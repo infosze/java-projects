@@ -7,6 +7,7 @@ public class Main {
 		System.out.println("Sziasztok!");
 		System.out.println("Haloho");
 		System.out.println("Remélem ez működik.");
+		System.out.println("Működik?");
 	}
 
 }
