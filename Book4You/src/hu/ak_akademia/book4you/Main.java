@@ -9,6 +9,7 @@ public class Main {
 		System.out.println("Remélem ez működik.");
 		System.out.println("Működik?");
 		System.out.println("Igen!");
+		System.out.println("Talán");
 	}
 
 }
