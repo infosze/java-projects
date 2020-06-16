@@ -10,6 +10,7 @@ public class Main {
 		System.out.println("Működik?");
 		System.out.println("Igen!");
 		System.out.println("Talán");
+		System.out.println("talán, talán");
 	}
 
 }
