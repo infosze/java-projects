@@ -19,28 +19,20 @@ public class Game {
 		var msgs = new Messages();
 		msgs.welcome();
 		msgs.instruct();
-		out: for (boolean first = true; startOrNot(first); first = false) {
+		for (boolean first = true; startOrNot(first); first = false) {
 			var session = new Session(scanner);
-			session.startNewGame();
-			do {
-				if (session.input()) {
-					break out;
-				}
-				session.checkLetter();
-				session.printResults();
-			} while (session.makeEnd());
+			if (session.run()) {
+				break;
+			}
 		}
 		msgs.sayGoodbye();
 	}
 
 	private boolean startOrNot(boolean first) {
 		String inputLetter;
-		boolean continueGame = true;
 		System.out.printf("%nIndulhat %s menet? ", first ? "az első" : "a következő");
 		inputLetter = scanner.nextLine().toUpperCase().trim();
-		if (inputLetter.startsWith("N")) {
-			continueGame = false;
-		}
-		return continueGame;
+		return !inputLetter.startsWith("N");
 	}
+
 }

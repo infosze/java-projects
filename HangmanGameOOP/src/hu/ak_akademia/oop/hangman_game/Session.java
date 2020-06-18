@@ -5,19 +5,19 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Session {
+class Session {
 
 	private static final int MAX_MISMATCHES = 12;
 	private static final String LEGAL_CHARS;
 	private static final String WORDS_FILE_NAME = "Words.txt";
 	private final Scanner scanner;
-	String[] mismatches = new String[MAX_MISMATCHES];
-	String[] wordFound;
-	Collator collator = Collator.getInstance();
-	String word;
-	String inputLetter;
-	int numMismatches;
-	String goodWord;
+	private String[] mismatches = new String[MAX_MISMATCHES];
+	private String[] wordFound;
+	private Collator collator = Collator.getInstance();
+	private String word;
+	private String inputLetter;
+	private int numMismatches;
+	private String goodWord;
 	static {
 		String l = "";
 		for (char ch = 'A'; ch <= 'Z'; ch++) {
@@ -32,15 +32,27 @@ public class Session {
 	}
 
 	Random random = new Random();
-	WordToGuess wtg = new WordToGuess();
-	String[] words = wtg.wordsFromTxt(WORDS_FILE_NAME);
+	private WordStore wordStore = new WordStore();
+	private String[] words = wordStore.wordsFromTxt(WORDS_FILE_NAME);
 
 	private String chooseWord() {
 		word = words[random.nextInt(words.length)].toUpperCase();
 		return word;
 	}
 
-	void startNewGame() {
+	boolean run() {
+		makeStart();
+		do {
+			if (input()) {
+				return true;
+			}
+			checkLetter();
+			printResults();
+		} while (makeEnd());
+		return false;
+	}
+
+	private void makeStart() {
 		numMismatches = 0;
 		word = chooseWord();
 		wordFound = new String[word.length()];
@@ -52,12 +64,10 @@ public class Session {
 		System.out.println();
 	}
 
-	boolean input() {
+	private boolean input() {
 		boolean wrongLetter;
-		boolean quite;
 		do {
 			wrongLetter = true;
-			quite = false;
 			System.out.print("Kérek egy betűt: ");
 			inputLetter = scanner.nextLine().toUpperCase().trim();
 			if (inputLetter.isEmpty() || inputLetter.length() > 1) {
@@ -65,14 +75,13 @@ public class Session {
 			} else if (LEGAL_CHARS.contains(inputLetter)) {
 				wrongLetter = false;
 			} else if (inputLetter.equals("*")) {
-				quite = true;
-				break;
+				return true;
 			}
 		} while (wrongLetter);
-		return quite;
+		return false;
 	}
 
-	void checkLetter() {
+	private void checkLetter() {
 		if (word.contains(inputLetter)) {
 			int index = word.indexOf(inputLetter);
 			while (index >= 0) {
@@ -86,7 +95,7 @@ public class Session {
 		}
 	}
 
-	void printResults() {
+	private void printResults() {
 		System.out.println();
 		for (int i = 0; i < wordFound.length; i++) {
 			System.out.printf("%s ", wordFound[i]);
@@ -99,7 +108,7 @@ public class Session {
 		System.out.println();
 	}
 
-	boolean makeEnd() {
+	private boolean makeEnd() {
 		if (numMismatches == MAX_MISMATCHES) {
 			System.out.println("Ez most nem sikerült.");
 			return false;

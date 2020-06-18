@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class WordToGuess {
+class WordStore {
 
 	public String[] wordsFromTxt(String file) {
 		String[] words;
@@ -16,4 +16,5 @@ public class WordToGuess {
 		}
 		return words;
 	}
+
 }
