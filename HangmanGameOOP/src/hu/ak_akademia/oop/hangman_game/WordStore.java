@@ -7,13 +7,9 @@ import java.nio.file.Path;
 
 class WordStore {
 
-	public String[] wordsFromTxt(String file) {
+	public String[] wordsFromTxt(String file) throws IOException {
 		String[] words;
-		try {
-			words = Files.readAllLines(Path.of(file), StandardCharsets.UTF_8).toArray(new String[0]);
-		} catch (IOException e) {
-			return null;
-		}
+		words = Files.readAllLines(Path.of(file), StandardCharsets.UTF_8).toArray(new String[0]);
 		return words;
 	}
 

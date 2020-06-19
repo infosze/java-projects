@@ -2,14 +2,12 @@ package hu.ak_akademia.oop.hangman_game;
 
 import java.text.Collator;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 class Session {
 
 	private static final int MAX_MISMATCHES = 12;
 	private static final String LEGAL_CHARS;
-	private static final String WORDS_FILE_NAME = "Words.txt";
 	private final Scanner scanner;
 	private String[] mismatches = new String[MAX_MISMATCHES];
 	private String[] wordFound;
@@ -27,17 +25,9 @@ class Session {
 		LEGAL_CHARS = l;
 	}
 
-	Session(Scanner scanner) {
+	Session(Scanner scanner, String word) {
 		this.scanner = scanner;
-	}
-
-	Random random = new Random();
-	private WordStore wordStore = new WordStore();
-	private String[] words = wordStore.wordsFromTxt(WORDS_FILE_NAME);
-
-	private String chooseWord() {
-		word = words[random.nextInt(words.length)].toUpperCase();
-		return word;
+		this.word = word;
 	}
 
 	boolean run() {
@@ -54,7 +44,6 @@ class Session {
 
 	private void makeStart() {
 		numMismatches = 0;
-		word = chooseWord();
 		wordFound = new String[word.length()];
 		for (int i = 0; i < wordFound.length; i++) {
 			wordFound[i] = "_";
