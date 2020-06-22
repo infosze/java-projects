@@ -5,19 +5,20 @@ import java.util.List;
 
 public class Clients implements ClientsHandle{
 	private List<Client> clientsList;
-
-	public Clients() {
-		this.clientsList = generate();
-	}
 	
+	public Clients(List<Client> clientsList) {
+		super();
+		this.clientsList = loadToList();
+	}
+
 	@Override
-	public List<Client> generate() {
+	public List<Client> loadToList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void add() {
+	public void add(Client newClient) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -27,5 +28,4 @@ public class Clients implements ClientsHandle{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

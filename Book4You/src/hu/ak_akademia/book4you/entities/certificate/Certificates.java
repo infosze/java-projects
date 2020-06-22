@@ -6,7 +6,7 @@ public class Certificates implements CertificatesHandler{
 	private List<Certificate> certificatesList;
 	
 	public Certificates(List<Certificate> certificatesList) {
-		this.certificatesList = generate();
+		this.certificatesList = loadToList();
 	}
 
 	public List<Certificate> getCertificatesList() {
@@ -14,14 +14,13 @@ public class Certificates implements CertificatesHandler{
 	}
 
 	@Override
-	public List<Certificate> generate() {
+	public List<Certificate> loadToList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public void add() {
+	public void add(Certificate newCertificate) {
 		// TODO Auto-generated method stub
-		
 	}
 }

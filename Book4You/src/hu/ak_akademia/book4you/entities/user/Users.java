@@ -6,26 +6,30 @@ public class Users implements UsersHandle{
 	private List<User> usersList;
 
 	public Users() {
-		this.usersList = generate();
+		this.usersList = loadToList();
 	}
 
 	@Override
-	public List<User> generate() {
+	public List<User> loadToList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void add() {
+	public void add(User newUser) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void modify() {
+	public void modify(String identifier) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	
 
 
 	

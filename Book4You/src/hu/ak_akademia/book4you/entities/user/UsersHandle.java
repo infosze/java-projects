@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface UsersHandle {
 	
-	List<User> generate();
-	void add();
-	void modify();
+	List<User> loadToList();
+	void add(User newUser);
+	void modify(String identifier);
 	
 }

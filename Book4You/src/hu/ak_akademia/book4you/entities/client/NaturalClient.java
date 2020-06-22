@@ -9,6 +9,7 @@ public class NaturalClient extends Client{
 
 	public NaturalClient(FullName name, Address address) {
 		super(address);
+		identifier = name.toString();
 		this.name = name;
 	}
 

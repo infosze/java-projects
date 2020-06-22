@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface ClientsHandle {
 	
-	List<Client> generate();
-	void add();
-	void modify();
+	List<Client> loadToList();
+	void add(Client newClient);
+	void modify(String clientWhoseName); 
 	
 }
