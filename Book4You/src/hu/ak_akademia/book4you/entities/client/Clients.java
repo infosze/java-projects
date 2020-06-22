@@ -24,7 +24,7 @@ public class Clients implements ClientsHandle{
 	}
 
 	@Override
-	public void modify() {
+	public void modify(String clientWhoseName) {
 		// TODO Auto-generated method stub
 		
 	}
