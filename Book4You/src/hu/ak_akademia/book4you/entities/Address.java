@@ -54,4 +54,10 @@ public class Address {
 	public void setNumber(int number) {
 		this.number = number;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [postalCode=" + postalCode + ", city=" + city + ", publicSpaceName=" + publicSpaceName
+				+ ", publicSpaceType=" + publicSpaceType + ", number=" + number + "]";
+	}
 }
