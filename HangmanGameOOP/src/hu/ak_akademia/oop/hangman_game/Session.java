@@ -7,79 +7,75 @@ import java.util.Scanner;
 class Session {
 
 	private static final int MAX_MISMATCHES = 12;
+	private static final Collator COLLATOR = Collator.getInstance();
 	private static final String LEGAL_CHARS;
-	private final Scanner scanner;
-	private String[] mismatches = new String[MAX_MISMATCHES];
-	private String[] wordFound;
-	private Collator collator = Collator.getInstance();
-	private String word;
-	private String inputLetter;
-	private int numMismatches;
-	private String goodWord;
+
 	static {
-		String l = "";
+		var l = new StringBuilder();
 		for (char ch = 'A'; ch <= 'Z'; ch++) {
-			l += ch;
+			l.append(ch);
 		}
-		l += "ÁÉÍÓÖŐÚÜŰ";
-		LEGAL_CHARS = l;
+		l.append("ÁÉÍÓÖŐÚÜŰ");
+		l.append("*");
+		LEGAL_CHARS = l.toString();
 	}
+
+	private final String word;
+	private final String[] wordFound;
+	private final String[] mismatches = new String[MAX_MISMATCHES];
+	private int numMismatches;
+	private boolean gameToQuit = false;
+	private final Scanner scanner;
 
 	Session(Scanner scanner, String word) {
 		this.scanner = scanner;
 		this.word = word;
-	}
 
-	boolean run() {
-		makeStart();
-		do {
-			if (input()) {
-				return true;
-			}
-			checkLetter();
-			printResults();
-		} while (makeEnd());
-		return false;
-	}
-
-	private void makeStart() {
-		numMismatches = 0;
 		wordFound = new String[word.length()];
 		for (int i = 0; i < wordFound.length; i++) {
 			wordFound[i] = "_";
 			System.out.printf("%s ", wordFound[i]);
 		}
 		Arrays.fill(mismatches, "");
-		System.out.println();
+		numMismatches = 0;
 	}
 
-	private boolean input() {
-		boolean wrongLetter;
+	void run() {
+		System.out.println();
 		do {
-			wrongLetter = true;
+			String inputLetter = input();
+			if (inputLetter.contentEquals("*")) {
+				gameToQuit = true;
+				return;
+			}
+			checkLetter(inputLetter);
+			printResults();
+		} while (makeEnd());
+	}
+
+	private String input() {
+		String inputLetter;
+		while (true) {
 			System.out.print("Kérek egy betűt: ");
 			inputLetter = scanner.nextLine().toUpperCase().trim();
 			if (inputLetter.isEmpty() || inputLetter.length() > 1) {
 				continue;
 			} else if (LEGAL_CHARS.contains(inputLetter)) {
-				wrongLetter = false;
-			} else if (inputLetter.equals("*")) {
-				return true;
+				return inputLetter;
 			}
-		} while (wrongLetter);
-		return false;
+		}
 	}
 
-	private void checkLetter() {
+	private void checkLetter(String inputLetter) {
 		if (word.contains(inputLetter)) {
 			int index = word.indexOf(inputLetter);
 			while (index >= 0) {
 				wordFound[index] = inputLetter;
 				index = word.indexOf(inputLetter, index + 1);
 			}
-		} else if (0 > Arrays.binarySearch(mismatches, 0, numMismatches + 1, inputLetter, collator)) {
+		} else if (0 > Arrays.binarySearch(mismatches, 0, numMismatches + 1, inputLetter, COLLATOR)) {
 			mismatches[numMismatches] = inputLetter;
-			Arrays.sort(mismatches, 0, numMismatches + 1, collator);
+			Arrays.sort(mismatches, 0, numMismatches + 1, COLLATOR);
 			numMismatches++;
 		}
 	}
@@ -98,6 +94,7 @@ class Session {
 	}
 
 	private boolean makeEnd() {
+		String goodWord;
 		if (numMismatches == MAX_MISMATCHES) {
 			System.out.println("Ez most nem sikerült.");
 			return false;
@@ -111,6 +108,10 @@ class Session {
 			return false;
 		}
 		return true;
+	}
+
+	boolean isGameToQuit() {
+		return gameToQuit;
 	}
 
 }
