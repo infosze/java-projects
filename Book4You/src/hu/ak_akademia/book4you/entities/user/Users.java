@@ -2,7 +2,7 @@ package hu.ak_akademia.book4you.entities.user;
 
 import java.util.List;
 
-public class Users implements UsersHandle{
+public class Users implements UsersHandler{
 	private List<User> usersList;
 
 	public Users() {

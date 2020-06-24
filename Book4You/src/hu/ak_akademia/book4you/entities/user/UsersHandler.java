@@ -2,7 +2,7 @@ package hu.ak_akademia.book4you.entities.user;
 
 import java.util.List;
 
-public interface UsersHandle {
+public interface UsersHandler {
 	
 	List<User> loadToList();
 	void add(User newUser);
