@@ -25,17 +25,19 @@ public class AdminMenuController {
 		System.out.println("loadClientsManagementView");
 	}
 	
-	public void loadCompanyDataManagementView(ActionEvent event){
-		Pane content = null;
-		try {
-			content = FXMLLoader.load(getClass().getResource("../views/Admin_company.fxml"));
-		} catch (IOException e) {
-			System.out.println("Hiba az fxml betöltésekor!");
-		}
+	public void loadCompanyDataManagementView(ActionEvent event) throws IOException{
+		setContentView("Admin_company.fxml");
+	}
+	
+	public void logout(ActionEvent event) throws IOException {
+		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Login.fxml"));
+		adminPage.getChildren().setAll(MainRoot);
+		
+	}
+
+	private void setContentView(String view) throws IOException {
+		Pane content = FXMLLoader.load(getClass().getResource("../views/" + view));
 		adminPage.setRight(content);
 	}
 	
-	public void logout(ActionEvent event) {
-		System.out.println("logout");
-	}
 }
