@@ -21,12 +21,12 @@ public class AdminMenuController {
 		System.out.println("loadCashiersManagementView");
 	}
 	
-	public void loadClientsManagementView(ActionEvent event) {
-		System.out.println("loadClientsManagementView");
+	public void loadClientsManagementView(ActionEvent event) throws IOException {
+		setContentView("Admin_clients");
 	}
 	
 	public void loadCompanyDataManagementView(ActionEvent event) throws IOException{
-		setContentView("Admin_company.fxml");
+		setContentView("Admin_company");
 	}
 	
 	public void logout(ActionEvent event) throws IOException {
@@ -36,7 +36,7 @@ public class AdminMenuController {
 	}
 
 	private void setContentView(String view) throws IOException {
-		Pane content = FXMLLoader.load(getClass().getResource("../views/" + view));
+		Pane content = FXMLLoader.load(getClass().getResource("../views/" + view + ".fxml"));
 		adminPage.setRight(content);
 	}
 	

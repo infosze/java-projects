@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="hu.ak_akademia.book4you.controllers.AdminClientsController">
+   <children>
+      <TabPane layoutX="60.0" layoutY="47.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Új ügyfél felvétele">
+            <content>
+              <AnchorPane id="admin_content" minHeight="0.0" minWidth="0.0" prefHeight="468.0" prefWidth="708.0" stylesheets="@application.css">
+                     <children>
+                        <VBox id="#admin_content" prefHeight="562.0" prefWidth="423.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="115.0" text="Ügyfél neve:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="companyNameFieldToAdd" prefHeight="40.0" prefWidth="45.0" />
+                              <Label text="Címe:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Irányítószám:" />
+                              <TextField fx:id="postalCodeFieldToAdd" prefHeight="40.0" prefWidth="255.0" />
+                              <Label text="Város:" />
+                              <TextField fx:id="cityFieldToAdd" prefHeight="40.0" />
+                              <Label text="Közterület neve:" />
+                              <TextField fx:id="publicSpaceNameFieldToAdd" prefHeight="40.0" />
+                              <Label text="Közterület jellege:" />
+                              <ComboBox fx:id="publicSpaceTypeComboBoxToAdd" prefHeight="40.0" prefWidth="221.0" />
+                              <Label text="Ház szám:" />
+                              <TextField fx:id="houseNumberFieldToAdd" prefHeight="40.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                        </VBox>
+                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
+                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Ügyfél módosítása">
+            <content>
+              <AnchorPane id="admin_content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox id="#admin_content" prefHeight="562.0" prefWidth="423.0" spacing="10.0" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="115.0" text="Ügyfél neve:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="companyNameFieldToModify" disable="true" prefHeight="40.0" prefWidth="45.0" />
+                              <Label text="Címe:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Irányítószám:" />
+                              <TextField fx:id="postalCodeFieldToModify" disable="true" prefHeight="40.0" prefWidth="255.0" />
+                              <Label text="Város:" />
+                              <TextField fx:id="cityFieldToModify" disable="true" prefHeight="40.0" />
+                              <Label text="Közterület neve:" />
+                              <TextField fx:id="publicSpaceNameFieldToModify" disable="true" prefHeight="40.0" />
+                              <Label text="Közterület jellege:" />
+                              <ComboBox fx:id="publicSpaceTypeComboBoxToModify" disable="true" prefHeight="40.0" prefWidth="221.0" />
+                              <Label text="Ház szám:" />
+                              <TextField fx:id="houseNumberFieldToModify" disable="true" prefHeight="40.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                        </VBox>
+                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
+                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
+                        <CheckBox fx:id="aktivCheckBox" disable="true" layoutX="550.0" layoutY="146.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="114.0" text="Aktív">
+                           <font>
+                              <Font name="Yu Gothic Light" size="18.0" />
+                           </font>
+                        </CheckBox>
+                        <ComboBox fx:id="clientChooser" layoutX="459.0" layoutY="47.0" prefHeight="61.0" prefWidth="276.0" promptText="Válasszon az ügyfelek közül" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
