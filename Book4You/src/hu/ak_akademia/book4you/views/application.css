@@ -40,3 +40,30 @@
 	-fx-text-fill: #FFECEB;
 	-fx-font-size: 18 pt;
 }
+
+#admin_left{
+	-fx-background-color: #00A9B0;
+}
+
+#admin_right{
+	-fx-background-color: white;
+}
+
+#menu_btn{
+	-fx-background-radius: 0;
+	-fx-background-color: #FFAAA7;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+}
+
+#menu_btn:hover{
+	-fx-background-radius: 0;
+	-fx-background-color: #FF564F;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+}
+
+
+
+
+
