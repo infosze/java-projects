@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="70.0" layoutY="44.0" prefHeight="534.0" prefWidth="373.0" spacing="10.0">
+         <children>
+            <Label text="Cég neve:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="companyNameField" prefHeight="40.0" prefWidth="45.0" />
+            <Label text="Címe:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Irányítószám:" />
+            <TextField fx:id="postalCodeField" prefHeight="40.0" prefWidth="255.0" />
+            <Label text="Város:" />
+            <TextField fx:id="cityField" prefHeight="40.0" />
+            <Label text="Közterület neve:" />
+            <TextField fx:id="publicSpaceNameField" prefHeight="40.0" />
+            <Label text="Közterület jellege:" />
+            <ComboBox fx:id="publicSpaceTypeComboBox" prefHeight="40.0" prefWidth="221.0" />
+            <Label text="Ház szám:" />
+            <TextField fx:id="houseNumberField" prefHeight="40.0" />
+         </children>
+      </VBox>
+      <Button layoutX="569.0" layoutY="520.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" text="Mentés" />
+      <Button layoutX="569.0" layoutY="437.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" text="Mégse" />
+   </children>
+</AnchorPane>

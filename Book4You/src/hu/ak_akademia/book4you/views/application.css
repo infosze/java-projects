@@ -45,8 +45,8 @@
 	-fx-background-color: #00A9B0;
 }
 
-#admin_right{
-	-fx-background-color: white;
+#admin_content{
+	-fx-background-color: darkgrey;
 }
 
 #menu_btn{
