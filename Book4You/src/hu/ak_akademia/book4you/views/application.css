@@ -1,52 +1,83 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+@font-face {
+  src: url('BebasNeue-Regular.ttf');
+}
 
 #login_left{
-	-fx-background-color: #00A9B0;
+	-fx-background-color: linear-gradient(to left, #0D3A4E, #27AEEA);
 }
 
 #login_right{
 	-fx-background-color: white;
 }
 
-#login_name_field{
+TextField{
 	-fx-background-color: #AAE2E4;
 	-fx-text-fill: #FFECEB;
 }
 
-#login_name_field:hover{
+TextField:hover{
 	-fx-background-color: #FF564F;
 	-fx-text-fill: #FFECEB;
 }
 
-#login_password_field{
+PasswordField{
 	-fx-background-color: #AAE2E4;
 	-fx-text-fill: #FFECEB;
 }
 
-#login_password_field:hover{
+PasswordField:hover{
 	-fx-background-color: #FF564F;
 	-fx-text-fill: #FFECEB;
 }
 
 
-#login_btn{
+Button{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0;
 	-fx-background-color: #FFAAA7;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+	
+}
+
+Button:hover{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0;
+	-fx-background-color: #FF564F;
 	-fx-text-fill: #FFECEB;
 	-fx-font-size: 18 pt;
 }
 
-#login_btn:hover{
-	-fx-background-color: #FF564F;
+Button:armed{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0;
+	-fx-background-color: red;
 	-fx-text-fill: #FFECEB;
 	-fx-font-size: 18 pt;
 }
 
 #admin_left{
-	-fx-background-color: #00A9B0;
+	-fx-background-color: linear-gradient(to left, #0D3A4E, #27AEEA);
 }
 
 #admin_content{
-	-fx-background-color: darkgrey;
+	-fx-background-color: white;
+}
+
+#panel{
+	
+}
+
+Button.menu{
+	-fx-font-size: 24 pt;
+}
+
+Label.menu{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0 70 0 0;
+	-fx-background-color: #25A3DB;
+	-fx-text-fill: white;
+	-fx-font-size: 28 pt;
 }
 
 #menu_btn{
@@ -62,6 +93,7 @@
 	-fx-text-fill: #FFECEB;
 	-fx-font-size: 18 pt;
 }
+
 
 
 

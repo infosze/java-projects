@@ -40,16 +40,16 @@
                   <Font name="Yu Gothic Light" size="16.0" />
                </font>
             </Label>
-            <Button id="login_btn" layoutX="161.0" layoutY="403.0" mnemonicParsing="false" onAction="#login" prefHeight="64.0" prefWidth="118.0" stylesheets="@application.css" text="Belépés">
+            <Button layoutX="161.0" layoutY="403.0" mnemonicParsing="false" onAction="#login" prefHeight="64.0" prefWidth="118.0" stylesheets="@application.css" text="Belépés">
                <font>
                   <Font name="Yu Gothic Light" size="12.0" />
                </font></Button>
-            <TextField id="login_name_field" fx:id="userNameField" layoutX="95.0" layoutY="162.0" prefWidth="250.0" stylesheets="@application.css">
+            <TextField fx:id="userNameField" layoutX="95.0" layoutY="162.0" prefWidth="250.0" stylesheets="@application.css">
                <font>
                   <Font name="Comic Sans MS" size="18.0" />
                </font>
             </TextField>
-            <PasswordField id="login_password_field" fx:id="passwordField" layoutX="95.0" layoutY="250.0" prefWidth="250.0" stylesheets="@application.css">
+            <PasswordField fx:id="passwordField" layoutX="95.0" layoutY="250.0" prefWidth="250.0" stylesheets="@application.css">
                <font>
                   <Font size="18.0" />
                </font>
