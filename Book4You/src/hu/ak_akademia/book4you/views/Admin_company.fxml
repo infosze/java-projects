@@ -11,7 +11,7 @@
 
 <AnchorPane id="admin_content" prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox id="panel" layoutX="70.0" layoutY="16.0" prefHeight="562.0" prefWidth="423.0" spacing="10.0" stylesheets="@application.css">
+      <VBox layoutX="70.0" layoutY="16.0" prefHeight="562.0" prefWidth="423.0" spacing="10.0" styleClass="panel" stylesheets="@application.css">
          <children>
             <Label stylesheets="@application.css" text="Cég neve:">
                <font>
