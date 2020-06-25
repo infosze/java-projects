@@ -95,6 +95,7 @@ Button:armed{
 	 -fx-padding: 5 30 5 30;
 	 -fx-font-family: 'Bebas Neue';
 	 -fx-font-size: 20 pt;
+	 -fx-background-radius: 0 20 0 20;
 	 -fx-background-color: white;
 	 -fx-text-fill: white;
  
@@ -116,6 +117,11 @@ Button:armed{
 	 -fx-font-family: 'Bebas Neue';
 	 -fx-font-size: 20 pt;
 	 -fx-background-color: #B96E3A;
+}
+
+.tab:focused .focus-indicator{
+	-fx-focus-color: transparent;
+	-fx-border-color: transarent;
 }
 
 Button.menu{
