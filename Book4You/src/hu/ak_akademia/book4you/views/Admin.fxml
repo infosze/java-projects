@@ -12,32 +12,35 @@
    <left>
       <AnchorPane id="admin_left" fx:id="menu_part" minHeight="600.0" prefHeight="600.0" prefWidth="259.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="15.0" layoutY="41.0" prefHeight="355.0" prefWidth="223.0" styleClass="menu" stylesheets="@application.css">
+            <VBox layoutY="41.0" prefHeight="355.0" prefWidth="223.0" styleClass="menu" stylesheets="@application.css">
                <children>
-                  <Label alignment="CENTER" prefHeight="62.0" prefWidth="213.0" styleClass="menu" stylesheets="@application.css" text="Admin menü">
+                  <Label alignment="BASELINE_LEFT" prefHeight="62.0" prefWidth="213.0" styleClass="menu" stylesheets="@application.css" text="Admin menü">
                      <font>
                         <Font name="Yu Gothic Light" size="20.0" />
                      </font>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#loadCashiersManagementView" prefHeight="65.0" prefWidth="239.0" styleClass="menu" stylesheets="@application.css" text="Pénztárosok kezelése">
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#loadCashiersManagementView" prefHeight="65.0" prefWidth="239.0" styleClass="menu" stylesheets="@application.css" text="Pénztárosok kezelése">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#loadClientsManagementView" prefHeight="65.0" prefWidth="223.0" styleClass="menu" stylesheets="@application.css" text="Ügyfelek kezelése">
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#loadClientsManagementView" prefHeight="65.0" prefWidth="223.0" styleClass="menu" stylesheets="@application.css" text="Ügyfelek kezelése">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#loadCompanyDataManagementView" prefHeight="65.0" prefWidth="225.0" styleClass="menu" stylesheets="@application.css" text="Cégadatok kezelése">
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#loadCompanyDataManagementView" prefHeight="65.0" prefWidth="225.0" styleClass="menu" stylesheets="@application.css" text="Cégadatok kezelése">
                      <font>
                         <Font name="Yu Gothic Light" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="65.0" prefWidth="225.0" styleClass="menu" stylesheets="@application.css" text="Kijelentkezés">
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="65.0" prefWidth="225.0" styleClass="menu" stylesheets="@application.css" text="Kijelentkezés">
                      <font>
                         <Font name="Yu Gothic Light" size="14.0" />
                      </font>
