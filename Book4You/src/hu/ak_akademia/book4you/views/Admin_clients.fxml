@@ -12,16 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="hu.ak_akademia.book4you.controllers.AdminClientsController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.ak_akademia.book4you.controllers.AdminClientsController">
    <children>
-      <TabPane layoutX="60.0" layoutY="47.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane layoutX="60.0" layoutY="47.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="Új ügyfél felvétele">
             <content>
               <AnchorPane id="admin_content" minHeight="0.0" minWidth="0.0" prefHeight="468.0" prefWidth="708.0" stylesheets="@application.css">
                      <children>
-                        <VBox id="#admin_content" prefHeight="562.0" prefWidth="423.0" spacing="10.0" stylesheets="@application.css">
+                        <VBox id="panel" prefHeight="562.0" prefWidth="423.0" spacing="10.0" stylesheets="@application.css">
                            <children>
                               <Label prefHeight="27.0" prefWidth="115.0" text="Ügyfél neve:">
                                  <font>
@@ -59,11 +58,11 @@
             <content>
               <AnchorPane id="admin_content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox id="#admin_content" prefHeight="562.0" prefWidth="423.0" spacing="10.0" stylesheets="@application.css">
+                        <VBox id="panel" prefHeight="562.0" prefWidth="423.0" spacing="10.0" stylesheets="@application.css">
                            <children>
                               <Label prefHeight="27.0" prefWidth="115.0" text="Ügyfél neve:">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="Yu Gothic Light" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="companyNameFieldToModify" disable="true" prefHeight="40.0" prefWidth="45.0" />
@@ -100,6 +99,9 @@
             </content>
           </Tab>
         </tabs>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </TabPane>
    </children>
 </AnchorPane>
