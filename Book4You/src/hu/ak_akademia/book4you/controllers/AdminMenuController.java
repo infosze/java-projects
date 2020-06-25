@@ -17,8 +17,8 @@ public class AdminMenuController {
 	@FXML
 	private BorderPane adminPage;
 
-	public void loadCashiersManagementView(ActionEvent event) {
-		System.out.println("loadCashiersManagementView");
+	public void loadCashiersManagementView(ActionEvent event) throws IOException {
+		setContentView("Admin_cashiers");
 	}
 	
 	public void loadClientsManagementView(ActionEvent event) throws IOException {

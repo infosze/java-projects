@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.ak_akademia.book4you.controllers.AdminCashiersController">
+   <children>
+      <TabPane layoutX="60.0" layoutY="47.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab closable="false" text="Új pénztáros felvétele">
+            <content>
+              <AnchorPane id="admin_content" minHeight="0.0" minWidth="0.0" prefHeight="468.0" prefWidth="708.0" stylesheets="@application.css">
+                     <children>
+                        <VBox prefHeight="552.0" prefWidth="423.0" spacing="10.0" styleClass="panel" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="115.0" stylesheets="@application.css" text="Pénztáros neve:" />
+                              <TextField fx:id="fullNameFieldToAdd" prefHeight="40.0" prefWidth="45.0" />
+                              <Label text="Jelszó:" />
+                              <TextField fx:id="passwordFieldToAdd" prefHeight="40.0" prefWidth="255.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                        </VBox>
+                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
+                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Pénztáros módosítása">
+            <content>
+              <AnchorPane id="admin_content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="562.0" prefWidth="423.0" spacing="10.0" styleClass="panel" stylesheets="@application.css">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="115.0" text="Pénztáros:" />
+                              <ComboBox fx:id="cashierChooser" prefHeight="40.0" prefWidth="371.0" />
+                              <Label text="Jelszó:" />
+                              <TextField fx:id="passwordToModify" disable="true" prefHeight="40.0" prefWidth="255.0" />
+                              <CheckBox fx:id="aktivCheckBox" disable="true" mnemonicParsing="false" prefHeight="55.0" prefWidth="114.0" text="Aktív">
+                                 <font>
+                                    <Font name="Yu Gothic Light" size="18.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                        </VBox>
+                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
+                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TabPane>
+   </children>
+</AnchorPane>
