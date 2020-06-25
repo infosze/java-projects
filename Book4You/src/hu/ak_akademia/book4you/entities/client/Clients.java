@@ -3,7 +3,7 @@ package hu.ak_akademia.book4you.entities.client;
 import java.util.List;
 
 
-public class Clients implements ClientsHandle{
+public class Clients implements ClientsHandler{
 	private List<Client> clientsList;
 	
 	public Clients(List<Client> clientsList) {

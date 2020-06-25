@@ -2,7 +2,7 @@ package hu.ak_akademia.book4you.entities.client;
 
 import java.util.List;
 
-public interface ClientsHandle {
+public interface ClientsHandler {
 	
 	List<Client> loadToList();
 	void add(Client newClient);

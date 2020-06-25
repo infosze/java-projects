@@ -1,0 +1,137 @@
+@font-face {
+  src: url('BebasNeue-Regular.ttf');
+}
+
+@font-face {
+  src: url('Roboto-Regular.ttf');
+}
+
+@font-face {
+  src: url('Roboto-Italic.ttf');
+}
+
+@font-face {
+  src: url('Roboto-Bold.ttf');
+}
+
+@font-face {
+  src: url('Roboto-BoldItalic.ttf');
+}
+
+
+#login_left{
+	-fx-background-color: linear-gradient(to left, #0D3A4E, #27AEEA);
+}
+
+#login_right{
+	-fx-background-color: white;
+}
+
+TextField{
+	-fx-background-color: #AAE2E4;
+	-fx-text-fill: #FFECEB;
+	-fx-font-family: 'Roboto';
+	-fx-font-size: 18 pt;
+}
+
+TextField:hover{
+	-fx-background-color: #FF564F;
+	-fx-text-fill: #FFECEB;
+	-fx-font-family: ''Roboto'';
+	-fx-font-size: 18 pt;
+}
+
+PasswordField{
+	-fx-background-color: #AAE2E4;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+}
+
+PasswordField:hover{
+	-fx-background-color: #FF564F;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+}
+
+Button{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0;
+	-fx-background-color: #FFAAA7;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+	
+}
+
+Button:hover{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0;
+	-fx-background-color: #FF564F;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+}
+
+Button:armed{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0;
+	-fx-background-color: red;
+	-fx-text-fill: #FFECEB;
+	-fx-font-size: 18 pt;
+}
+
+#admin_left{
+	-fx-background-color: linear-gradient(to left, #0D3A4E, #27AEEA);
+}
+
+#admin_content{
+	-fx-background-color: white;
+}
+
+#panel{
+	-fx-font-family: 'Yu Gothic Light';
+}
+
+.tab{
+	 -fx-pref-height: 50;
+	 -fx-padding: 5 30 5 30;
+	 -fx-font-family: 'Bebas Neue';
+	 -fx-font-size: 20 pt;
+	 -fx-background-color: white;
+	 -fx-text-fill: white;
+ 
+}
+
+.tab:hover{
+	 -fx-text-fill: white;
+	 -fx-pref-height: 50;
+	 -fx-padding: 5 30 5 30;
+	 -fx-font-family: 'Bebas Neue';
+	 -fx-font-size: 20 pt;
+	 -fx-background-color: #27AEEA;
+}
+
+.tab:selected{
+	 -fx-text-fill: #96b946;
+	 -fx-pref-height: 50;
+	 -fx-padding: 5 30 5 30;
+	 -fx-font-family: 'Bebas Neue';
+	 -fx-font-size: 20 pt;
+	 -fx-background-color: #B96E3A;
+}
+
+Button.menu{
+	-fx-font-size: 20 pt;
+	-fx-text-align: left;
+	-fx-background-color: rgba(255,0,0,0.1);
+}
+Button.menu:hover{
+	-fx-font-size: 20 pt;
+	-fx-border-width: 0 0 0 20; -fx-border-color: #00B1B9;
+}
+
+Label.menu{
+    -fx-font-family: 'Bebas Neue';
+	-fx-background-radius: 0 70 0 0;
+	-fx-text-fill: white;
+	-fx-font-size: 28 pt;
+	-fx-background-color: rgba(255,110,20,0.7);
+}

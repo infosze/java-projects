@@ -20,7 +20,7 @@ public abstract class User {
 	public String getIdentifier() {
 		return identifier;
 	}
-
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
