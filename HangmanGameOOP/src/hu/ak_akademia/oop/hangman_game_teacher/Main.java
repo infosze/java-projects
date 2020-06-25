@@ -1,4 +1,4 @@
-package hu.ak_akademia.oop.hangman_game.teacher;
+package hu.ak_akademia.oop.hangman_game_teacher;
 
 import java.io.IOException;
 import java.util.Scanner;
