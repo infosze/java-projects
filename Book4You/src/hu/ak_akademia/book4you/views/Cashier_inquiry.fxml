@@ -28,7 +28,7 @@
                   <Font name="Yu Gothic UI Light" size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="InquiryClient" layoutX="50.0" layoutY="67.0" prefHeight="35.0" prefWidth="286.0" promptText="ügyfél neve" />
+            <ComboBox fx:id="InquiryClient" layoutX="29.0" layoutY="66.0" prefHeight="35.0" prefWidth="286.0" promptText="ügyfél neve" />
          </children>
       </AnchorPane>
       <TableView fx:id="tableView" layoutX="31.0" layoutY="300.0" prefHeight="292.0" prefWidth="739.0" style="-fx-background-color: AAE2E4;" stylesheets="@application.css">
