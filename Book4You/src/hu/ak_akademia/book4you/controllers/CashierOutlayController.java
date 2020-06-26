@@ -27,5 +27,5 @@ public class CashierOutlayController {
 	private TextField clientAdressType;
 	
 	@FXML
-	private ComboBox chooeClient;
+	private ComboBox chooseClient;
 }

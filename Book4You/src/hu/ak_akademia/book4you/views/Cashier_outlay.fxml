@@ -15,7 +15,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #0D3A4E;">
                      <children>
-                        <ComboBox fx:id="chooeClient" layoutX="14.0" layoutY="38.0" prefHeight="35.0" prefWidth="383.0" promptText="Válasszon a listából" />
+                        <ComboBox fx:id="chooseClient" layoutX="14.0" layoutY="38.0" prefHeight="35.0" prefWidth="383.0" promptText="Válasszon a listából" />
                      </children>
                   </AnchorPane>
             </content>

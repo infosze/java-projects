@@ -28,6 +28,6 @@ public class CashierIncomeController {
 	private TextField clientAdressType;
 	
 	@FXML
-	private ComboBox chooeClient;
+	private ComboBox chooseClient;
 
 }
