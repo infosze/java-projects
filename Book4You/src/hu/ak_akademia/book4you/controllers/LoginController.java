@@ -38,7 +38,7 @@ public class LoginController implements Authentication {
 	}
 
 	private void loadMain() throws IOException {
-		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Admin.fxml"));
+		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Cashier.fxml"));
 		rootPane.getChildren().setAll(MainRoot);
 
 	}

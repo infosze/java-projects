@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="149.0" prefWidth="358.0" style="-fx-border-color: #0D3A4E;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="14.0" prefHeight="34.0" prefWidth="102.0" style="-fx-background-color: #0D3A4E;" text="Dátum szerint" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="66.0" text="Kezdő dátum :" />
+            <Label layoutX="24.0" layoutY="100.0" text="Végső dátum : " />
+            <DatePicker fx:id="dateBegin" layoutX="126.0" layoutY="61.0" />
+            <DatePicker fx:id="dateEng" layoutX="126.0" layoutY="95.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="400.0" layoutY="14.0" prefHeight="149.0" prefWidth="386.0" style="-fx-border-color: #0D3A4E;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="14.0" prefHeight="34.0" prefWidth="102.0" style="-fx-background-color: #0D3A4E;" text="Ügyfél szerint" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="InquiryClient" layoutX="50.0" layoutY="67.0" prefHeight="35.0" prefWidth="286.0" promptText="ügyfél neve" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tableView" layoutX="31.0" layoutY="300.0" prefHeight="292.0" prefWidth="739.0" style="-fx-background-color: AAE2E4;" stylesheets="@application.css">
+        <columns>
+          <TableColumn fx:id="tableViewDateColumn" prefWidth="90.0" text="Dátum" />
+          <TableColumn fx:id="tableViewVoucherNum" prefWidth="167.0" text="Bizonylatszám" />
+            <TableColumn fx:id="tableViewClient" prefWidth="145.0" text="Ügyfél" />
+            <TableColumn fx:id="tableViewBalance" prefWidth="197.0" text="Egyenleg" />
+            <TableColumn fx:id="tableViewAmount" prefWidth="139.0" text="Összeg" />
+        </columns>
+      </TableView>
+      <HBox layoutX="28.0" layoutY="173.0" prefHeight="35.0" prefWidth="731.0" style="-fx-border-color: #0D3A4E;">
+         <children>
+            <Label alignment="CENTER" prefHeight="33.0" prefWidth="182.0" style="-fx-border-color: #0D3A4E;" text="Nyitóegyenleg" textFill="#0d3a4e" />
+            <Label alignment="CENTER" prefHeight="33.0" prefWidth="182.0" style="-fx-border-color: #0D3A4E;" text="Záróegyenleg" textFill="#0d3a4e" />
+            <Label alignment="CENTER" prefHeight="33.0" prefWidth="178.0" style="-fx-border-color: #0D3A4E;" text="Összes bevétel" textFill="#0d3a4e" />
+            <Label alignment="CENTER" prefHeight="33.0" prefWidth="188.0" style="-fx-border-color: #0D3A4E;" text="Összes kiadás" textFill="#0d3a4e" />
+         </children>
+      </HBox>
+      <HBox layoutX="28.0" layoutY="214.0" prefHeight="35.0" prefWidth="731.0" style="-fx-border-color: #0D3A4E;">
+         <children>
+            <Label fx:id="openingBalance" alignment="CENTER" prefHeight="33.0" prefWidth="182.0" style="-fx-border-color: #0D3A4E;" textFill="#0d3a4e" />
+            <Label fx:id="closedBalance" alignment="CENTER" prefHeight="33.0" prefWidth="182.0" style="-fx-border-color: #0D3A4E;" textFill="#0d3a4e" />
+            <Label fx:id="totalRevenue" alignment="CENTER" prefHeight="33.0" prefWidth="178.0" style="-fx-border-color: #0D3A4E;" textFill="#0d3a4e" />
+            <Label fx:id="totalOutlay" alignment="CENTER" prefHeight="33.0" prefWidth="188.0" style="-fx-border-color: #0D3A4E;" textFill="#0d3a4e" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

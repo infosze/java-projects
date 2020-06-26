@@ -95,7 +95,14 @@ Button:armed{
 	-fx-background-color: linear-gradient(to left, #0D3A4E, #27AEEA);
 }
 
+#cashier_left{
+	-fx-background-color: linear-gradient(to left, #0D3A4E, #27AEEA);
+}
+
 #admin_content{
+	-fx-background-color: white;
+}
+#casier_content{
 	-fx-background-color: white;
 }
 
