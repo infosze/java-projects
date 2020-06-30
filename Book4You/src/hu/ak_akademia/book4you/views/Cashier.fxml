@@ -21,7 +21,7 @@
                   <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#loadIncomeManagementView" prefHeight="65.0" prefWidth="239.0" styleClass="menu" stylesheets="@application.css" text="Bevétel / Kiadás" />
                   <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#loadNewClientManagementView" prefHeight="65.0" prefWidth="239.0" styleClass="menu" stylesheets="@application.css" text="Ügyfél hozzáadás" />
                   <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#loadinquiryManagementView" prefHeight="65.0" prefWidth="239.0" styleClass="menu" stylesheets="@application.css" text="Lekérdezés" />
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="65.0" prefWidth="239.0" styleClass="menu" stylesheets="@application.css" text="kilépés" />
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="65.0" prefWidth="239.0" styleClass="menu" stylesheets="@application.css" text="kijelentkezés" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="5.0" right="5.0" top="15.0" />
