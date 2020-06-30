@@ -14,7 +14,7 @@ public class CashierMenuController {
 	private BorderPane cashierPage;
 	
 	public void loadIncomeManagementView(ActionEvent event) throws IOException {
-		setContentView("Cashier_income");
+		setContentView("Cashier_transactions");
 	}
 	
 	public void loadNewClientManagementView(ActionEvent event) throws IOException {
