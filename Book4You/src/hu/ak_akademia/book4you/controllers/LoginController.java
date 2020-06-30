@@ -1,10 +1,7 @@
 package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
-import java.util.List;
-
 import hu.ak_akademia.book4you.entities.user.User;
-import hu.ak_akademia.book4you.entities.user.UsersHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,20 +24,23 @@ public class LoginController implements Authentication {
 	private TextField passwordField;
 
 	public void login(ActionEvent event) throws IOException {
-//		if (isAccessGranted()) {
-//			loadMain();
-//		} else {
-//			System.out.println("Belépés megtagadva!");
-//			reset();
-//		}
-		
-		loadMain(); //tesztelés céljából mindíg átdob az Adminra.
+		loadMain(); //tesztelés céljából
 	}
-
+	
+	//ez ki lesz szedve
 	private void loadMain() throws IOException {
 		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Cashier.fxml"));
 		rootPane.getChildren().setAll(MainRoot);
-
+	}
+	//lehet refaktorálni kell...file adatstruktúra függőség
+	private void loadCashierView() throws IOException {
+		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Cashier.fxml"));
+		rootPane.getChildren().setAll(MainRoot); //redundáns sor
+	}
+	//lehet refaktorálni kell...file adatstruktúra függőség
+	private void loadAdminView() throws IOException {
+		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Admin.fxml"));
+		rootPane.getChildren().setAll(MainRoot); //redundáns sor
 	}
 
 	private void reset() {
