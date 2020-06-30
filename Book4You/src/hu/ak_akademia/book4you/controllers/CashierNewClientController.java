@@ -1,5 +1,6 @@
 package hu.ak_akademia.book4you.controllers;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -7,13 +8,15 @@ import java.util.ResourceBundle;
 import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.FullName;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
-import hu.ak_akademia.book4you.entities.client.Clients;
-import hu.ak_akademia.book4you.entities.client.ClientsHandler;
+
+import hu.ak_akademia.book4you.entities.client.EconomicClient;
 import hu.ak_akademia.book4you.entities.client.NaturalClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+
 import javafx.scene.control.TextField;
 
 public class CashierNewClientController implements Initializable {
@@ -35,14 +38,21 @@ public class CashierNewClientController implements Initializable {
 	
 	@FXML
 	private ComboBox<String> clientAdressType= new ComboBox<String>();
+	
+	@FXML
+	private CheckBox checkBox;
 
 	private FullName fullName;
 	private Address address;
 
 	public void addNewClient(ActionEvent event) throws IOException {
-		setName();
 		setAdress();
-		var newClient = new NaturalClient(fullName, address);
+		if(checkBox.isSelected()) {
+			var ecoClient = new EconomicClient(newClientFullName.getText(), address);
+		}else {
+			setName();
+			var newClient = new NaturalClient(fullName, address);	
+		}
 		newClientFullName.setText("");
 		newClientZipCode.setText("");
 		newClientCityName.setText("");
