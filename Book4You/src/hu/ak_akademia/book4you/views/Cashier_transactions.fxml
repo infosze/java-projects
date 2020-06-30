@@ -18,8 +18,11 @@
             </Label>
             <ComboBox fx:id="chooseTitle" layoutX="14.0" layoutY="97.0" prefHeight="35.0" prefWidth="262.0" promptText="Válasszon jogcímet" />
             <TextField fx:id="incomeAmount" layoutX="75.0" layoutY="261.0" promptText="Összeg" style="-fx-background-color: #AAE2E4;" />
-            <RadioButton fx:id="income" layoutX="107.0" layoutY="167.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #AAE2E4;" text="Bevétel" />
-            <RadioButton fx:id="outlay" layoutX="107.0" layoutY="202.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #AAE2E4;" text="Kiadás" />
+            <RadioButton fx:id="income" layoutX="107.0" layoutY="167.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #AAE2E4;" text="Bevétel">
+               <toggleGroup>
+                  <ToggleGroup fx:id="transactions" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="outlay" layoutX="107.0" layoutY="202.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #AAE2E4;" text="Kiadás" toggleGroup="$transactions" />
          </children>
       </AnchorPane>
       <Button layoutX="136.0" layoutY="394.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="141.0" stylesheets="@application.css" text="Mentés" />
