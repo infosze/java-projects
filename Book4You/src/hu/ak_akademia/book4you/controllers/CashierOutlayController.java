@@ -5,11 +5,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class CashierOutlayController {
-	@FXML
-	private ComboBox chooseTitle;
 	
-	@FXML
-	private TextField outlayAmount;
 	
 	@FXML
 	private TextField newClientFullName;
@@ -26,6 +22,4 @@ public class CashierOutlayController {
 	@FXML
 	private TextField clientAdressType;
 	
-	@FXML
-	private ComboBox chooseClient;
 }

@@ -17,8 +17,8 @@ public class CashierMenuController {
 		setContentView("Cashier_income");
 	}
 	
-	public void loadOutlayManagementView(ActionEvent event) throws IOException {
-		setContentView("Cashier_outlay");
+	public void loadNewClientManagementView(ActionEvent event) throws IOException {
+		setContentView("Cashier_new_client");
 	}
 	
 	public void loadinquiryManagementView(ActionEvent event) throws IOException{
