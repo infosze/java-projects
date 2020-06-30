@@ -2,10 +2,11 @@ package hu.ak_akademia.book4you.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 
-public class CashierIncomeController {
+public class CashierTransactionsController {
 	@FXML
 	private ComboBox chooseTitle;
 	
@@ -28,6 +29,8 @@ public class CashierIncomeController {
 	private TextField clientAdressType;
 	
 	@FXML
-	private ComboBox chooseClient;
-
+	private RadioButton income;
+	
+	@FXML
+	private RadioButton outlay;
 }

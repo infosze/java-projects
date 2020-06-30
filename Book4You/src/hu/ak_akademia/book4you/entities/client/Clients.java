@@ -19,7 +19,7 @@ public class Clients implements ClientsHandler{
 
 	@Override
 	public void add(Client newClient) {
-		// TODO Auto-generated method stub
+		clientsList.add(newClient);
 		
 	}
 
