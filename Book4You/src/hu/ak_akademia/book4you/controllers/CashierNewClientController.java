@@ -37,6 +37,9 @@ public class CashierNewClientController implements Initializable {
 	private TextField newClientHouseNumber;
 	
 	@FXML
+	private TextField newClientCountry;
+	
+	@FXML
 	private ComboBox<String> clientAdressType= new ComboBox<String>();
 	
 	@FXML
@@ -54,6 +57,7 @@ public class CashierNewClientController implements Initializable {
 			var newClient = new NaturalClient(fullName, address);	
 		}
 		newClientFullName.setText("");
+		newClientCountry.setText("");
 		newClientZipCode.setText("");
 		newClientCityName.setText("");
 		newClientAdressName.setText("");
@@ -65,7 +69,7 @@ public class CashierNewClientController implements Initializable {
 		int zipCode = Integer.parseInt(newClientZipCode.getText());
 		var spaceType = getType(clientAdressType.getValue());
 		int number = Integer.parseInt(newClientHouseNumber.getText());
-		address = new Address(zipCode,newClientCityName.getText(),newClientAdressName.getText(),spaceType , number);
+		address = new Address(newClientCountry.getText(),zipCode,newClientCityName.getText(),newClientAdressName.getText(),spaceType , number);
 	}
 	
 	private PublicSpaceType getType(String enumName) {
@@ -92,6 +96,7 @@ public class CashierNewClientController implements Initializable {
 		newClientAdressName.setText("");
 		clientAdressType.getSelectionModel().clearSelection();
 		newClientHouseNumber.setText("");
+		newClientCountry.setText("");
 		
 	}
 
