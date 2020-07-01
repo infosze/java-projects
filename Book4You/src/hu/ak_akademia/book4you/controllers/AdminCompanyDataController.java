@@ -14,6 +14,9 @@ public class AdminCompanyDataController {
 	private TextField companyNameField;
 	
 	@FXML
+	private TextField countryField;
+	
+	@FXML
 	private TextField postalCodeField;
 	
 	@FXML

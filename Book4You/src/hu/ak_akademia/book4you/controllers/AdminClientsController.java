@@ -18,6 +18,12 @@ public class AdminClientsController {
 	private TextField clientNameFieldToModify;
 	
 	@FXML
+	private TextField countryFieldToAdd;
+	
+	@FXML
+	private TextField countryFieldToModify;
+	
+	@FXML
 	private TextField postalCodeFieldToAdd;
 	
 	@FXML

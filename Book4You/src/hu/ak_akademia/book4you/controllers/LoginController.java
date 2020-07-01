@@ -27,9 +27,14 @@ public class LoginController implements Authentication {
 		loadMain(); //tesztelés céljából
 	}
 	
+	public void resetFields(ActionEvent event) {
+		userNameField.setText("");
+		passwordField.setText("");
+	}
+	
 	//ez ki lesz szedve
 	private void loadMain() throws IOException {
-		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Cashier.fxml"));
+		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Admin.fxml"));
 		rootPane.getChildren().setAll(MainRoot);
 	}
 	//lehet refaktorálni kell...file adatstruktúra függőség
@@ -43,10 +48,11 @@ public class LoginController implements Authentication {
 		rootPane.getChildren().setAll(MainRoot); //redundáns sor
 	}
 
-	private void reset() {
+	private void resetAlertMessage() {
 		alertMessage.setVisible(true);
 		passwordField.setText("");
 	}
+	
 
 	@Override
 	public boolean isAccessGranted() {

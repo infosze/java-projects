@@ -1,18 +1,28 @@
 package hu.ak_akademia.book4you.entities;
 
 public class Address {
+	private String country;
 	private int postalCode;
 	private String city;
 	private String publicSpaceName;
 	private PublicSpaceType publicSpaceType;
 	private int number;
 	
-	public Address(int postalCode, String city, String publicSpaceName, PublicSpaceType publicSpaceType, int number) {
+	public Address(String country, int postalCode, String city, String publicSpaceName, PublicSpaceType publicSpaceType, int number) {
+		this.country = country;
 		this.postalCode = postalCode;
 		this.city = city;
 		this.publicSpaceName = publicSpaceName;
 		this.publicSpaceType = publicSpaceType;
 		this.number = number;
+	}
+	
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public int getPostalCode() {
@@ -57,7 +67,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [postalCode=" + postalCode + ", city=" + city + ", publicSpaceName=" + publicSpaceName
-				+ ", publicSpaceType=" + publicSpaceType + ", number=" + number + "]";
+		return "Address [country=" + country + ", postalCode=" + postalCode + ", city=" + city + ", publicSpaceName="
+				+ publicSpaceName + ", publicSpaceType=" + publicSpaceType + ", number=" + number + "]";
 	}
 }

@@ -7,23 +7,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane id="admin_content" prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="70.0" layoutY="16.0" prefHeight="562.0" prefWidth="423.0" spacing="10.0" styleClass="panel" stylesheets="@application.css">
          <children>
-            <Label stylesheets="@application.css" text="Cég neve:">
-               <font>
-                  <Font name="Yu Gothic Light" size="18.0" />
-               </font>
-            </Label>
+            <Label text="Cég neve:" />
             <TextField fx:id="companyNameField" prefHeight="40.0" prefWidth="45.0" />
-            <Label text="Címe:">
-               <font>
-                  <Font name="Yu Gothic Light" size="18.0" />
-               </font>
-            </Label>
+            <Label text="Székhelye:" />
+            <Label text="Ország:" />
+            <TextField fx:id="countryField" prefHeight="40.0" prefWidth="255.0" />
             <Label text="Irányítószám:" />
             <TextField fx:id="postalCodeField" prefHeight="40.0" prefWidth="255.0" />
             <Label text="Város:" />

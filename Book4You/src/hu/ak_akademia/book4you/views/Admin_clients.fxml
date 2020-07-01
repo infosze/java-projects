@@ -24,7 +24,9 @@
                            <children>
                               <Label prefHeight="27.0" prefWidth="115.0" stylesheets="@application.css" text="Ügyfél neve:" />
                               <TextField fx:id="companyNameFieldToAdd" prefHeight="40.0" prefWidth="45.0" />
-                              <Label text="Címe:" />
+                              <Label text="Címe / Székhelye:" />
+                              <Label text="Ország:" />
+                              <TextField fx:id="countryFieldToAdd" prefHeight="40.0" prefWidth="255.0" />
                               <Label text="Irányítószám:" />
                               <TextField fx:id="postalCodeFieldToAdd" prefHeight="40.0" prefWidth="255.0" />
                               <Label text="Város:" />
@@ -50,11 +52,13 @@
             <content>
               <AnchorPane id="admin_content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="562.0" prefWidth="423.0" spacing="10.0" styleClass="panel" stylesheets="@application.css">
+                        <VBox prefHeight="520.0" prefWidth="423.0" spacing="10.0" styleClass="panel" stylesheets="@application.css">
                            <children>
                               <Label prefHeight="27.0" prefWidth="115.0" text="Ügyfél neve:" />
                               <TextField fx:id="companyNameFieldToModify" disable="true" prefHeight="40.0" prefWidth="45.0" />
-                              <Label text="Címe:" />
+                              <Label text="Címe / Székhelye:" />
+                              <Label text="Ország:" />
+                              <TextField fx:id="countryFieldToModify" disable="true" prefHeight="40.0" prefWidth="255.0" />
                               <Label text="Irányítószám:" />
                               <TextField fx:id="postalCodeFieldToModify" disable="true" prefHeight="40.0" prefWidth="255.0" />
                               <Label text="Város:" />
@@ -72,12 +76,12 @@
                         </VBox>
                         <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
                         <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
-                        <CheckBox fx:id="aktivCheckBox" disable="true" layoutX="550.0" layoutY="146.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="114.0" text="Aktív">
+                        <CheckBox fx:id="aktivCheckBox" disable="true" layoutX="575.0" layoutY="135.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="114.0" text="Aktív">
                            <font>
                               <Font name="Yu Gothic Light" size="18.0" />
                            </font>
                         </CheckBox>
-                        <ComboBox fx:id="clientChooser" layoutX="469.0" layoutY="68.0" prefHeight="40.0" prefWidth="220.0" stylesheets="@application.css" />
+                        <ComboBox fx:id="clientChooser" layoutX="469.0" layoutY="50.0" prefHeight="40.0" prefWidth="220.0" stylesheets="@application.css" />
                      </children>
                   </AnchorPane>
             </content>
