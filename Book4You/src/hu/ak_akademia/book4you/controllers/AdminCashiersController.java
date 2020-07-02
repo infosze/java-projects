@@ -29,4 +29,10 @@ public class AdminCashiersController {
 	
 	@FXML
 	private Label id;
+	
+	@FXML
+	private Label messageLabelToAdd;
+	
+	@FXML
+	private Label messageLabelToModify;
 }
