@@ -26,6 +26,12 @@
                               <TextField fx:id="fullNameFieldToAdd" prefHeight="40.0" prefWidth="45.0" />
                               <Label text="Jelszó:" />
                               <TextField fx:id="passwordFieldToAdd" prefHeight="40.0" prefWidth="255.0" />
+                              <Label prefHeight="27.0" prefWidth="115.0" stylesheets="@application.css" text="Azonosító generálás:" />
+                              <Label fx:id="id" prefHeight="56.0" prefWidth="363.0" text="Mentés után jegyezze le a generált ID-t!">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                            <padding>
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
