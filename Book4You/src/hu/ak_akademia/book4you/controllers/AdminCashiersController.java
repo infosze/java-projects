@@ -1,10 +1,10 @@
 package hu.ak_akademia.book4you.controllers;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import hu.ak_akademia.book4you.entities.FullName;
 import hu.ak_akademia.book4you.entities.user.Cashier;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -48,7 +48,7 @@ public class AdminCashiersController {
 	public void addNewCashier(ActionEvent event) throws IOException {
 		setName();
 		generateIdentifier();
-		writePassword();
+		addPassword();
 		Cashier newChashier = new Cashier(fullName, identifier, password);
 		fullNameFieldToAdd.setText("");
 		passwordFieldToAdd.setText("");
@@ -72,7 +72,7 @@ public class AdminCashiersController {
 		identifier += s;
 	}
 
-	private void writePassword() {
+	private void addPassword() {
 		password = passwordFieldToAdd.getText();
 	}
 
