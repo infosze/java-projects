@@ -89,7 +89,7 @@ public class CashierNewClientController implements Initializable {
 		}
 	}
 	
-	public void reset(ActionEvent event) throws IOException{
+	public void resetTextFields(ActionEvent event) throws IOException{
 		newClientFullName.setText("");
 		newClientZipCode.setText("");
 		newClientCityName.setText("");

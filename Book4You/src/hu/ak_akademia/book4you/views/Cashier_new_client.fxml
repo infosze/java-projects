@@ -14,7 +14,7 @@
       <TextField fx:id="newClientCityName" layoutX="182.0" layoutY="231.0" promptText="város neve" />
       <TextField fx:id="newClientAdressName" layoutX="182.0" layoutY="341.0" prefHeight="35.0" prefWidth="246.0" promptText="közterület neve" />
       <Button layoutX="630.0" layoutY="242.0" mnemonicParsing="false" onAction="#addNewClient" prefHeight="40.0" prefWidth="100.0" text="Mentés" />
-      <Button layoutX="630.0" layoutY="306.0" mnemonicParsing="false" onAction="#reset" prefHeight="40.0" prefWidth="100.0" text="Mégse" />
+      <Button layoutX="630.0" layoutY="306.0" mnemonicParsing="false" onAction="#resetTextFields" prefHeight="40.0" prefWidth="100.0" text="Mégse" />
       <Label alignment="CENTER" layoutX="26.0" layoutY="23.0" prefHeight="40.0" prefWidth="208.0" style="-fx-background-color: #0D3A4E;" text="Új ügyfél hozzáadása" textFill="WHITE">
          <font>
             <Font size="20.0" />
