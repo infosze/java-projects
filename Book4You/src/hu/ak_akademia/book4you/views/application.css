@@ -42,27 +42,27 @@ ComboBox:hover{
 
 TextField{
 	-fx-background-color: #AAE2E4;
-	-fx-text-fill: #FFECEB;
+	-fx-text-fill: Black;
 	-fx-font-family: 'Roboto';
 	-fx-font-size: 18 pt;
 }
 
 TextField:hover{
 	-fx-background-color: #FF564F;
-	-fx-text-fill: #FFECEB;
+	-fx-text-fill: Black;
 	-fx-font-family: 'Roboto';
 	-fx-font-size: 18 pt;
 }
 
 PasswordField{
 	-fx-background-color: #AAE2E4;
-	-fx-text-fill: #FFECEB;
+	-fx-text-fill: Black;
 	-fx-font-size: 18 pt;
 }
 
 PasswordField:hover{
 	-fx-background-color: #FF564F;
-	-fx-text-fill: #FFECEB;
+	-fx-text-fill: Black;
 	-fx-font-size: 18 pt;
 }
 
