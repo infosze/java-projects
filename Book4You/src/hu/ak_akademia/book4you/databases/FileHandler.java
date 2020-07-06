@@ -11,21 +11,21 @@ import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
 import hu.ak_akademia.book4you.entities.owncompany.OwnCompany;
 
-public class UsersFileHandler implements DataSaver, DataLoader {
+public class FileHandler implements DataSaver, DataLoader {
 	private String url;
 
-	public UsersFileHandler(String url) {
+	public FileHandler(String url) {
 		this.url = url;
 	}
 
 	@Override
 	public Object load() {
 		ObjectInputStream in;
-		OwnCompany obj = null;
+		Object obj = null;
 		
 		try {
 			in = new ObjectInputStream(new FileInputStream(url));
-			obj = (OwnCompany) in.readObject();
+			obj = in.readObject();
 		} catch (FileNotFoundException e) {
 			System.out.println(url + " nem található!");
 		} catch (IOException e) {

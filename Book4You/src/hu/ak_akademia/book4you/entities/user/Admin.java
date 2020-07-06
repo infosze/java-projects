@@ -12,6 +12,6 @@ public class Admin extends User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Admin [getName()=" + getName() + ", getIdentifier()=" + getIdentifier() + "]";
+		return  getName() + "(Admin) ID=" + getIdentifier();
 	}
 }
