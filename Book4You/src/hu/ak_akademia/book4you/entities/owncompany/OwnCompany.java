@@ -34,6 +34,6 @@ public class OwnCompany implements Serializable{
 
 	@Override
 	public String toString() {
-		return "OwnCompany [name=" + name + ", toString()=" + super.toString() + "]";
+		return "OwnCompany: " + name + " " + address.toString();
 	}
 }

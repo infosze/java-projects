@@ -13,17 +13,16 @@ import hu.ak_akademia.book4you.entities.owncompany.OwnCompany;
 
 public class OwnCompanyFileHandler implements DataSaver, DataLoader {
 	private String url;
-	private OwnCompany data;
 
-	public OwnCompanyFileHandler(String url, OwnCompany data) {
+	public OwnCompanyFileHandler(String url) {
 		this.url = url;
-		this.data = data;
 	}
 
 	@Override
-	public Object load() throws ClassNotFoundException {
+	public Object load() {
 		ObjectInputStream in;
 		OwnCompany obj = null;
+		
 		try {
 			in = new ObjectInputStream(new FileInputStream(url));
 			obj = (OwnCompany) in.readObject();
@@ -31,15 +30,18 @@ public class OwnCompanyFileHandler implements DataSaver, DataLoader {
 			System.out.println(url + " nem található!");
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
+		
 		return obj;
 	}
 
 	@Override
-	public void save() {
+	public void save(Object obj) {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(url));
-			out.writeObject(data);
+			out.writeObject(obj);
 			out.close();
 			System.out.println(url + "-be adatok kiírva.");
 		} catch (FileNotFoundException e) {

@@ -1,11 +1,14 @@
 package hu.ak_akademia.book4you.entities.user;
 
-import hu.ak_akademia.book4you.entities.FullName;
+import java.io.Serializable;
 
-public class Cashier extends User{
+public class Cashier extends User implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private boolean isActive;
 	
-	public Cashier(FullName name, String identifier, String password) {
+	public Cashier(String name, String identifier, String password) {
 		super(name, identifier, password);
 		isActive = true;
 	}
@@ -22,6 +25,4 @@ public class Cashier extends User{
 	public String toString() {
 		return "Cashier [isActive=" + isActive + ", toString()=" + super.toString() + "]";
 	}
-	
-	
 }

@@ -1,19 +1,22 @@
 package hu.ak_akademia.book4you.entities.user;
 
-import hu.ak_akademia.book4you.entities.FullName;
+import java.io.Serializable;
 
-public abstract class User {
-	private FullName name;
+public abstract class User implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private String name;
 	private String identifier;
 	private String password;
 	
-	public User(FullName name, String identifier, String password) {
+	public User(String name, String identifier, String password) {
 		this.name = name;
 		this.identifier = identifier;
 		this.password = password;
 	}
 
-	public FullName getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -33,6 +36,4 @@ public abstract class User {
 	public String toString() {
 		return "User [name=" + name + ", identifier=" + identifier + "]";
 	}
-	
-	
 }

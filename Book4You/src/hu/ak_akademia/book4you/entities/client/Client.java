@@ -11,27 +11,4 @@ public abstract class Client {
 		this.address = address;
 		this.isVIP = false;
 	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public boolean isVIP() {
-		return isVIP;
-	}
-
-	public void setVIP(boolean isVIP) {
-		this.isVIP = isVIP;
-	}
-
-	@Override
-	public String toString() {
-		return "Client [address=" + address + ", isVIP=" + isVIP + "]";
-	}
-	
-	
 }

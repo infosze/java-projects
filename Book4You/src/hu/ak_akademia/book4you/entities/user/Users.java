@@ -8,6 +8,7 @@ public class Users implements UsersHandler{
 	public Users() {
 		this.usersList = loadToList();
 	}
+	
 
 	@Override
 	public List<User> loadToList() {
@@ -26,11 +27,4 @@ public class Users implements UsersHandler{
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-	
-
-
-	
 }

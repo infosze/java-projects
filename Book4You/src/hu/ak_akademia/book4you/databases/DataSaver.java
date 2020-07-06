@@ -1,5 +1,5 @@
 package hu.ak_akademia.book4you.databases;
 
 public interface DataSaver {
-	void save();
+	void save(Object obj);
 }
