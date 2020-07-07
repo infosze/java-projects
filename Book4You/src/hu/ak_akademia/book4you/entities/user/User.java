@@ -7,7 +7,7 @@ public abstract class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
-	private String identifier;
+	private final String identifier;
 	private String password;
 	
 	public User(String name, String identifier, String password) {

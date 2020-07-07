@@ -10,7 +10,7 @@ public abstract class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
-	private String identifier; 
+	private final String identifier; 
 	private Address address;
 	private boolean isVIP;
 	
@@ -31,10 +31,6 @@ public abstract class Client implements Serializable{
 
 	public String getIdentifier() {
 		return identifier;
-	}
-
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
 	}
 
 	public Address getAddress() {
