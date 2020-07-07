@@ -3,6 +3,8 @@ package hu.ak_akademia.book4you.controllers;
 import java.io.IOException;
 
 import hu.ak_akademia.book4you.entities.user.Cashier;
+import hu.ak_akademia.book4you.entities.user.Users;
+import hu.ak_akademia.book4you.entities.user.UsersHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -50,11 +52,14 @@ public class AdminCashiersController {
 			String[] letters = cutLettersFromName(fullName);
 			String identifier = generateIdentifier(letters);
 			messageLabelToAdd.setText(identifier);
+			UsersHandler users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
 			Cashier newChashier = new Cashier(fullName, identifier, password);
+			users.add(newChashier);
+			users.save();
 			fullNameFieldToAdd.setText("");
 			passwordFieldToAdd.setText("");
 			System.out.print(newChashier);
-			System.out.printf("[password= %s]%n", password);
+			System.out.printf(" Password= %s%n", password);
 		}
 	}
 
