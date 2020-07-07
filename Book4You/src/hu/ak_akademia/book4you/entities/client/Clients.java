@@ -28,7 +28,13 @@ public class Clients implements ClientsHandler {
 
 	@Override
 	public void modify(Client from, Client to) {
-		clientsList.set(getClientIndex(from), to);
+		int clientIndex = getClientIndex(from);
+
+		if (clientIndex >= 0) {
+			clientsList.set(clientIndex, to);
+		} else {
+			System.out.println("A módosítandó objektum nem található!");
+		}
 	}
 
 	@Override
@@ -47,7 +53,7 @@ public class Clients implements ClientsHandler {
 		}
 		return result;
 	}
-	
+
 	private int getClientIndex(Client client) {
 		return clientsList.indexOf(client);
 	}
