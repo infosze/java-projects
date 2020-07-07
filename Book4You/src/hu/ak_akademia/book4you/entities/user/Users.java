@@ -9,7 +9,6 @@ public class Users implements UsersHandler{
 		this.usersList = loadToList();
 	}
 	
-
 	@Override
 	public List<User> loadToList() {
 		// TODO Auto-generated method stub

@@ -26,6 +26,7 @@ public class FileHandler implements DataSaver, DataLoader {
 		try {
 			in = new ObjectInputStream(new FileInputStream(url));
 			obj = in.readObject();
+			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println(url + " nem található!");
 		} catch (IOException e) {

@@ -1,18 +1,24 @@
 package hu.ak_akademia.book4you.entities.client;
 
+import java.io.Serializable;
+
 import hu.ak_akademia.book4you.entities.Address;
 
-public class EconomicClient extends Client{
+public class EconomicClient extends Client implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
-	private String CompanyName;
-
-	public EconomicClient(String companyName, Address address) {
-		super(address);
-		identifier = companyName;
-		CompanyName = companyName;
+	public EconomicClient(String name, String identifier, Address address) {
+		super(name, identifier, address);
 	}
+	
+	
 
-	public String getCompanyName() {
-		return CompanyName;
-	}
+	
+	
+
+	
+
+	
+	
+	
 }
