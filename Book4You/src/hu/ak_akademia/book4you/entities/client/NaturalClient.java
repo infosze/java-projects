@@ -9,18 +9,4 @@ public class NaturalClient extends Client implements Serializable{
 	public NaturalClient(String name, String identifier, Address address) {
 		super(name, identifier, address);
 	}
-	
-	
-
-
-	
-
-	
-	
-	
-
-	
-
-	
-
 }

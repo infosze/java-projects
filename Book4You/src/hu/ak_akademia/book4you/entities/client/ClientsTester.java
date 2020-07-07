@@ -21,6 +21,7 @@ public class ClientsTester {
 		Client client = clients.getClient("vv01");
 
 		Client modified = new NaturalClient("Vásárló Vivien", "vv01", address1);
+		modified.setVIP(true);
 		clients.modify(client, modified);
 		clients.save();
 	}
