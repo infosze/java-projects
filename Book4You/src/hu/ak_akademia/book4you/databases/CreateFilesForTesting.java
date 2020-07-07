@@ -21,9 +21,8 @@ public class CreateFilesForTesting {
 	public static void main(String[] args) {
 		// owncompany.bin feltöltése teszt adatokkal
 		String url1 = "src/hu/ak_akademia/book4you/databases/owncompany.bin";
-		OwnCompany data = new OwnCompany("Book4You",
-				new Address("Magyarország", 1037, "Budapest", "Hunor", PublicSpaceType.STREET, 62));
-
+		OwnCompany data = new OwnCompany("Book4You", new Address("Magyarország", 1037, "Budapest", "Hunor", PublicSpaceType.STREET, 62));
+		
 		DataSaver ownCompanyFileSaver = new FileHandler("src/hu/ak_akademia/book4you/databases/owncompany.bin");
 		ownCompanyFileSaver.save(data);
 
