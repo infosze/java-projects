@@ -87,7 +87,6 @@ public class AdminClientsController implements Initializable {
 	
 	
 	public void editClient(ActionEvent event ) throws IOException{
-		String Teszt = "tesztdfsfsfsfsfs";
 		selectedClient = clientChooser.getValue();
 		companyNameFieldToModify.setDisable(false);
 		companyNameFieldToModify.setText(selectedClient.getName());
