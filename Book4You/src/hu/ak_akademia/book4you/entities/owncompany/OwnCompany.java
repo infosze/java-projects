@@ -1,7 +1,6 @@
 package hu.ak_akademia.book4you.entities.owncompany;
 
 import java.io.Serializable;
-
 import hu.ak_akademia.book4you.entities.Address;
 
 public class OwnCompany implements Serializable{

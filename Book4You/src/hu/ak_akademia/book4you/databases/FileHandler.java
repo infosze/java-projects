@@ -7,10 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import hu.ak_akademia.book4you.entities.Address;
-import hu.ak_akademia.book4you.entities.PublicSpaceType;
-import hu.ak_akademia.book4you.entities.owncompany.OwnCompany;
-
 public class FileHandler implements DataSaver, DataLoader {
 	private String url;
 
