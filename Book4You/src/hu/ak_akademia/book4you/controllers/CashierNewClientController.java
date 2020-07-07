@@ -3,12 +3,13 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import hu.ak_akademia.book4you.entities.Address;
-import hu.ak_akademia.book4you.entities.FullName;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
-
+import hu.ak_akademia.book4you.entities.client.Clients;
+import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.client.EconomicClient;
 import hu.ak_akademia.book4you.entities.client.NaturalClient;
 import javafx.event.ActionEvent;
@@ -45,17 +46,26 @@ public class CashierNewClientController implements Initializable {
 	@FXML
 	private CheckBox checkBox;
 
-	private FullName fullName;
+	private Random rnd = new Random(); // for testing
 	private Address address;
 
 	public void addNewClient(ActionEvent event) throws IOException {
 		setAdress();
+		EconomicClient newEClient= null;
+		NaturalClient newNClient = null;
+		ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
 		if(checkBox.isSelected()) {
-			var ecoClient = new EconomicClient(newClientFullName.getText(), address);
+			newEClient = new EconomicClient(newClientFullName.getText(),"Teszt" +rnd.nextInt(150) , address);
+			clientHandler.add(newEClient);
+			clientHandler.save();
 		}else {
-			setName();
-			var newClient = new NaturalClient(fullName, address);	
+			 newNClient = new NaturalClient(newClientFullName.getText(),"Teszt"+ rnd.nextInt(150), address);
+			 clientHandler.add(newNClient);
+			 clientHandler.save();
 		}
+		
+		System.out.println(newNClient);		//for testing
+		System.out.println(newEClient);		//for testing
 		newClientFullName.setText("");
 		newClientCountry.setText("");
 		newClientZipCode.setText("");
@@ -79,14 +89,6 @@ public class CashierNewClientController implements Initializable {
 			}
 		}
 		return null;
-	}
-	private void setName() {
-		String[] name = newClientFullName.getText().split(" ");
-		if(name.length <=2) {
-			fullName = new FullName(name[0],"",name[1]);
-		}else {
-		 fullName = new FullName(name[0],name[1],name[2]);
-		}
 	}
 	
 	public void resetTextFields(ActionEvent event) throws IOException{
