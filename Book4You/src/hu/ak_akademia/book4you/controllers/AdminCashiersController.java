@@ -2,7 +2,6 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 
-import hu.ak_akademia.book4you.entities.FullName;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,48 +40,110 @@ public class AdminCashiersController {
 	@FXML
 	private Label messageLabelToModify;
 
-	private FullName fullName;
-	private String identifier;
-	private String password;
+	private String errorMessage1 = String.format("Kérem töltse ki a mezőt!");
+	private String errorMessage2 = String.format("Kérem megfelelő formátumot adjon meg!");
 
 	public void addNewCashier(ActionEvent event) throws IOException {
-		setName();
-		generateIdentifier();
-		addPassword();
-		Cashier newChashier = new Cashier(fullName, identifier, password);
-		fullNameFieldToAdd.setText("");
-		passwordFieldToAdd.setText("");
-		System.out.println(newChashier);
-	}
-
-	private void setName() {
-		String[] name = fullNameFieldToAdd.getText().split(" ");
-		if (name.length <= 2) {
-			fullName = new FullName(name[0], "", name[1]);
-		} else {
-			fullName = new FullName(name[0], name[1], name[2]);
+		if (validateName(fullNameFieldToAdd) & validatePassword(passwordFieldToAdd)) {
+			String fullName = addCashier(fullNameFieldToAdd);
+			String password = addPassword(passwordFieldToAdd);
+			String[] letters = cutLettersFromName(fullName);
+			String identifier = generateIdentifier(letters);
+			messageLabelToAdd.setText(identifier);
+			Cashier newChashier = new Cashier(fullName, identifier, password);
+			fullNameFieldToAdd.setText("");
+			passwordFieldToAdd.setText("");
+			System.out.print(newChashier);
+			System.out.printf("[password= %s]%n", password);
 		}
 	}
 
-	private void generateIdentifier() {
-		identifier = fullName.getLastName().substring(0, 1);
-		identifier += fullName.getFirstName().substring(0, 1);
-		int i = (int) (Math.random() * 100_000) + 0;
-		String s = String.format("%05d", i);
-		identifier += s;
+	private String addCashier(TextField textField) {
+		return changeFirstLetterToUpperCase(textField);
 	}
 
-	private void addPassword() {
-		password = passwordFieldToAdd.getText();
+	private String addPassword(TextField textField) {
+		return textField.getText();
 	}
 
-//	private boolean checkPassword() {
-//		return password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-//	}
+	private String generateIdentifier(String[] letters) {
+		String identifier;
+		identifier = letters[0];
+		identifier += letters[1];
+		int identityNumber = (int) (Math.random() * 10_000) + 0;
+		String formattedIdentityNumber = String.format("%04d", identityNumber);
+		identifier += formattedIdentityNumber;
+		return identifier;
+	}
 
-	public void reset(ActionEvent event) throws IOException {
-		fullNameFieldToAdd.setText("");
-		passwordFieldToAdd.setText("");
+	private boolean validateName(TextField textFieldName) {
+		String rawName = textFieldName.getText();
+		if (rawName.isEmpty()) {
+			textFieldName.setText(errorMessage1);
+			return false;
+		} else if (!rawName
+				.matches("([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ]{2,})(?: |\\-)([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ]*\\b\\.?)(| ([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ]*))\\ *")) {
+			textFieldName.setText(errorMessage2);
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validatePassword(TextField textField) {
+		String rawPassword = textField.getText();
+		if (rawPassword.isEmpty()) {
+			textField.setText(errorMessage1);
+			return false;
+		} else if (!rawPassword.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")) {
+			textField.setText(errorMessage2);
+			return false;
+		} else
+			return true;
+	}
+
+	private static String changeFirstLetterToUpperCase(TextField textField) {
+		StringBuilder fullName = new StringBuilder(textField.getText().toLowerCase());
+		fullName.setCharAt(0, Character.toUpperCase(fullName.charAt(0)));
+		for (int i = 1; i < fullName.length(); i++) {
+			if (fullName.charAt(i) == ' ' || fullName.charAt(i) == '-') {
+				fullName.setCharAt(i + 1, Character.toUpperCase(fullName.charAt(i + 1)));
+			}
+		}
+		return fullName.toString();
+	}
+
+	private String[] cutLettersFromName(String textField) {
+		String name1;
+		String name2;
+		String[] name = textField.split(" ");
+		if (name.length == 2) {
+			name1 = name[0];
+			name2 = name[1];
+		} else if (name[1].lastIndexOf(".") > -1) {
+			name1 = name[0];
+			name2 = name[2];
+		} else {
+			name1 = name[0];
+			name2 = name[1];
+		}
+		String[] letters = { name1.substring(0, 2).toUpperCase(), name2.substring(0, 1) };
+		return letters;
+	}
+
+	public void emptyTextField(ActionEvent event) throws IOException {
+		boolean deleteAll = true;
+		if (fullNameFieldToAdd.getText().equals(errorMessage1) || fullNameFieldToAdd.getText().equals(errorMessage2)) {
+			fullNameFieldToAdd.setText("");
+			deleteAll = false;
+		}
+		if (passwordFieldToAdd.getText().equals(errorMessage1) || passwordFieldToAdd.getText().equals(errorMessage2)) {
+			passwordFieldToAdd.setText("");
+			deleteAll = false;
+		}
+		if (deleteAll) {
+			fullNameFieldToAdd.setText("");
+			passwordFieldToAdd.setText("");
+		}
 	}
 
 }

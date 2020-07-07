@@ -39,7 +39,7 @@
                            </padding>
                         </VBox>
                         <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" onAction="#addNewCashier" stylesheets="@application.css" text="Mentés" />
-                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" onAction="#reset" stylesheets="@application.css" text="Mégse" />
+                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" onAction="#emptyTextField" stylesheets="@application.css" text="Mégse" />
                      </children>
                   </AnchorPane>
             </content>
