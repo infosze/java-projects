@@ -81,16 +81,17 @@ public class AdminClientsController implements Initializable {
 	private Random rnd = new Random(); // for testing
 	private Address address;
 	private ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
-	private Client x;
+	private Client selectedClient;
 
 	
 	
 	
 	public void editClient(ActionEvent event ) throws IOException{
-		x = clientChooser.getValue();
+		String Teszt = "tesztdfsfsfsfsfs";
+		selectedClient = clientChooser.getValue();
 		companyNameFieldToModify.setDisable(false);
-		companyNameFieldToModify.setText(x.getName());
-		Address clientAddress = x.getAddress();
+		companyNameFieldToModify.setText(selectedClient.getName());
+		Address clientAddress = selectedClient.getAddress();
 		countryFieldToModify.setDisable(false);
 		countryFieldToModify.setText(clientAddress.getCountry());
 		postalCodeFieldToModify.setDisable(false);
@@ -103,7 +104,8 @@ public class AdminClientsController implements Initializable {
 		houseNumberFieldToModify.setText(clientAddress.getNumber()+"");
 		publicSpaceTypeComboBoxToModify.setDisable(false);
 		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getName());
-		
+		//TODO
+		//TODO Action event létrehozása
 	}
 
 	public void addNewClient(ActionEvent event) throws IOException {
