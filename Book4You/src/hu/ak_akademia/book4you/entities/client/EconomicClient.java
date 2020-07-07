@@ -10,15 +10,4 @@ public class EconomicClient extends Client implements Serializable{
 	public EconomicClient(String name, String identifier, Address address) {
 		super(name, identifier, address);
 	}
-	
-	
-
-	
-	
-
-	
-
-	
-	
-	
 }

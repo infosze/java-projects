@@ -13,6 +13,11 @@ public class Cashier extends User implements Serializable{
 		isActive = true;
 	}
 
+	public Cashier(String name, String identifier, String password, boolean isActive) {
+		super(name, identifier, password);
+		this.isActive = isActive;
+	}
+
 	public boolean isActive() {
 		return isActive;
 	}
