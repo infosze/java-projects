@@ -84,7 +84,7 @@ public class CashierNewClientController implements Initializable {
 	
 	private PublicSpaceType getType(String enumName) {
 		for(var pst : PublicSpaceType.values()) {
-			if(pst.getName().equals(enumName)) {
+			if(pst.getValue().equals(enumName)) {
 				return pst;
 			}
 		}
@@ -105,7 +105,7 @@ public class CashierNewClientController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		for(PublicSpaceType pst : PublicSpaceType.values()) {
-		clientAdressType.getItems().addAll(pst.getName());
+		clientAdressType.getItems().addAll(pst.getValue());
 		}
 		
 		

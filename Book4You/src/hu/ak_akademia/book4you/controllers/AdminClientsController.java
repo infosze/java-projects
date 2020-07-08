@@ -102,7 +102,7 @@ public class AdminClientsController implements Initializable {
 		houseNumberFieldToModify.setDisable(false);
 		houseNumberFieldToModify.setText(clientAddress.getNumber()+"");
 		publicSpaceTypeComboBoxToModify.setDisable(false);
-		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getName());
+		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getValue());
 		//TODO
 		//TODO Action event létrehozása
 	}
@@ -141,7 +141,7 @@ public class AdminClientsController implements Initializable {
 
 	private PublicSpaceType getType(String enumName) {
 		for (var pst : PublicSpaceType.values()) {
-			if (pst.getName().equals(enumName)) {
+			if (pst.getValue().equals(enumName)) {
 				return pst;
 			}
 		}
@@ -162,8 +162,8 @@ public class AdminClientsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		for (PublicSpaceType pst : PublicSpaceType.values()) {
-			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getName());
-			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getName());
+			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
+			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
 		}
 		List<Client> clients = clientHandler.load();
 		clientChooser.getItems().addAll(clients);

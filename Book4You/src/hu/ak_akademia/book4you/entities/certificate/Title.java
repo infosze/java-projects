@@ -1,5 +1,7 @@
 package hu.ak_akademia.book4you.entities.certificate;
 
+import hu.ak_akademia.book4you.entities.PublicSpaceType;
+
 public enum Title {
 	
 	SELL_BOOK ("könyv eladás"),
@@ -11,13 +13,22 @@ public enum Title {
 	LEAFLET("szórólap"),
 	DEDICATION_EVENT("dedikálási esemény");
 	
-	private String title;
+	private String value;
 
-	private Title(String title) {
-		this.title = title;
+	private Title(String value) {
+		this.value = value;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getValue() {
+		return value;
+	}
+	
+	public static String getName(String value) {
+		for (Title enumName : Title.values()) {
+			if (enumName.getValue().equals(value)) {
+				return enumName.name();
+			}
+		}
+		return null;
 	}
 }

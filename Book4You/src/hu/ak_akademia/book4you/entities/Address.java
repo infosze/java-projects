@@ -73,6 +73,6 @@ public class Address implements Serializable{
 	@Override
 	public String toString() {
 		return country + " " + postalCode + " " + city + " "
-				+ publicSpaceName + " " + publicSpaceType.getName() + " " + number + ".";
+				+ publicSpaceName + " " + publicSpaceType.getValue() + " " + number + ".";
 	}
 }
