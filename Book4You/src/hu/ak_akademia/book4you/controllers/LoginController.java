@@ -42,7 +42,7 @@ public class LoginController implements Authentication, Initializable {
 
 		if (isRequiredFieldsSpecified()) {
 			User user = getUser(userIDField.getText());
-
+			
 			if (isAccessGranted(user, passwordField.getText())) {
 				loadUserTypeSpecificView(getUserType(user));
 			} else {
@@ -75,7 +75,6 @@ public class LoginController implements Authentication, Initializable {
 
 	@Override
 	public User getUser(String ID) {
-		User user = null;
 		return users.getUser(ID);
 	}
 
