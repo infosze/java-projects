@@ -47,7 +47,7 @@ public class Clients implements ClientsHandler {
 	public Client getClient(String ID) {
 		Client result = null;
 		for (Client client : clientsList) {
-			if (client.getIdentifier().equals(ID)) {
+			if (client.getID().equals(ID)) {
 				result = client;
 			}
 		}

@@ -25,8 +25,9 @@ public class Users implements UsersHandler {
 	public User getUser(String ID) {
 		User result = null;
 		for (User user : usersList) {
-			if (user.getIdentifier().equals(ID)) {
+			if (user.getID().equals(ID)) {
 				result = user;
+				break;
 			}
 		}
 		return result;

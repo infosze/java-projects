@@ -28,6 +28,6 @@ public class Cashier extends User implements Serializable{
 
 	@Override
 	public String toString() {
-		return  getName() + "(Cashier) ID=" + getIdentifier() + " Active=" + isActive;
+		return  getName() + "(Cashier) ID=" + getID() + " Active=" + isActive;
 	}
 }
