@@ -48,7 +48,7 @@ public class CreateFilesForTesting {
 		List<User> users = (List<User>) usersFileLoader.load();
 		
 		for (User user : users) {
-			System.out.println(user.getName() + " " + user.getIdentifier());
+			System.out.println(user.getName() + " " + user.getID());
 		}
 		
 		// clients.bin feltöltése teszt adatokkal

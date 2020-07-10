@@ -36,12 +36,15 @@ public class LoginController implements Authentication, Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
 	}
-	
+
 	public void login(ActionEvent event) throws IOException {
 		setAlertMessage("");
-		if (!isOneFieldEmpty()) {
-			if (isAccessGranted(userIDField.getText(), passwordField.getText())) {
-				LoginAsAdminOrCashier();
+
+		if (isRequiredFieldsSpecified()) {
+			User user = getUser(userIDField.getText());
+			
+			if (isAccessGranted(user, passwordField.getText())) {
+				loadUserTypeSpecificView(getUserType(user));
 			} else {
 				setAlertMessage("Belépés megtagadva!");
 			}
@@ -55,9 +58,9 @@ public class LoginController implements Authentication, Initializable {
 		passwordField.setText("");
 		setAlertMessage("");
 	}
-	
-	private boolean isOneFieldEmpty() {
-		return userIDField.getText().isEmpty() || passwordField.getText().isEmpty();
+
+	private boolean isRequiredFieldsSpecified() {
+		return !userIDField.getText().isEmpty() && !passwordField.getText().isEmpty();
 	}
 
 	private void setAlertMessage(String message) {
@@ -71,9 +74,12 @@ public class LoginController implements Authentication, Initializable {
 	}
 
 	@Override
-	public boolean isAccessGranted(String ID, String password) {
-		User user = users.getUser(ID);
+	public User getUser(String ID) {
+		return users.getUser(ID);
+	}
 
+	@Override
+	public boolean isAccessGranted(User user, String password) {
 		if (user != null) {
 			return user.isPasswordMatch(password);
 		}
@@ -93,11 +99,9 @@ public class LoginController implements Authentication, Initializable {
 		return result;
 	}
 
+	private void loadUserTypeSpecificView(String userType) throws IOException {
 
-	private void LoginAsAdminOrCashier() throws IOException {
-		User user = users.getUser(userIDField.getText());
-
-		switch (getUserType(user)) {
+		switch (userType) {
 		case "Admin":
 			loadView("../views/Admin.fxml");
 			break;
@@ -108,4 +112,5 @@ public class LoginController implements Authentication, Initializable {
 			System.out.println("Nincs jogosultsága még!");
 		}
 	}
+
 }

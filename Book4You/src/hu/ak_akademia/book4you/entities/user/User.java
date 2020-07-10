@@ -7,12 +7,12 @@ public abstract class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private final String identifier;
+	private final String ID;
 	private String password;
 
 	public User(String name, String identifier, String password) {
 		this.name = name;
-		this.identifier = identifier;
+		this.ID = identifier;
 		this.password = password;
 	}
 
@@ -20,8 +20,8 @@ public abstract class User implements Serializable {
 		return name;
 	}
 
-	public String getIdentifier() {
-		return identifier;
+	public String getID() {
+		return ID;
 	}
 
 	public void setPassword(String password) {
@@ -38,7 +38,7 @@ public abstract class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", identifier=" + identifier + "]";
+		return "User [name=" + name + ", identifier=" + ID + "]";
 	}
 
 }
