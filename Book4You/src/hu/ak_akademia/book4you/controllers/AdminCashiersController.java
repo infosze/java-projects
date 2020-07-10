@@ -1,19 +1,25 @@
 package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import hu.ak_akademia.book4you.entities.user.Cashier;
+import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
 import hu.ak_akademia.book4you.entities.user.UsersHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class AdminCashiersController {
+public class AdminCashiersController implements Initializable {
 
 	@FXML
 	private BorderPane rootPane;
@@ -28,7 +34,7 @@ public class AdminCashiersController {
 	private TextField passwordToModify;
 
 	@FXML
-	private ComboBox cashierChooser;
+	private ComboBox<Cashier> cashierChooser = new ComboBox<>();
 
 	@FXML
 	private CheckBox aktivCheckBox;
@@ -44,6 +50,31 @@ public class AdminCashiersController {
 
 	private String errorMessage1 = String.format("Kérem töltse ki a mezőt!");
 	private String errorMessage2 = String.format("Kérem megfelelő formátumot adjon meg!");
+
+	private Cashier selectedCashier;
+
+	UsersHandler users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
+	List<User> usersList = users.load();
+	List<Cashier> cashiers = new ArrayList<>();
+
+	public void chooseCashier(ActionEvent event) {
+		cashierChooser.getItems().addAll(cashiers);
+		selectedCashier = cashierChooser.getValue();
+		passwordToModify.setDisable(false);
+		passwordToModify.setText(selectedCashier.getPassword());
+		aktivCheckBox.setDisable(false);
+		aktivCheckBox.setSelected(selectedCashier.isActive());
+		cashierChooser.getItems().removeAll(cashiers);
+	}
+
+	public void editCashier(ActionEvent event) throws IOException {
+		User cashier = users.getUser(selectedCashier.getIdentifier());
+		User modified = //
+				new Cashier(selectedCashier.getName(), selectedCashier.getIdentifier(), passwordToModify.getText(), aktivCheckBox.isSelected());
+		users.modify(cashier, modified);
+		users.save();
+		passwordToModify.setText("");
+	}
 
 	public void addNewCashier(ActionEvent event) throws IOException {
 		if (validateName(fullNameFieldToAdd) & validatePassword(passwordFieldToAdd)) {
@@ -149,6 +180,20 @@ public class AdminCashiersController {
 			fullNameFieldToAdd.setText("");
 			passwordFieldToAdd.setText("");
 		}
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		List<Cashier> cashiers = new ArrayList<>();
+		{
+			List<User> usersList = users.load();
+			for (User user : usersList) {
+				if (user instanceof Cashier) {
+					cashiers.add((Cashier) user);
+				}
+			}
+		}
+		cashierChooser.getItems().addAll(cashiers);
 	}
 
 }

@@ -17,7 +17,7 @@ public class Cashier extends User implements Serializable{
 		super(name, identifier, password);
 		this.isActive = isActive;
 	}
-
+	
 	public boolean isActive() {
 		return isActive;
 	}
