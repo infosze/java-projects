@@ -1,12 +1,16 @@
 package hu.ak_akademia.book4you.controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 
-public class CashierTransactionsController {
+public class CashierTransactionsController implements Initializable{
 	@FXML
 	private ComboBox chooseTitle;
 	
@@ -33,4 +37,13 @@ public class CashierTransactionsController {
 	
 	@FXML
 	private RadioButton outlay;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		//Tesztelés végett van csak bent!
+		//Az aktuálisan belépett user-t így tudjátok elérni.
+		System.out.println("session: " + Session.getUser());
+	}
+	
+	
 }
