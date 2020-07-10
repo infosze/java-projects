@@ -27,6 +27,9 @@ public class AdminMenuController {
 	}
 	
 	public void logout(ActionEvent event) throws IOException {
+		Session.setUser(null);
+		System.out.println("session: " + Session.getUser());
+		
 		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Login.fxml"));
 		adminPage.getChildren().setAll(MainRoot);
 		
