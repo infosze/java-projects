@@ -68,9 +68,9 @@ public class AdminCashiersController implements Initializable {
 	}
 
 	public void editCashier(ActionEvent event) throws IOException {
-		User cashier = users.getUser(selectedCashier.getIdentifier());
-		User modified = //
-				new Cashier(selectedCashier.getName(), selectedCashier.getIdentifier(), passwordToModify.getText(), aktivCheckBox.isSelected());
+		User cashier = users.getUser(selectedCashier.getID());
+		User modified = new Cashier(selectedCashier.getName(), selectedCashier.getID(), passwordToModify.getText(),
+				aktivCheckBox.isSelected());
 		users.modify(cashier, modified);
 		users.save();
 		passwordToModify.setText("");
