@@ -42,15 +42,33 @@ public class LoginController implements Authentication, Initializable {
 
 		if (isRequiredFieldsSpecified()) {
 			User user = getUser(userIDField.getText());
-			
-			if (isAccessGranted(user, passwordField.getText())) {
-				loadUserTypeSpecificView(getUserType(user));
+
+			if (isExists(user) && isAktiv(user)) {
+				if (isAccessGranted(user, passwordField.getText())) {
+					Session.setUser(user);
+					loadUserTypeSpecificView(getUserType(user));
+				} else {
+					setAlertMessage("Belépés megtagadva!");
+				}
 			} else {
 				setAlertMessage("Belépés megtagadva!");
 			}
 		} else {
 			setAlertMessage("Üres mező(k)!");
 		}
+	}
+
+	private boolean isExists(User user) {
+		return user != null;
+	}
+
+	private boolean isAktiv(User user) {
+		if (user instanceof Admin) {
+			return true;
+		} else if(user instanceof Cashier){
+			return ((Cashier) user).isActive();
+		}
+		return false;
 	}
 
 	public void resetFields(ActionEvent event) {

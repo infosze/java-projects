@@ -20,7 +20,6 @@ public class Login {
 	}
 
 	public boolean isAuthenticated() throws MyException {
-
 		if (!isRequiredFieldsSpecified())
 			throw new MyException("Üres mező(k)!");
 		else if (user == null)
