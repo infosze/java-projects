@@ -41,7 +41,7 @@
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" onAction="#addNewCashier" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
+                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" onAction="#saveAddedDatas" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
                         <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" onAction="#emptyTextField" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
                      </children>
                   </AnchorPane>
