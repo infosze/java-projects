@@ -83,8 +83,8 @@
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
-                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
+                        <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" onAction="#saveEditedClient" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
+                        <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" onAction="#resetTextFields" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
                         <CheckBox fx:id="aktivCheckBox" disable="true" layoutX="575.0" layoutY="135.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="114.0" text="Aktív">
                            <font>
                               <Font name="Yu Gothic Light" size="18.0" />

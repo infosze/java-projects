@@ -59,17 +59,17 @@ public class AdminClientsController implements Initializable {
 	private ComboBox<String> publicSpaceTypeComboBoxToAdd = new ComboBox<String>();
 
 	@FXML
-	private ComboBox<String> publicSpaceTypeComboBoxToModify=new ComboBox<String>();
-	
+	private ComboBox<String> publicSpaceTypeComboBoxToModify = new ComboBox<String>();
+
 	@FXML
-	private ComboBox<Client> clientChooser= new ComboBox<>(); ;
+	private ComboBox<Client> clientChooser = new ComboBox<>();;
 
 	@FXML
 	private TextField houseNumberFieldToAdd;
 
 	@FXML
 	private TextField houseNumberFieldToModify;
-	
+
 	@FXML
 	private TextField companyNameFieldToModify;
 
@@ -79,14 +79,11 @@ public class AdminClientsController implements Initializable {
 	@FXML
 	private CheckBox checkBox;
 	private Random rnd = new Random(); // for testing
-	private Address address;
 	private ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
 	private Client selectedClient;
+	private IdentifierFactory identifier;
 
-	
-	
-	
-	public void editClient(ActionEvent event ) throws IOException{
+	public void editClient(ActionEvent event) throws IOException {
 		selectedClient = clientChooser.getValue();
 		companyNameFieldToModify.setDisable(false);
 		companyNameFieldToModify.setText(selectedClient.getName());
@@ -94,34 +91,46 @@ public class AdminClientsController implements Initializable {
 		countryFieldToModify.setDisable(false);
 		countryFieldToModify.setText(clientAddress.getCountry());
 		postalCodeFieldToModify.setDisable(false);
-		postalCodeFieldToModify.setText(clientAddress.getPostalCode()+"");
+		postalCodeFieldToModify.setText(clientAddress.getPostalCode() + "");
 		cityFieldToModify.setDisable(false);
 		cityFieldToModify.setText(clientAddress.getCity());
 		publicSpaceNameFieldToModify.setDisable(false);
 		publicSpaceNameFieldToModify.setText(clientAddress.getPublicSpaceName());
 		houseNumberFieldToModify.setDisable(false);
-		houseNumberFieldToModify.setText(clientAddress.getNumber()+"");
+		houseNumberFieldToModify.setText(clientAddress.getNumber() + "");
 		publicSpaceTypeComboBoxToModify.setDisable(false);
 		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getValue());
-		//TODO
-		//TODO Action event létrehozása
+	}
+
+	public void saveEditedClient(ActionEvent event) throws IOException {
+		Address modifiedAddress = setModifiedAdress();
+		if (selectedClient instanceof NaturalClient) {
+			Client modifiedNC = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(),
+					modifiedAddress);
+			clientHandler.modify(selectedClient, modifiedNC);
+			clientHandler.save();
+		} else {
+			Client modifiedEC = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(),
+					modifiedAddress);
+			clientHandler.modify(selectedClient, modifiedEC);
+			clientHandler.save();
+		}
 	}
 
 	public void addNewClient(ActionEvent event) throws IOException {
-		setAdress();
+		Address address = setAdress();
 		EconomicClient newEClient = null;
 		NaturalClient newNClient = null;
 		if (checkBox.isSelected()) {
-			newEClient = new EconomicClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
+			newEClient = new EconomicClient(companyNameFieldToAdd.getText(),identifier.generateIdentifier(companyNameFieldToAdd.getText()), address);
 			clientHandler.add(newEClient);
 			clientHandler.save();
 		} else {
 			newNClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
 			clientHandler.add(newNClient);
 			clientHandler.save();
+			System.out.println(newNClient);
 		}
-		System.out.println(newNClient); // for testing
-		System.out.println(newEClient); // for testing
 		companyNameFieldToAdd.setText("");
 		countryFieldToAdd.setText("");
 		postalCodeFieldToAdd.setText("");
@@ -131,12 +140,20 @@ public class AdminClientsController implements Initializable {
 		houseNumberFieldToAdd.setText("");
 	}
 
-	private void setAdress() {
+	private Address setAdress() {
 		int zipCode = Integer.parseInt(postalCodeFieldToAdd.getText());
 		var spaceType = getType(publicSpaceTypeComboBoxToAdd.getValue());
 		int number = Integer.parseInt(houseNumberFieldToAdd.getText());
-		address = new Address(countryFieldToAdd.getText(), zipCode, cityFieldToAdd.getText(),
+		return new Address(countryFieldToAdd.getText(), zipCode, cityFieldToAdd.getText(),
 				publicSpaceNameFieldToAdd.getText(), spaceType, number);
+	}
+
+	private Address setModifiedAdress() {
+		int zipCode = Integer.parseInt(postalCodeFieldToModify.getText());
+		var spaceType = getType(publicSpaceTypeComboBoxToModify.getValue());
+		int number = Integer.parseInt(houseNumberFieldToModify.getText());
+		return new Address(countryFieldToModify.getText(), zipCode, cityFieldToModify.getText(),
+				publicSpaceNameFieldToModify.getText(), spaceType, number);
 	}
 
 	private PublicSpaceType getType(String enumName) {
@@ -150,13 +167,25 @@ public class AdminClientsController implements Initializable {
 
 	public void resetTextFields(ActionEvent event) throws IOException {
 		companyNameFieldToAdd.setText("");
+		companyNameFieldToModify.setText("");
 		postalCodeFieldToAdd.setText("");
+		postalCodeFieldToModify.setText("");
 		cityFieldToAdd.setText("");
+		cityFieldToModify.setText("");
 		publicSpaceNameFieldToAdd.setText("");
+		publicSpaceNameFieldToModify.setText("");
 		publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
+		publicSpaceTypeComboBoxToModify.getSelectionModel().clearSelection();
 		houseNumberFieldToAdd.setText("");
+		houseNumberFieldToModify.setText("");
 		countryFieldToAdd.setText("");
+		countryFieldToModify.setText("");
 
+	}
+
+	private void updateComboBox() {
+		List<Client> clients = clientHandler.load();
+		clientChooser.getItems().addAll(clients);
 	}
 
 	@Override
@@ -165,10 +194,7 @@ public class AdminClientsController implements Initializable {
 			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
 			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
 		}
-		List<Client> clients = clientHandler.load();
-		clientChooser.getItems().addAll(clients);
-		 
-
+		updateComboBox();
 	}
 
 }

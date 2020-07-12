@@ -1,6 +1,5 @@
 package hu.ak_akademia.book4you.controllers;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
@@ -33,39 +32,36 @@ public class CashierNewClientController implements Initializable {
 
 	@FXML
 	private TextField newClientAdressName;
-	
+
 	@FXML
 	private TextField newClientHouseNumber;
-	
+
 	@FXML
 	private TextField newClientCountry;
-	
+
 	@FXML
-	private ComboBox<String> clientAdressType= new ComboBox<String>();
-	
+	private ComboBox<String> clientAdressType = new ComboBox<String>();
+
 	@FXML
 	private CheckBox checkBox;
 
 	private Random rnd = new Random(); // for testing
-	private Address address;
 
 	public void addNewClient(ActionEvent event) throws IOException {
-		setAdress();
-		EconomicClient newEClient= null;
+		Address address =setAdress();
+		EconomicClient newEClient = null;
 		NaturalClient newNClient = null;
 		ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
-		if(checkBox.isSelected()) {
-			newEClient = new EconomicClient(newClientFullName.getText(),"Teszt" +rnd.nextInt(150) , address);
+		if (checkBox.isSelected()) {
+			newEClient = new EconomicClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
 			clientHandler.add(newEClient);
 			clientHandler.save();
-		}else {
-			 newNClient = new NaturalClient(newClientFullName.getText(),"Teszt"+ rnd.nextInt(150), address);
-			 clientHandler.add(newNClient);
-			 clientHandler.save();
+		} else {
+			newNClient = new NaturalClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
+			clientHandler.add(newNClient);
+			clientHandler.save();
 		}
-		
-		System.out.println(newNClient);		//for testing
-		System.out.println(newEClient);		//for testing
+
 		newClientFullName.setText("");
 		newClientCountry.setText("");
 		newClientZipCode.setText("");
@@ -74,24 +70,25 @@ public class CashierNewClientController implements Initializable {
 		clientAdressType.getSelectionModel().clearSelection();
 		newClientHouseNumber.setText("");
 	}
-	
-	private void setAdress() {
+
+	private Address setAdress() {
 		int zipCode = Integer.parseInt(newClientZipCode.getText());
 		var spaceType = getType(clientAdressType.getValue());
 		int number = Integer.parseInt(newClientHouseNumber.getText());
-		address = new Address(newClientCountry.getText(),zipCode,newClientCityName.getText(),newClientAdressName.getText(),spaceType , number);
+		return  new Address(newClientCountry.getText(), zipCode, newClientCityName.getText(),
+				newClientAdressName.getText(), spaceType, number);
 	}
-	
+
 	private PublicSpaceType getType(String enumName) {
-		for(var pst : PublicSpaceType.values()) {
-			if(pst.getValue().equals(enumName)) {
+		for (var pst : PublicSpaceType.values()) {
+			if (pst.getValue().equals(enumName)) {
 				return pst;
 			}
 		}
 		return null;
 	}
-	
-	public void resetTextFields(ActionEvent event) throws IOException{
+
+	public void resetTextFields(ActionEvent event) throws IOException {
 		newClientFullName.setText("");
 		newClientZipCode.setText("");
 		newClientCityName.setText("");
@@ -99,16 +96,14 @@ public class CashierNewClientController implements Initializable {
 		clientAdressType.getSelectionModel().clearSelection();
 		newClientHouseNumber.setText("");
 		newClientCountry.setText("");
-		
+
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		for(PublicSpaceType pst : PublicSpaceType.values()) {
-		clientAdressType.getItems().addAll(pst.getValue());
+		for (PublicSpaceType pst : PublicSpaceType.values()) {
+			clientAdressType.getItems().addAll(pst.getValue());
 		}
-		
-		
 
 	}
 }
