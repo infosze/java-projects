@@ -3,6 +3,7 @@ package hu.ak_akademia.book4you.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import hu.ak_akademia.book4you.login.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;

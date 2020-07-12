@@ -14,6 +14,11 @@ public class Users implements UsersHandler {
 		this.usersList = load();
 	}
 
+	public Users(List<User> usersList) {
+		this.usersList = usersList;
+		this.url = null;
+	}
+
 	@Override
 	public List<User> load() {
 		DataLoader usersFileLoader = new FileHandler(url);

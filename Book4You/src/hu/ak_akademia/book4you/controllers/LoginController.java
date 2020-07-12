@@ -6,8 +6,11 @@ import java.util.ResourceBundle;
 
 import hu.ak_akademia.book4you.entities.user.Admin;
 import hu.ak_akademia.book4you.entities.user.Cashier;
-import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
+import hu.ak_akademia.book4you.login.Login;
+import hu.ak_akademia.book4you.login.LoginSession;
+import hu.ak_akademia.book4you.login.MyException;
+import hu.ak_akademia.book4you.login.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class LoginController implements Authentication, Initializable {
+public class LoginController implements Initializable {
 	@FXML
 	private BorderPane rootPane;
 
@@ -30,55 +33,31 @@ public class LoginController implements Authentication, Initializable {
 	@FXML
 	private TextField passwordField;
 
-	private Users users;
+	private Login userLogin;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
+		this.userLogin = new LoginSession(new Users("src/hu/ak_akademia/book4you/databases/users.bin"));
 	}
 
 	public void login(ActionEvent event) throws IOException {
 		setAlertMessage("");
 
-		if (isRequiredFieldsSpecified()) {
-			User user = getUser(userIDField.getText());
-
-			if (isExists(user) && isAktiv(user)) {
-				if (isAccessGranted(user, passwordField.getText())) {
-					Session.setUser(user);
-					loadUserTypeSpecificView(getUserType(user));
-				} else {
-					setAlertMessage("Belépés megtagadva!");
-				}
-			} else {
-				setAlertMessage("Belépés megtagadva!");
-			}
-		} else {
-			setAlertMessage("Üres mező(k)!");
+		try {
+			userLogin.authenticate(userIDField.getText(), passwordField.getText());
+			userLogin.storeSession();
+			redirect();
+		} catch (MyException e) {
+			setAlertMessage(e.getMessage());
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
 		}
-	}
-
-	private boolean isExists(User user) {
-		return user != null;
-	}
-
-	private boolean isAktiv(User user) {
-		if (user instanceof Admin) {
-			return true;
-		} else if(user instanceof Cashier){
-			return ((Cashier) user).isActive();
-		}
-		return false;
 	}
 
 	public void resetFields(ActionEvent event) {
 		userIDField.setText("");
 		passwordField.setText("");
 		setAlertMessage("");
-	}
-
-	private boolean isRequiredFieldsSpecified() {
-		return !userIDField.getText().isEmpty() && !passwordField.getText().isEmpty();
 	}
 
 	private void setAlertMessage(String message) {
@@ -91,44 +70,12 @@ public class LoginController implements Authentication, Initializable {
 		rootPane.getChildren().setAll(MainRoot);
 	}
 
-	@Override
-	public User getUser(String ID) {
-		return users.getUser(ID);
-	}
-
-	@Override
-	public boolean isAccessGranted(User user, String password) {
-		if (user != null) {
-			return user.isPasswordMatch(password);
-		}
-
-		return false;
-	}
-
-	@Override
-	public String getUserType(User user) {
-		String result = null;
-		if (user instanceof Admin) {
-			result = "Admin";
-		} else if (user instanceof Cashier) {
-			result = "Cashier";
-		}
-
-		return result;
-	}
-
-	private void loadUserTypeSpecificView(String userType) throws IOException {
-
-		switch (userType) {
-		case "Admin":
+	private void redirect() throws IOException, ClassNotFoundException {
+		if (Session.getUser() instanceof Admin) {
 			loadView("../views/Admin.fxml");
-			break;
-		case "Cashier":
+		} else if (Session.getUser() instanceof Cashier) {
 			loadView("../views/Cashier.fxml");
-			break;
-		default:
-			System.out.println("Nincs jogosultsága még!");
-		}
+		} else
+			throw new ClassNotFoundException();
 	}
-
 }

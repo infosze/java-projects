@@ -3,6 +3,7 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 
+import hu.ak_akademia.book4you.login.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,6 @@ public class AdminMenuController {
 	
 	public void logout(ActionEvent event) throws IOException {
 		Session.setUser(null);
-		System.out.println("session: " + Session.getUser());
 		
 		Parent MainRoot = FXMLLoader.load(getClass().getResource("../views/Login.fxml"));
 		adminPage.getChildren().setAll(MainRoot);

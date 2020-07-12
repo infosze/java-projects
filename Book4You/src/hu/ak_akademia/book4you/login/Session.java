@@ -1,4 +1,4 @@
-package hu.ak_akademia.book4you.controllers;
+package hu.ak_akademia.book4you.login;
 
 import hu.ak_akademia.book4you.entities.user.User;
 
