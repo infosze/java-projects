@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
+import hu.ak_akademia.book4you.entities.client.Client;
 import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.client.EconomicClient;
@@ -49,19 +50,15 @@ public class CashierNewClientController implements Initializable {
 
 	public void addNewClient(ActionEvent event) throws IOException {
 		Address address =setAdress();
-		EconomicClient newEClient = null;
-		NaturalClient newNClient = null;
+		Client newClient = null;
 		ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
 		if (checkBox.isSelected()) {
-			newEClient = new EconomicClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
-			clientHandler.add(newEClient);
-			clientHandler.save();
+			newClient = new EconomicClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
 		} else {
-			newNClient = new NaturalClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
-			clientHandler.add(newNClient);
-			clientHandler.save();
+			newClient = new NaturalClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
 		}
-
+		clientHandler.add(newClient);
+		clientHandler.save();
 		newClientFullName.setText("");
 		newClientCountry.setText("");
 		newClientZipCode.setText("");

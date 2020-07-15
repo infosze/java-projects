@@ -86,22 +86,26 @@ public class AdminClientsController implements Initializable {
 	private IdentifierFactory identifier;
 
 	public void editClient(ActionEvent event) throws IOException {
+		setTextFieldsDisableTrue();
 		selectedClient = identifyClient();
-		companyNameFieldToModify.setDisable(false);
 		companyNameFieldToModify.setText(selectedClient.getName());
 		Address clientAddress = selectedClient.getAddress();
-		countryFieldToModify.setDisable(false);
 		countryFieldToModify.setText(clientAddress.getCountry());
-		postalCodeFieldToModify.setDisable(false);
 		postalCodeFieldToModify.setText(clientAddress.getPostalCode() + "");
-		cityFieldToModify.setDisable(false);
 		cityFieldToModify.setText(clientAddress.getCity());
-		publicSpaceNameFieldToModify.setDisable(false);
 		publicSpaceNameFieldToModify.setText(clientAddress.getPublicSpaceName());
-		houseNumberFieldToModify.setDisable(false);
 		houseNumberFieldToModify.setText(clientAddress.getNumber() + "");
-		publicSpaceTypeComboBoxToModify.setDisable(false);
 		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getValue());
+	}
+
+	void setTextFieldsDisableTrue() {
+		companyNameFieldToModify.setDisable(false);
+		countryFieldToModify.setDisable(false);
+		postalCodeFieldToModify.setDisable(false);
+		cityFieldToModify.setDisable(false);
+		publicSpaceNameFieldToModify.setDisable(false);
+		houseNumberFieldToModify.setDisable(false);
+		publicSpaceTypeComboBoxToModify.setDisable(false);
 	}
 
 	public void saveEditedClient(ActionEvent event) throws IOException {
@@ -109,35 +113,30 @@ public class AdminClientsController implements Initializable {
 																// akkor manuálisan megoldom -Üres textfield mentése ->
 																// Hibaüzenet
 			Address modifiedAddress = setModifiedAdress();
+			Client modified = null;
 			if (selectedClient instanceof NaturalClient) {
-				Client modifiedNC = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(),
+				modified = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(),
 						modifiedAddress);
-				clientHandler.modify(selectedClient, modifiedNC);
-				clientHandler.save();
 			} else if (selectedClient instanceof EconomicClient) {
-				Client modifiedEC = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(),
+				modified = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(),
 						modifiedAddress);
-				clientHandler.modify(selectedClient, modifiedEC);
-				clientHandler.save();
 			}
+			clientHandler.modify(selectedClient, modified);
+			clientHandler.save();
 		}
 	}
 
 	public void addNewClient(ActionEvent event) throws IOException {
 		Address address = setAdress();
-		EconomicClient newEClient = null;
-		NaturalClient newNClient = null;
+		Client newClient = null;
 		if (checkBox.isSelected()) {
-			newEClient = new EconomicClient(companyNameFieldToAdd.getText(),
+			newClient = new EconomicClient(companyNameFieldToAdd.getText(),
 					identifier.generateIdentifier(companyNameFieldToAdd.getText()), address);
-			clientHandler.add(newEClient);
-			clientHandler.save();
 		} else {
-			newNClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
-			clientHandler.add(newNClient);
-			clientHandler.save();
-			System.out.println(newNClient);
+			newClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
 		}
+		clientHandler.add(newClient);
+		clientHandler.save();
 		companyNameFieldToAdd.setText("");
 		countryFieldToAdd.setText("");
 		postalCodeFieldToAdd.setText("");
@@ -192,7 +191,11 @@ public class AdminClientsController implements Initializable {
 
 	private Client identifyClient() {
 		String[] valueOfComboBox = clientChooser.getValue().split(" ");
-		return clientHandler.getClient(valueOfComboBox[2]);
+		return switch (valueOfComboBox.length) {
+		case 3 -> clientHandler.getClient(valueOfComboBox[2]);
+		case 4 -> clientHandler.getClient(valueOfComboBox[3]);
+		default -> null;
+		};
 	}
 
 	@Override
