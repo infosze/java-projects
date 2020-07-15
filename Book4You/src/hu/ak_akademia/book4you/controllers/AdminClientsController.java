@@ -185,9 +185,9 @@ public class AdminClientsController implements Initializable {
 		countryFieldToModify.setText("");
 
 	}
+
 	private Client identifyClient() {
 		String[] valueOfComboBox = clientChooser.getValue().split(" ");
-		System.out.println(valueOfComboBox);
 		return clientHandler.getClient(valueOfComboBox[2]);
 	}
 
@@ -197,6 +197,7 @@ public class AdminClientsController implements Initializable {
 			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
 			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
 		}
+
 		ObservableList<String> ls = FXCollections.observableArrayList();
 		for (var cl : clientHandler.load()) {
 			ls.add(cl.getName() + " " + cl.getID());
