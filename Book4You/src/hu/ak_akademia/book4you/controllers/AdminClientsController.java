@@ -13,6 +13,8 @@ import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.client.EconomicClient;
 import hu.ak_akademia.book4you.entities.client.NaturalClient;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -62,7 +64,7 @@ public class AdminClientsController implements Initializable {
 	private ComboBox<String> publicSpaceTypeComboBoxToModify = new ComboBox<String>();
 
 	@FXML
-	private ComboBox<Client> clientChooser = new ComboBox<>();;
+	private ComboBox<String> clientChooser = new ComboBox<>();
 
 	@FXML
 	private TextField houseNumberFieldToAdd;
@@ -84,7 +86,7 @@ public class AdminClientsController implements Initializable {
 	private IdentifierFactory identifier;
 
 	public void editClient(ActionEvent event) throws IOException {
-		selectedClient = clientChooser.getValue();
+		selectedClient = identifyClient();
 		companyNameFieldToModify.setDisable(false);
 		companyNameFieldToModify.setText(selectedClient.getName());
 		Address clientAddress = selectedClient.getAddress();
@@ -122,7 +124,8 @@ public class AdminClientsController implements Initializable {
 		EconomicClient newEClient = null;
 		NaturalClient newNClient = null;
 		if (checkBox.isSelected()) {
-			newEClient = new EconomicClient(companyNameFieldToAdd.getText(),identifier.generateIdentifier(companyNameFieldToAdd.getText()), address);
+			newEClient = new EconomicClient(companyNameFieldToAdd.getText(),
+					identifier.generateIdentifier(companyNameFieldToAdd.getText()), address);
 			clientHandler.add(newEClient);
 			clientHandler.save();
 		} else {
@@ -182,10 +185,10 @@ public class AdminClientsController implements Initializable {
 		countryFieldToModify.setText("");
 
 	}
-
-	private void updateComboBox() {
-		List<Client> clients = clientHandler.load();
-		clientChooser.getItems().addAll(clients);
+	private Client identifyClient() {
+		String[] valueOfComboBox = clientChooser.getValue().split(" ");
+		System.out.println(valueOfComboBox);
+		return clientHandler.getClient(valueOfComboBox[2]);
 	}
 
 	@Override
@@ -194,7 +197,12 @@ public class AdminClientsController implements Initializable {
 			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
 			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
 		}
-		updateComboBox();
+		ObservableList<String> ls = FXCollections.observableArrayList();
+		for (var cl : clientHandler.load()) {
+			ls.add(cl.getName() + " " + cl.getID());
+		}
+		clientChooser.setItems(ls);
+
 	}
 
 }
