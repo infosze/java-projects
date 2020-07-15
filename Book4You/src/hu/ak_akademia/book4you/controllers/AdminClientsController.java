@@ -105,17 +105,21 @@ public class AdminClientsController implements Initializable {
 	}
 
 	public void saveEditedClient(ActionEvent event) throws IOException {
-		Address modifiedAddress = setModifiedAdress();
-		if (selectedClient instanceof NaturalClient) {
-			Client modifiedNC = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(),
-					modifiedAddress);
-			clientHandler.modify(selectedClient, modifiedNC);
-			clientHandler.save();
-		} else {
-			Client modifiedEC = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(),
-					modifiedAddress);
-			clientHandler.modify(selectedClient, modifiedEC);
-			clientHandler.save();
+		if (!companyNameFieldToModify.getText().equals("")) { // Ezt javítani kell -gyors megoldás- Valudáció? ha nem
+																// akkor manuálisan megoldom -Üres textfield mentése ->
+																// Hibaüzenet
+			Address modifiedAddress = setModifiedAdress();
+			if (selectedClient instanceof NaturalClient) {
+				Client modifiedNC = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(),
+						modifiedAddress);
+				clientHandler.modify(selectedClient, modifiedNC);
+				clientHandler.save();
+			} else if (selectedClient instanceof EconomicClient) {
+				Client modifiedEC = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(),
+						modifiedAddress);
+				clientHandler.modify(selectedClient, modifiedEC);
+				clientHandler.save();
+			}
 		}
 	}
 
