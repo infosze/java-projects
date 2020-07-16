@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class AdminClientsController implements Initializable {
+
 	@FXML
 	private BorderPane rootPane;
 
@@ -105,55 +106,58 @@ public class AdminClientsController implements Initializable {
 	public void saveEditedClient(ActionEvent event) throws IOException {
 		Address modifiedAddress = setModifiedAdress();
 		if (selectedClient instanceof NaturalClient) {
-			Client modifiedNC = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(),
-					modifiedAddress);
+			Client modifiedNC = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
 			clientHandler.modify(selectedClient, modifiedNC);
 			clientHandler.save();
 		} else {
-			Client modifiedEC = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(),
-					modifiedAddress);
+			Client modifiedEC = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
 			clientHandler.modify(selectedClient, modifiedEC);
 			clientHandler.save();
 		}
 	}
 
 	public void addNewClient(ActionEvent event) throws IOException {
-		Address address = setAdress();
-		EconomicClient newEClient = null;
-		NaturalClient newNClient = null;
-		if (checkBox.isSelected()) {
-			newEClient = new EconomicClient(companyNameFieldToAdd.getText(),identifier.generateIdentifier(companyNameFieldToAdd.getText()), address);
-			clientHandler.add(newEClient);
-			clientHandler.save();
-		} else {
-			newNClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
-			clientHandler.add(newNClient);
-			clientHandler.save();
-			System.out.println(newNClient);
+		if (Validation.validateName(companyNameFieldToAdd) & Validation.validCountry(countryFieldToAdd)
+				& Validation.validPostalCode(postalCodeFieldToAdd) & Validation.validateCity(cityFieldToAdd)
+				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd) 
+				& Validation.validHouseNumber(houseNumberFieldToAdd)) {
+			Address address = setAdress();
+			EconomicClient newEClient = null;
+			NaturalClient newNClient = null;
+			if (checkBox.isSelected()) {
+				newEClient = new EconomicClient(companyNameFieldToAdd.getText(), identifier.generateIdentifier(companyNameFieldToAdd.getText()),
+						address);
+				clientHandler.add(newEClient);
+				clientHandler.save();
+			} else {
+				newNClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
+				clientHandler.add(newNClient);
+				clientHandler.save();
+				System.out.println(newNClient);
+			}
+			companyNameFieldToAdd.setText("");
+			countryFieldToAdd.setText("");
+			postalCodeFieldToAdd.setText("");
+			cityFieldToAdd.setText("");
+			publicSpaceNameFieldToAdd.setText("");
+			publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
+			houseNumberFieldToAdd.setText("");
 		}
-		companyNameFieldToAdd.setText("");
-		countryFieldToAdd.setText("");
-		postalCodeFieldToAdd.setText("");
-		cityFieldToAdd.setText("");
-		publicSpaceNameFieldToAdd.setText("");
-		publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
-		houseNumberFieldToAdd.setText("");
 	}
 
 	private Address setAdress() {
 		int zipCode = Integer.parseInt(postalCodeFieldToAdd.getText());
 		var spaceType = getType(publicSpaceTypeComboBoxToAdd.getValue());
 		int number = Integer.parseInt(houseNumberFieldToAdd.getText());
-		return new Address(countryFieldToAdd.getText(), zipCode, cityFieldToAdd.getText(),
-				publicSpaceNameFieldToAdd.getText(), spaceType, number);
+		return new Address(countryFieldToAdd.getText(), zipCode, cityFieldToAdd.getText(), publicSpaceNameFieldToAdd.getText(), spaceType, number);
 	}
 
 	private Address setModifiedAdress() {
 		int zipCode = Integer.parseInt(postalCodeFieldToModify.getText());
 		var spaceType = getType(publicSpaceTypeComboBoxToModify.getValue());
 		int number = Integer.parseInt(houseNumberFieldToModify.getText());
-		return new Address(countryFieldToModify.getText(), zipCode, cityFieldToModify.getText(),
-				publicSpaceNameFieldToModify.getText(), spaceType, number);
+		return new Address(countryFieldToModify.getText(), zipCode, cityFieldToModify.getText(), publicSpaceNameFieldToModify.getText(), spaceType,
+				number);
 	}
 
 	private PublicSpaceType getType(String enumName) {
@@ -180,7 +184,6 @@ public class AdminClientsController implements Initializable {
 		houseNumberFieldToModify.setText("");
 		countryFieldToAdd.setText("");
 		countryFieldToModify.setText("");
-
 	}
 
 	private void updateComboBox() {

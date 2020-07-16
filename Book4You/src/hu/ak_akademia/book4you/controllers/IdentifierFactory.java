@@ -5,7 +5,7 @@ public class IdentifierFactory {
 	String[] letters = new String[2];
 
 	String generateIdentifier(String textField) {
-		cutLettersFromName(textField);
+		cutFirstLettersFromName(textField);
 		String identifier;
 		identifier = letters[0];
 		identifier += letters[1];
@@ -15,11 +15,11 @@ public class IdentifierFactory {
 		return identifier;
 	}
 
-	void cutLettersFromName(String textField) {
+	private void cutFirstLettersFromName(String textField) {
 		String name1;
 		String name2;
 		String[] name = textField.split(" ");
-		if (name.length == 2) {
+		if (name.length <= 2) {
 			name1 = name[0];
 			name2 = name[1];
 		} else if (name[1].lastIndexOf(".") > -1) {

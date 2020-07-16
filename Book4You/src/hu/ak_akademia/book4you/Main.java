@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("views/Login.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("views/Admin.fxml"));
 
 			Image icon = new Image("hu/ak_akademia/book4you/views/img/icon.png");
 			primaryStage.getIcons().add(icon);

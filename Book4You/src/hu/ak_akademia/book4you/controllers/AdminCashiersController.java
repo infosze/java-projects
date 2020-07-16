@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import hu.ak_akademia.book4you.SaveAndClearBottoms;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
@@ -20,7 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class AdminCashiersController implements Initializable, SaveAndClearBottoms {
+public class AdminCashiersController implements Initializable {
 
 	@FXML
 	private BorderPane rootPane;
@@ -49,9 +48,8 @@ public class AdminCashiersController implements Initializable, SaveAndClearBotto
 	@FXML
 	private Label messageLabelToModify;
 
-	NameFactory names = new NameFactory();
-	PasswordFactory passwords = new PasswordFactory();
-	IdentifierFactory identifiers = new IdentifierFactory();
+	NameFactory nameFactory = new NameFactory();
+	IdentifierFactory identifierFactory = new IdentifierFactory();
 
 	private Cashier selectedCashier;
 
@@ -77,13 +75,11 @@ public class AdminCashiersController implements Initializable, SaveAndClearBotto
 		passwordToModify.setText("");
 	}
 
-	@Override
-	public void saveAddedDatas(ActionEvent event) throws IOException {
-		if (names.validateName(fullNameFieldToAdd) & passwords.validatePassword(passwordFieldToAdd)) {
-			String fullName = names.addName(fullNameFieldToAdd);
-			String password = passwords.addPassword(passwordFieldToAdd);
-//			String[] letters = identifiers.cutLettersFromName(fullName);
-			String identifier = identifiers.generateIdentifier(fullName);
+	public void saveTextField(ActionEvent event) throws IOException {
+		if (Validation.validateName(fullNameFieldToAdd) & Validation.validatePassword(passwordFieldToAdd)) {
+			String fullName = nameFactory.addName(fullNameFieldToAdd);
+			String password = passwordFieldToAdd.getText();
+			String identifier = identifierFactory.generateIdentifier(fullName);
 			messageLabelToAdd.setText(identifier);
 			UsersHandler users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
 			Cashier newChashier = new Cashier(fullName, identifier, password);
@@ -91,8 +87,6 @@ public class AdminCashiersController implements Initializable, SaveAndClearBotto
 			users.save();
 			fullNameFieldToAdd.setText("");
 			passwordFieldToAdd.setText("");
-			System.out.print(newChashier);
-			System.out.printf(" Password= %s%n", password);
 		}
 	}
 
