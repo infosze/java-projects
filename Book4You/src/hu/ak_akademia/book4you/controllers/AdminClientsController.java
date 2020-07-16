@@ -13,6 +13,8 @@ import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.client.EconomicClient;
 import hu.ak_akademia.book4you.entities.client.NaturalClient;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,7 +65,7 @@ public class AdminClientsController implements Initializable {
 	private ComboBox<String> publicSpaceTypeComboBoxToModify = new ComboBox<String>();
 
 	@FXML
-	private ComboBox<Client> clientChooser = new ComboBox<>();;
+	private ComboBox<String> clientChooser = new ComboBox<>();
 
 	@FXML
 	private TextField houseNumberFieldToAdd;
@@ -85,33 +87,40 @@ public class AdminClientsController implements Initializable {
 	private IdentifierFactory identifier;
 
 	public void editClient(ActionEvent event) throws IOException {
-		selectedClient = clientChooser.getValue();
-		companyNameFieldToModify.setDisable(false);
+		setTextFieldsDisableTrue();
+		selectedClient = identifyClient();
 		companyNameFieldToModify.setText(selectedClient.getName());
 		Address clientAddress = selectedClient.getAddress();
-		countryFieldToModify.setDisable(false);
 		countryFieldToModify.setText(clientAddress.getCountry());
-		postalCodeFieldToModify.setDisable(false);
 		postalCodeFieldToModify.setText(clientAddress.getPostalCode() + "");
-		cityFieldToModify.setDisable(false);
 		cityFieldToModify.setText(clientAddress.getCity());
-		publicSpaceNameFieldToModify.setDisable(false);
 		publicSpaceNameFieldToModify.setText(clientAddress.getPublicSpaceName());
-		houseNumberFieldToModify.setDisable(false);
 		houseNumberFieldToModify.setText(clientAddress.getNumber() + "");
-		publicSpaceTypeComboBoxToModify.setDisable(false);
 		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getValue());
 	}
 
+	void setTextFieldsDisableTrue() {
+		companyNameFieldToModify.setDisable(false);
+		countryFieldToModify.setDisable(false);
+		postalCodeFieldToModify.setDisable(false);
+		cityFieldToModify.setDisable(false);
+		publicSpaceNameFieldToModify.setDisable(false);
+		houseNumberFieldToModify.setDisable(false);
+		publicSpaceTypeComboBoxToModify.setDisable(false);
+	}
+
 	public void saveEditedClient(ActionEvent event) throws IOException {
-		Address modifiedAddress = setModifiedAdress();
-		if (selectedClient instanceof NaturalClient) {
-			Client modifiedNC = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
-			clientHandler.modify(selectedClient, modifiedNC);
-			clientHandler.save();
-		} else {
-			Client modifiedEC = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
-			clientHandler.modify(selectedClient, modifiedEC);
+		if (!companyNameFieldToModify.getText().equals("")) { // Ezt javítani kell -gyors megoldás- Valudáció? ha nem
+																// akkor manuálisan megoldom -Üres textfield mentése ->
+																// Hibaüzenet
+			Address modifiedAddress = setModifiedAdress();
+			Client modified = null;
+			if (selectedClient instanceof NaturalClient) {
+				modified = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
+			} else if (selectedClient instanceof EconomicClient) {
+				modified = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
+			}
+			clientHandler.modify(selectedClient, modified);
 			clientHandler.save();
 		}
 	}
@@ -119,22 +128,17 @@ public class AdminClientsController implements Initializable {
 	public void addNewClient(ActionEvent event) throws IOException {
 		if (Validation.validateName(companyNameFieldToAdd) & Validation.validCountry(countryFieldToAdd)
 				& Validation.validPostalCode(postalCodeFieldToAdd) & Validation.validateCity(cityFieldToAdd)
-				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd) 
-				& Validation.validHouseNumber(houseNumberFieldToAdd)) {
+				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd) & Validation.validHouseNumber(houseNumberFieldToAdd)) {
 			Address address = setAdress();
-			EconomicClient newEClient = null;
-			NaturalClient newNClient = null;
+			Client newClient = null;
 			if (checkBox.isSelected()) {
-				newEClient = new EconomicClient(companyNameFieldToAdd.getText(), identifier.generateIdentifier(companyNameFieldToAdd.getText()),
+				newClient = new EconomicClient(companyNameFieldToAdd.getText(), identifier.generateIdentifier(companyNameFieldToAdd.getText()),
 						address);
-				clientHandler.add(newEClient);
-				clientHandler.save();
 			} else {
-				newNClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
-				clientHandler.add(newNClient);
-				clientHandler.save();
-				System.out.println(newNClient);
+				newClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
 			}
+			clientHandler.add(newClient);
+			clientHandler.save();
 			companyNameFieldToAdd.setText("");
 			countryFieldToAdd.setText("");
 			postalCodeFieldToAdd.setText("");
@@ -186,9 +190,13 @@ public class AdminClientsController implements Initializable {
 		countryFieldToModify.setText("");
 	}
 
-	private void updateComboBox() {
-		List<Client> clients = clientHandler.load();
-		clientChooser.getItems().addAll(clients);
+	private Client identifyClient() {
+		String[] valueOfComboBox = clientChooser.getValue().split(" ");
+		return switch (valueOfComboBox.length) {
+		case 3 -> clientHandler.getClient(valueOfComboBox[2]);
+		case 4 -> clientHandler.getClient(valueOfComboBox[3]);
+		default -> null;
+		};
 	}
 
 	@Override
@@ -197,7 +205,12 @@ public class AdminClientsController implements Initializable {
 			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
 			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
 		}
-		updateComboBox();
+
+		ObservableList<String> ls = FXCollections.observableArrayList();
+		for (var cl : clientHandler.load()) {
+			ls.add(cl.getName() + " " + cl.getID());
+		}
+		clientChooser.setItems(ls);
 	}
 
 }

@@ -85,11 +85,6 @@
                         </VBox>
                         <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" onAction="#saveEditedClient" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
                         <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" onAction="#resetTextFields" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
-                        <CheckBox fx:id="aktivCheckBox" disable="true" layoutX="575.0" layoutY="135.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="114.0" text="Aktív">
-                           <font>
-                              <Font name="Yu Gothic Light" size="18.0" />
-                           </font>
-                        </CheckBox>
                         <ComboBox fx:id="clientChooser" layoutX="469.0" layoutY="50.0" onAction="#editClient" prefHeight="40.0" prefWidth="220.0" stylesheets="@application.css" />
                      </children>
                   </AnchorPane>
