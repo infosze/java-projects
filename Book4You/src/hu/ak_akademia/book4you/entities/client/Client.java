@@ -51,7 +51,7 @@ public abstract class Client implements Serializable{
 
 	@Override
 	public String toString() {
-		return  name + " (client)  id=" + ID + ", " + address + " isVIP=" + isVIP;
+		return  name + " (client)  id=" + ID ; //+ ", " + address + " isVIP=" + isVIP;
 	}
 
 	@Override

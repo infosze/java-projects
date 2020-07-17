@@ -65,6 +65,9 @@ public class AdminClientsController implements Initializable {
 
 	@FXML
 	private ComboBox<String> clientChooser = new ComboBox<>();
+//  Meglátom a végén melyik lesz a befutó, egyelnőre String a lista az frissítések miatt	
+//	@FXML   
+//	private ComboBox<Client> clientChooser = new ComboBox<>();
 
 	@FXML
 	private TextField houseNumberFieldToAdd;
@@ -86,7 +89,7 @@ public class AdminClientsController implements Initializable {
 	private IdentifierFactory identifier;
 
 	public void editClient(ActionEvent event) throws IOException {
-		setTextFieldsDisableTrue();
+		setTextFieldsDisableFalse();
 		selectedClient = identifyClient();
 		companyNameFieldToModify.setText(selectedClient.getName());
 		Address clientAddress = selectedClient.getAddress();
@@ -98,7 +101,7 @@ public class AdminClientsController implements Initializable {
 		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getValue());
 	}
 
-	void setTextFieldsDisableTrue() {
+	private void setTextFieldsDisableFalse() {
 		companyNameFieldToModify.setDisable(false);
 		countryFieldToModify.setDisable(false);
 		postalCodeFieldToModify.setDisable(false);
@@ -206,6 +209,11 @@ public class AdminClientsController implements Initializable {
 		}
 
 		ObservableList<String> ls = FXCollections.observableArrayList();
+		// ObservableList<Client> ls2 = FXCollections.observableArrayList();
+//		for (var cl : clientHandler.load()) {
+//			ls2.add(cl);
+//		}
+		//clientChooser.setItems(ls2);
 		for (var cl : clientHandler.load()) {
 			ls.add(cl.getName() + " " + cl.getID());
 		}
