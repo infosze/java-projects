@@ -27,8 +27,8 @@
             <RadioButton fx:id="outlay" layoutX="107.0" layoutY="202.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #AAE2E4;" text="Kiadás" toggleGroup="$transactions" />
          </children>
       </AnchorPane>
-      <Button layoutX="136.0" layoutY="394.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="141.0" stylesheets="@application.css" text="Mentés" />
-      <Button layoutX="444.0" layoutY="394.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="141.0" text="Mégse" />
+      <Button layoutX="136.0" layoutY="394.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="141.0" onAction="#createTransaction" stylesheets="@application.css" text="Mentés" />
+      <Button layoutX="444.0" layoutY="394.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="141.0" onAction="#resetFields" text="Mégse" />
       <AnchorPane layoutX="14.0" layoutY="7.0" prefHeight="254.0" prefWidth="418.0" style="-fx-border-color: #0D3A4E;" stylesheets="@application.css">
          <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="1.0" prefHeight="53.0" prefWidth="247.0" style="-fx-background-color: #0D3A4E;" stylesheets="@application.css" text="Ügyfél kiválasztása" textFill="#fcfcfc">
