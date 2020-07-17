@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 public class AdminClientsController implements Initializable {
+
 	@FXML
 	private BorderPane rootPane;
 
@@ -118,11 +119,9 @@ public class AdminClientsController implements Initializable {
 			Address modifiedAddress = setModifiedAdress();
 			Client modified = null;
 			if (selectedClient instanceof NaturalClient) {
-				modified = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(),
-						modifiedAddress);
+				modified = new NaturalClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
 			} else if (selectedClient instanceof EconomicClient) {
-				modified = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(),
-						modifiedAddress);
+				modified = new EconomicClient(companyNameFieldToModify.getText(), selectedClient.getID(), modifiedAddress);
 			}
 			clientHandler.modify(selectedClient, modified);
 			clientHandler.save();
@@ -130,39 +129,42 @@ public class AdminClientsController implements Initializable {
 	}
 
 	public void addNewClient(ActionEvent event) throws IOException {
-		Address address = setAdress();
-		Client newClient = null;
-		if (checkBox.isSelected()) {
-			newClient = new EconomicClient(companyNameFieldToAdd.getText(),
-					identifier.generateIdentifier(companyNameFieldToAdd.getText()), address);
-		} else {
-			newClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
+		if (Validation.validateName(companyNameFieldToAdd) & Validation.validCountry(countryFieldToAdd)
+				& Validation.validPostalCode(postalCodeFieldToAdd) & Validation.validateCity(cityFieldToAdd)
+				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd) & Validation.validHouseNumber(houseNumberFieldToAdd)) {
+			Address address = setAdress();
+			Client newClient = null;
+			if (checkBox.isSelected()) {
+				newClient = new EconomicClient(companyNameFieldToAdd.getText(), identifier.generateIdentifier(companyNameFieldToAdd.getText()),
+						address);
+			} else {
+				newClient = new NaturalClient(companyNameFieldToAdd.getText(), "Teszt" + rnd.nextInt(150), address);
+			}
+			clientHandler.add(newClient);
+			clientHandler.save();
+			companyNameFieldToAdd.setText("");
+			countryFieldToAdd.setText("");
+			postalCodeFieldToAdd.setText("");
+			cityFieldToAdd.setText("");
+			publicSpaceNameFieldToAdd.setText("");
+			publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
+			houseNumberFieldToAdd.setText("");
 		}
-		clientHandler.add(newClient);
-		clientHandler.save();
-		companyNameFieldToAdd.setText("");
-		countryFieldToAdd.setText("");
-		postalCodeFieldToAdd.setText("");
-		cityFieldToAdd.setText("");
-		publicSpaceNameFieldToAdd.setText("");
-		publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
-		houseNumberFieldToAdd.setText("");
 	}
 
 	private Address setAdress() {
 		int zipCode = Integer.parseInt(postalCodeFieldToAdd.getText());
 		var spaceType = getType(publicSpaceTypeComboBoxToAdd.getValue());
 		int number = Integer.parseInt(houseNumberFieldToAdd.getText());
-		return new Address(countryFieldToAdd.getText(), zipCode, cityFieldToAdd.getText(),
-				publicSpaceNameFieldToAdd.getText(), spaceType, number);
+		return new Address(countryFieldToAdd.getText(), zipCode, cityFieldToAdd.getText(), publicSpaceNameFieldToAdd.getText(), spaceType, number);
 	}
 
 	private Address setModifiedAdress() {
 		int zipCode = Integer.parseInt(postalCodeFieldToModify.getText());
 		var spaceType = getType(publicSpaceTypeComboBoxToModify.getValue());
 		int number = Integer.parseInt(houseNumberFieldToModify.getText());
-		return new Address(countryFieldToModify.getText(), zipCode, cityFieldToModify.getText(),
-				publicSpaceNameFieldToModify.getText(), spaceType, number);
+		return new Address(countryFieldToModify.getText(), zipCode, cityFieldToModify.getText(), publicSpaceNameFieldToModify.getText(), spaceType,
+				number);
 	}
 
 	private PublicSpaceType getType(String enumName) {
@@ -189,7 +191,6 @@ public class AdminClientsController implements Initializable {
 		houseNumberFieldToModify.setText("");
 		countryFieldToAdd.setText("");
 		countryFieldToModify.setText("");
-
 	}
 
 	private Client identifyClient() {
@@ -218,7 +219,6 @@ public class AdminClientsController implements Initializable {
 			ls.add(cl.getName() + " " + cl.getID());
 		}
 		clientChooser.setItems(ls);
-
 	}
 
 }
