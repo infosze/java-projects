@@ -1,5 +1,7 @@
 package hu.ak_akademia.book4you.databases;
 
-public interface DataLoader {
-	Object load();
+import java.util.List;
+
+public interface DataLoader <E> {
+	List<E> load();
 }

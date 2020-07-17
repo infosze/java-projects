@@ -16,9 +16,9 @@ public class Clients implements ClientsHandler {
 
 	@Override
 	public List<Client> load() {
-		DataLoader clientsFileLoader = new FileHandler(url);
+		DataLoader<Client> clientsFileLoader = new FileHandler<Client>(url);
 
-		return (List<Client>) clientsFileLoader.load();
+		return clientsFileLoader.load();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class Clients implements ClientsHandler {
 
 	@Override
 	public void save() {
-		DataSaver clientsFileSaver = new FileHandler(url);
+		DataSaver<Client> clientsFileSaver = new FileHandler<Client>(url);
 		clientsFileSaver.save(clientsList);
 	}
 

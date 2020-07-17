@@ -2,7 +2,6 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 

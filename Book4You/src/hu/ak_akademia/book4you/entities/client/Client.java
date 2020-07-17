@@ -1,7 +1,6 @@
 package hu.ak_akademia.book4you.entities.client;
 
 import java.io.Serializable;
-import java.util.Random;
 
 import hu.ak_akademia.book4you.entities.Address;
 

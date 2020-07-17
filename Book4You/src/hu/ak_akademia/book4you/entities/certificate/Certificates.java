@@ -5,7 +5,6 @@ import java.util.List;
 import hu.ak_akademia.book4you.databases.DataLoader;
 import hu.ak_akademia.book4you.databases.DataSaver;
 import hu.ak_akademia.book4you.databases.FileHandler;
-import hu.ak_akademia.book4you.entities.user.User;
 
 public class Certificates implements CertificatesHandler{
 	private List<Certificate> certificatesList;
@@ -22,9 +21,9 @@ public class Certificates implements CertificatesHandler{
 
 	@Override
 	public List<Certificate> load() {
-		DataLoader certificatesFileLoader = new FileHandler(url);
+		DataLoader<Certificate> certificatesFileLoader = new FileHandler<Certificate>(url);
 
-		return (List<Certificate>) certificatesFileLoader.load();
+		return certificatesFileLoader.load();
 	}
 	
 	@Override
@@ -34,7 +33,7 @@ public class Certificates implements CertificatesHandler{
 
 	@Override
 	public void save() {
-		DataSaver certificatesFileSaver = new FileHandler(url);
+		DataSaver<Certificate> certificatesFileSaver = new FileHandler<Certificate>(url);
 		certificatesFileSaver.save(certificatesList);
 	}
 }

@@ -1,5 +1,7 @@
 package hu.ak_akademia.book4you.databases;
 
-public interface DataSaver {
-	void save(Object obj);
+import java.util.List;
+
+public interface DataSaver <E> {
+	void save(List<E> data);
 }

@@ -1,7 +1,5 @@
 package hu.ak_akademia.book4you.entities.certificate;
 
-import hu.ak_akademia.book4you.entities.PublicSpaceType;
-
 public enum Title {
 	
 	SELL_BOOK ("könyv eladás"),

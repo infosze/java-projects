@@ -5,13 +5,13 @@ import java.util.List;
 
 import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
+import hu.ak_akademia.book4you.entities.bookstore.Store;
 import hu.ak_akademia.book4you.entities.certificate.Certificate;
 import hu.ak_akademia.book4you.entities.certificate.Direction;
 import hu.ak_akademia.book4you.entities.certificate.Title;
 import hu.ak_akademia.book4you.entities.client.Client;
 import hu.ak_akademia.book4you.entities.client.EconomicClient;
 import hu.ak_akademia.book4you.entities.client.NaturalClient;
-import hu.ak_akademia.book4you.entities.owncompany.OwnCompany;
 import hu.ak_akademia.book4you.entities.user.Admin;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
@@ -21,16 +21,16 @@ public class CreateFilesForTesting {
 	public static void main(String[] args) {
 		// owncompany.bin feltöltése teszt adatokkal
 		String url1 = "src/hu/ak_akademia/book4you/databases/owncompany.bin";
-		OwnCompany data = new OwnCompany("Book4You", new Address("Magyarország", 1037, "Budapest", "Hunor", PublicSpaceType.STREET, 62));
-		
-		DataSaver ownCompanyFileSaver = new FileHandler("src/hu/ak_akademia/book4you/databases/owncompany.bin");
-		ownCompanyFileSaver.save(data);
+		Store data = new Store("Book4You", new Address("Magyarország", 1037, "Budapest", "Hunor", PublicSpaceType.STREET, 62));
+		List<Store> bookstore = List.of(data);
+		DataSaver<Store> bookStoreFileSaver = new FileHandler<Store>(url1);
+		bookStoreFileSaver.save(bookstore);
 
 		// owncompany.bin-ből OwnCompany objektumba töltés
-		DataLoader ownCompanyFileLoader = new FileHandler(url1);
-		OwnCompany companyData = (OwnCompany) ownCompanyFileLoader.load();
+		DataLoader<Store> bookStoreFileLoader = new FileHandler<Store>(url1);
+		List<Store> companyData = bookStoreFileLoader.load();
 
-		System.out.println(companyData.toString());
+		System.out.println(companyData.get(0).toString());
 
 		// users.bin feltöltése teszt adatokkal
 		String url2 = "src/hu/ak_akademia/book4you/databases/users.bin";
@@ -39,13 +39,12 @@ public class CreateFilesForTesting {
 		usersToSave.add(new Cashier("Pénztáros Géza", "pg01", "E1234567"));
 		usersToSave.add(new Cashier("Pénztáros Jolán", "pj01", "E1234567"));
 
-		DataSaver usersFileSaver = new FileHandler(url2);
+		DataSaver<User> usersFileSaver = new FileHandler<User>(url2);
 		usersFileSaver.save(usersToSave);
 
 		// users.bin-ből ArrayList-be töltés
-		DataLoader usersFileLoader = new FileHandler(url2);
-
-		List<User> users = (List<User>) usersFileLoader.load();
+		DataLoader<User> usersFileLoader = new FileHandler<User>(url2);
+		List<User> users = usersFileLoader.load();
 		
 		for (User user : users) {
 			System.out.println(user.getName() + " " + user.getID());
@@ -63,18 +62,14 @@ public class CreateFilesForTesting {
 		clientsToSave.add(new NaturalClient("Vásárló Balázs","vb01", address2));
 		clientsToSave.add(new EconomicClient("Takarítószolgálat Kft.","tk01", address3));
 		
-		DataSaver clientsFileSaver = new FileHandler(url3);
+		DataSaver<Client> clientsFileSaver = new FileHandler<Client>(url3);
 		clientsFileSaver.save(clientsToSave);
 		
 		// clients.bin-ből ArrayList-be töltés
-		DataLoader clientsFileLoader = new FileHandler(url3);
+		DataLoader<Client> clientsFileLoader = new FileHandler<Client>(url3);
 		
-		List<Client> clients = (List<Client>) clientsFileLoader.load();
+		List<Client> clients = clientsFileLoader.load();
 		System.out.println(clients.toString());
-		
-		for (Client client : clients) {
-			System.out.println(client.getName());
-		}
 		
 		// certificates.bin feltöltése teszt adatokkal
 		String url4 = "src/hu/ak_akademia/book4you/databases/certificates.bin";
@@ -94,14 +89,13 @@ public class CreateFilesForTesting {
 		certificatesToSave.add(certificate2);
 		certificatesToSave.add(certificate3);
 		
-		DataSaver certificateFileSaver = new FileHandler(url4);
+		DataSaver<Certificate> certificateFileSaver = new FileHandler<Certificate>(url4);
 		certificateFileSaver.save(certificatesToSave);
 		
 		// certificates.bin-ből ArrayList-be töltés
-		DataLoader certificatesFileLoader = new FileHandler(url4);
+		DataLoader<Certificate> certificatesFileLoader = new FileHandler<Certificate>(url4);
 		
-		List<Certificate> certificates = (List<Certificate>) certificatesFileLoader.load();
-//		System.out.println(certificates.toString());
+		List<Certificate> certificates = certificatesFileLoader.load();
 		
 		for (Certificate certificate : certificates) {
 			System.out.println(certificate.getDate() + " " + certificate.getCashier().getName());

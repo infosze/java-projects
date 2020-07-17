@@ -67,14 +67,14 @@ public class Certificate implements Serializable{
 	public String toString() {
 		StringBuilder text = new StringBuilder();
 		
-		text.append("number=" + number + "/n");
-		text.append("date=" + date + "/n");
-		text.append("cashierObj=" + cashier + "/n");
-		text.append("direction=" + direction + "/n");
-		text.append("clientObj=" + client + "/n");
-		text.append("amount=" + amount + "/n");
-		text.append("title=" + title + "/n");
-		text.append("comment=" + comment + "/n");
+		text.append("number=" + number + " ");
+		text.append("date=" + date + " ");
+		text.append("cashierObj=" + cashier + " ");
+		text.append("direction=" + direction + " ");
+		text.append("clientObj=" + client + " ");
+		text.append("amount=" + amount + " ");
+		text.append("title=" + title + " ");
+		text.append("comment=" + comment);
 		
 		return text.toString(); 
 	}
