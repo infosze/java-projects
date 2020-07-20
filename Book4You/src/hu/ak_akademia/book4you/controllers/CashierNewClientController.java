@@ -17,7 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class CashierNewClientController implements Initializable {
@@ -46,34 +46,46 @@ public class CashierNewClientController implements Initializable {
 	@FXML
 	private CheckBox checkBox;
 
+	@FXML
+	private Label errorMessageLabel;
+
 	private Random rnd = new Random(); // for testing
+	private ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+	NameFactory nameFactory = new NameFactory();
+	private IdentifierFactory identifierFactory = new IdentifierFactory();
 
 	public void addNewClient(ActionEvent event) throws IOException {
-		Address address =setAdress();
-		Client newClient = null;
-		ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
-		if (checkBox.isSelected()) {
-			newClient = new EconomicClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
-		} else {
-			newClient = new NaturalClient(newClientFullName.getText(), "Teszt" + rnd.nextInt(150), address);
+		if (Validation.validateName(newClientFullName) & Validation.validCountry(newClientCountry) & Validation.validPostalCode(newClientZipCode)
+				& Validation.validateCity(newClientCityName) & Validation.validPubilcSpaceName(newClientAdressName)
+				& Validation.validPublicSpaceType(clientAdressType, errorMessageLabel) & Validation.validHouseNumber(newClientHouseNumber)) {
+			String fullName = nameFactory.formatName(newClientFullName);
+			String identifier = identifierFactory.generateIdentifier(fullName);
+			Address address = setAdress();
+			Client newClient = null;
+//		ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+			if (checkBox.isSelected()) {
+				newClient = new EconomicClient(fullName, identifier, address);
+			} else {
+				newClient = new NaturalClient(fullName, identifier, address);
+			}
+			clientHandler.add(newClient);
+			clientHandler.save();
+			newClientFullName.setText("");
+			newClientCountry.setText("");
+			newClientZipCode.setText("");
+			newClientCityName.setText("");
+			newClientAdressName.setText("");
+			clientAdressType.getSelectionModel().clearSelection();
+			newClientHouseNumber.setText("");
 		}
-		clientHandler.add(newClient);
-		clientHandler.save();
-		newClientFullName.setText("");
-		newClientCountry.setText("");
-		newClientZipCode.setText("");
-		newClientCityName.setText("");
-		newClientAdressName.setText("");
-		clientAdressType.getSelectionModel().clearSelection();
-		newClientHouseNumber.setText("");
 	}
 
 	private Address setAdress() {
-		int zipCode = Integer.parseInt(newClientZipCode.getText());
+		String zipCode = newClientZipCode.getText().toUpperCase();
 		var spaceType = getType(clientAdressType.getValue());
-		int number = Integer.parseInt(newClientHouseNumber.getText());
-		return  new Address(newClientCountry.getText(), zipCode, newClientCityName.getText(),
-				newClientAdressName.getText(), spaceType, number);
+		String number = newClientHouseNumber.getText();
+		return new Address(nameFactory.formatName(newClientCountry), zipCode, nameFactory.formatName(newClientCityName),
+				nameFactory.formatName(newClientAdressName), spaceType, number);
 	}
 
 	private PublicSpaceType getType(String enumName) {
@@ -93,7 +105,6 @@ public class CashierNewClientController implements Initializable {
 		clientAdressType.getSelectionModel().clearSelection();
 		newClientHouseNumber.setText("");
 		newClientCountry.setText("");
-
 	}
 
 	@Override
@@ -101,6 +112,6 @@ public class CashierNewClientController implements Initializable {
 		for (PublicSpaceType pst : PublicSpaceType.values()) {
 			clientAdressType.getItems().addAll(pst.getValue());
 		}
-
 	}
+
 }

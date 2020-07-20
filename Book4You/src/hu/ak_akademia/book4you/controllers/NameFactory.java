@@ -4,7 +4,7 @@ import javafx.scene.control.TextField;
 
 class NameFactory {
 
-	String addName(TextField textField) {
+	String formatName(TextField textField) {
 		return changeFirstLetterToUpperCase(textField);
 	}
 

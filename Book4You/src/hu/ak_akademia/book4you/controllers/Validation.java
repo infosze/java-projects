@@ -1,6 +1,7 @@
 package hu.ak_akademia.book4you.controllers;
 
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 class Validation {
@@ -35,24 +36,24 @@ class Validation {
 		if (rawNumber.isEmpty()) {
 			number.setText(Messages.getErrorMessageEmpty());
 			return false;
-		} else if (!rawNumber.matches("(\\d{1,})")) {
+		} else if (!rawNumber.matches("((\\d{1,})(( |\\/)([a-zA-Z]))?)")) {
 			number.setText(Messages.getErrorMessageWrongFormat());
 			return false;
 		}
 		return true;
 	}
 
-	static boolean validPublicSpaceType(ComboBox publicSpaceType) {
-//		String rawPublicSpaceType = publicSpaceType.getSelectionModel().isEmpty();
-		try {
-			if (publicSpaceType.getValue() == null) {
-				return false;
-			}
-		} catch (NullPointerException e) {
-
-		}
-		return true;
-	}
+//	static boolean validPublicSpaceType(ComboBox publicSpaceType) {
+////		String rawPublicSpaceType = publicSpaceType.getSelectionModel().isEmpty();
+//		try {
+//			if (publicSpaceType.getValue() == null) {
+//				return false;
+//			}
+//		} catch (NullPointerException e) {
+//
+//		}
+//		return true;
+//	}
 
 	static boolean validPubilcSpaceName(TextField publicSpaceName) {
 		String rawPublicSpaceName = publicSpaceName.getText();
@@ -84,7 +85,7 @@ class Validation {
 		if (rawPostalCode.isEmpty()) {
 			postalCode.setText(Messages.getErrorMessageEmpty());
 			return false;
-		} else if (!rawPostalCode.matches("(\\d{4,})")) {
+		} else if (!rawPostalCode.matches("([a-zA-Z\\d]{4,})")) {
 			postalCode.setText(Messages.getErrorMessageWrongFormat());
 			return false;
 		}
@@ -102,6 +103,14 @@ class Validation {
 			return false;
 		}
 		return true;
+	}
+	
+	static boolean validPublicSpaceType(ComboBox<String> publicSpaceType, Label errorMessageLabel) {
+		if(publicSpaceType.getSelectionModel().isEmpty()) {
+			errorMessageLabel.setText(Messages.getErrorMessageNotChosen());
+			return false;
+		} else
+			return true;
 	}
 
 }

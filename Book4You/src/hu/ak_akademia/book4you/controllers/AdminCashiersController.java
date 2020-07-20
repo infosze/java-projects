@@ -75,9 +75,9 @@ public class AdminCashiersController implements Initializable {
 		passwordToModify.setText("");
 	}
 
-	public void saveTextField(ActionEvent event) throws IOException {
+	public void addNewCashier(ActionEvent event) throws IOException {
 		if (Validation.validateName(fullNameFieldToAdd) & Validation.validatePassword(passwordFieldToAdd)) {
-			String fullName = nameFactory.addName(fullNameFieldToAdd);
+			String fullName = nameFactory.formatName(fullNameFieldToAdd);
 			String password = passwordFieldToAdd.getText();
 			String identifier = identifierFactory.generateIdentifier(fullName);
 			messageLabelToAdd.setText(identifier);

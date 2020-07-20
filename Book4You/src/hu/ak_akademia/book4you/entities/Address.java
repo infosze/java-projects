@@ -7,13 +7,13 @@ public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String country;
-	private int postalCode;
+	private String postalCode;
 	private String city;
 	private String publicSpaceName;
 	private PublicSpaceType publicSpaceType;
-	private int number;
+	private String number;
 	
-	public Address(String country, int postalCode, String city, String publicSpaceName, PublicSpaceType publicSpaceType, int number) {
+	public Address(String country, String postalCode, String city, String publicSpaceName, PublicSpaceType publicSpaceType, String number) {
 		this.country = country;
 		this.postalCode = postalCode;
 		this.city = city;
@@ -30,11 +30,11 @@ public class Address implements Serializable{
 		this.country = country;
 	}
 
-	public int getPostalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
@@ -62,11 +62,11 @@ public class Address implements Serializable{
 		this.publicSpaceType = publicSpaceType;
 	}
 
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

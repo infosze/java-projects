@@ -9,5 +9,9 @@ public class Messages {
 	static String getErrorMessageWrongFormat() {
 		return String.format("Kérem megfelelő formátumot adjon meg!");
 	}
+	
+	static String getErrorMessageNotChosen() {
+		return String.format("Kérem válasszon!");
+	}
 
 }

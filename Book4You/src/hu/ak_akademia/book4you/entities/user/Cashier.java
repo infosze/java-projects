@@ -2,12 +2,12 @@ package hu.ak_akademia.book4you.entities.user;
 
 import java.io.Serializable;
 
-public class Cashier extends User implements Serializable{
-	
+public class Cashier extends User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private boolean isActive;
-	
+
 	public Cashier(String name, String identifier, String password) {
 		super(name, identifier, password);
 		isActive = true;
@@ -17,7 +17,7 @@ public class Cashier extends User implements Serializable{
 		super(name, identifier, password);
 		this.isActive = isActive;
 	}
-	
+
 	public boolean isActive() {
 		return isActive;
 	}
@@ -28,6 +28,7 @@ public class Cashier extends User implements Serializable{
 
 	@Override
 	public String toString() {
-		return  getName() + "(Cashier) ID=" + getID() + " Active=" + isActive;
+		return getName() + "(Cashier) ID=" + getID() + " Active=" + isActive;
 	}
+
 }
