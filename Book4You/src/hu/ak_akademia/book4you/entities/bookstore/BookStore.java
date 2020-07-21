@@ -14,15 +14,13 @@ public class BookStore implements StoreHandler, Serializable {
 
 	public BookStore(String url) {
 		this.url = url;
-		this.storeList = load();
+		DataLoader<Store> bookStoreFileLoader = new FileHandler<Store>(url);
+		this.storeList = bookStoreFileLoader.load();
 	}
 
 	@Override
 	public List<Store> load() {
-		DataLoader<Store> bookStoreFileLoader = new FileHandler<Store>(url);
-		List<Store> companyData = bookStoreFileLoader.load();
-
-		return companyData;
+		return storeList;
 	}
 
 	@Override

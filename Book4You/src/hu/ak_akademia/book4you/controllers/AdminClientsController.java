@@ -95,14 +95,16 @@ public class AdminClientsController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		setContentOfClientChooserComboBox();
-		
+		setContentOfPublicSpaceTypeComboBoxes();
+
+		IdentifierFactory = new IdentifierFactory();
+	}
+
+	private void setContentOfPublicSpaceTypeComboBoxes() {
 		publicSpaceTypeOptions = FXCollections.observableArrayList(PublicSpaceType.getAllValues());
 		publicSpaceTypeComboBoxToAdd.setItems(publicSpaceTypeOptions);
 		publicSpaceTypeComboBoxToModify.setItems(publicSpaceTypeOptions);
-
-		IdentifierFactory = new IdentifierFactory();
 	}
 
 	private void setContentOfClientChooserComboBox() {
