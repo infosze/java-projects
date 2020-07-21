@@ -99,9 +99,8 @@ public class AdminClientsController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		clientsHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
-		List<Client> clients = clientsHandler.load();
 		
-		clientOptions = FXCollections.observableList(clients);
+		clientOptions = FXCollections.observableList(clientsHandler.load());
 		clientChooserComboBox.setItems(clientOptions);
 		
 		publicSpaceTypeOptions = FXCollections.observableArrayList(PublicSpaceType.getAllValues());
@@ -183,8 +182,8 @@ public class AdminClientsController implements Initializable {
 				modified = new EconomicClient(fullName, choosen.getID(), modifiedAddress);
 			}
 			
-//			clientsHandler.modify(choosen, modified);
-//			clientsHandler.save();
+			clientsHandler.modify(choosen, modified);
+			clientsHandler.save();
 		}
 	}
 

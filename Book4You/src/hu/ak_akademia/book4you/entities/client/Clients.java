@@ -11,13 +11,13 @@ public class Clients implements ClientsHandler {
 
 	public Clients(String url) {
 		this.url = url;
+		DataLoader<Client> clientsFileLoader = new FileHandler<Client>(url);
+		this.clientsList = clientsFileLoader.load();
 	}
 	
 	@Override
 	public List<Client> load() {
-		DataLoader<Client> clientsFileLoader = new FileHandler<Client>(url);
-
-		return clientsFileLoader.load();
+		return clientsList;
 	}
 
 	@Override
@@ -27,7 +27,6 @@ public class Clients implements ClientsHandler {
 
 	@Override
 	public void modify(Client from, Client to) {
-		
 		int clientIndex = getClientIndex(from);
 
 		if (clientIndex >= 0) {
@@ -55,8 +54,6 @@ public class Clients implements ClientsHandler {
 	}
 
 	private int getClientIndex(Client client) {
-		System.out.println("teszt: " + clientsList.size());
-		
 		return clientsList.indexOf(client);
 	}
 }
