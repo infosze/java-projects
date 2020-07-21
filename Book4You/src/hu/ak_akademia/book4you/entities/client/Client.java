@@ -64,7 +64,15 @@ public abstract class Client implements Serializable{
 
 	@Override
 	public String toString() {
-		return  name + " (client)  id=" + ID ;
+		StringBuilder result = new StringBuilder();
+		
+		result.append(name);
+		result.append(" ");
+		result.append("[");
+		result.append(ID);
+		result.append("]");
+		
+		return  result.toString();
 	}
 
 	@Override

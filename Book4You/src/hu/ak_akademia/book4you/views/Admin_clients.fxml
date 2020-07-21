@@ -63,7 +63,7 @@
                         <VBox prefHeight="520.0" prefWidth="423.0" spacing="10.0" styleClass="panel" stylesheets="@application.css">
                            <children>
                               <Label prefHeight="27.0" prefWidth="115.0" text="Ügyfél neve:" />
-                              <TextField fx:id="companyNameFieldToModify" disable="true" prefHeight="40.0" prefWidth="45.0" />
+                              <TextField fx:id="companyNameFieldToModify" disable="true" prefHeight="40.0" prefWidth="255.0" />
                               <Label text="Címe / Székhelye:" />
                               <Label text="Ország:" />
                               <TextField fx:id="countryFieldToModify" disable="true" prefHeight="40.0" prefWidth="255.0" />
@@ -84,7 +84,7 @@
                         </VBox>
                         <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" onAction="#saveEditedClient" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mentés" />
                         <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" onAction="#resetTextFields" prefHeight="58.0" prefWidth="139.0" stylesheets="@application.css" text="Mégse" />
-                        <ComboBox fx:id="clientChooserComboBox" layoutX="469.0" layoutY="50.0" onAction="#editClient" prefHeight="40.0" prefWidth="220.0" stylesheets="@application.css" />
+                        <ComboBox fx:id="clientChooserComboBox" layoutX="423.0" layoutY="56.0" onAction="#editClient" prefHeight="35.0" prefWidth="327.0" stylesheets="@application.css" />
                         <Label fx:id="errorMessageLabel1" layoutX="298.0" layoutY="432.0" prefHeight="46.0" prefWidth="250.0">
                            <font>
                               <Font size="20.0" />

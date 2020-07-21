@@ -2,9 +2,9 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
 import hu.ak_akademia.book4you.entities.client.Client;
@@ -84,54 +84,47 @@ public class AdminClientsController implements Initializable {
 
 	@FXML
 	private Label errorMessageLabel;
-	
+
 	@FXML
 	private Label errorMessageLabel1;
 
-	
-	
 	private ClientsHandler clientsHandler;
+	private ObservableList<String> publicSpaceTypeOptions;
+	private ObservableList<String> clientOptions;
 	
-	
-	
+
+
 	NameFactory nameFactory = new NameFactory();
 	private IdentifierFactory IDFactory;
 	private Client selectedClient;
-	
-	
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		setTextFieldsDisableFalse();
-		
-		clientChooserComboBox = new ComboBox<>();
-		publicSpaceTypeComboBoxToModify = new ComboBox<>();
-		publicSpaceTypeComboBoxToAdd = new ComboBox<>();
 		
 		clientsHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
-		IDFactory = new IdentifierFactory();
-		
-		fillPublicSpaceTypesComboBoxes();
-		fillClientChooserComboBox();
-	}
-
-	private void fillPublicSpaceTypesComboBoxes() {
-		for (PublicSpaceType pst : PublicSpaceType.values()) {
-			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
-			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
-		}
-	}
-
-	private void fillClientChooserComboBox() {
 		List<Client> clients = clientsHandler.load();
 		
-		for (Client client : clients) {
-			clientChooserComboBox.getItems().add(client.getNameAndID());
-		}
-		clientChooserComboBox.setValue("érték");
+		List<String> clientsWithNameAndID = convertToStringList(clients);
+		clientOptions = FXCollections.observableList(clientsWithNameAndID);
+		clientChooserComboBox.setItems(clientOptions);
+		
+		publicSpaceTypeOptions = FXCollections.observableArrayList(PublicSpaceType.getAllValues());
+		publicSpaceTypeComboBoxToAdd.setItems(publicSpaceTypeOptions);
+		publicSpaceTypeComboBoxToModify.setItems(publicSpaceTypeOptions);
+		
+		publicSpaceTypeComboBoxToAdd.getSelectionModel().selectFirst();
+
+		IDFactory = new IdentifierFactory();
 	}
-	
-	
+
+	private List<String> convertToStringList(List<Client> clients) {
+		List<String> clientsNameAndID = new ArrayList<>();
+		
+		for (Client client : clients) {
+			clientsNameAndID.add(client.getNameAndID());
+		}
+		return clientsNameAndID;
+	}
 
 	public void editClient(ActionEvent event) throws IOException {
 		setTextFieldsDisableFalse();
@@ -178,7 +171,8 @@ public class AdminClientsController implements Initializable {
 	public void addNewClient(ActionEvent event) throws IOException {
 		if (Validation.validateName(companyNameFieldToAdd) & Validation.validCountry(countryFieldToAdd)
 				& Validation.validPostalCode(postalCodeFieldToAdd) & Validation.validateCity(cityFieldToAdd)
-				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd) & Validation.validPublicSpaceType(publicSpaceTypeComboBoxToAdd, errorMessageLabel)
+				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd)
+				& Validation.validPublicSpaceType(publicSpaceTypeComboBoxToAdd, errorMessageLabel)
 				& Validation.validHouseNumber(houseNumberFieldToAdd)) {
 			String fullName = nameFactory.formatName(companyNameFieldToAdd);
 			String identifier = IDFactory.generateIdentifier(fullName);
@@ -213,8 +207,9 @@ public class AdminClientsController implements Initializable {
 		String zipCode = postalCodeFieldToModify.getText().toUpperCase();
 		var spaceType = getType(publicSpaceTypeComboBoxToModify.getValue());
 		String number = houseNumberFieldToModify.getText();
-		return new Address(nameFactory.formatName(countryFieldToModify), zipCode, nameFactory.formatName(cityFieldToModify),
-				nameFactory.formatName(publicSpaceNameFieldToModify), spaceType, number);
+		return new Address(nameFactory.formatName(countryFieldToModify), zipCode,
+				nameFactory.formatName(cityFieldToModify), nameFactory.formatName(publicSpaceNameFieldToModify),
+				spaceType, number);
 	}
 
 	private PublicSpaceType getType(String enumName) {

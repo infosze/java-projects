@@ -12,7 +12,7 @@ public class Clients implements ClientsHandler {
 	public Clients(String url) {
 		this.url = url;
 	}
-
+	
 	@Override
 	public List<Client> load() {
 		DataLoader<Client> clientsFileLoader = new FileHandler<Client>(url);

@@ -1,5 +1,8 @@
 package hu.ak_akademia.book4you.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum PublicSpaceType {
 
 	ROAD("út"), STREET("utca"), BOULEVARD("sétány"), PUBLIC("köz"), SQUARE("tér"), AVENUE("sugárút"), WHARF("rakpart");
@@ -21,5 +24,15 @@ public enum PublicSpaceType {
 			}
 		}
 		return null;
+	}
+
+	public static List<String> getAllValues() {
+		List<String> result = new ArrayList<>();
+
+		for (PublicSpaceType e : PublicSpaceType.values()) {
+			result.add(e.getValue());
+		}
+
+		return result;
 	}
 }
