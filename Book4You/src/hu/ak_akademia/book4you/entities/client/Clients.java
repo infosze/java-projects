@@ -27,6 +27,7 @@ public class Clients implements ClientsHandler {
 
 	@Override
 	public void modify(Client from, Client to) {
+		
 		int clientIndex = getClientIndex(from);
 
 		if (clientIndex >= 0) {
@@ -54,6 +55,8 @@ public class Clients implements ClientsHandler {
 	}
 
 	private int getClientIndex(Client client) {
+		System.out.println("teszt: " + clientsList.size());
+		
 		return clientsList.indexOf(client);
 	}
 }

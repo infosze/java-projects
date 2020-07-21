@@ -68,9 +68,9 @@ public abstract class Client implements Serializable{
 		
 		result.append(name);
 		result.append(" ");
-		result.append("[");
+		result.append("(");
 		result.append(ID);
-		result.append("]");
+		result.append(")");
 		
 		return  result.toString();
 	}
