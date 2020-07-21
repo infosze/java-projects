@@ -2,6 +2,7 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import hu.ak_akademia.book4you.entities.Address;
@@ -58,16 +59,13 @@ public class AdminClientsController implements Initializable {
 	private TextField publicSpaceNameFieldToModify;
 
 	@FXML
-	private ComboBox<String> publicSpaceTypeComboBoxToAdd = new ComboBox<String>();
+	private ComboBox<String> publicSpaceTypeComboBoxToAdd;
 
 	@FXML
-	private ComboBox<String> publicSpaceTypeComboBoxToModify = new ComboBox<String>();
+	private ComboBox<String> publicSpaceTypeComboBoxToModify;
 
 	@FXML
-	private ComboBox<String> clientChooser = new ComboBox<>();
-//  Meglátom a végén melyik lesz a befutó, egyelnőre String a lista az frissítések miatt	
-//	@FXML   
-//	private ComboBox<Client> clientChooser = new ComboBox<>();
+	private ComboBox<String> clientChooserComboBox;
 
 	@FXML
 	private TextField houseNumberFieldToAdd;
@@ -90,10 +88,47 @@ public class AdminClientsController implements Initializable {
 	@FXML
 	private Label errorMessageLabel1;
 
-	private ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+	
+	
+	private ClientsHandler clientsHandler;
+	
+	
+	
 	NameFactory nameFactory = new NameFactory();
-	private IdentifierFactory identifierFactory = new IdentifierFactory();
+	private IdentifierFactory IDFactory;
 	private Client selectedClient;
+	
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		clientChooserComboBox = new ComboBox<>();
+		publicSpaceTypeComboBoxToModify = new ComboBox<>();
+		publicSpaceTypeComboBoxToAdd = new ComboBox<>();
+		
+		clientsHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+		IDFactory = new IdentifierFactory();
+		
+		fillPublicSpaceTypesComboBoxes();
+		fillClientChooserComboBox();
+	}
+
+	private void fillPublicSpaceTypesComboBoxes() {
+		for (PublicSpaceType pst : PublicSpaceType.values()) {
+			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
+			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
+		}
+	}
+
+	private void fillClientChooserComboBox() {
+		List<Client> clients = clientsHandler.load();
+		
+		for (Client client : clients) {
+			clientChooserComboBox.getItems().add(client.getNameAndID());
+		}
+	}
+	
+	
 
 	public void editClient(ActionEvent event) throws IOException {
 		setTextFieldsDisableFalse();
@@ -132,8 +167,8 @@ public class AdminClientsController implements Initializable {
 			} else if (selectedClient instanceof EconomicClient) {
 				modified = new EconomicClient(fullName, selectedClient.getID(), modifiedAddress);
 			}
-			clientHandler.modify(selectedClient, modified);
-			clientHandler.save();
+			clientsHandler.modify(selectedClient, modified);
+			clientsHandler.save();
 		}
 	}
 
@@ -143,7 +178,7 @@ public class AdminClientsController implements Initializable {
 				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd) & Validation.validPublicSpaceType(publicSpaceTypeComboBoxToAdd, errorMessageLabel)
 				& Validation.validHouseNumber(houseNumberFieldToAdd)) {
 			String fullName = nameFactory.formatName(companyNameFieldToAdd);
-			String identifier = identifierFactory.generateIdentifier(fullName);
+			String identifier = IDFactory.generateIdentifier(fullName);
 			Address address = setAdress();
 			Client newClient = null;
 			if (checkBox.isSelected()) {
@@ -151,8 +186,8 @@ public class AdminClientsController implements Initializable {
 			} else {
 				newClient = new NaturalClient(fullName, identifier, address);
 			}
-			clientHandler.add(newClient);
-			clientHandler.save();
+			clientsHandler.add(newClient);
+			clientsHandler.save();
 			companyNameFieldToAdd.setText("");
 			countryFieldToAdd.setText("");
 			postalCodeFieldToAdd.setText("");
@@ -252,31 +287,12 @@ public class AdminClientsController implements Initializable {
 	}
 
 	private Client identifyClient() {
-		String[] valueOfComboBox = clientChooser.getValue().split(" ");
+		String[] valueOfComboBox = clientChooserComboBox.getValue().split(" ");
 		return switch (valueOfComboBox.length) {
-		case 3 -> clientHandler.getClient(valueOfComboBox[2]);
-		case 4 -> clientHandler.getClient(valueOfComboBox[3]);
+		case 3 -> clientsHandler.getClient(valueOfComboBox[2]);
+		case 4 -> clientsHandler.getClient(valueOfComboBox[3]);
 		default -> null;
 		};
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		for (PublicSpaceType pst : PublicSpaceType.values()) {
-			publicSpaceTypeComboBoxToAdd.getItems().addAll(pst.getValue());
-			publicSpaceTypeComboBoxToModify.getItems().addAll(pst.getValue());
-		}
-
-		ObservableList<String> ls = FXCollections.observableArrayList();
-		// ObservableList<Client> ls2 = FXCollections.observableArrayList();
-//		for (var cl : clientHandler.load()) {
-//			ls2.add(cl);
-//		}
-		// clientChooser.setItems(ls2);
-		for (var cl : clientHandler.load()) {
-			ls.add(cl.getName() + " " + cl.getID());
-		}
-		clientChooser.setItems(ls);
 	}
 
 }

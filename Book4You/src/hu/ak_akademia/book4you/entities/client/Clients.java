@@ -11,7 +11,6 @@ public class Clients implements ClientsHandler {
 
 	public Clients(String url) {
 		this.url = url;
-		this.clientsList = load();
 	}
 
 	@Override

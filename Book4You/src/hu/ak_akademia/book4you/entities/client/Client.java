@@ -47,10 +47,24 @@ public abstract class Client implements Serializable{
 	public void setVIP(boolean isVIP) {
 		this.isVIP = isVIP;
 	}
+	
+	public String getNameAndID() {
+		StringBuilder text = new StringBuilder();
+		
+		text.append(name);
+		text.append(" ");
+		text.append("[");
+		text.append(ID);
+		text.append("]");
+		
+		System.out.println(text);
+		
+		return text.toString(); 
+	}
 
 	@Override
 	public String toString() {
-		return  name + " (client)  id=" + ID ; //+ ", " + address + " isVIP=" + isVIP;
+		return  name + " (client)  id=" + ID ;
 	}
 
 	@Override
