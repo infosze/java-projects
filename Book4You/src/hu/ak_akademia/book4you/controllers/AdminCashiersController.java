@@ -6,10 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import hu.ak_akademia.book4you.entities.client.Client;
+import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
 import hu.ak_akademia.book4you.entities.user.UsersHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +38,7 @@ public class AdminCashiersController implements Initializable {
 	private TextField passwordToModify;
 
 	@FXML
-	private ComboBox<Cashier> cashierChooser = new ComboBox<>();
+	private ComboBox<Cashier> cashierChooserComboBox;
 
 	@FXML
 	private CheckBox aktivCheckBox;
@@ -51,28 +55,57 @@ public class AdminCashiersController implements Initializable {
 	NameFactory nameFactory = new NameFactory();
 	IdentifierFactory identifierFactory = new IdentifierFactory();
 
-	private Cashier selectedCashier;
+	private UsersHandler usersHandler;
+	private ObservableList<Cashier> cashierOptions;
 
-	UsersHandler users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
-	List<User> usersList = users.load();
-	List<Cashier> cashiers = new ArrayList<>();
-
-	public void chooseCashier(ActionEvent event) {
-		cashierChooser.getItems().addAll(cashiers);
-		selectedCashier = cashierChooser.getValue();
-		passwordToModify.setDisable(false);
-		passwordToModify.setText(selectedCashier.getPassword());
-		aktivCheckBox.setDisable(false);
-		aktivCheckBox.setSelected(selectedCashier.isActive());
-		cashierChooser.getItems().removeAll(cashiers);
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		setContentOfCashierChooserComboBox();
 	}
 
-	public void editCashier(ActionEvent event) throws IOException {
-		User cashier = users.getUser(selectedCashier.getID());
-		User modified = new Cashier(selectedCashier.getName(), selectedCashier.getID(), passwordToModify.getText(), aktivCheckBox.isSelected());
-		users.modify(cashier, modified);
-		users.save();
-		passwordToModify.setText("");
+	private void setContentOfCashierChooserComboBox() {
+		usersHandler = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
+
+		cashierOptions = FXCollections.observableList(getCashiers(usersHandler.load()));
+		cashierChooserComboBox.setItems(cashierOptions);
+	}
+
+	private List<Cashier> getCashiers(List<User> users) {
+		List<Cashier> result = new ArrayList<>();
+		for (User user : users) {
+			if (user instanceof Cashier) {
+				result.add((Cashier) user);
+			}
+		}
+		
+		return result;
+	}
+
+	public void chooseCashier(ActionEvent event) {
+		if(cashierChooserComboBox.getValue() != null) {
+			setDisableStateOfTextFields(false);
+			fillFieldsWithChoosenCashierData();
+		}else {
+			setDisableStateOfTextFields(true);
+		}
+	}
+
+	private void fillFieldsWithChoosenCashierData() {
+		passwordToModify.setText(cashierChooserComboBox.getValue().getPassword());
+		aktivCheckBox.setSelected(cashierChooserComboBox.getValue().isActive());
+	}
+
+	private void setDisableStateOfTextFields(boolean value) {
+		passwordToModify.setDisable(value);
+		aktivCheckBox.setDisable(value);
+	}
+
+	public void saveEditedCashier(ActionEvent event) throws IOException {
+		User choosen = cashierChooserComboBox.getValue();
+		User modified = new Cashier(choosen.getName(), choosen.getID(), passwordToModify.getText(),	aktivCheckBox.isSelected());
+		
+		usersHandler.modify(choosen, modified);
+		usersHandler.save();
 	}
 
 	public void addNewCashier(ActionEvent event) throws IOException {
@@ -107,19 +140,4 @@ public class AdminCashiersController implements Initializable {
 			passwordFieldToAdd.setText("");
 		}
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		List<Cashier> cashiers = new ArrayList<>();
-		{
-			List<User> usersList = users.load();
-			for (User user : usersList) {
-				if (user instanceof Cashier) {
-					cashiers.add((Cashier) user);
-				}
-			}
-		}
-		cashierChooser.getItems().addAll(cashiers);
-	}
-
 }

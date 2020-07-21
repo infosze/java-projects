@@ -11,7 +11,8 @@ public class Users implements UsersHandler {
 
 	public Users(String url) {
 		this.url = url;
-		this.usersList = load();
+		DataLoader<User> usersFileLoader = new FileHandler<User>(url);
+		this.usersList = usersFileLoader.load();
 	}
 
 	public Users(List<User> usersList) {
@@ -21,9 +22,7 @@ public class Users implements UsersHandler {
 
 	@Override
 	public List<User> load() {
-		DataLoader usersFileLoader = new FileHandler(url);
-
-		return (List<User>) usersFileLoader.load();
+		return usersList;
 	}
 
 	@Override

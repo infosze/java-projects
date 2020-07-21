@@ -38,7 +38,15 @@ public abstract class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", identifier=" + ID + "]";
+		StringBuilder result = new StringBuilder();
+
+		result.append(name);
+		result.append(" ");
+		result.append("(");
+		result.append(ID);
+		result.append(")");
+
+		return result.toString();
 	}
 
 }

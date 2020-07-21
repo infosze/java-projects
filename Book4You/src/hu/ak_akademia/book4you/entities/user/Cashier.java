@@ -28,7 +28,7 @@ public class Cashier extends User implements Serializable {
 
 	@Override
 	public String toString() {
-		return getName() + "(Cashier) ID=" + getID() + " Active=" + isActive;
+		return super.toString();
 	}
 
 }
