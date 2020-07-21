@@ -102,6 +102,8 @@ public class AdminClientsController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		setTextFieldsDisableFalse();
+		
 		clientChooserComboBox = new ComboBox<>();
 		publicSpaceTypeComboBoxToModify = new ComboBox<>();
 		publicSpaceTypeComboBoxToAdd = new ComboBox<>();
@@ -126,6 +128,7 @@ public class AdminClientsController implements Initializable {
 		for (Client client : clients) {
 			clientChooserComboBox.getItems().add(client.getNameAndID());
 		}
+		clientChooserComboBox.setValue("érték");
 	}
 	
 	
@@ -136,10 +139,10 @@ public class AdminClientsController implements Initializable {
 		companyNameFieldToModify.setText(selectedClient.getName());
 		Address clientAddress = selectedClient.getAddress();
 		countryFieldToModify.setText(clientAddress.getCountry());
-		postalCodeFieldToModify.setText(clientAddress.getPostalCode() + "");
+		postalCodeFieldToModify.setText(clientAddress.getPostalCode());
 		cityFieldToModify.setText(clientAddress.getCity());
 		publicSpaceNameFieldToModify.setText(clientAddress.getPublicSpaceName());
-		houseNumberFieldToModify.setText(clientAddress.getNumber() + "");
+		houseNumberFieldToModify.setText(clientAddress.getNumber());
 		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientAddress.getPublicSpaceType().getValue());
 	}
 
