@@ -48,19 +48,19 @@ public abstract class Client implements Serializable{
 		this.isVIP = isVIP;
 	}
 	
-	public String getNameAndID() {
-		StringBuilder text = new StringBuilder();
-		
-		text.append(name);
-		text.append(" ");
-		text.append("[");
-		text.append(ID);
-		text.append("]");
-		
-		System.out.println(text);
-		
-		return text.toString(); 
-	}
+//	public String getNameAndID() {
+//		StringBuilder text = new StringBuilder();
+//		
+//		text.append(name);
+//		text.append(" ");
+//		text.append("[");
+//		text.append(ID);
+//		text.append("]");
+//		
+//		System.out.println(text);
+//		
+//		return text.toString(); 
+//	}
 
 	@Override
 	public String toString() {

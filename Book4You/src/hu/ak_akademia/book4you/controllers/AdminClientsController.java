@@ -2,8 +2,6 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
@@ -98,18 +96,20 @@ public class AdminClientsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		clientsHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
-		
-		clientOptions = FXCollections.observableList(clientsHandler.load());
-		clientChooserComboBox.setItems(clientOptions);
+		setContentOfClientChooserComboBox();
 		
 		publicSpaceTypeOptions = FXCollections.observableArrayList(PublicSpaceType.getAllValues());
 		publicSpaceTypeComboBoxToAdd.setItems(publicSpaceTypeOptions);
 		publicSpaceTypeComboBoxToModify.setItems(publicSpaceTypeOptions);
-		
-		publicSpaceTypeComboBoxToAdd.getSelectionModel().selectFirst();
 
 		IdentifierFactory = new IdentifierFactory();
+	}
+
+	private void setContentOfClientChooserComboBox() {
+		clientsHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+		
+		clientOptions = FXCollections.observableList(clientsHandler.load());
+		clientChooserComboBox.setItems(clientOptions);
 	}
 
 	public void chooseClient(ActionEvent event) throws IOException {
@@ -121,11 +121,51 @@ public class AdminClientsController implements Initializable {
 		}
 	}
 	
-	public void resetTextFields(ActionEvent event) throws IOException {
-		resetTextFields();
+	public void resetFields(ActionEvent event) throws IOException {
+		resetFieldsOnClientModificationPage();
+		resetFieldsOnClientAdditionPage();
+	}
+	
+	public void saveEditedClient(ActionEvent event) throws IOException {
+		if (isValidToModification()) {
+			String fullName = nameFactory.formatName(companyNameFieldToModify);
+			Address modifiedAddress = setModifiedAdress();
+			Client modified = null;
+			Client choosen = clientChooserComboBox.getValue();
+			
+			if (choosen instanceof NaturalClient) {
+				modified = new NaturalClient(fullName, choosen.getID(), modifiedAddress);
+			} else if (choosen instanceof EconomicClient) {
+				modified = new EconomicClient(fullName, choosen.getID(), modifiedAddress);
+			}
+			
+			clientsHandler.modify(choosen, modified);
+			clientsHandler.save();
+		}
 	}
 
-	private void resetTextFields() {
+	public void saveNewClient(ActionEvent event) throws IOException {
+		if (isValidToAddition()) {
+			String fullName = nameFactory.formatName(companyNameFieldToAdd);
+			String identifier = IdentifierFactory.generateIdentifier(fullName);
+			Address address = setAdress();
+			Client newClient = null;
+			
+			if (checkBox.isSelected()) {
+				newClient = new EconomicClient(fullName, identifier, address);
+			} else {
+				newClient = new NaturalClient(fullName, identifier, address);
+			}
+			clientsHandler.add(newClient);
+			clientsHandler.save();
+			
+			setContentOfClientChooserComboBox();
+			
+			resetFieldsOnClientAdditionPage();
+		}
+	}
+
+	private void resetFieldsOnClientModificationPage() {
 		clientChooserComboBox.getSelectionModel().clearSelection();
 		publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
 		publicSpaceTypeComboBoxToModify.getSelectionModel().clearSelection();
@@ -148,6 +188,16 @@ public class AdminClientsController implements Initializable {
 		countryFieldToAdd.setText("");
 		countryFieldToModify.setText("");
 	}
+	
+	private void resetFieldsOnClientAdditionPage() {
+		companyNameFieldToAdd.setText("");
+		countryFieldToAdd.setText("");
+		postalCodeFieldToAdd.setText("");
+		cityFieldToAdd.setText("");
+		publicSpaceNameFieldToAdd.setText("");
+		publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
+		houseNumberFieldToAdd.setText("");
+	}
 
 	private void fillFieldsWithChoosenClientData() {
 		companyNameFieldToModify.setText(clientChooserComboBox.getValue().getName());
@@ -169,24 +219,6 @@ public class AdminClientsController implements Initializable {
 		publicSpaceTypeComboBoxToModify.setDisable(value);
 	}
 
-	public void saveEditedClient(ActionEvent event) throws IOException {
-		if (isValidToModification()) {
-			String fullName = nameFactory.formatName(companyNameFieldToModify);
-			Address modifiedAddress = setModifiedAdress();
-			Client modified = null;
-			Client choosen = clientChooserComboBox.getValue();
-			
-			if (choosen instanceof NaturalClient) {
-				modified = new NaturalClient(fullName, choosen.getID(), modifiedAddress);
-			} else if (choosen instanceof EconomicClient) {
-				modified = new EconomicClient(fullName, choosen.getID(), modifiedAddress);
-			}
-			
-			clientsHandler.modify(choosen, modified);
-			clientsHandler.save();
-		}
-	}
-
 	private boolean isValidToModification() {
 		return Validation.validateName(companyNameFieldToModify) & Validation.validCountry(countryFieldToModify)
 				& Validation.validPostalCode(postalCodeFieldToModify) & Validation.validateCity(cityFieldToModify)
@@ -194,32 +226,13 @@ public class AdminClientsController implements Initializable {
 				& Validation.validPublicSpaceType(publicSpaceTypeComboBoxToModify, errorMessageLabel1)
 				& Validation.validHouseNumber(houseNumberFieldToModify);
 	}
-
-	public void addNewClient(ActionEvent event) throws IOException {
-		if (Validation.validateName(companyNameFieldToAdd) & Validation.validCountry(countryFieldToAdd)
+	
+	private boolean isValidToAddition() {
+		return Validation.validateName(companyNameFieldToAdd) & Validation.validCountry(countryFieldToAdd)
 				& Validation.validPostalCode(postalCodeFieldToAdd) & Validation.validateCity(cityFieldToAdd)
 				& Validation.validPubilcSpaceName(publicSpaceNameFieldToAdd)
 				& Validation.validPublicSpaceType(publicSpaceTypeComboBoxToAdd, errorMessageLabel)
-				& Validation.validHouseNumber(houseNumberFieldToAdd)) {
-			String fullName = nameFactory.formatName(companyNameFieldToAdd);
-			String identifier = IdentifierFactory.generateIdentifier(fullName);
-			Address address = setAdress();
-			Client newClient = null;
-			if (checkBox.isSelected()) {
-				newClient = new EconomicClient(fullName, identifier, address);
-			} else {
-				newClient = new NaturalClient(fullName, identifier, address);
-			}
-			clientsHandler.add(newClient);
-			clientsHandler.save();
-			companyNameFieldToAdd.setText("");
-			countryFieldToAdd.setText("");
-			postalCodeFieldToAdd.setText("");
-			cityFieldToAdd.setText("");
-			publicSpaceNameFieldToAdd.setText("");
-			publicSpaceTypeComboBoxToAdd.getSelectionModel().clearSelection();
-			houseNumberFieldToAdd.setText("");
-		}
+				& Validation.validHouseNumber(houseNumberFieldToAdd);
 	}
 
 	private Address setAdress() {
