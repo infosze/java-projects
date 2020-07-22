@@ -99,6 +99,8 @@ public class AdminCashiersController implements Initializable {
 			fullNameFieldToAdd.setText("");
 			passwordFieldToAdd.setText("");
 		}
+		
+		resetFieldsOnCashierModifierPage();
 	}
 	
 	public void addNewCashier(ActionEvent event) throws IOException {
@@ -117,6 +119,7 @@ public class AdminCashiersController implements Initializable {
 	}
 	
 	private void resetFieldsOnCashierModifierPage() {
+		cashierChooserComboBox.getSelectionModel().clearSelection();
 		passwordToModify.setText("");
 		aktivCheckBox.setSelected(false);
 		aktivCheckBox.setDisable(true);
