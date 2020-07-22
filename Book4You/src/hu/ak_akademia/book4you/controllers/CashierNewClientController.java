@@ -2,9 +2,7 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
-
 import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
 import hu.ak_akademia.book4you.entities.client.Client;
@@ -12,6 +10,8 @@ import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.client.EconomicClient;
 import hu.ak_akademia.book4you.entities.client.NaturalClient;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +32,7 @@ public class CashierNewClientController implements Initializable {
 	private TextField newClientCityName;
 
 	@FXML
-	private TextField newClientAdressName;
+	private TextField newClientPublicSpaceName;
 
 	@FXML
 	private TextField newClientHouseNumber;
@@ -41,7 +41,7 @@ public class CashierNewClientController implements Initializable {
 	private TextField newClientCountry;
 
 	@FXML
-	private ComboBox<String> clientAdressType = new ComboBox<String>();
+	private ComboBox<String> publicSpaceTypeComboBox;
 
 	@FXML
 	private CheckBox checkBox;
@@ -49,45 +49,64 @@ public class CashierNewClientController implements Initializable {
 	@FXML
 	private Label errorMessageLabel;
 
-	private Random rnd = new Random(); // for testing
-	private ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+	private ObservableList<String> publicSpaceTypeOptions;
+	private ClientsHandler clientHandler;
 	NameFactory nameFactory = new NameFactory();
 	private IdentifierFactory identifierFactory = new IdentifierFactory();
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+		setContentOfPublicSpaceTypeComboBoxes();
+	}
+
+	public void resetTextFields(ActionEvent event) throws IOException {
+		resetFields();
+	}
+
 	public void addNewClient(ActionEvent event) throws IOException {
-		if (Validation.validateName(newClientFullName) & Validation.validCountry(newClientCountry) & Validation.validPostalCode(newClientZipCode)
-				& Validation.validateCity(newClientCityName) & Validation.validPubilcSpaceName(newClientAdressName)
-				& Validation.validPublicSpaceType(clientAdressType, errorMessageLabel) & Validation.validHouseNumber(newClientHouseNumber)) {
+		if (isValid()) {
 			String fullName = nameFactory.formatName(newClientFullName);
 			String identifier = identifierFactory.generateIdentifier(fullName);
-			Address address = setAdress();
+			Address address = setAddress();
 			Client newClient = null;
-//		ClientsHandler clientHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+
 			if (checkBox.isSelected()) {
 				newClient = new EconomicClient(fullName, identifier, address);
 			} else {
 				newClient = new NaturalClient(fullName, identifier, address);
 			}
+
 			clientHandler.add(newClient);
 			clientHandler.save();
-			newClientFullName.setText("");
-			newClientCountry.setText("");
-			newClientZipCode.setText("");
-			newClientCityName.setText("");
-			newClientAdressName.setText("");
-			clientAdressType.getSelectionModel().clearSelection();
-			newClientHouseNumber.setText("");
+
+			resetFields();
 		}
 	}
 
-	private Address setAdress() {
-		String zipCode = newClientZipCode.getText().toUpperCase();
-		var spaceType = getType(clientAdressType.getValue());
-		String number = newClientHouseNumber.getText();
-		return new Address(nameFactory.formatName(newClientCountry), zipCode, nameFactory.formatName(newClientCityName),
-				nameFactory.formatName(newClientAdressName), spaceType, number);
+	private boolean isValid() {
+		return Validation.validateName(newClientFullName) & Validation.validCountry(newClientCountry)
+				& Validation.validPostalCode(newClientZipCode) & Validation.validateCity(newClientCityName)
+				& Validation.validPubilcSpaceName(newClientPublicSpaceName)
+				& Validation.validPublicSpaceType(publicSpaceTypeComboBox, errorMessageLabel)
+				& Validation.validHouseNumber(newClientHouseNumber);
 	}
 
+	private void setContentOfPublicSpaceTypeComboBoxes() {
+		publicSpaceTypeOptions = FXCollections.observableArrayList(PublicSpaceType.getAllValues());
+		publicSpaceTypeComboBox.setItems(publicSpaceTypeOptions);
+	}
+
+	private Address setAddress() {
+		String zipCode = newClientZipCode.getText().toUpperCase();
+		var spaceType = getType(publicSpaceTypeComboBox.getValue());
+		String number = newClientHouseNumber.getText();
+
+		return new Address(nameFactory.formatName(newClientCountry), zipCode, nameFactory.formatName(newClientCityName),
+				nameFactory.formatName(newClientPublicSpaceName), spaceType, number);
+	}
+
+	// Ez a metódus belekerült a PublicSpaceType enum-ba is...ki lehetne venni
 	private PublicSpaceType getType(String enumName) {
 		for (var pst : PublicSpaceType.values()) {
 			if (pst.getValue().equals(enumName)) {
@@ -97,21 +116,13 @@ public class CashierNewClientController implements Initializable {
 		return null;
 	}
 
-	public void resetTextFields(ActionEvent event) throws IOException {
+	private void resetFields() {
 		newClientFullName.setText("");
+		newClientCountry.setText("");
 		newClientZipCode.setText("");
 		newClientCityName.setText("");
-		newClientAdressName.setText("");
-		clientAdressType.getSelectionModel().clearSelection();
+		newClientPublicSpaceName.setText("");
+		publicSpaceTypeComboBox.getSelectionModel().clearSelection();
 		newClientHouseNumber.setText("");
-		newClientCountry.setText("");
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		for (PublicSpaceType pst : PublicSpaceType.values()) {
-			clientAdressType.getItems().addAll(pst.getValue());
-		}
-	}
-
 }
