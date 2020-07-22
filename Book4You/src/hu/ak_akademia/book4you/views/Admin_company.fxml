@@ -32,7 +32,7 @@
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
       </VBox>
-      <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" onAction="#modifyStoreData" prefHeight="60.0" prefWidth="140.0" stylesheets="@application.css" text="Mentés" />
+      <Button layoutX="550.0" layoutY="240.0" mnemonicParsing="false" onAction="#saveStoreData" prefHeight="60.0" prefWidth="140.0" stylesheets="@application.css" text="Mentés" />
       <Button layoutX="550.0" layoutY="320.0" mnemonicParsing="false" onAction="#resetTextFields" prefHeight="60.0" prefWidth="140.0" stylesheets="@application.css" text="Mégse" />
    </children>
 </AnchorPane>

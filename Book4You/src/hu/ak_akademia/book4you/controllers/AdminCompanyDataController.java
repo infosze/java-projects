@@ -2,14 +2,12 @@ package hu.ak_akademia.book4you.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import hu.ak_akademia.book4you.entities.Address;
 import hu.ak_akademia.book4you.entities.PublicSpaceType;
 import hu.ak_akademia.book4you.entities.bookstore.BookStore;
 import hu.ak_akademia.book4you.entities.bookstore.Store;
 import hu.ak_akademia.book4you.entities.bookstore.StoreHandler;
-import hu.ak_akademia.book4you.entities.client.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,26 +42,31 @@ public class AdminCompanyDataController implements Initializable {
 
 	@FXML
 	private TextField houseNumberField;
-	
+
 	NameFactory nameFactory = new NameFactory();
-	
+
 	private ObservableList<String> publicSpaceTypeOptions;
 	private StoreHandler storeHandler;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		storeHandler = new BookStore("src/hu/ak_akademia/book4you/databases/owncompany.bin");
+
 		setContentOfPublicSpaceTypeComboBox();
-		fillFieldsWithStoreData(getStoreData());
+		fillFieldsWithStoreData();
 	}
-	
-	public void modifyStoreData(ActionEvent event) throws IOException {
+
+	public void saveStoreData(ActionEvent event) throws IOException {
 		if (isValid()) {
 			String fullName = nameFactory.formatName(companyNameField);
 			Address address = setAddress();
 			Store modifiedStoreData = new Store(fullName, address);
-			
-			storeHandler.modify(modifiedStoreData);
-
+			try {
+				storeHandler.modify(modifiedStoreData);
+				storeHandler.save();
+			} catch (IllegalStateException e) {
+				System.out.println("Nem sikerült betölteni az adatokat, a mentés nem lehetséges!");
+			}
 		}
 	}
 
@@ -72,7 +75,7 @@ public class AdminCompanyDataController implements Initializable {
 				& Validation.validPostalCode(postalCodeField) & Validation.validateCity(cityField)
 				& Validation.validPubilcSpaceName(publicSpaceNameField) & Validation.validHouseNumber(houseNumberField);
 	}
-	
+
 	public void resetTextFields(ActionEvent event) throws IOException {
 		resetFieldsOnBookStorePage();
 	}
@@ -86,7 +89,7 @@ public class AdminCompanyDataController implements Initializable {
 		publicSpaceTypeComboBox.getSelectionModel().clearSelection();
 		houseNumberField.setText("");
 	}
-	
+
 	private Address setAddress() {
 		String zipCode = postalCodeField.getText().toUpperCase();
 		var spaceType = getType(publicSpaceTypeComboBox.getValue());
@@ -94,7 +97,7 @@ public class AdminCompanyDataController implements Initializable {
 		return new Address(nameFactory.formatName(countryField), zipCode, nameFactory.formatName(cityField),
 				nameFactory.formatName(publicSpaceNameField), spaceType, number);
 	}
-	
+
 	private PublicSpaceType getType(String enumName) {
 		for (var pst : PublicSpaceType.values()) {
 			if (pst.getValue().equals(enumName)) {
@@ -104,16 +107,15 @@ public class AdminCompanyDataController implements Initializable {
 		return null;
 	}
 
-	private Store getStoreData() {
-		storeHandler = new BookStore("src/hu/ak_akademia/book4you/databases/owncompany.bin");
-		List<Store> storeList = storeHandler.load();
-		Store book4UStore = storeList.get(0);
-		return book4UStore;
+	private Store loadFirstStoreData() {
+		return storeHandler.load().get(0);
 	}
 
-	private void fillFieldsWithStoreData(Store store) {
+	private void fillFieldsWithStoreData() {
+		Store store = loadFirstStoreData();
+
 		companyNameField.setText(store.getName());
-		
+
 		countryField.setText(store.getAddress().getCountry());
 		postalCodeField.setText(store.getAddress().getPostalCode());
 		cityField.setText(store.getAddress().getCity());

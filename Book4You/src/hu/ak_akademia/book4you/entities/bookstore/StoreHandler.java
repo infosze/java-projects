@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface StoreHandler {
 	List<Store> load();
-	void modify(Store newData);
+	void modify(Store newData) throws IllegalStateException;
 	void save();
 }

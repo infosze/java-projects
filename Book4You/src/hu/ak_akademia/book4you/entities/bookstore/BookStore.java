@@ -1,6 +1,7 @@
 package hu.ak_akademia.book4you.entities.bookstore;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import hu.ak_akademia.book4you.databases.DataLoader;
 import hu.ak_akademia.book4you.databases.DataSaver;
@@ -24,10 +25,11 @@ public class BookStore implements StoreHandler, Serializable {
 	}
 
 	@Override
-	public void modify(Store newData) {
+	public void modify(Store newData) throws IllegalStateException{
 		if (storeList.isEmpty()) throw new IllegalStateException();
 		
-		storeList.set(0, newData);
+		this.storeList = new ArrayList<>();
+		this.storeList.add(newData);
 	}
 
 	@Override
