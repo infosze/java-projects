@@ -63,22 +63,15 @@ public class AdminCashiersController implements Initializable {
 		setContentOfCashierChooserComboBox();
 	}
 
-	private void setContentOfCashierChooserComboBox() {
-		usersHandler = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
-
-		cashierOptions = FXCollections.observableList(getCashiers(usersHandler.load()));
-		cashierChooserComboBox.setItems(cashierOptions);
-	}
-
-	private List<Cashier> getCashiers(List<User> users) {
-		List<Cashier> result = new ArrayList<>();
-		for (User user : users) {
-			if (user instanceof Cashier) {
-				result.add((Cashier) user);
-			}
-		}
+	public void saveEditedCashier(ActionEvent event) throws IOException {
+		User choosen = cashierChooserComboBox.getValue();
+		User modified = new Cashier(choosen.getName(), choosen.getID(), passwordToModify.getText(),	aktivCheckBox.isSelected());
 		
-		return result;
+		usersHandler.modify(choosen, modified);
+		usersHandler.save();
+		
+		setContentOfCashierChooserComboBox();
+		resetFieldsOnCashierModifierPage();
 	}
 
 	public void chooseCashier(ActionEvent event) {
@@ -89,40 +82,7 @@ public class AdminCashiersController implements Initializable {
 			setDisableStateOfTextFields(true);
 		}
 	}
-
-	private void fillFieldsWithChoosenCashierData() {
-		passwordToModify.setText(cashierChooserComboBox.getValue().getPassword());
-		aktivCheckBox.setSelected(cashierChooserComboBox.getValue().isActive());
-	}
-
-	private void setDisableStateOfTextFields(boolean value) {
-		passwordToModify.setDisable(value);
-		aktivCheckBox.setDisable(value);
-	}
-
-	public void saveEditedCashier(ActionEvent event) throws IOException {
-		User choosen = cashierChooserComboBox.getValue();
-		User modified = new Cashier(choosen.getName(), choosen.getID(), passwordToModify.getText(),	aktivCheckBox.isSelected());
-		
-		usersHandler.modify(choosen, modified);
-		usersHandler.save();
-	}
-
-	public void addNewCashier(ActionEvent event) throws IOException {
-		if (Validation.validateName(fullNameFieldToAdd) & Validation.validatePassword(passwordFieldToAdd)) {
-			String fullName = nameFactory.formatName(fullNameFieldToAdd);
-			String password = passwordFieldToAdd.getText();
-			String identifier = identifierFactory.generateIdentifier(fullName);
-			messageLabelToAdd.setText(identifier);
-			UsersHandler users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
-			Cashier newChashier = new Cashier(fullName, identifier, password);
-			users.add(newChashier);
-			users.save();
-			fullNameFieldToAdd.setText("");
-			passwordFieldToAdd.setText("");
-		}
-	}
-
+	
 	public void emptyTextField(ActionEvent event) throws IOException {
 		boolean deleteAll = true;
 		if (fullNameFieldToAdd.getText().equals(Messages.getErrorMessageEmpty())
@@ -139,5 +99,54 @@ public class AdminCashiersController implements Initializable {
 			fullNameFieldToAdd.setText("");
 			passwordFieldToAdd.setText("");
 		}
+	}
+	
+	public void addNewCashier(ActionEvent event) throws IOException {
+		if (Validation.validateName(fullNameFieldToAdd) & Validation.validatePassword(passwordFieldToAdd)) {
+			String fullName = nameFactory.formatName(fullNameFieldToAdd);
+			String password = passwordFieldToAdd.getText();
+			String identifier = identifierFactory.generateIdentifier(fullName);
+			messageLabelToAdd.setText(identifier);
+			UsersHandler users = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
+			Cashier newChashier = new Cashier(fullName, identifier, password);
+			users.add(newChashier);
+			users.save();
+			fullNameFieldToAdd.setText("");
+			passwordFieldToAdd.setText("");
+		}
+	}
+	
+	private void resetFieldsOnCashierModifierPage() {
+		passwordToModify.setText("");
+		aktivCheckBox.setSelected(false);
+		aktivCheckBox.setDisable(true);
+	}
+	
+	private void setContentOfCashierChooserComboBox() {
+		usersHandler = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
+		
+		cashierOptions = FXCollections.observableList(getCashiers(usersHandler.load()));
+		cashierChooserComboBox.setItems(cashierOptions);
+	}
+	
+	private List<Cashier> getCashiers(List<User> users) {
+		List<Cashier> result = new ArrayList<>();
+		for (User user : users) {
+			if (user instanceof Cashier) {
+				result.add((Cashier) user);
+			}
+		}
+		
+		return result;
+	}
+
+	private void fillFieldsWithChoosenCashierData() {
+		passwordToModify.setText(cashierChooserComboBox.getValue().getPassword());
+		aktivCheckBox.setSelected(cashierChooserComboBox.getValue().isActive());
+	}
+
+	private void setDisableStateOfTextFields(boolean value) {
+		passwordToModify.setDisable(value);
+		aktivCheckBox.setDisable(value);
 	}
 }

@@ -55,7 +55,7 @@ public class Users implements UsersHandler {
 
 	@Override
 	public void save() {
-		DataSaver usersFileSaver = new FileHandler(url);
+		DataSaver<User> usersFileSaver = new FileHandler<User>(url);
 		usersFileSaver.save(usersList);
 	}
 
