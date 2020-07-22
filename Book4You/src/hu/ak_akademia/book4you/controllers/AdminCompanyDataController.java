@@ -46,7 +46,9 @@ public class AdminCompanyDataController implements Initializable {
 	private TextField houseNumberField;
 	
 	NameFactory nameFactory = new NameFactory();
+	
 	private ObservableList<String> publicSpaceTypeOptions;
+	private StoreHandler storeHandler;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -58,8 +60,9 @@ public class AdminCompanyDataController implements Initializable {
 		if (isValid()) {
 			String fullName = nameFactory.formatName(companyNameField);
 			Address address = setAddress();
-			Store modified = new Store(fullName, address);
-			storeHandler.modify(modified);
+			Store modifiedStoreData = new Store(fullName, address);
+			
+			storeHandler.modify(modifiedStoreData);
 
 		}
 	}
@@ -102,7 +105,7 @@ public class AdminCompanyDataController implements Initializable {
 	}
 
 	private Store getStoreData() {
-		StoreHandler storeHandler = new BookStore("src/hu/ak_akademia/book4you/databases/owncompany.bin");
+		storeHandler = new BookStore("src/hu/ak_akademia/book4you/databases/owncompany.bin");
 		List<Store> storeList = storeHandler.load();
 		Store book4UStore = storeList.get(0);
 		return book4UStore;
@@ -123,5 +126,4 @@ public class AdminCompanyDataController implements Initializable {
 		publicSpaceTypeOptions = FXCollections.observableArrayList(PublicSpaceType.getAllValues());
 		publicSpaceTypeComboBox.setItems(publicSpaceTypeOptions);
 	}
-
 }
