@@ -14,7 +14,7 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("views/Cashier.fxml"));
 
-			Image icon = new Image("hu/ak_akademia/book4you/views/img/icon.png");
+			Image icon = new Image("hu/ak_akademia/book4you/views/images/icon.png");
 			primaryStage.getIcons().add(icon);
 
 			Scene scene = new Scene(root, 1024, 600);
