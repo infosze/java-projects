@@ -1,5 +1,10 @@
 package hu.ak_akademia.book4you.entities.certificate;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import hu.ak_akademia.book4you.entities.PublicSpaceType;
+
 public enum Title {
 	
 	SELL_BOOK ("könyv eladás"),
@@ -28,5 +33,15 @@ public enum Title {
 			}
 		}
 		return null;
+	}
+	
+	public static List<String> getAllValues() {
+		List<String> result = new ArrayList<>();
+
+		for (Title e : Title.values()) {
+			result.add(e.getValue());
+		}
+
+		return result;
 	}
 }
