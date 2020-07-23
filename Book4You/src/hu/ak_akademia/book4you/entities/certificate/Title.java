@@ -3,29 +3,35 @@ package hu.ak_akademia.book4you.entities.certificate;
 import java.util.ArrayList;
 import java.util.List;
 
-import hu.ak_akademia.book4you.entities.PublicSpaceType;
-
 public enum Title {
-	
-	SELL_BOOK ("könyv eladás"),
-	BUY_BOOK("könyv vétel"),
-	PARKING_RENTAL("parkolóbérlet"),
-	MOBILEPHONE("mobiltelefon számla"),
-	CLEANING("takarítási költség"),
-	INTERNET_SUBSCRIPTION("internet előfizetés"),
-	LEAFLET("szórólap"),
-	DEDICATION_EVENT("dedikálási esemény");
-	
-	private String value;
 
-	private Title(String value) {
-		this.value = value;
+	//@formatter:off
+	SELL_BOOK              ("könyv eladás",        Direction.INCOME),
+	BUY_BOOK               ("könyv vétel",         Direction.OUTCOME),
+	PARKING_RENTAL         ("parkolóbérlet",       Direction.INCOME),
+	MOBILEPHONE            ("mobiltelefon számla", Direction.INCOME),
+	CLEANING               ("takarítási költség",  Direction.OUTCOME),
+	INTERNET_SUBSCRIPTION  ("internet előfizetés", Direction.OUTCOME),
+	LEAFLET                ("szórólap",            Direction.OUTCOME),
+	DEDICATION_EVENT       ("dedikálási esemény",  Direction.INCOME);
+	//@formatter:on
+
+	private String value;
+	private Direction direction;
+
+	private Title(String longName, Direction direction) {
+		this.value = longName;
+		this.direction = direction;
 	}
 
 	public String getValue() {
 		return value;
 	}
-	
+
+	public Direction getDirection() {
+		return direction;
+	}
+
 	public static String getName(String value) {
 		for (Title enumName : Title.values()) {
 			if (enumName.getValue().equals(value)) {
@@ -34,7 +40,7 @@ public enum Title {
 		}
 		return null;
 	}
-	
+
 	public static List<String> getAllValues() {
 		List<String> result = new ArrayList<>();
 
