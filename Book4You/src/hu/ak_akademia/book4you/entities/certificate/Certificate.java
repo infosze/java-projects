@@ -19,10 +19,10 @@ public class Certificate implements Serializable{
 	private final Title title;
 	private final String comment;
 
-	public Certificate(int number, Cashier cashier, Direction direction, Client client, int amount, Title title,
+	public Certificate(int number, LocalDate date, Cashier cashier, Direction direction, Client client, int amount, Title title,
 			String comment) {
 		this.number = number;
-		this.date = LocalDate.now();
+		this.date = date;
 		this.cashier = cashier;
 		this.direction = direction;
 		this.client = client;

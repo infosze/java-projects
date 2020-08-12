@@ -1,5 +1,6 @@
 package hu.ak_akademia.book4you.databases;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,11 +82,11 @@ public class CreateFilesForTesting {
 		Client actualClient2 = new NaturalClient("Vásárló Balázs", "vb01", address2);
 		Client actualClient3 = new EconomicClient("Takarítószolgálat Kft.", "tk01", address3);
 
-		Certificate certificate1 = new Certificate(1, actualCashier1, Direction.INCOME, actualClient1, 4_000, Title.BUY_BOOK,
+		Certificate certificate1 = new Certificate(1, LocalDate.now(),actualCashier1, Direction.INCOME, actualClient1, 4_000, Title.BUY_BOOK,
 				"Robert C. Martin - Tiszta kód könyv");
-		Certificate certificate2 = new Certificate(2, actualCashier1, Direction.INCOME, actualClient2, 5_000, Title.BUY_BOOK,
+		Certificate certificate2 = new Certificate(2, LocalDate.of(2020, 6, 1),actualCashier1, Direction.INCOME, actualClient2, 5_000, Title.BUY_BOOK,
 				"Robert C. Martin - Túlélőkönyv programozóknak");
-		Certificate certificate3 = new Certificate(3, actualCashier2, Direction.OUTCOME, actualClient3, 3_000, Title.CLEANING,
+		Certificate certificate3 = new Certificate(3, LocalDate.of(2020, 6, 10),actualCashier2, Direction.OUTCOME, actualClient3, 3_000, Title.CLEANING,
 				"Üzlet napi takarítása");
 
 		certificatesToSave.add(certificate1);

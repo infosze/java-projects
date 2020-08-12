@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -37,14 +36,10 @@
             <Button layoutX="275.0" layoutY="46.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="67.0" text="Szűrés" />
          </children>
       </AnchorPane>
-      <TableView fx:id="tableView" layoutX="31.0" layoutY="300.0" prefHeight="292.0" prefWidth="739.0" style="-fx-background-color: AAE2E4;" stylesheets="@application.css">
-        <columns>
-          <TableColumn fx:id="tableViewDateColumn" prefWidth="90.0" text="Dátum" />
-          <TableColumn fx:id="tableViewVoucherNum" prefWidth="167.0" text="Bizonylatszám" />
-            <TableColumn fx:id="tableViewClient" prefWidth="145.0" text="Ügyfél" />
-            <TableColumn fx:id="tableViewBalance" prefWidth="197.0" text="Egyenleg" />
-            <TableColumn fx:id="tableViewAmount" prefWidth="139.0" text="Összeg" />
-        </columns>
+      <TableView fx:id="table" layoutX="31.0" layoutY="300.0" prefHeight="292.0" prefWidth="739.0" style="-fx-background-color: AAE2E4;" stylesheets="@application.css">
+      <placeholder>
+      	<Label text="Nincs adat" />
+      </placeholder>
       </TableView>
       <HBox layoutX="35.0" layoutY="197.0" prefHeight="35.0" prefWidth="731.0" style="-fx-border-color: #0D3A4E;">
          <children>
