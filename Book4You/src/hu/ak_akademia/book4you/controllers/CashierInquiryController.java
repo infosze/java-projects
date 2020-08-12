@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import hu.ak_akademia.book4you.entities.certificate.Certificate;
 import hu.ak_akademia.book4you.entities.certificate.Certificates;
 import hu.ak_akademia.book4you.entities.certificate.CertificatesHandler;
+import hu.ak_akademia.book4you.entities.certificate.Direction;
 import hu.ak_akademia.book4you.entities.certificate.Title;
 import hu.ak_akademia.book4you.entities.client.Client;
 import hu.ak_akademia.book4you.entities.client.Clients;
@@ -21,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
@@ -89,31 +91,20 @@ public class CashierInquiryController implements Initializable {
 		TableColumn<Certificate, Integer> amountColumn = new TableColumn<>("Összeg");
 		amountColumn.setMinWidth(80);
 		amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-
-		amountColumn.setCellFactory(new Callback<TableColumn<Certificate, Integer>, TableCell<Certificate, Integer>>() {
-
-			@Override
-			public TableCell<Certificate, Integer> call(TableColumn<Certificate, Integer> param) {
-
-				return new TableCell<Certificate, Integer>() {
-					@Override
-					protected void updateItem(Integer item, boolean empty) {
-
-						if (item == null || empty) {
-							setText(null);
-							setStyle("");
-						} else if (item == 4000) {
-							setTextFill(Color.RED);
-							setStyle("-fx-font-weight: bold");
-							setText(item.toString());
-						} else {
-							setTextFill(Color.BLACK);
-							setStyle("-fx-font-weight: normal");
-							setText(item.toString());
-						}
-					}
-				};
-			}
+		
+		table.setRowFactory(e -> new TableRow<Certificate>() {
+		    @Override
+		    protected void updateItem(Certificate item, boolean empty) {
+		        super.updateItem(item, empty);
+		        if (item == null || empty)
+		            setStyle("");
+		        else if (item.getDirection() == Direction.INCOME)
+		            setStyle("-fx-background-color: #baffba;");
+		        else if (item.getDirection() == Direction.OUTCOME)
+		            setStyle("-fx-background-color: #ffd7d1;");
+		        else
+		            setStyle("");
+		    }
 		});
 
 		table.getColumns().addAll(dateColumn, certificateIDColumn, clientColumn, cashierColumn, titleColumn,

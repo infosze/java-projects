@@ -40,8 +40,8 @@ public class CreateFilesForTesting {
 //		loadCertificates(url4);
 	}
 
-	private static void loadCertificates(String url4) {
-		DataLoader<Certificate> certificatesFileLoader = new FileHandler<Certificate>(url4);
+	private static void loadCertificates(String url) {
+		DataLoader<Certificate> certificatesFileLoader = new FileHandler<Certificate>(url);
 
 		List<Certificate> certificates = certificatesFileLoader.load();
 
@@ -50,7 +50,7 @@ public class CreateFilesForTesting {
 		}
 	}
 
-	private static void fillCertificates(String url4, Address address1, Address address2, Address address3) {
+	private static void fillCertificates(String url, Address address1, Address address2, Address address3) {
 		List<Certificate> certificatesToSave = new ArrayList<>();
 
 		Cashier actualCashier1 = new Cashier("Pénztáros Géza", "pg01", "E1234567");
@@ -60,9 +60,9 @@ public class CreateFilesForTesting {
 		Client actualClient3 = new EconomicClient("Takarítószolgálat Kft.", "tk01", address3);
 
 		Certificate certificate1 = new Certificate(1, LocalDate.now(), actualCashier1, Direction.INCOME, actualClient1,
-				4_000, Title.BUY_BOOK, "Robert C. Martin - Tiszta kód könyv");
+				4_000, Title.SELL_BOOK, "Robert C. Martin - Tiszta kód könyv");
 		Certificate certificate2 = new Certificate(2, LocalDate.of(2020, 6, 1), actualCashier1, Direction.INCOME,
-				actualClient2, 5_000, Title.BUY_BOOK, "Robert C. Martin - Túlélőkönyv programozóknak");
+				actualClient2, 5_000, Title.SELL_BOOK, "Robert C. Martin - Túlélőkönyv programozóknak");
 		Certificate certificate3 = new Certificate(3, LocalDate.of(2020, 6, 10), actualCashier2, Direction.OUTCOME,
 				actualClient3, 3_000, Title.CLEANING, "Üzlet napi takarítása");
 
@@ -74,30 +74,30 @@ public class CreateFilesForTesting {
 		certificatesToSave.add(certificate2);
 		certificatesToSave.add(certificate3);
 
-		DataSaver<Certificate> certificateFileSaver = new FileHandler<Certificate>(url4);
+		DataSaver<Certificate> certificateFileSaver = new FileHandler<Certificate>(url);
 		certificateFileSaver.save(certificatesToSave);
 	}
 
-	private static void loadClients(String url3) {
-		DataLoader<Client> clientsFileLoader = new FileHandler<Client>(url3);
+	private static void loadClients(String url) {
+		DataLoader<Client> clientsFileLoader = new FileHandler<Client>(url);
 
 		List<Client> clients = clientsFileLoader.load();
 		System.out.println(clients.toString());
 	}
 
-	private static void fillClients(String url3, Address address1, Address address2, Address address3) {
+	private static void fillClients(String url, Address address1, Address address2, Address address3) {
 		List<Client> clientsToSave = new ArrayList<>();
 
 		clientsToSave.add(new NaturalClient("Vásárló Tamás", "vt01", address1));
 		clientsToSave.add(new NaturalClient("Vásárló Balázs", "vb01", address2));
 		clientsToSave.add(new EconomicClient("Takarítószolgálat Kft.", "tk01", address3));
 
-		DataSaver<Client> clientsFileSaver = new FileHandler<Client>(url3);
+		DataSaver<Client> clientsFileSaver = new FileHandler<Client>(url);
 		clientsFileSaver.save(clientsToSave);
 	}
 
-	private static void loadUsers(String url2) {
-		DataLoader<User> usersFileLoader = new FileHandler<User>(url2);
+	private static void loadUsers(String url) {
+		DataLoader<User> usersFileLoader = new FileHandler<User>(url);
 		List<User> users = usersFileLoader.load();
 
 		for (User user : users) {
@@ -105,28 +105,28 @@ public class CreateFilesForTesting {
 		}
 	}
 
-	private static void fillUsers(String url2) {
+	private static void fillUsers(String url) {
 		List<User> usersToSave = new ArrayList<>();
 		usersToSave.add(new Admin("Teszt Elek", "admin", "E1234567"));
 		usersToSave.add(new Cashier("Pénztáros Géza", "pg01", "E1234567"));
 		usersToSave.add(new Cashier("Pénztáros Jolán", "pj01", "E1234567"));
 
-		DataSaver<User> usersFileSaver = new FileHandler<User>(url2);
+		DataSaver<User> usersFileSaver = new FileHandler<User>(url);
 		usersFileSaver.save(usersToSave);
 	}
 
-	private static void loadOwnCompany(String url1) {
-		DataLoader<Store> bookStoreFileLoader = new FileHandler<Store>(url1);
+	private static void loadOwnCompany(String url) {
+		DataLoader<Store> bookStoreFileLoader = new FileHandler<Store>(url);
 		List<Store> companyData = bookStoreFileLoader.load();
 
 		System.out.println(companyData.get(0).toString());
 	}
 
-	private static void fillOwnCompany(String url1) {
+	private static void fillOwnCompany(String url) {
 		Store data = new Store("Book4You",
 				new Address("Magyarország", "1037", "Budapest", "Hunor", PublicSpaceType.STREET, "62"));
 		List<Store> bookstore = List.of(data);
-		DataSaver<Store> bookStoreFileSaver = new FileHandler<Store>(url1);
+		DataSaver<Store> bookStoreFileSaver = new FileHandler<Store>(url);
 		bookStoreFileSaver.save(bookstore);
 	}
 

@@ -4,13 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import hu.ak_akademia.book4you.entities.client.Client;
 import hu.ak_akademia.book4you.entities.user.Cashier;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 public class Certificate implements Serializable{
 
-	
-	//https://stackoverflow.com/questions/18791566/notserializableexception-on-simplelistproperty
 	private static final long serialVersionUID = 1L;
 	
 	private final int number;
@@ -57,7 +53,6 @@ public class Certificate implements Serializable{
 	public int getAmount() {
 		return amount;
 	}
-	
 	
 	public Title getTitle() {
 		return title;
