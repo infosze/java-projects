@@ -12,7 +12,7 @@ public class Certificates implements CertificatesHandler{
 	
 	public Certificates(String url) {
 		this.url = url;
-		this.certificatesList = load();
+//		this.certificatesList = load();
 	}
 
 	public List<Certificate> getCertificatesList() {

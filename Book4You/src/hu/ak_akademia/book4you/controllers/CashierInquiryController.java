@@ -1,7 +1,9 @@
 package hu.ak_akademia.book4you.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,6 +18,7 @@ import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -51,26 +54,57 @@ public class CashierInquiryController implements Initializable {
 	private ObservableList<Client> clientOptions;
 
 	private CertificatesHandler certificatesHandler;
-	private ObservableList<Certificate> certificatesData;
+	private ObservableList<Certificate> certificatesObservableList;
+	private List<Certificate> certificates;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setContentOfClientChooserComboBox();
-		
-		certificatesData = loadCertificatesData();
+
+		setCertificates();
+		setCertificatesObservableList(certificates);
 		setTableHeaders();
-		setTableContent(certificatesData);
+		setTableContent();
 		setTableContentAppearance();
 	}
 
-	private void setTableContent(ObservableList<Certificate> certificatesData) {
-		table.setItems(certificatesData);
+	public void selectByAllButton(ActionEvent event) throws IOException {
+		setCertificatesObservableList(certificates);
+		setTableContent();
 	}
 
-	private ObservableList<Certificate> loadCertificatesData() {
+	public void selectByClientButton(ActionEvent event) throws IOException {
+		setCertificatesObservableList(getClientFiliteredList(clientChooserComboBox.getValue()));
+		setTableContent();
+	}
+
+	public void selectByDateButton(ActionEvent event) throws IOException {
+		System.out.println("selectByDateButton");
+		certificatesObservableList.clear();
+	}
+
+	private void setTableContent() {
+		table.setItems(certificatesObservableList);
+	}
+
+	private void setCertificatesObservableList(List<Certificate> list) {
+		certificatesObservableList = FXCollections.observableArrayList(list);
+	}
+
+	private void setCertificates() {
 		certificatesHandler = new Certificates("src/hu/ak_akademia/book4you/databases/certificates.bin");
-		ObservableList<Certificate> result = FXCollections.observableArrayList(certificatesHandler.load());
-		
+		certificates = certificatesHandler.load();
+	}
+
+	private List<Certificate> getClientFiliteredList(Client client) {
+		List<Certificate> result = new ArrayList<>();
+
+		for (Certificate obj : certificates) {
+			if (obj.getClient().equals(client)) {
+				result.add(obj);
+			}
+		}
+
 		return result;
 	}
 
@@ -110,18 +144,18 @@ public class CashierInquiryController implements Initializable {
 
 	private void setTableContentAppearance() {
 		table.setRowFactory(e -> new TableRow<Certificate>() {
-		    @Override
-		    protected void updateItem(Certificate item, boolean empty) {
-		        super.updateItem(item, empty);
-		        if (item == null || empty)
-		            setStyle("");
-		        else if (item.getDirection() == Direction.INCOME)
-		            setStyle("-fx-background-color: #baffba;");
-		        else if (item.getDirection() == Direction.OUTCOME)
-		            setStyle("-fx-background-color: #ffd7d1;");
-		        else
-		            setStyle("");
-		    }
+			@Override
+			protected void updateItem(Certificate item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || empty)
+					setStyle("");
+				else if (item.getDirection() == Direction.INCOME)
+					setStyle("-fx-background-color: #baffba;");
+				else if (item.getDirection() == Direction.OUTCOME)
+					setStyle("-fx-background-color: #ffd7d1;");
+				else
+					setStyle("");
+			}
 		});
 	}
 
