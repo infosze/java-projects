@@ -18,7 +18,7 @@ public class Certificate implements Serializable{
 	private final Cashier cashier;
 	private final Direction direction;
 	private final Client client;
-	private final IntegerProperty amount;
+	private final int amount;
 	private final Title title;
 	private final String comment;
 
@@ -29,7 +29,7 @@ public class Certificate implements Serializable{
 		this.cashier = cashier;
 		this.direction = direction;
 		this.client = client;
-		this.amount = new SimpleIntegerProperty(amount);
+		this.amount = amount;
 		this.title = title;
 		this.comment = comment;
 	}
@@ -55,13 +55,10 @@ public class Certificate implements Serializable{
 	}
 
 	public int getAmount() {
-		return amount.get();
-	}
-	
-	public IntegerProperty amountProperty() {
 		return amount;
 	}
-
+	
+	
 	public Title getTitle() {
 		return title;
 	}

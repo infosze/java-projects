@@ -90,8 +90,6 @@ public class CashierInquiryController implements Initializable {
 		amountColumn.setMinWidth(80);
 		amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
-//		amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty());
-
 		amountColumn.setCellFactory(new Callback<TableColumn<Certificate, Integer>, TableCell<Certificate, Integer>>() {
 
 			@Override
@@ -101,10 +99,17 @@ public class CashierInquiryController implements Initializable {
 					@Override
 					protected void updateItem(Integer item, boolean empty) {
 
-						if (amountColumn.equals("4000")) {
+						if (item == null || empty) {
+							setText(null);
+							setStyle("");
+						} else if (item == 4000) {
 							setTextFill(Color.RED);
 							setStyle("-fx-font-weight: bold");
-							setText(amountColumn.toString());
+							setText(item.toString());
+						} else {
+							setTextFill(Color.BLACK);
+							setStyle("-fx-font-weight: normal");
+							setText(item.toString());
 						}
 					}
 				};
