@@ -56,14 +56,26 @@ public class CashierInquiryController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setContentOfClientChooserComboBox();
-		setTableContent();
+		
+		certificatesData = loadCertificatesData();
+		setTableHeaders();
+		setTableContent(certificatesData);
+		setTableContentAppearance();
+	}
+
+	private void setTableContent(ObservableList<Certificate> certificatesData) {
+		table.setItems(certificatesData);
+	}
+
+	private ObservableList<Certificate> loadCertificatesData() {
+		certificatesHandler = new Certificates("src/hu/ak_akademia/book4you/databases/certificates.bin");
+		ObservableList<Certificate> result = FXCollections.observableArrayList(certificatesHandler.load());
+		
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
-	private void setTableContent() {
-		certificatesHandler = new Certificates("src/hu/ak_akademia/book4you/databases/certificates.bin");
-		certificatesData = FXCollections.observableArrayList(certificatesHandler.load());
-
+	private void setTableHeaders() {
 		TableColumn<Certificate, LocalDate> dateColumn = new TableColumn<>("Dátum");
 		dateColumn.setMinWidth(60);
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -91,7 +103,12 @@ public class CashierInquiryController implements Initializable {
 		TableColumn<Certificate, Integer> amountColumn = new TableColumn<>("Összeg");
 		amountColumn.setMinWidth(80);
 		amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-		
+
+		table.getColumns().addAll(dateColumn, certificateIDColumn, clientColumn, cashierColumn, titleColumn,
+				amountColumn, balanceColumn);
+	}
+
+	private void setTableContentAppearance() {
 		table.setRowFactory(e -> new TableRow<Certificate>() {
 		    @Override
 		    protected void updateItem(Certificate item, boolean empty) {
@@ -106,11 +123,6 @@ public class CashierInquiryController implements Initializable {
 		            setStyle("");
 		    }
 		});
-
-		table.getColumns().addAll(dateColumn, certificateIDColumn, clientColumn, cashierColumn, titleColumn,
-				amountColumn, balanceColumn);
-		table.setItems(certificatesData);
-
 	}
 
 	private void setContentOfClientChooserComboBox() {

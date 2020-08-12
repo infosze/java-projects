@@ -1,4 +1,4 @@
-package hu.ak_akademia.book4you.certificate;
+package hu.ak_akademia.book4you.certificateSelector;
 
 public class CertificateSelector implements Selector{
 
@@ -16,7 +16,7 @@ public class CertificateSelector implements Selector{
 
 	@Override
 	public void selectAll() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
