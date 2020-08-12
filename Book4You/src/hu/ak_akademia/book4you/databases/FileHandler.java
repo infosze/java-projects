@@ -46,6 +46,7 @@ public class FileHandler <E> implements DataSaver <E>, DataLoader <E> {
 			out.close();
 		} catch (IOException e) {
 			System.out.println("Hiba: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }

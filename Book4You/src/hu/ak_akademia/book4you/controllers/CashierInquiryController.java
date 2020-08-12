@@ -8,44 +8,49 @@ import java.util.ResourceBundle;
 import hu.ak_akademia.book4you.entities.certificate.Certificate;
 import hu.ak_akademia.book4you.entities.certificate.Certificates;
 import hu.ak_akademia.book4you.entities.certificate.CertificatesHandler;
+import hu.ak_akademia.book4you.entities.certificate.Title;
 import hu.ak_akademia.book4you.entities.client.Client;
 import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
+import hu.ak_akademia.book4you.entities.user.Cashier;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
-public class CashierInquiryController implements Initializable{
+public class CashierInquiryController implements Initializable {
 	@FXML
 	private Label openingBalance;
-	
+
 	@FXML
 	private Label closedBalance;
-	
+
 	@FXML
 	private Label totalRevenue;
-	
+
 	@FXML
 	private Label totalOutlay;
-	
+
 	@FXML
 	private TableView<Certificate> table;
-	
+
 	@FXML
 	private ComboBox<Client> clientChooserComboBox;
 
 	private ClientsHandler clientsHandler;
 	private ObservableList<Client> clientOptions;
-	
+
 	private CertificatesHandler certificatesHandler;
 	private ObservableList<Certificate> certificatesData;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setContentOfClientChooserComboBox();
@@ -56,37 +61,60 @@ public class CashierInquiryController implements Initializable{
 	private void setTableContent() {
 		certificatesHandler = new Certificates("src/hu/ak_akademia/book4you/databases/certificates.bin");
 		certificatesData = FXCollections.observableArrayList(certificatesHandler.load());
-		
+
 		TableColumn<Certificate, LocalDate> dateColumn = new TableColumn<>("Dátum");
 		dateColumn.setMinWidth(60);
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-		
-		TableColumn<Certificate, LocalDate> certificateIDColumn = new TableColumn<>("B.szám");
+
+		TableColumn<Certificate, Integer> certificateIDColumn = new TableColumn<>("B.szám");
 		certificateIDColumn.setMinWidth(60);
 		certificateIDColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
-		
-		TableColumn<Certificate, LocalDate> clientColumn = new TableColumn<>("Ügyfél");
+
+		TableColumn<Certificate, Client> clientColumn = new TableColumn<>("Ügyfél");
 		clientColumn.setMinWidth(200);
 		clientColumn.setCellValueFactory(new PropertyValueFactory<>("client"));
-		
-		TableColumn<Certificate, LocalDate> cashierColumn = new TableColumn<>("Pénztáros");
+
+		TableColumn<Certificate, Cashier> cashierColumn = new TableColumn<>("Pénztáros");
 		cashierColumn.setMinWidth(150);
 		cashierColumn.setCellValueFactory(new PropertyValueFactory<>("cashier"));
-		
-		TableColumn<Certificate, LocalDate> titleColumn = new TableColumn<>("Jogcím");
+
+		TableColumn<Certificate, Title> titleColumn = new TableColumn<>("Jogcím");
 		titleColumn.setMinWidth(80);
 		titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-		
-		TableColumn<Certificate, LocalDate> balanceColumn = new TableColumn<>("Egyenleg");
+
+		TableColumn<Certificate, Integer> balanceColumn = new TableColumn<>("Egyenleg");
 		balanceColumn.setMinWidth(80);
 		balanceColumn.setCellValueFactory(new PropertyValueFactory<>(""));
-		
-		TableColumn<Certificate, LocalDate> amountColumn = new TableColumn<>("Összeg");
+
+		TableColumn<Certificate, Integer> amountColumn = new TableColumn<>("Összeg");
 		amountColumn.setMinWidth(80);
 		amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-		
-		table.getColumns().addAll(dateColumn, certificateIDColumn, clientColumn, cashierColumn, titleColumn, amountColumn, balanceColumn);
+
+//		amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty());
+
+		amountColumn.setCellFactory(new Callback<TableColumn<Certificate, Integer>, TableCell<Certificate, Integer>>() {
+
+			@Override
+			public TableCell<Certificate, Integer> call(TableColumn<Certificate, Integer> param) {
+
+				return new TableCell<Certificate, Integer>() {
+					@Override
+					protected void updateItem(Integer item, boolean empty) {
+
+						if (amountColumn.equals("4000")) {
+							setTextFill(Color.RED);
+							setStyle("-fx-font-weight: bold");
+							setText(amountColumn.toString());
+						}
+					}
+				};
+			}
+		});
+
+		table.getColumns().addAll(dateColumn, certificateIDColumn, clientColumn, cashierColumn, titleColumn,
+				amountColumn, balanceColumn);
 		table.setItems(certificatesData);
+
 	}
 
 	private void setContentOfClientChooserComboBox() {
