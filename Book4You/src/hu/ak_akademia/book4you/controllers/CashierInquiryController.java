@@ -86,7 +86,7 @@ public class CashierInquiryController implements Initializable {
 
 		TableColumn<Certificate, Integer> balanceColumn = new TableColumn<>("Egyenleg");
 		balanceColumn.setMinWidth(80);
-		balanceColumn.setCellValueFactory(new PropertyValueFactory<>(""));
+		balanceColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
 
 		TableColumn<Certificate, Integer> amountColumn = new TableColumn<>("Összeg");
 		amountColumn.setMinWidth(80);

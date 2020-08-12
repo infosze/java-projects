@@ -17,9 +17,10 @@ public class Certificate implements Serializable{
 	private final int amount;
 	private final Title title;
 	private final String comment;
+	private final long balance;
 
 	public Certificate(int number, LocalDate date, Cashier cashier, Direction direction, Client client, int amount, Title title,
-			String comment) {
+			String comment, long balance) {
 		this.number = number;
 		this.date = date;
 		this.cashier = cashier;
@@ -28,6 +29,7 @@ public class Certificate implements Serializable{
 		this.amount = amount;
 		this.title = title;
 		this.comment = comment;
+		this.balance = balance;
 	}
 
 	public int getNumber() {
@@ -62,6 +64,10 @@ public class Certificate implements Serializable{
 		return comment;
 	}
 
+	public long getBalance() {
+		return balance;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder text = new StringBuilder();
@@ -73,10 +79,9 @@ public class Certificate implements Serializable{
 		text.append("client=" + client + " ");
 		text.append("amount=" + amount + " ");
 		text.append("title=" + title + " ");
-		text.append("comment=" + comment);
+		text.append("comment=" + comment + " ");
+		text.append("balance=" + balance);
 		
 		return text.toString(); 
 	}
-	
-	
 }

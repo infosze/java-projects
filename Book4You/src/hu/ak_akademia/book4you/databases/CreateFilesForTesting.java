@@ -60,11 +60,11 @@ public class CreateFilesForTesting {
 		Client actualClient3 = new EconomicClient("Takarítószolgálat Kft.", "tk01", address3);
 
 		Certificate certificate1 = new Certificate(1, LocalDate.now(), actualCashier1, Direction.INCOME, actualClient1,
-				4_000, Title.SELL_BOOK, "Robert C. Martin - Tiszta kód könyv");
+				4_000, Title.SELL_BOOK, "Robert C. Martin - Tiszta kód könyv" , 4_000L);
 		Certificate certificate2 = new Certificate(2, LocalDate.of(2020, 6, 1), actualCashier1, Direction.INCOME,
-				actualClient2, 5_000, Title.SELL_BOOK, "Robert C. Martin - Túlélőkönyv programozóknak");
+				actualClient2, 5_000, Title.SELL_BOOK, "Robert C. Martin - Túlélőkönyv programozóknak",  0L + 4_000L + 5_000L);
 		Certificate certificate3 = new Certificate(3, LocalDate.of(2020, 6, 10), actualCashier2, Direction.OUTCOME,
-				actualClient3, 3_000, Title.CLEANING, "Üzlet napi takarítása");
+				actualClient3, 3_000, Title.CLEANING, "Üzlet napi takarítása", 0L + 4_000L + 5_000L - 3_000L);
 
 //		System.out.println(certificate1);
 //		System.out.println(certificate2);
