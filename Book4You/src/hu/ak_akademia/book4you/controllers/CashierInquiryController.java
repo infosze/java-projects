@@ -86,9 +86,15 @@ public class CashierInquiryController implements Initializable {
 	}
 
 	public void selectByDateButton(ActionEvent event) throws IOException {
-		setCertificatesObservableList(getDateFiliteredList(dateFrom.getValue(), dateTo.getValue()));
-		setTableContent();
-		resetComboBox();
+		if (isValid()) {
+			setCertificatesObservableList(getDateFiliteredList(dateFrom.getValue(), dateTo.getValue()));
+			setTableContent();
+			resetComboBox();
+		}
+	}
+
+	private boolean isValid() {
+		return dateFrom.getValue() != null && dateTo.getValue() != null;
 	}
 
 	private void resetComboBox() {
