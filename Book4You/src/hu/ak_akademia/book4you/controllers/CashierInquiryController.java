@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import hu.ak_akademia.book4you.entities.certificate.Certificate;
 import hu.ak_akademia.book4you.entities.certificate.Certificates;
 import hu.ak_akademia.book4you.entities.certificate.CertificatesHandler;
@@ -22,14 +21,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-import javafx.util.Callback;
 
 public class CashierInquiryController implements Initializable {
 	@FXML
@@ -46,6 +43,12 @@ public class CashierInquiryController implements Initializable {
 
 	@FXML
 	private TableView<Certificate> table;
+
+	@FXML
+	private DatePicker dateFrom;
+
+	@FXML
+	private DatePicker dateTo;
 
 	@FXML
 	private ComboBox<Client> clientChooserComboBox;
@@ -66,21 +69,40 @@ public class CashierInquiryController implements Initializable {
 		setTableHeaders();
 		setTableContent();
 		setTableContentAppearance();
+		setDatePickers();
 	}
 
 	public void selectByAllButton(ActionEvent event) throws IOException {
 		setCertificatesObservableList(certificates);
 		setTableContent();
+		resetComboBox();
+		resetDatePickers();
 	}
 
 	public void selectByClientButton(ActionEvent event) throws IOException {
 		setCertificatesObservableList(getClientFiliteredList(clientChooserComboBox.getValue()));
 		setTableContent();
+		resetDatePickers();
 	}
 
 	public void selectByDateButton(ActionEvent event) throws IOException {
-		System.out.println("selectByDateButton");
-		certificatesObservableList.clear();
+		setCertificatesObservableList(getDateFiliteredList(dateFrom.getValue(), dateTo.getValue()));
+		setTableContent();
+		resetComboBox();
+	}
+
+	private void resetComboBox() {
+		clientChooserComboBox.getSelectionModel().clearSelection();
+	}
+
+	private void setDatePickers() {
+		dateFrom.setEditable(false);
+		dateTo.setEditable(false);
+	}
+
+	private void resetDatePickers() {
+		dateFrom.setValue(null);
+		dateTo.setValue(null);
 	}
 
 	private void setTableContent() {
@@ -101,6 +123,19 @@ public class CashierInquiryController implements Initializable {
 
 		for (Certificate obj : certificates) {
 			if (obj.getClient().equals(client)) {
+				result.add(obj);
+			}
+		}
+
+		return result;
+	}
+
+	private List<Certificate> getDateFiliteredList(LocalDate fromInclusively, LocalDate toInclusively) {
+		List<Certificate> result = new ArrayList<>();
+
+		for (Certificate obj : certificates) {
+			if (obj.getDate().isAfter(fromInclusively.minusDays(1))
+					&& obj.getDate().isBefore(toInclusively.plusDays(1))) {
 				result.add(obj);
 			}
 		}
