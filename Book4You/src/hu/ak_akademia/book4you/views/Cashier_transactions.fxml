@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.ak_akademia.book4you.controllers.CashierTransactionsController">
    <children>
-      <AnchorPane layoutX="444.0" layoutY="7.0" prefHeight="348.0" prefWidth="342.0" style="-fx-border-color: #0D3A4E;" stylesheets="@application.css">
+      <AnchorPane layoutX="444.0" layoutY="7.0" prefHeight="254.0" prefWidth="342.0" style="-fx-border-color: #0D3A4E;" stylesheets="@application.css">
          <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="1.0" prefHeight="53.0" prefWidth="121.0" style="-fx-background-color: #0D3A4E;" stylesheets="@application.css" text="Összeg" textFill="#fcfcfc">
                <font>
@@ -23,12 +23,7 @@
                </font>
             </Label>
             <ComboBox fx:id="chooseTitleComboBox" layoutX="14.0" layoutY="97.0" prefHeight="35.0" prefWidth="262.0" promptText="Válasszon jogcímet" />
-            <TextField fx:id="incomeAmount" layoutX="75.0" layoutY="261.0" promptText="Összeg" style="-fx-background-color: #AAE2E4;" />
-            <RadioButton fx:id="income" layoutX="107.0" layoutY="167.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #AAE2E4;" text="Bevétel">
-               <toggleGroup>
-                  <ToggleGroup fx:id="transactions" />
-               </toggleGroup></RadioButton>
-            <RadioButton fx:id="outlay" layoutX="107.0" layoutY="202.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #AAE2E4;" text="Kiadás" toggleGroup="$transactions" />
+            <TextField fx:id="incomeAmount" layoutX="67.0" layoutY="174.0" promptText="Összeg" style="-fx-background-color: #AAE2E4;" />
          </children>
       </AnchorPane>
       <Button layoutX="136.0" layoutY="447.0" mnemonicParsing="false" onAction="#createTransaction" prefHeight="53.0" prefWidth="141.0" stylesheets="@application.css" text="Mentés" />
@@ -43,14 +38,14 @@
             <ComboBox fx:id="chooseClientComboBox" layoutX="14.0" layoutY="120.0" prefHeight="35.0" prefWidth="383.0" promptText="Válasszon a listából" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="14.0" layoutY="269.0" prefHeight="125.0" prefWidth="418.0" style="-fx-border-color: #0D3A4E;">
+      <AnchorPane layoutX="14.0" layoutY="269.0" prefHeight="125.0" prefWidth="772.0" style="-fx-border-color: #0D3A4E;">
          <children>
             <Label alignment="CENTER" layoutX="14.0" prefHeight="38.0" prefWidth="133.0" style="-fx-background-color: #0D3A4E;" stylesheets="@application.css" text="Komment" textFill="#fcfcfc">
                <font>
                   <Font name="Yu Gothic UI Semibold" size="26.0" />
                </font>
             </Label>
-            <TextField fx:id="comment" layoutX="14.0" layoutY="63.0" prefHeight="35.0" prefWidth="377.0" />
+            <TextField fx:id="comment" layoutX="14.0" layoutY="63.0" prefHeight="35.0" prefWidth="680.0" promptText="Könyv cím , számla név , parlokás számla, stb..." />
          </children>
       </AnchorPane>
    </children>

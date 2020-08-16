@@ -50,4 +50,13 @@ public enum Title {
 
 		return result;
 	}
+	//Test
+	public static Title getTitle(String value) {
+		for( Title t : Title.values()) {
+			if (t.getValue().equals(value)) {
+				return t;
+			}
+		}
+		return null;
+	}
 }
