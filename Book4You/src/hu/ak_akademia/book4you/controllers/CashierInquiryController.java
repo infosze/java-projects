@@ -5,6 +5,11 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import hu.ak_akademia.book4you.calculations.Calculation;
+import hu.ak_akademia.book4you.calculations.ClosingBalanceCalculation;
+import hu.ak_akademia.book4you.calculations.IncomeCalculation;
+import hu.ak_akademia.book4you.calculations.OpeningBalanceCalculation;
+import hu.ak_akademia.book4you.calculations.OutcomeCalculation;
 import hu.ak_akademia.book4you.entities.certificate.Certificate;
 import hu.ak_akademia.book4you.entities.certificate.Certificates;
 import hu.ak_akademia.book4you.entities.certificate.CertificatesHandler;
@@ -32,13 +37,13 @@ public class CashierInquiryController implements Initializable {
 	private Label openingBalance;
 
 	@FXML
-	private Label closedBalance;
+	private Label closingBalance;
 
 	@FXML
-	private Label totalRevenue;
+	private Label totalIncome;
 
 	@FXML
-	private Label totalOutlay;
+	private Label totalOutcome;
 
 	@FXML
 	private TableView<Certificate> table;
@@ -54,7 +59,6 @@ public class CashierInquiryController implements Initializable {
 
 	private ObservableList<Certificate> certificatesObservableList;
 	private CertificatesHandler certificatesHandler;
-//	private List<Certificate> certificates;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -66,6 +70,23 @@ public class CashierInquiryController implements Initializable {
 		setTableContent();
 		setTableContentAppearance();
 		setDatePickers();
+		setInfoBar();
+	}
+
+	private void setInfoBar() {
+		Calculation income = new IncomeCalculation(certificatesObservableList); 
+		totalIncome.setText(income.format(income.calculate()));
+		
+		Calculation outcome = new OutcomeCalculation(certificatesObservableList); 
+		totalOutcome.setText(outcome.format(outcome.calculate()));
+		
+		Calculation opening = new OpeningBalanceCalculation(certificatesObservableList); 
+		openingBalance.setText(opening.format(opening.calculate()));
+		
+		Calculation closing = new ClosingBalanceCalculation(certificatesObservableList); 
+		closingBalance.setText(closing.format(closing.calculate()));
+		
+		
 	}
 
 	public void selectByAllButton(ActionEvent event) throws IOException {
@@ -73,6 +94,7 @@ public class CashierInquiryController implements Initializable {
 		setTableContent();
 		resetComboBox();
 		resetDatePickers();
+		setInfoBar();
 	}
 
 	public void selectByClientButton(ActionEvent event) throws IOException {
@@ -80,6 +102,7 @@ public class CashierInquiryController implements Initializable {
 		setCertificatesObservableList(selection);
 		setTableContent();
 		resetDatePickers();
+		setInfoBar();
 	}
 
 	public void selectByDateButton(ActionEvent event) throws IOException {
@@ -88,6 +111,7 @@ public class CashierInquiryController implements Initializable {
 			setCertificatesObservableList(selection);
 			setTableContent();
 			resetComboBox();
+			setInfoBar();
 		}
 	}
 
