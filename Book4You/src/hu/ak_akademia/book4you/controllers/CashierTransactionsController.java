@@ -156,7 +156,7 @@ public class CashierTransactionsController implements Initializable {
 
 	private List<Certificate> getCertificates() {
 		CertificatesHandler certificatesHandler = new Certificates(certificateURL);
-		return certificatesHandler.load();
+		return certificatesHandler.get();
 	}
 
 	private void setContentOfChooseTitleComboBox() {

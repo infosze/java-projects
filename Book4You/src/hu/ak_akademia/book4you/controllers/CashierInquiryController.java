@@ -3,7 +3,6 @@ package hu.ak_akademia.book4you.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import hu.ak_akademia.book4you.entities.certificate.Certificate;
@@ -53,19 +52,16 @@ public class CashierInquiryController implements Initializable {
 	@FXML
 	private ComboBox<Client> clientChooserComboBox;
 
-	private ClientsHandler clientsHandler;
-	private ObservableList<Client> clientOptions;
-
-	private CertificatesHandler certificatesHandler;
 	private ObservableList<Certificate> certificatesObservableList;
-	private List<Certificate> certificates;
+	private CertificatesHandler certificatesHandler;
+//	private List<Certificate> certificates;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setContentOfClientChooserComboBox();
 
-		setCertificates();
-		setCertificatesObservableList(certificates);
+		loadCertificates();
+		setCertificatesObservableList(certificatesHandler.get());
 		setTableHeaders();
 		setTableContent();
 		setTableContentAppearance();
@@ -73,21 +69,23 @@ public class CashierInquiryController implements Initializable {
 	}
 
 	public void selectByAllButton(ActionEvent event) throws IOException {
-		setCertificatesObservableList(certificates);
+		setCertificatesObservableList(certificatesHandler.get());
 		setTableContent();
 		resetComboBox();
 		resetDatePickers();
 	}
 
 	public void selectByClientButton(ActionEvent event) throws IOException {
-		setCertificatesObservableList(getClientFiliteredList(clientChooserComboBox.getValue()));
+		List<Certificate> selection = certificatesHandler.getByClient(clientChooserComboBox.getValue());
+		setCertificatesObservableList(selection);
 		setTableContent();
 		resetDatePickers();
 	}
 
 	public void selectByDateButton(ActionEvent event) throws IOException {
 		if (isValid()) {
-			setCertificatesObservableList(getDateFiliteredList(dateFrom.getValue(), dateTo.getValue()));
+			List<Certificate> selection = certificatesHandler.getByDate(dateFrom.getValue(), dateTo.getValue());
+			setCertificatesObservableList(selection);
 			setTableContent();
 			resetComboBox();
 		}
@@ -119,34 +117,8 @@ public class CashierInquiryController implements Initializable {
 		certificatesObservableList = FXCollections.observableArrayList(list);
 	}
 
-	private void setCertificates() {
+	private void loadCertificates() {
 		certificatesHandler = new Certificates("src/hu/ak_akademia/book4you/databases/certificates.bin");
-		certificates = certificatesHandler.load();
-	}
-
-	private List<Certificate> getClientFiliteredList(Client client) {
-		List<Certificate> result = new ArrayList<>();
-
-		for (Certificate obj : certificates) {
-			if (obj.getClient().equals(client)) {
-				result.add(obj);
-			}
-		}
-
-		return result;
-	}
-
-	private List<Certificate> getDateFiliteredList(LocalDate fromInclusively, LocalDate toInclusively) {
-		List<Certificate> result = new ArrayList<>();
-
-		for (Certificate obj : certificates) {
-			if (obj.getDate().isAfter(fromInclusively.minusDays(1))
-					&& obj.getDate().isBefore(toInclusively.plusDays(1))) {
-				result.add(obj);
-			}
-		}
-
-		return result;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -201,8 +173,8 @@ public class CashierInquiryController implements Initializable {
 	}
 
 	private void setContentOfClientChooserComboBox() {
-		clientsHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
-		clientOptions = FXCollections.observableList(clientsHandler.load());
+		ClientsHandler clientsHandler = new Clients("src/hu/ak_akademia/book4you/databases/clients.bin");
+		ObservableList<Client> clientOptions = FXCollections.observableList(clientsHandler.load());
 		clientChooserComboBox.setItems(clientOptions);
 	}
 }
