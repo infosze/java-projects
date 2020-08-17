@@ -19,6 +19,7 @@ import hu.ak_akademia.book4you.entities.client.Client;
 import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.user.Cashier;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -165,9 +166,9 @@ public class CashierInquiryController implements Initializable {
 		cashierColumn.setMinWidth(150);
 		cashierColumn.setCellValueFactory(new PropertyValueFactory<>("cashier"));
 
-		TableColumn<Certificate, Title> titleColumn = new TableColumn<>("Jogcím");
+		TableColumn<Certificate, String> titleColumn = new TableColumn<>("Jogcím");
 		titleColumn.setMinWidth(80);
-		titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		titleColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getTitle().getLongName()));
 
 		TableColumn<Certificate, Integer> balanceColumn = new TableColumn<>("Egyenleg");
 		balanceColumn.setMinWidth(80);

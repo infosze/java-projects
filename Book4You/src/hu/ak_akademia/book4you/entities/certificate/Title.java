@@ -16,16 +16,16 @@ public enum Title {
 	DEDICATION_EVENT       ("dedikálási esemény",  Direction.INCOME);
 	//@formatter:on
 
-	private String value;
+	private String longName;
 	private Direction direction;
 
 	private Title(String longName, Direction direction) {
-		this.value = longName;
+		this.longName = longName;
 		this.direction = direction;
 	}
 
-	public String getValue() {
-		return value;
+	public String getLongName() {
+		return longName;
 	}
 
 	public Direction getDirection() {
@@ -34,7 +34,7 @@ public enum Title {
 
 	public static String getName(String value) {
 		for (Title enumName : Title.values()) {
-			if (enumName.getValue().equals(value)) {
+			if (enumName.getLongName().equals(value)) {
 				return enumName.name();
 			}
 		}
@@ -45,7 +45,7 @@ public enum Title {
 		List<String> result = new ArrayList<>();
 
 		for (Title e : Title.values()) {
-			result.add(e.getValue());
+			result.add(e.getLongName());
 		}
 
 		return result;
@@ -53,7 +53,7 @@ public enum Title {
 	//Test
 	public static Title getTitle(String value) {
 		for( Title t : Title.values()) {
-			if (t.getValue().equals(value)) {
+			if (t.getLongName().equals(value)) {
 				return t;
 			}
 		}
