@@ -3,14 +3,12 @@ package hu.ak_akademia.book4you.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import hu.ak_akademia.book4you.databases.DataLoader;
-import hu.ak_akademia.book4you.databases.DataSaver;
-import hu.ak_akademia.book4you.databases.FileHandler;
+
 import hu.ak_akademia.book4you.entities.certificate.Certificate;
 import hu.ak_akademia.book4you.entities.certificate.Certificates;
 import hu.ak_akademia.book4you.entities.certificate.CertificatesHandler;
@@ -70,10 +68,13 @@ public class CashierTransactionsController implements Initializable {
 	// A 2 ActionEvent metódus hozzáadva az fxml filehoz -> az fxmlhez nem kell
 	// hozzányúlni
 	public void createTransaction(ActionEvent event) throws IOException {
-		Certificate certificate = createCertificate();
-		if (Objects.equals(certificate, null)) {
+		Certificate certificate;
+		try {
+			certificate = createCertificate();
+		} catch (IllegalArgumentException ex) {
 			return;
 		}
+
 		saveCertificate(certificate);
 		resetText();
 	}
@@ -90,24 +91,18 @@ public class CashierTransactionsController implements Initializable {
 	}
 
 	private void saveCertificate(Certificate certificate) {
-		DataLoader<Certificate> certificateLoader = new FileHandler<Certificate>(certificateURL);
-		List<Certificate> certificatesToSave = new ArrayList<>();
-
-		certificatesToSave = certificateLoader.load();
-		certificatesToSave.add(certificate);
-
-		DataSaver<Certificate> certificateFileSaver = new FileHandler<Certificate>(certificateURL);
-		certificateFileSaver.save(certificatesToSave);
-
+		CertificatesHandler handler = new Certificates(certificateURL);
+		handler.add(certificate);
+		handler.save();
 	}
 
 	private Certificate createCertificate() {
 		Client client = chooseClientComboBox.getValue();
 		Title title = Title.getTitle(chooseTitleComboBox.getValue());
 		if (!(checkNullValue(client) && checkNullValue(title))) {
-			return null;
+			throw new IllegalArgumentException();
 		}
-		
+
 		int amount = 0;
 		try {
 			amount = parse(incomeAmount.getText());
@@ -116,9 +111,9 @@ public class CashierTransactionsController implements Initializable {
 			alert.setTitle("Nem megfelelő paraméter");
 			alert.setContentText("Kérlek pozitív egész számot adj meg!");
 			alert.show();
-			return null;
+			throw new IllegalArgumentException();
 		}
-		
+
 		Cashier ch = (Cashier) Session.getUser();
 		Direction dir = title.getDirection();
 		long actualBalance = getActualBalance();
@@ -127,6 +122,7 @@ public class CashierTransactionsController implements Initializable {
 
 		Certificate certificate = new Certificate(getCertificateNumber(), LocalDate.now(), ch, dir, client, amount,
 				title, certificateComment, balance);
+
 		return certificate;
 	}
 
