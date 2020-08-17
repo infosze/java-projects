@@ -149,14 +149,16 @@ public class CashierInquiryController implements Initializable {
 	private void setTableHeaders() {
 		TableColumn<Certificate, LocalDate> dateColumn = new TableColumn<>("Dátum");
 		dateColumn.setMinWidth(60);
+		dateColumn.setStyle("-fx-alignment: CENTER;");
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
 		TableColumn<Certificate, Integer> certificateIDColumn = new TableColumn<>("B.szám");
-		certificateIDColumn.setMinWidth(60);
+		certificateIDColumn.setMinWidth(40);
+		certificateIDColumn.setStyle("-fx-alignment: CENTER;");
 		certificateIDColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
 
 		TableColumn<Certificate, Client> clientColumn = new TableColumn<>("Ügyfél");
-		clientColumn.setMinWidth(200);
+		clientColumn.setMinWidth(150);
 		clientColumn.setCellValueFactory(new PropertyValueFactory<>("client"));
 
 		TableColumn<Certificate, Cashier> cashierColumn = new TableColumn<>("Pénztáros");
@@ -169,10 +171,12 @@ public class CashierInquiryController implements Initializable {
 
 		TableColumn<Certificate, Integer> balanceColumn = new TableColumn<>("Egyenleg");
 		balanceColumn.setMinWidth(80);
+		balanceColumn.setStyle("-fx-alignment: CENTER-RIGHT;");
 		balanceColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
 
 		TableColumn<Certificate, Integer> amountColumn = new TableColumn<>("Összeg");
 		amountColumn.setMinWidth(80);
+		amountColumn.setStyle("-fx-alignment: CENTER-RIGHT;");
 		amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
 		table.getColumns().addAll(dateColumn, certificateIDColumn, clientColumn, cashierColumn, titleColumn,
