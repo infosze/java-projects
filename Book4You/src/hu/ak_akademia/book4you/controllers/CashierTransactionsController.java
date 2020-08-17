@@ -5,6 +5,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import hu.ak_akademia.book4you.databases.DataLoader;
@@ -28,9 +29,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 
 public class CashierTransactionsController implements Initializable {
 	@FXML
@@ -72,7 +71,7 @@ public class CashierTransactionsController implements Initializable {
 	// hozzányúlni
 	public void createTransaction(ActionEvent event) throws IOException {
 		Certificate certificate = createCertificate();
-		if (certificate == null) {
+		if (Objects.equals(certificate, null)) {
 			return;
 		}
 		saveCertificate(certificate);
@@ -104,16 +103,27 @@ public class CashierTransactionsController implements Initializable {
 
 	private Certificate createCertificate() {
 		Client client = chooseClientComboBox.getValue();
-		Cashier ch = (Cashier) Session.getUser();
-		int amount = parse(incomeAmount.getText());
 		Title title = Title.getTitle(chooseTitleComboBox.getValue());
+		if (!(checkNullValue(client) && checkNullValue(title))) {
+			return null;
+		}
+		
+		int amount = 0;
+		try {
+			amount = parse(incomeAmount.getText());
+		} catch (NumberFormatException e) {
+			alert.setHeaderText("");
+			alert.setTitle("Nem megfelelő paraméter");
+			alert.setContentText("Kérlek pozitív egész számot adj meg!");
+			alert.show();
+			return null;
+		}
+		
+		Cashier ch = (Cashier) Session.getUser();
 		Direction dir = title.getDirection();
 		long actualBalance = getActualBalance();
 		long balance = dir == Direction.INCOME ? actualBalance + amount : actualBalance - amount;
 		String certificateComment = comment.getText();
-		if (checkNullValue(client) || checkNullValue(title)) {
-			return null;
-		}
 
 		Certificate certificate = new Certificate(getCertificateNumber(), LocalDate.now(), ch, dir, client, amount,
 				title, certificateComment, balance);
@@ -122,22 +132,19 @@ public class CashierTransactionsController implements Initializable {
 
 	private int parse(String str) {
 		int number = 0;
-		try {
-			number = Integer.parseInt(str);
-			if (number < 0) {
-				throw new NumberFormatException();
-			}
-			return number;
-		} catch (NumberFormatException e) {
-			alert.setContentText("Kérlek pozitív egész számot adj meg!");
-			alert.show();
-			return 0;
+		number = Integer.parseInt(str);
+		if (number <= 0) {
+			throw new NumberFormatException();
 		}
+		return number;
+
 	}
 
 	private boolean checkNullValue(Object o) {
-		if (o == null) {
+		if (Objects.equals(o, null)) {
 			alert.setContentText("Kérlek válassz a listából!");
+			alert.setHeaderText("");
+			alert.setTitle("Nem megfelelő paraméter");
 			alert.show();
 			return false;
 		}
