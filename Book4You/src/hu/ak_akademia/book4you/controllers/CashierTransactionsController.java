@@ -25,6 +25,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -49,6 +51,7 @@ public class CashierTransactionsController implements Initializable {
 	private ClientsHandler clientsHandler;
 	private String certificateURL = "src/hu/ak_akademia/book4you/databases/certificates.bin";
 	private String clientsURL = "src/hu/ak_akademia/book4you/databases/clients.bin";
+	private Alert alert = new Alert(AlertType.ERROR);
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -69,6 +72,9 @@ public class CashierTransactionsController implements Initializable {
 	// hozzányúlni
 	public void createTransaction(ActionEvent event) throws IOException {
 		Certificate certificate = createCertificate();
+		if (certificate == null) {
+			return;
+		}
 		saveCertificate(certificate);
 		resetText();
 	}
@@ -99,16 +105,43 @@ public class CashierTransactionsController implements Initializable {
 	private Certificate createCertificate() {
 		Client client = chooseClientComboBox.getValue();
 		Cashier ch = (Cashier) Session.getUser();
-		int amount = Integer.parseInt(incomeAmount.getText());
+		int amount = parse(incomeAmount.getText());
 		Title title = Title.getTitle(chooseTitleComboBox.getValue());
 		Direction dir = title.getDirection();
 		long actualBalance = getActualBalance();
 		long balance = dir == Direction.INCOME ? actualBalance + amount : actualBalance - amount;
 		String certificateComment = comment.getText();
+		if (checkNullValue(client) || checkNullValue(title)) {
+			return null;
+		}
 
 		Certificate certificate = new Certificate(getCertificateNumber(), LocalDate.now(), ch, dir, client, amount,
 				title, certificateComment, balance);
 		return certificate;
+	}
+
+	private int parse(String str) {
+		int number = 0;
+		try {
+			number = Integer.parseInt(str);
+			if (number < 0) {
+				throw new NumberFormatException();
+			}
+			return number;
+		} catch (NumberFormatException e) {
+			alert.setContentText("Kérlek pozitív egész számot adj meg!");
+			alert.show();
+			return 0;
+		}
+	}
+
+	private boolean checkNullValue(Object o) {
+		if (o == null) {
+			alert.setContentText("Kérlek válassz a listából!");
+			alert.show();
+			return false;
+		}
+		return true;
 	}
 
 	private int getCertificateNumber() {
