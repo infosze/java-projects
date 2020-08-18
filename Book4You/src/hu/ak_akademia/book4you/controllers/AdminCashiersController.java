@@ -5,9 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import hu.ak_akademia.book4you.entities.client.Client;
-import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
@@ -64,8 +61,14 @@ public class AdminCashiersController implements Initializable {
 	}
 
 	public void saveEditedCashier(ActionEvent event) throws IOException {
+		System.out.println(cashierChooserComboBox.getValue());
+		System.out.println(passwordToModify.getText());
+		
+		
 		User choosen = cashierChooserComboBox.getValue();
 		User modified = new Cashier(choosen.getName(), choosen.getID(), passwordToModify.getText(),	aktivCheckBox.isSelected());
+		
+		
 		
 		usersHandler.modify(choosen, modified);
 		usersHandler.save();

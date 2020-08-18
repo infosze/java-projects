@@ -4,6 +4,7 @@ import hu.ak_akademia.book4you.entities.user.Admin;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
+import hu.ak_akademia.book4you.validation.MyException;
 
 public class LoginSession implements Login {
 	private Users users;

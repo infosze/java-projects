@@ -14,7 +14,7 @@ import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
 import hu.ak_akademia.book4you.login.LoginSession;
-import hu.ak_akademia.book4you.login.MyException;
+import hu.ak_akademia.book4you.validation.MyException;
 
 class TestLogin {
 	

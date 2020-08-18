@@ -1,4 +1,4 @@
-package hu.ak_akademia.book4you.login;
+package hu.ak_akademia.book4you.validation;
 
 public class MyException extends Exception {
 
