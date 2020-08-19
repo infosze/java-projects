@@ -4,11 +4,9 @@ public class NumberValidator implements Validator {
 	private long value;
 	private String message;
 	
-	
 	@Override
-	public boolean isValid() {
+	public void validate() throws Exception {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
-
 }

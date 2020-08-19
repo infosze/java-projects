@@ -2,32 +2,25 @@ package hu.ak_akademia.book4you.validation;
 
 public class TextValidator implements Validator {
 	private String value;
-	private boolean canBeEmpty;
-	private String message;
+	private String alertMessage;
 
-	public TextValidator(String value, boolean canBeEmty) {
+	public TextValidator(String value, String alertMessage) {
 		this.value = value;
-		this.canBeEmpty = canBeEmty;
-		this.message = "A mező nem lehet üres!";
+		this.alertMessage = alertMessage;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public String getAlertMessage() {
+		return alertMessage;
 	}
 
 	@Override
-	public boolean isValid() throws Exception {
+	public void validate() throws Exception {
 		if (value == null) {
-			throw new MyException(message);
+			throw new MyException(alertMessage);
 		}
 
-		if (!canBeEmpty) {
-			if (value.trim().isEmpty()) {
-				throw new MyException(message);
-			}
+		if (value.trim().isEmpty()) {
+			throw new MyException(alertMessage);
 		}
-
-		return true;
 	}
-
 }

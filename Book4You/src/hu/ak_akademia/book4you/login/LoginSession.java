@@ -5,6 +5,7 @@ import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
 import hu.ak_akademia.book4you.validation.MyException;
+import hu.ak_akademia.book4you.validation.TextValidator;
 
 public class LoginSession implements Login {
 	private Users users;
@@ -15,16 +16,13 @@ public class LoginSession implements Login {
 	}
 
 	@Override
-	public void authenticate(String ID, String password) throws MyException {
-		checkValues(ID, password);
+	public void authenticate(String ID, String password) throws Exception {
+		new TextValidator(ID, "ID mező üres!").validate();
+		new TextValidator(password, "Jelszó mező üres!").validate();
+		
 		findAndSetUser(ID);
 		checkUserStatus();
 		checkAccess(password);
-	}
-
-	private void checkValues(String ID, String password) throws MyException {
-		if (ID.isEmpty() || password.isEmpty())
-			throw new MyException("Hiányzó mező(k)!");
 	}
 
 	private void findAndSetUser(String ID) throws MyException {

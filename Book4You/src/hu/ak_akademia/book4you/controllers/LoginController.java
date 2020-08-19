@@ -3,13 +3,13 @@ package hu.ak_akademia.book4you.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import hu.ak_akademia.book4you.entities.user.Admin;
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.Users;
 import hu.ak_akademia.book4you.login.Login;
 import hu.ak_akademia.book4you.login.LoginSession;
 import hu.ak_akademia.book4you.login.Session;
+import hu.ak_akademia.book4you.validation.MyAlert;
 import hu.ak_akademia.book4you.validation.MyException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,15 +41,15 @@ public class LoginController implements Initializable {
 	}
 
 	public void login(ActionEvent event) throws IOException {
-		setAlertMessage("");
-
 		try {
 			userLogin.authenticate(userIDField.getText(), passwordField.getText());
 			userLogin.storeSession();
 			redirect();
 		} catch (MyException e) {
-			setAlertMessage(e.getMessage());
+			MyAlert.show(e.getMessage());
 		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -57,12 +57,6 @@ public class LoginController implements Initializable {
 	public void resetFields(ActionEvent event) {
 		userIDField.setText("");
 		passwordField.setText("");
-		setAlertMessage("");
-	}
-
-	private void setAlertMessage(String message) {
-		alertMessage.setText(message);
-		alertMessage.setVisible(true);
 	}
 
 	private void loadView(String url) throws IOException {
