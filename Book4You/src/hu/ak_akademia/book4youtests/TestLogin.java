@@ -2,14 +2,10 @@ package hu.ak_akademia.book4youtests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
@@ -34,14 +30,14 @@ class TestLogin {
 	void TestEmptyID() {
 	    MyException exception = assertThrows(MyException.class, () ->
 	        loginSession.authenticate("", "password"));
-	    assertEquals("Hiányzó mező(k)!", exception.getMessage());
+	    assertEquals("ID mező üres!", exception.getMessage());
 	}
 	
 	@Test
 	void TestEmptyPassword() {
 		MyException exception = assertThrows(MyException.class, () ->
 		loginSession.authenticate("c01", ""));
-		assertEquals("Hiányzó mező(k)!", exception.getMessage());
+		assertEquals("Jelszó mező üres!", exception.getMessage());
 	}
 	
 	@Test
