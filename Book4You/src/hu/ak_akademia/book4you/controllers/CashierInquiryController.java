@@ -14,11 +14,14 @@ import hu.ak_akademia.book4you.entities.certificate.Certificate;
 import hu.ak_akademia.book4you.entities.certificate.Certificates;
 import hu.ak_akademia.book4you.entities.certificate.CertificatesHandler;
 import hu.ak_akademia.book4you.entities.certificate.Direction;
-import hu.ak_akademia.book4you.entities.certificate.Title;
 import hu.ak_akademia.book4you.entities.client.Client;
 import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.user.Cashier;
+import hu.ak_akademia.book4you.validation.DateValidator;
+import hu.ak_akademia.book4you.validation.ExistenceValidator;
+import hu.ak_akademia.book4you.validation.MyAlert;
+import hu.ak_akademia.book4you.validation.MyException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,19 +78,18 @@ public class CashierInquiryController implements Initializable {
 	}
 
 	private void setInfoBar() {
-		Calculation income = new IncomeCalculation(certificatesObservableList); 
+		Calculation income = new IncomeCalculation(certificatesObservableList);
 		totalIncome.setText(income.format(income.calculate()));
-		
-		Calculation outcome = new OutcomeCalculation(certificatesObservableList); 
+
+		Calculation outcome = new OutcomeCalculation(certificatesObservableList);
 		totalOutcome.setText(outcome.format(outcome.calculate()));
-		
-		Calculation opening = new OpeningBalanceCalculation(certificatesObservableList); 
+
+		Calculation opening = new OpeningBalanceCalculation(certificatesObservableList);
 		openingBalance.setText(opening.format(opening.calculate()));
-		
-		Calculation closing = new ClosingBalanceCalculation(certificatesObservableList); 
+
+		Calculation closing = new ClosingBalanceCalculation(certificatesObservableList);
 		closingBalance.setText(closing.format(closing.calculate()));
-		
-		
+
 	}
 
 	public void selectByAllButton(ActionEvent event) throws IOException {
@@ -99,25 +101,37 @@ public class CashierInquiryController implements Initializable {
 	}
 
 	public void selectByClientButton(ActionEvent event) throws IOException {
-		List<Certificate> selection = certificatesHandler.getByClient(clientChooserComboBox.getValue());
-		setCertificatesObservableList(selection);
-		setTableContent();
-		resetDatePickers();
-		setInfoBar();
+		List<Certificate> selection;
+		try {
+			new ExistenceValidator(clientChooserComboBox.getValue(), "Kérem válasszon az ügyfél listából!").validate();
+
+			selection = certificatesHandler.getByClient(clientChooserComboBox.getValue());
+			setCertificatesObservableList(selection);
+			setTableContent();
+			resetDatePickers();
+			setInfoBar();
+		} catch (MyException e) {
+			MyAlert.show(e.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void selectByDateButton(ActionEvent event) throws IOException {
-		if (isValid()) {
-			List<Certificate> selection = certificatesHandler.getByDate(dateFrom.getValue(), dateTo.getValue());
+		List<Certificate> selection;
+		try {
+			new DateValidator(dateFrom.getValue(), dateTo.getValue()).validate();
+
+			selection = certificatesHandler.getByDate(dateFrom.getValue(), dateTo.getValue());
 			setCertificatesObservableList(selection);
 			setTableContent();
 			resetComboBox();
 			setInfoBar();
+		} catch (MyException e) {
+			MyAlert.show(e.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-	}
-
-	private boolean isValid() {
-		return dateFrom.getValue() != null && dateTo.getValue() != null;
 	}
 
 	private void resetComboBox() {
