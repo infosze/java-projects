@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
 			userLogin.storeSession();
 			redirect();
 		} catch (MyException e) {
-			MyAlert.show(e.getMessage());
+			MyAlert.showError(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (Exception e) {

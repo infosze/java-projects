@@ -8,6 +8,14 @@ import hu.ak_akademia.book4you.entities.PublicSpaceType;
 import hu.ak_akademia.book4you.entities.bookstore.BookStore;
 import hu.ak_akademia.book4you.entities.bookstore.Store;
 import hu.ak_akademia.book4you.entities.bookstore.StoreHandler;
+import hu.ak_akademia.book4you.validation.CityNameValidator;
+import hu.ak_akademia.book4you.validation.CompanyNameValidator;
+import hu.ak_akademia.book4you.validation.CountryNameValidator;
+import hu.ak_akademia.book4you.validation.HouseNumberValidator;
+import hu.ak_akademia.book4you.validation.MyAlert;
+import hu.ak_akademia.book4you.validation.MyException;
+import hu.ak_akademia.book4you.validation.PostalCodeValidator;
+import hu.ak_akademia.book4you.validation.PublicSpaceNameValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,27 +65,37 @@ public class AdminCompanyDataController implements Initializable {
 	}
 
 	public void saveStoreData(ActionEvent event) throws IOException {
-		if (isValid()) {
+		try {
+			validateFields();
+
 			String fullName = nameFactory.formatName(companyNameField);
 			Address address = setAddress();
 			Store modifiedStoreData = new Store(fullName, address);
-			try {
-				storeHandler.modify(modifiedStoreData);
-				storeHandler.save();
-			} catch (IllegalStateException e) {
-				System.out.println("Nem sikerült betölteni az adatokat, a mentés nem lehetséges!");
-			}
+			
+			storeHandler.modify(modifiedStoreData);
+			storeHandler.save();
+			
+			MyAlert.showInformation("Adatok mentése megtörtént");
+		} catch (MyException e) {
+			MyAlert.showError(e.getMessage());
+		} catch (IllegalStateException e) {
+			MyAlert.showError("Nem sikerült betölteni az adatokat, a mentés nem lehetséges!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-	}
-
-	private boolean isValid() {
-		return Validation.validateName(companyNameField) & Validation.validCountry(countryField)
-				& Validation.validPostalCode(postalCodeField) & Validation.validateCity(cityField)
-				& Validation.validPubilcSpaceName(publicSpaceNameField) & Validation.validHouseNumber(houseNumberField);
 	}
 
 	public void resetTextFields(ActionEvent event) throws IOException {
 		resetFieldsOnBookStorePage();
+	}
+
+	private void validateFields() throws Exception {
+		new CompanyNameValidator(companyNameField.getText()).validate();
+		new CountryNameValidator(countryField.getText()).validate();
+		new PostalCodeValidator(postalCodeField.getText()).validate();
+		new CityNameValidator(cityField.getText()).validate();
+		new PublicSpaceNameValidator(publicSpaceNameField.getText()).validate();
+		new HouseNumberValidator(houseNumberField.getText()).validate();
 	}
 
 	private void resetFieldsOnBookStorePage() {

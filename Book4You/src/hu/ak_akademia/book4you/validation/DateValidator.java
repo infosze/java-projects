@@ -17,6 +17,6 @@ public class DateValidator implements Validator {
 		new ExistenceValidator(to, "Kérem adjon meg végső dátumot!").validate();
 
 		if (from.isAfter(to))
-			throw new MyException("A kezdő dátum nem lehet nagyobb mint a végső dátum!");
+			throw new MyException("A kezdő dátum nem lehet nagyobb, mint a végső dátum!");
 	}
 }

@@ -111,7 +111,7 @@ public class CashierInquiryController implements Initializable {
 			resetDatePickers();
 			setInfoBar();
 		} catch (MyException e) {
-			MyAlert.show(e.getMessage());
+			MyAlert.showError(e.getMessage());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -128,7 +128,7 @@ public class CashierInquiryController implements Initializable {
 			resetComboBox();
 			setInfoBar();
 		} catch (MyException e) {
-			MyAlert.show(e.getMessage());
+			MyAlert.showError(e.getMessage());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
