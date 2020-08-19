@@ -10,6 +10,15 @@ import hu.ak_akademia.book4you.entities.client.Clients;
 import hu.ak_akademia.book4you.entities.client.ClientsHandler;
 import hu.ak_akademia.book4you.entities.client.EconomicClient;
 import hu.ak_akademia.book4you.entities.client.NaturalClient;
+import hu.ak_akademia.book4you.validation.CityNameValidator;
+import hu.ak_akademia.book4you.validation.CompanyNameValidator;
+import hu.ak_akademia.book4you.validation.CountryNameValidator;
+import hu.ak_akademia.book4you.validation.ExistenceValidator;
+import hu.ak_akademia.book4you.validation.HouseNumberValidator;
+import hu.ak_akademia.book4you.validation.MyAlert;
+import hu.ak_akademia.book4you.validation.MyException;
+import hu.ak_akademia.book4you.validation.PostalCodeValidator;
+import hu.ak_akademia.book4you.validation.PublicSpaceNameValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,10 +74,12 @@ public class CashierNewClientController implements Initializable {
 	}
 
 	public void addNewClient(ActionEvent event) throws IOException {
-		if (isValid()) {
+		try {
+			validateFields();
+
 			String fullName = nameFactory.formatName(newClientFullName);
 			String identifier = identifierFactory.generateIdentifier(fullName);
-			Address address = setAddress();
+			Address address = generateAddress();
 			Client newClient = null;
 
 			if (checkBox.isSelected()) {
@@ -81,15 +92,24 @@ public class CashierNewClientController implements Initializable {
 			clientHandler.save();
 
 			resetFields();
+			
+			MyAlert.showInformation("Adatok mentése megtörtént");
+		} catch (MyException e) {
+			MyAlert.showError(e.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+
 	}
 
-	private boolean isValid() {
-		return Validation.validateName(newClientFullName) & Validation.validCountry(newClientCountry)
-				& Validation.validPostalCode(newClientZipCode) & Validation.validateCity(newClientCityName)
-				& Validation.validPubilcSpaceName(newClientPublicSpaceName)
-				& Validation.validPublicSpaceType(publicSpaceTypeComboBox, errorMessageLabel)
-				& Validation.validHouseNumber(newClientHouseNumber);
+	private void validateFields() throws Exception {
+		new CompanyNameValidator(newClientFullName.getText()).validate();
+		new CountryNameValidator(newClientCountry.getText()).validate();
+		new PostalCodeValidator(newClientZipCode.getText()).validate();
+		new CityNameValidator(newClientCityName.getText()).validate();
+		new PublicSpaceNameValidator(newClientPublicSpaceName.getText()).validate();
+		new ExistenceValidator(publicSpaceTypeComboBox.getValue(), "Kérem válaszon a közterület jellege listából!").validate();
+		new HouseNumberValidator(newClientHouseNumber.getText()).validate();
 	}
 
 	private void setContentOfPublicSpaceTypeComboBoxes() {
@@ -97,23 +117,13 @@ public class CashierNewClientController implements Initializable {
 		publicSpaceTypeComboBox.setItems(publicSpaceTypeOptions);
 	}
 
-	private Address setAddress() {
+	private Address generateAddress() {
 		String zipCode = newClientZipCode.getText().toUpperCase();
-		var spaceType = getType(publicSpaceTypeComboBox.getValue());
+		var spaceType = PublicSpaceType.getEnum(publicSpaceTypeComboBox.getValue());
 		String number = newClientHouseNumber.getText();
 
 		return new Address(nameFactory.formatName(newClientCountry), zipCode, nameFactory.formatName(newClientCityName),
 				nameFactory.formatName(newClientPublicSpaceName), spaceType, number);
-	}
-
-	// Ez a metódus belekerült a PublicSpaceType enum-ba is...ki lehetne venni
-	private PublicSpaceType getType(String enumName) {
-		for (var pst : PublicSpaceType.values()) {
-			if (pst.getValue().equals(enumName)) {
-				return pst;
-			}
-		}
-		return null;
 	}
 
 	private void resetFields() {

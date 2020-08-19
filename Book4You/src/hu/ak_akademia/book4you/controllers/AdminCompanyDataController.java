@@ -118,7 +118,7 @@ public class AdminCompanyDataController implements Initializable {
 
 	private PublicSpaceType getType(String enumName) {
 		for (var pst : PublicSpaceType.values()) {
-			if (pst.getValue().equals(enumName)) {
+			if (pst.getLongName().equals(enumName)) {
 				return pst;
 			}
 		}
@@ -138,7 +138,7 @@ public class AdminCompanyDataController implements Initializable {
 		postalCodeField.setText(store.getAddress().getPostalCode());
 		cityField.setText(store.getAddress().getCity());
 		publicSpaceNameField.setText(store.getAddress().getPublicSpaceName());
-		publicSpaceTypeComboBox.getSelectionModel().select(store.getAddress().getPublicSpaceType().getValue());
+		publicSpaceTypeComboBox.getSelectionModel().select(store.getAddress().getPublicSpaceType().getLongName());
 		houseNumberField.setText(store.getAddress().getNumber());
 	}
 

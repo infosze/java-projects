@@ -208,7 +208,7 @@ public class AdminClientsController implements Initializable {
 		cityFieldToModify.setText(clientChooserComboBox.getValue().getAddress().getCity());
 		publicSpaceNameFieldToModify.setText(clientChooserComboBox.getValue().getAddress().getPublicSpaceName());
 		houseNumberFieldToModify.setText(clientChooserComboBox.getValue().getAddress().getNumber());
-		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientChooserComboBox.getValue().getAddress().getPublicSpaceType().getValue());
+		publicSpaceTypeComboBoxToModify.getSelectionModel().select(clientChooserComboBox.getValue().getAddress().getPublicSpaceType().getLongName());
 	}
 
 	private void setDisableStateOfTextFields(boolean value) {
@@ -256,7 +256,7 @@ public class AdminClientsController implements Initializable {
 
 	private PublicSpaceType getType(String enumName) {
 		for (var pst : PublicSpaceType.values()) {
-			if (pst.getValue().equals(enumName)) {
+			if (pst.getLongName().equals(enumName)) {
 				return pst;
 			}
 		}

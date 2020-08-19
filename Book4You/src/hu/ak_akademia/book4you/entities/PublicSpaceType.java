@@ -7,20 +7,20 @@ public enum PublicSpaceType {
 
 	ROAD("út"), STREET("utca"), BOULEVARD("sétány"), PUBLIC("köz"), SQUARE("tér"), AVENUE("sugárút"), WHARF("rakpart");
 
-	private String value;
+	private String longName;
 
 	private PublicSpaceType(String value) {
-		this.value = value;
+		this.longName = value;
 	}
 
-	public String getValue() {
-		return value;
+	public String getLongName() {
+		return longName;
 	}
-
-	public static String getName(String value) {
-		for (PublicSpaceType enumName : PublicSpaceType.values()) {
-			if (enumName.getValue().equals(value)) {
-				return enumName.name();
+	
+	public static PublicSpaceType getEnum(String longName) {
+		for (var pst : PublicSpaceType.values()) {
+			if (pst.getLongName().equals(longName)) {
+				return pst;
 			}
 		}
 		return null;
@@ -30,7 +30,7 @@ public enum PublicSpaceType {
 		List<String> result = new ArrayList<>();
 
 		for (PublicSpaceType e : PublicSpaceType.values()) {
-			result.add(e.getValue());
+			result.add(e.getLongName());
 		}
 
 		return result;

@@ -10,7 +10,7 @@ public class CompanyNameValidator implements Validator{
 
 	@Override
 	public void validate() throws Exception {
-		new TextValidator(value, "Cég neve mező üres!").validate();;
+		new TextValidator(value, "A név mező üres!").validate();;
 		if (!value.matches("([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ0-9]{2,})(?: |\\-)([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ0-9]*\\b\\.?)(| ([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ0-9]*))\\ *"))
 			throw new MyException("Cég neve nem megfelelő formátumú!");
 	}
