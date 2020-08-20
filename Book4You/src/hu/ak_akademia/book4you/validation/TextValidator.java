@@ -15,9 +15,7 @@ public class TextValidator implements Validator {
 
 	@Override
 	public void validate() throws Exception {
-		if (value == null) {
-			throw new MyException(alertMessage);
-		}
+		new ExistenceValidator(value, alertMessage);
 
 		if (value.trim().isEmpty()) {
 			throw new MyException(alertMessage);

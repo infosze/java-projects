@@ -12,6 +12,6 @@ public class CompanyNameValidator implements Validator{
 	public void validate() throws Exception {
 		new TextValidator(value, "A név mező üres!").validate();;
 		if (!value.matches("([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ0-9]{2,})(?: |\\-)([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ0-9]*\\b\\.?)(| ([a-záéíóúöüőűA-ZÁÉÍÓÚÖÜŐŰ0-9]*))\\ *"))
-			throw new MyException("Cég neve nem megfelelő formátumú!");
+			throw new MyException("A név nem megfelelő formátumú! Legalább 2 szóból kell állnia!");
 	}
 }
