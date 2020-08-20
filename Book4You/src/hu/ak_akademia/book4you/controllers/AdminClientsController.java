@@ -270,17 +270,9 @@ public class AdminClientsController implements Initializable {
 		publicSpaceTypeComboBoxToModify.setDisable(value);
 	}
 
-	private boolean isValidToModification() {
-		return Validation.validateName(companyNameFieldToModify) & Validation.validCountry(countryFieldToModify)
-				& Validation.validPostalCode(postalCodeFieldToModify) & Validation.validateCity(cityFieldToModify)
-				& Validation.validPubilcSpaceName(publicSpaceNameFieldToModify)
-				& Validation.validPublicSpaceType(publicSpaceTypeComboBoxToModify, errorMessageLabel1)
-				& Validation.validHouseNumber(houseNumberFieldToModify);
-	}
-
 	private Address setAdress() {
 		String zipCode = postalCodeFieldToAdd.getText().toUpperCase();
-		var spaceType = getType(publicSpaceTypeComboBoxToAdd.getValue());
+		var spaceType = PublicSpaceType.getEnum(publicSpaceTypeComboBoxToAdd.getValue());
 		String number = houseNumberFieldToAdd.getText();
 		return new Address(nameFactory.formatName(countryFieldToAdd), zipCode, nameFactory.formatName(cityFieldToAdd),
 				nameFactory.formatName(publicSpaceNameFieldToAdd), spaceType, number);
@@ -288,20 +280,11 @@ public class AdminClientsController implements Initializable {
 
 	private Address setModifiedAdress() {
 		String zipCode = postalCodeFieldToModify.getText().toUpperCase();
-		var spaceType = getType(publicSpaceTypeComboBoxToModify.getValue());
+		var spaceType = PublicSpaceType.getEnum(publicSpaceTypeComboBoxToModify.getValue());
 		String number = houseNumberFieldToModify.getText();
 		return new Address(nameFactory.formatName(countryFieldToModify), zipCode,
 				nameFactory.formatName(cityFieldToModify), nameFactory.formatName(publicSpaceNameFieldToModify),
 				spaceType, number);
-	}
-
-	private PublicSpaceType getType(String enumName) {
-		for (var pst : PublicSpaceType.values()) {
-			if (pst.getLongName().equals(enumName)) {
-				return pst;
-			}
-		}
-		return null;
 	}
 
 	public void emptyTextField(ActionEvent event) throws IOException {
