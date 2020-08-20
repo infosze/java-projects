@@ -90,6 +90,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <Label layoutX="423.0" layoutY="21.0" prefHeight="27.0" prefWidth="115.0" text="Ügyféllista:" />
                      </children>
                   </AnchorPane>
             </content>
