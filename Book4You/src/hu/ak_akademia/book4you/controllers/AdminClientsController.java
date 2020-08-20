@@ -141,6 +141,7 @@ public class AdminClientsController implements Initializable {
 				
 				clientsHandler.modify(choosen, modified);
 				clientsHandler.save();
+				setContentOfClientChooserComboBox();
 				
 				MyAlert.showInformation("Adatok mentése megtörtént");
 			} catch (MyException e) {
