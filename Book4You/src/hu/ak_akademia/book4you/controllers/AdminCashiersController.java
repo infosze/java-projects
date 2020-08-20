@@ -9,6 +9,11 @@ import hu.ak_akademia.book4you.entities.user.Cashier;
 import hu.ak_akademia.book4you.entities.user.User;
 import hu.ak_akademia.book4you.entities.user.Users;
 import hu.ak_akademia.book4you.entities.user.UsersHandler;
+import hu.ak_akademia.book4you.validation.CashierNameValidator;
+import hu.ak_akademia.book4you.validation.ExistenceValidator;
+import hu.ak_akademia.book4you.validation.MyAlert;
+import hu.ak_akademia.book4you.validation.MyException;
+import hu.ak_akademia.book4you.validation.PasswordValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,53 +66,48 @@ public class AdminCashiersController implements Initializable {
 	}
 
 	public void saveEditedCashier(ActionEvent event) throws IOException {
-		System.out.println(cashierChooserComboBox.getValue());
-		System.out.println(passwordToModify.getText());
-		
-		
-		User choosen = cashierChooserComboBox.getValue();
-		User modified = new Cashier(choosen.getName(), choosen.getID(), passwordToModify.getText(),	aktivCheckBox.isSelected());
-		
-		
-		
-		usersHandler.modify(choosen, modified);
-		usersHandler.save();
-		
-		setContentOfCashierChooserComboBox();
-		resetFieldsOnCashierModifierPage();
+		try {
+			new ExistenceValidator(cashierChooserComboBox.getValue(), "Kérem válasszon a pénztáros listáról!")
+					.validate();
+			new PasswordValidator(passwordToModify.getText()).validate();
+
+			User choosen = cashierChooserComboBox.getValue();
+			User modified = new Cashier(choosen.getName(), choosen.getID(), passwordToModify.getText(),
+					aktivCheckBox.isSelected());
+
+			usersHandler.modify(choosen, modified);
+			usersHandler.save();
+
+			setContentOfCashierChooserComboBox();
+			resetFieldsOnCashierModificatuinPage();
+
+			MyAlert.showInformation("Adatok mentése megtörtént");
+		} catch (MyException e) {
+			MyAlert.showError(e.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void chooseCashier(ActionEvent event) {
-		if(cashierChooserComboBox.getValue() != null) {
+		if (cashierChooserComboBox.getValue() != null) {
 			setDisableStateOfTextFields(false);
 			fillFieldsWithChoosenCashierData();
-		}else {
+		} else {
 			setDisableStateOfTextFields(true);
 		}
 	}
-	
+
 	public void emptyTextField(ActionEvent event) throws IOException {
-		boolean deleteAll = true;
-		if (fullNameFieldToAdd.getText().equals(Messages.getErrorMessageEmpty())
-				|| fullNameFieldToAdd.getText().equals(Messages.getErrorMessageWrongFormat())) {
-			fullNameFieldToAdd.setText("");
-			deleteAll = false;
-		}
-		if (passwordFieldToAdd.getText().equals(Messages.getErrorMessageEmpty())
-				|| passwordFieldToAdd.getText().equals(Messages.getErrorMessageWrongFormat())) {
-			passwordFieldToAdd.setText("");
-			deleteAll = false;
-		}
-		if (deleteAll) {
-			fullNameFieldToAdd.setText("");
-			passwordFieldToAdd.setText("");
-		}
-		
-		resetFieldsOnCashierModifierPage();
+		resetFieldsOnNewCashierAdditionPage();
+		resetFieldsOnCashierModificatuinPage();
 	}
-	
+
 	public void addNewCashier(ActionEvent event) throws IOException {
-		if (Validation.validateName(fullNameFieldToAdd) & Validation.validatePassword(passwordFieldToAdd)) {
+		try {
+			new CashierNameValidator(fullNameFieldToAdd.getText()).validate();
+			new PasswordValidator(passwordFieldToAdd.getText()).validate();
+
 			String fullName = nameFactory.formatName(fullNameFieldToAdd);
 			String password = passwordFieldToAdd.getText();
 			String identifier = identifierFactory.generateIdentifier(fullName);
@@ -116,25 +116,37 @@ public class AdminCashiersController implements Initializable {
 			Cashier newChashier = new Cashier(fullName, identifier, password);
 			users.add(newChashier);
 			users.save();
-			fullNameFieldToAdd.setText("");
-			passwordFieldToAdd.setText("");
+
+			resetFieldsOnNewCashierAdditionPage();
+
+			MyAlert.showInformation("Adatok mentése megtörtént");
+
+		} catch (MyException e) {
+			MyAlert.showError(e.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
-	
-	private void resetFieldsOnCashierModifierPage() {
+
+	private void resetFieldsOnCashierModificatuinPage() {
 		cashierChooserComboBox.getSelectionModel().clearSelection();
 		passwordToModify.setText("");
 		aktivCheckBox.setSelected(false);
 		aktivCheckBox.setDisable(true);
 	}
 	
+	private void resetFieldsOnNewCashierAdditionPage() {
+		fullNameFieldToAdd.setText("");
+		passwordFieldToAdd.setText("");
+	}
+
 	private void setContentOfCashierChooserComboBox() {
 		usersHandler = new Users("src/hu/ak_akademia/book4you/databases/users.bin");
-		
+
 		cashierOptions = FXCollections.observableList(getCashiers(usersHandler.load()));
 		cashierChooserComboBox.setItems(cashierOptions);
 	}
-	
+
 	private List<Cashier> getCashiers(List<User> users) {
 		List<Cashier> result = new ArrayList<>();
 		for (User user : users) {
@@ -142,7 +154,7 @@ public class AdminCashiersController implements Initializable {
 				result.add((Cashier) user);
 			}
 		}
-		
+
 		return result;
 	}
 
