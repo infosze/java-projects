@@ -1,0 +1,40 @@
+
+
+                     Árajánlat
+
+A megrendelő adatai:
+
+Név:         Sziklás Edmond
+Cím:         2151 Fót Hegyalja utca 23.
+Telefonszám: +36 30 999 5181
+E-mail:      infosze@gmail.com
+
+Aljzatkiegyenlítő:      1 csomag    4512 Ft
+Padlóburkoló:           1 csomag   12000 Ft
+
+A felhasznált anyagok összesítése
+
+A kiválasztott aljzatkiegyenlítő(k)
+   neve: Tesztanyag, a szükséges mennyiség: 1 csomag, ennek ára: 4512 forint
+ára összesen: 4 512 forint
+   neve: Tesztanyag, a szükséges mennyiség: 1 csomag, ennek ára: 4512 forint
+ára összesen: 9 024 forint
+
+A kiválasztott paldóburkolat(ok)
+neve: OBIszőnyeg, a szükséges mennyiség: 1 csomag, ennek ára: 12000 forint
+ára összesen: 12 000 forint
+neve: OBIszőnyeg, a szükséges mennyiség: 2 csomag, ennek ára: 24000 forint
+ára összesen: 36 000 forint
+
+A kiválasztott falburkolat(ok)
+ára összesen: 0 forint
+ára összesen: 0 forint
+
+A kiválasztott segédanyag(ok)
+ára összesen: 0 forint
+ára összesen: 0 forint
+
+Végösszeg: 16 512 forint
+Kedvezmény mértéke: 10%
+Kedvezménnyel csökkentett végösszeg: 14 861 forint
+

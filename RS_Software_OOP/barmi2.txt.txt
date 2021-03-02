@@ -1,0 +1,13 @@
+                     Árajánlat
+
+A megrendelő adatai:
+
+Név:         Sziklás Edmond
+Cím:         2151 Fót Hegyalja utca 23.
+Telefonszám: +36 30 999 5181
+E-mail:      infosze@gmail.com
+
+Tapéta:                11 csomag   16500 Ft
+Segédanyag:             3 csomag   11610 Ft
+neve: Ragasztó, a szükséges mennyiség: 3 csomag, ennek ára: 11610 forint
+ára összesen: 11 610 forint
