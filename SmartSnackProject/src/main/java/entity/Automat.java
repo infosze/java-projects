@@ -14,7 +14,7 @@ public class Automat {
 	public Automat() {
 	}
 
-	public Automat(String machineId, int machineTypeId, String coutry, String county, int zipCode, String address) {
+	public Automat(String machineId, int machineTypeId, String coutry, int zipCode, String county, String address) {
 		this.machineId = machineId;
 		this.machineTypeId = machineTypeId;
 		this.coutry = coutry;
@@ -86,4 +86,10 @@ public class Automat {
 		return Objects.equals(machineId, other.machineId);
 	}
 
+	@Override
+	public String toString() {
+		return "Automat [machineId=" + machineId + "; " + zipCode + ". " + county + ", " + address + "]";
+	}
+
+	
 }
