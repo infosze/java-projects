@@ -14,7 +14,7 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h1>LEKÉRDEZÉSEK</h1>
+	<h1>LEKÉRDEZÉSEK</h1> 
 </body>
 
 </html>
