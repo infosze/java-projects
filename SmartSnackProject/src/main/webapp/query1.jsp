@@ -30,12 +30,12 @@
 				<th>Megye</th>
 				<th>Cím</th>
 			</tr>
-			<c:forEach var="automata" items="${list}" varStatus="i">
+			<c:forEach var="automat" items="${automatlist}">
 				<tr>
-					<td><c:out value="${automata.machineId }" /></td>
-					<td><c:out value="${automata.zipCode }" /></td>
-					<td><c:out value="${automata.county }" /></td>
-					<td><c:out value="${automata.address }" /></td>
+					<td><c:out value="${automat.machineId}" /></td>
+					<td><c:out value="${automat.zipCode}" /></td>
+					<td><c:out value="${automat.county}" /></td>
+					<td><c:out value="${automat.address}" /></td>
 				</tr>
 			</c:forEach>
 		</table>

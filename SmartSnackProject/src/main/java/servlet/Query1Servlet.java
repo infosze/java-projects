@@ -20,10 +20,12 @@ public class Query1Servlet extends HttpServlet {
 		
 //		FindErrorHourly error = new FindErrorHourly();
 		List<Automat> list = FindErrorHourly.getWrongMachines(); //new AutomatErrorDAO().findSoldOutProductMachines();
-		for (Automat e : list) {
-			System.out.println(e.toString() + " ----> servlet---- termék kifogyott...");  // TODO test. fix it later.
-		}
-		request.setAttribute("automat", list);
+//		for (Automat e : list) {
+//			System.out.println(e.toString() + " ----> servlet---- termék kifogyott...");  // TODO test. fix it later.
+//		}
+		
+//		List<Automat> list = List.of(new Automat("ss000006", 4, "hungary", 1111, "pest", "fehérvári út"));
+		request.setAttribute("automatlist", list);
 		request.getRequestDispatcher("query1.jsp").forward(request, response);
 	}
 
