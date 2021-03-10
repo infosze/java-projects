@@ -14,7 +14,8 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h1>LEKÉRDEZÉSEK</h1> 
+	<h1>LEKÉRDEZÉSEK</h1>
+	<a href="query1.jsp"> 1. 3 kifogyott termék</a>
 </body>
 
 </html>

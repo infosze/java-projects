@@ -14,11 +14,6 @@ public class TasksServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		User user =(User)request.getSession().getAttribute("loggedInUser");
-//		TaskDao taskDao = new TaskDaoImp();
-//		List<Task> tasks = taskDao.findAllTasksByUser(user);
-//		
-//		request.setAttribute("tasks", tasks);
 		request.getRequestDispatcher("tasks.jsp").forward(request, response);
 	}
 

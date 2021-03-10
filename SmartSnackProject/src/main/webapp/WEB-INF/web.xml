@@ -30,6 +30,17 @@
 		<servlet-name>TasksServlet</servlet-name>
 		<url-pattern>/tasks</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Query1Servlet</servlet-name>
+		<servlet-class>servlet.Query1Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Query1Servlet</servlet-name>
+		<url-pattern>/query1</url-pattern>
+	</servlet-mapping>
+	
+	
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>servlet.LogoutServlet</servlet-class>

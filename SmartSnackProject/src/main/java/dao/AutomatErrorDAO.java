@@ -11,9 +11,9 @@ import entity.Automat;
 
 public class AutomatErrorDAO extends AbstractDao {
 
-	private static final String SOLD_OUT_COIN = "SELECT * FROM ssp.machine;";
+	private static final String SOLD_OUT_COIN = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
 
-	public List<Automat> findSoldOutCoinMachines() {
+	public List<Automat> findSoldOutProductMachines() {
 		List<Automat> result = new ArrayList<>();
 		try (Connection con = getConnection(); //
 				PreparedStatement stm = con.prepareStatement(SOLD_OUT_COIN); //
@@ -33,7 +33,7 @@ public class AutomatErrorDAO extends AbstractDao {
 		return result;
 	}
 
-//	List<Automat> findSoldOutProductMachines();
+//	List<Automat> findSoldOutCoinMachines();
 
 //	List<Automat> findWrongMachines();
 

@@ -20,6 +20,24 @@
 	response.setIntHeader("Refresh", 10);
 	//             System.out.println(" Refreshed..."); // TODO test. fix it later.
 	%>
+	<div>
+		<table border="1">
+			<tr>
+				<th>Azonosító</th>
+				<th>Irányítószám</th>
+				<th>Megye</th>
+				<th>Cím</th>
+			</tr>
+			<c:forEach var="automat" items="${list}">
+				<tr>
+					<td><c:out value="${ automat.machineId}" /></td>
+					<td><c:out value="${ automat.zipCode}" /></td>
+					<td><c:out value="${ automat.county}" /></td>
+					<td><c:out value="${ automat.address}" /></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 
 </html>
