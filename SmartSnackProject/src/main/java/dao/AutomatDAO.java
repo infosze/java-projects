@@ -9,14 +9,12 @@ import java.util.List;
 
 import entity.Automat;
 
-public class AutomatErrorDAO extends AbstractDao {
+public class AutomatDAO extends AbstractDao {
 
-	private static final String SOLD_OUT_COIN = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
-
-	public List<Automat> findSoldOutProductMachines() {
+	public List<Automat> findMachines(String sqlStatement) {
 		List<Automat> result = new ArrayList<>();
 		try (Connection con = getConnection(); //
-				PreparedStatement stm = con.prepareStatement(SOLD_OUT_COIN); //
+				PreparedStatement stm = con.prepareStatement(sqlStatement); //
 				ResultSet rs = stm.executeQuery()) {
 			while (rs.next()) {
 				result.add(new Automat(//
@@ -32,9 +30,5 @@ public class AutomatErrorDAO extends AbstractDao {
 		}
 		return result;
 	}
-
-//	List<Automat> findSoldOutCoinMachines();
-
-//	List<Automat> findWrongMachines();
 
 }

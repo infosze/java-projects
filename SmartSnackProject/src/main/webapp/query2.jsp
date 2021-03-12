@@ -7,13 +7,13 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - Termék kifogyott</title>
+<title>Smart Snack - Meghibásodott automaták</title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Kifogyott min. 3 termékkategória:</h2>
+	<h2>Meghibásodott automaták:</h2>
 	<%
 	// Set refresh, autoload time as 10 seconds
 	response.setIntHeader("Refresh", 10);
