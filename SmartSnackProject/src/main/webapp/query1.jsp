@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page session="true"%>
 
+
 <!DOCTYPE html>
 <html>
 
@@ -20,22 +21,21 @@
 	response.setIntHeader("Refresh", 10);
 	//             System.out.println(" Refreshed..."); // TODO test. fix it later.
 	%>
-
-
+	<p>${msg}</p>
 	<div>
 		<table border="1">
 			<tr>
 				<th>Azonosító</th>
 				<th>Irányítószám</th>
-				<th>Megye</th>
+				<th>Település</th>
 				<th>Cím</th>
 			</tr>
-			<c:forEach var="automat" items="${automatlist}">
+			<c:forEach var="automat" items="${ automatList}">
 				<tr>
-					<td><c:out value="${automat.machineId}" /></td>
-					<td><c:out value="${automat.zipCode}" /></td>
-					<td><c:out value="${automat.county}" /></td>
-					<td><c:out value="${automat.address}" /></td>
+					<td><c:out value="${ automat.machineId}" /></td>
+					<td><c:out value="${ automat.zipCode}" /></td>
+					<td><c:out value="${ automat.county}" /></td>
+					<td><c:out value="${ automat.address}" /></td>
 				</tr>
 			</c:forEach>
 		</table>

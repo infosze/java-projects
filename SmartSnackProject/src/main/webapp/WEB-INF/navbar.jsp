@@ -10,9 +10,9 @@
 			<a  href="login.jsp" style="float:right"><i class="fas fa-sign-in-alt"></i> Bejelentkezés</a>
 		</c:when>
 		<c:otherwise>
-			<a href="tasks"><i class="fas fa-tasks"></i> Lekérdezések</a>
+			<a href="tasks.jsp"><i class="fas fa-tasks"></i> Lekérdezések</a>
 			<a href="logout" style="float:right"><i class="fas fa-sign-out-alt"></i> Kijelentkezés</a>
-			<a style="float:right"><i class="far fa-user"></i> ${name} </a>
+			<a style="float:right"><i class="far fa-user"></i> ${name }  </a>
 		</c:otherwise>
 	</c:choose>
 
