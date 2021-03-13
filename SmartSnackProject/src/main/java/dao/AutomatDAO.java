@@ -11,7 +11,23 @@ import entity.Automat;
 
 public class AutomatDAO extends AbstractDao {
 
-	public List<Automat> findMachines(String sqlStatement) {
+	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
+	private static final String SOLD_OUT_COIN = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
+	private static final String OFFLINE = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
+
+	public List<Automat> getSoldOutProductMachines() {
+		return findMachines(SOLD_OUT_PRODUCT);
+	}
+
+	public List<Automat> getSoldOutCoinMachines() {
+		return findMachines(SOLD_OUT_COIN);
+	}
+
+	public List<Automat> getOfflineMachines() {
+		return findMachines(OFFLINE);
+	}
+
+	private List<Automat> findMachines(String sqlStatement) {
 		List<Automat> result = new ArrayList<>();
 		try (Connection con = getConnection(); //
 				PreparedStatement stm = con.prepareStatement(sqlStatement); //
