@@ -18,6 +18,8 @@
 	<br>
 	<a href="query2"> 2. Meghibásodott automaták</a>
 	<br>
+	<a href="query3.jsp"> 3. Az adott év vagy hónap slágertermékei automatánként</a>
+	<br>
 
 </body>
 
