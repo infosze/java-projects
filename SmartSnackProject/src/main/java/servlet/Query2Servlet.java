@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.AutomatDAO;
 import entity.Automat;
-import servlet.listener.HourlyTasks;
 
 public class Query2Servlet extends HttpServlet {
 

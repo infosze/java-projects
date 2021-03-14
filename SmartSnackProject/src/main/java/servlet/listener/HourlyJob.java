@@ -4,7 +4,7 @@ import java.util.List;
 import dao.AutomatDAO;
 import entity.Automat;
 
-public class HourlyTasks implements Runnable {
+public class HourlyJob implements Runnable {
 
 	private static List<Automat> soldOutProductMachines;
 	private static List<Automat> soldOutCoinMachines;
