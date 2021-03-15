@@ -49,6 +49,14 @@
 		<servlet-name>Query2Servlet</servlet-name>
 		<url-pattern>/query2</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Query3Servlet</servlet-name>
+		<servlet-class>servlet.Query3Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Query3Servlet</servlet-name>
+		<url-pattern>/query3</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
@@ -58,4 +66,5 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
+	
 </web-app>

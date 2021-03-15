@@ -38,7 +38,7 @@ public class AutomatDAO extends AbstractDao {
 						rs.getInt("machine_type_id"), //
 						rs.getString("country"), //
 						rs.getInt("zipcode"), //
-						rs.getString("county"), //
+						rs.getString("city"), //
 						rs.getString("address")));
 			}
 		} catch (SQLException e) {

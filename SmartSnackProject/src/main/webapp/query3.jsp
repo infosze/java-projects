@@ -16,21 +16,22 @@
 	<h2>Adott év vagy hónap slágertermékei automatánként</h2>
 
 	<div class="container">
-		<form action="query3">
-			<label for="year">Év megadása: </label> 
-			<input type="text"
-				name="year" placeholder="2021" required
-				pattern="[0-9]{4}" title="négy számjegy (pl. 2021)"><br>
-			<br> 
-			<label for="month">Hónap megadása (opcionális): </label> 
-			<input
-				type="text" name="month" placeholder="03" pattern="[0-9]{2}"
-				title="két számjegy (pl. 01 vagy 12)"><br>
-			<br> <input type="submit" value="Mehet"><br><br>
+		<form action="/query3">
+			<label for="year">Év megadása: </label> <input type="text"
+				name="year" placeholder="2021" required pattern="[0-9]{4}"
+				title="négy számjegy (pl. 2021)"><br> <br> <label
+				for="month">Hónap megadása (opcionális): </label> <input type="text"
+				name="month" placeholder="03" pattern="[0-9]{2}"
+				title="két számjegy (pl. 01 vagy 12)"><br> <br> <input
+				type="submit" value="Mehet"><br>
+			<br>
 		</form>
 	</div>
-	<div>
-		<table border="1"> 
+
+
+
+	<div class="container">
+		<table border="1">
 			<tr>
 				<th>Az automata azonosítója</th>
 				<th>Irányítószám</th>
@@ -40,17 +41,20 @@
 				<th>A termék neve</th>
 				<th>A fogyott mennyiség</th>
 			</tr>
-			<c:forEach var="automat" items="${ automatList}">
-				<tr>
-					<td><c:out value="${ automat.machineId}" /></td>
-					<td><c:out value="${ automat.zipCode}" /></td>
-					<td><c:out value="${ automat.county}" /></td>
-					<td><c:out value="${ automat.address}" /></td>
-					
-				</tr>
-			</c:forEach>
+				<c:forEach var="product" items="${productList}">
+					<tr>
+						<td><c:out value="${product.machineId}" /></td>
+						<td><c:out value="${product.zipCode}" /></td>
+						<td><c:out value="${product.city}" /></td>
+						<td><c:out value="${product.address}" /></td>
+						<td><c:out value="${product.productId}" /></td>
+						<td><c:out value="${product.productName}" /></td>
+						<td><c:out value="${product.quantity}" /></td>
+					</tr>
+				</c:forEach>
 		</table>
 	</div>
+
 
 </body>
 </html>
