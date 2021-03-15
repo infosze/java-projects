@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.AutomatDAO;
-import daoimpl.AutomatDAOimpl;
+import dao.impl.AutomatDAOimpl;
 import entity.Automat;
 
 public class Query1Servlet extends HttpServlet {

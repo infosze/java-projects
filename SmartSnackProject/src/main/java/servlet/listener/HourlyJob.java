@@ -3,7 +3,7 @@ package servlet.listener;
 import java.util.List;
 
 import dao.AutomatDAO;
-import daoimpl.AutomatDAOimpl;
+import dao.impl.AutomatDAOimpl;
 import entity.Automat;
 
 public class HourlyJob implements Runnable {
