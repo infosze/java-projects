@@ -1,7 +1,9 @@
 package servlet.listener;
 
 import java.util.List;
+
 import dao.AutomatDAO;
+import daoimpl.AutomatDAOimpl;
 import entity.Automat;
 
 public class HourlyJob implements Runnable {
@@ -12,7 +14,7 @@ public class HourlyJob implements Runnable {
 
 	@Override
 	public void run() {
-		AutomatDAO automatDao = new AutomatDAO();
+		AutomatDAO automatDao = new AutomatDAOimpl();
 		soldOutProductMachines = automatDao.getSoldOutProductMachines();
 		soldOutCoinMachines = automatDao.getSoldOutCoinMachines();
 		offlineMachines = automatDao.getOfflineMachines();
