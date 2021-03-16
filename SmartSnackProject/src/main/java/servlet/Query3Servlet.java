@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.impl.PopularProductsDAO;
-import entity.PopularProduct;
+import queries.queriesImp.PopularProductsQuery;
 
 public class Query3Servlet extends HttpServlet{
 	
@@ -18,10 +17,10 @@ public class Query3Servlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int year = Integer.parseInt(req.getParameter("year"));
-		int month = Integer.parseInt(req.getParameter("month"));
+		int month = req.getParameter("month").equals("") ? 0 : Integer.parseInt(req.getParameter("year"));
 		
-		PopularProductsDAO popularProdDao = new PopularProductsDAO(year, month);
-		List<PopularProduct> products = popularProdDao.getPopularProducts();
+		PopularProductsQuery query = new PopularProductsQuery(year, month);
+		List<List<String>> products = query.findQueryData();
 		
 		req.setAttribute("productList", products);
 		req.getRequestDispatcher("query3.jsp").forward(req, resp);

@@ -1,4 +1,4 @@
-package dao;
+package queries;
 
 import java.util.List;
 

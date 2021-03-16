@@ -16,7 +16,7 @@
 	<h2>Adott év vagy hónap slágertermékei automatánként</h2>
 
 	<div class="container">
-		<form action="/query3">
+		<form action="query3" method="get">
 			<label for="year">Év megadása: </label> <input type="text"
 				name="year" placeholder="2021" required pattern="[0-9]{4}"
 				title="négy számjegy (pl. 2021)"><br> <br> <label
@@ -43,13 +43,13 @@
 			</tr>
 				<c:forEach var="product" items="${productList}">
 					<tr>
-						<td><c:out value="${product.machineId}" /></td>
-						<td><c:out value="${product.zipCode}" /></td>
-						<td><c:out value="${product.city}" /></td>
-						<td><c:out value="${product.address}" /></td>
-						<td><c:out value="${product.productId}" /></td>
-						<td><c:out value="${product.productName}" /></td>
-						<td><c:out value="${product.quantity}" /></td>
+						<td><c:out value="${product.get(0)}" /></td>
+						<td><c:out value="${product.get(1)}" /></td>
+						<td><c:out value="${product.get(2)}" /></td>
+						<td><c:out value="${product.get(3)}" /></td>
+						<td><c:out value="${product.get(4)}" /></td>
+						<td><c:out value="${product.get(5)}" /></td>
+						<td><c:out value="${product.get(6)}" /></td>
 					</tr>
 				</c:forEach>
 		</table>
