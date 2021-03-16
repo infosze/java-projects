@@ -20,7 +20,11 @@
 	<br>
 	<a href="query3.jsp"> 3. Az adott év vagy hónap slágertermékei automatánként</a>
 	<br>
-
+	
+	
+	<a href="query5.jsp"> 5. Mely automaták nem tudtak visszaadni</a>
+	<br>
+	<a href="query6.jsp"> 6. Automatánkén történt feltöltések</a>
 </body>
 
 </html>

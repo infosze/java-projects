@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbstractDAO;
+import dao.SqlConnectionService;
 import entity.PopularProduct;
 
-public class PopularProductsDAO extends AbstractDAO {
+public class PopularProductsDAO extends SqlConnectionService {
 
 	private final String sqlStatement1 = "CREATE VIEW my_view AS SELECT machine_id, product_id, SUM(difference) as total_diff FROM product_movement WHERE difference < 0 group by machine_id, product_id;";
 	private final String sqlStatement2 = "SELECT machine_id, zipcode, city, address, product_id, name, total_diff FROM my_view NATURAL JOIN machine NATURAL JOIN product WHERE (machine_id,  total_diff) IN (SELECT machine_id, MIN(total_diff) FROM my_view group by machine_id);";

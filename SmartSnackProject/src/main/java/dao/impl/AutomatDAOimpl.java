@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbstractDAO;
+import dao.SqlConnectionService;
 import dao.AutomatDAO;
 import entity.Automat;
 
-public class AutomatDAOimpl extends AbstractDAO implements AutomatDAO {
+public class AutomatDAOimpl extends SqlConnectionService implements AutomatDAO {
 
 	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
 	private static final String SOLD_OUT_COIN = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query

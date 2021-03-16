@@ -57,6 +57,15 @@
 		<servlet-name>Query3Servlet</servlet-name>
 		<url-pattern>/query3</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Query5Servlet</servlet-name>
+		<servlet-class>servlet.Query5Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Query5Servlet</servlet-name>
+		<url-pattern>/query5</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
