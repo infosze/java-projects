@@ -11,53 +11,6 @@ import java.util.List;
 
 public class Queries extends SqlConnectionService {
 
-	private final String sqlStatement1 = "CREATE VIEW my_view AS SELECT machine_id, product_id, SUM(difference) as total_diff FROM product_movement WHERE difference < 0 AND time_stamp >= ? AND time_stamp < ? group by machine_id, product_id;";
-	private final String sqlStatement2 = "SELECT machine_id, city, zipcode, address, product_id, name, total_diff FROM my_view NATURAL JOIN machine NATURAL JOIN product WHERE (machine_id,  total_diff) IN (SELECT machine_id, MIN(total_diff) FROM my_view group by machine_id);";
-	private final String sqlStatement3 = "DROP VIEW my_view";
-
-	public List<List<String>> findQueryData(int year, int month) {
-		List<Timestamp> timeStamps = createTimeStamps(year, month);
-		List<List<String>> popularProducts = new ArrayList<List<String>>();
-		try (Connection con = getConnection();
-				PreparedStatement pstmts1 = con.prepareStatement(sqlStatement1);
-				PreparedStatement pstmts2 = con.prepareStatement(sqlStatement2);
-				PreparedStatement pstmts3 = con.prepareStatement(sqlStatement3)) {
-			String timest1 = timeStamps.get(0).toString();
-			String timest2 = timeStamps.get(1).toString();
-			pstmts1.setString(1, timest1);
-			pstmts1.setString(2, timest2);
-			pstmts1.execute();
-			ResultSet rs = pstmts2.executeQuery();
-			while (rs.next()) {
-				popularProducts.add(List.of(//
-						String.valueOf(rs.getString("machine_id")), //
-						String.valueOf(rs.getString("zipcode")), //
-						rs.getString("city"), //
-						rs.getString("address"), //
-						String.valueOf(rs.getString("product_id")), //
-						rs.getString("name"), //
-						String.valueOf(rs.getInt("total_diff") * (-1))));
-			}
-			pstmts3.execute();
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return popularProducts;
-	}
-
-	private List<Timestamp> createTimeStamps(int year, int month) {
-		List<Timestamp> timeStamps = new ArrayList<>();
-		Timestamp start = month == 0 ? Timestamp.valueOf(LocalDate.of(year, 1, 1).atStartOfDay())
-				: Timestamp.valueOf(LocalDate.of(year, month, 1).atStartOfDay());
-		Timestamp end = month == 0 ? Timestamp.valueOf(LocalDate.of(year + 1, 1, 1).atStartOfDay())
-				: month == 12 ? Timestamp.valueOf(LocalDate.of(year + 1, 1, 1).atStartOfDay())
-						: Timestamp.valueOf(LocalDate.of(year, month + 1, 1).atStartOfDay());
-		timeStamps.add(start);
-		timeStamps.add(end);
-		return timeStamps;
-	}
-
 	private static final String SOLD_OUT_COIN_MACHINE_SQL = //
 			"SELECT machine.machine_id, machine.country, machine.zipcode, machine.city, machine.address FROM ssp.machine JOIN ssp.coin_movement "
 					+ "ON ssp.coin_movement.machine_id = ssp.machine.machine_id WHERE coin_movement.time_stamp >= ? "
@@ -116,6 +69,75 @@ public class Queries extends SqlConnectionService {
 			e.printStackTrace();
 		}
 		return findUploadsMachines;
+	}
+
+	private final String sqlStatement1 = "CREATE VIEW my_view AS SELECT machine_id, product_id, SUM(difference) as total_diff FROM product_movement WHERE difference < 0 AND time_stamp >= ? AND time_stamp < ? group by machine_id, product_id;";
+	private final String sqlStatement2 = "SELECT machine_id, city, zipcode, address, product_id, name, total_diff FROM my_view NATURAL JOIN machine NATURAL JOIN product WHERE (machine_id,  total_diff) IN (SELECT machine_id, MIN(total_diff) FROM my_view group by machine_id);";
+	private final String sqlStatement3 = "DROP VIEW my_view";
+
+	public List<List<String>> findQueryData(int year, int month) {
+		List<Timestamp> timeStamps = createTimeStamps(year, month);
+		List<List<String>> popularProducts = new ArrayList<List<String>>();
+		try (Connection con = getConnection();
+				PreparedStatement pstmts1 = con.prepareStatement(sqlStatement1);
+				PreparedStatement pstmts2 = con.prepareStatement(sqlStatement2);
+				PreparedStatement pstmts3 = con.prepareStatement(sqlStatement3)) {
+			String timest1 = timeStamps.get(0).toString();
+			String timest2 = timeStamps.get(1).toString();
+			pstmts1.setString(1, timest1);
+			pstmts1.setString(2, timest2);
+			pstmts1.execute();
+			ResultSet rs = pstmts2.executeQuery();
+			while (rs.next()) {
+				popularProducts.add(List.of(//
+						String.valueOf(rs.getString("machine_id")), //
+						String.valueOf(rs.getString("zipcode")), //
+						rs.getString("city"), //
+						rs.getString("address"), //
+						String.valueOf(rs.getString("product_id")), //
+						rs.getString("name"), //
+						String.valueOf(rs.getInt("total_diff") * (-1))));
+			}
+			pstmts3.execute();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return popularProducts;
+	}
+
+	private List<Timestamp> createTimeStamps(int year, int month) {
+		List<Timestamp> timeStamps = new ArrayList<>();
+		Timestamp start = month == 0 ? Timestamp.valueOf(LocalDate.of(year, 1, 1).atStartOfDay())
+				: Timestamp.valueOf(LocalDate.of(year, month, 1).atStartOfDay());
+		Timestamp end = month == 0 ? Timestamp.valueOf(LocalDate.of(year + 1, 1, 1).atStartOfDay())
+				: month == 12 ? Timestamp.valueOf(LocalDate.of(year + 1, 1, 1).atStartOfDay())
+						: Timestamp.valueOf(LocalDate.of(year, month + 1, 1).atStartOfDay());
+		timeStamps.add(start);
+		timeStamps.add(end);
+		return timeStamps;
+	}
+
+	private static final String TOP_MACHINES_SQL = "SELECT machine_id, SUM((-1) * difference * unit_price) AS total_income FROM product_movement NATURAL JOIN product WHERE difference < 0 AND time_stamp >= ? AND time_stamp <= ? group by machine_id order by total_income DESC limit 10;";
+
+	public List<List<String>> findTopMachines(LocalDate startDate, LocalDate endDate) {
+		List<List<String>> topMachines = new ArrayList<List<String>>();
+		try (Connection con = getConnection(); PreparedStatement pstmts1 = con.prepareStatement(TOP_MACHINES_SQL)) {
+			pstmts1.setString(1, Timestamp.valueOf(startDate.atStartOfDay()).toString());
+			pstmts1.setString(2, Timestamp.valueOf(endDate.atTime(23, 59, 59)).toString());
+			ResultSet rs = pstmts1.executeQuery();
+			int count = 1;
+			while (rs.next()) {
+				topMachines.add(List.of(//
+						String.valueOf(count++), //
+						String.valueOf(rs.getString("machine_id")), //
+						String.valueOf(rs.getInt("total_income"))));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return topMachines;
 	}
 
 }

@@ -56,6 +56,16 @@
 		<servlet-name>Query3Servlet</servlet-name>
 		<url-pattern>/query3</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Query4Servlet</servlet-name>
+		<servlet-class>servlet.Query4Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Query4Servlet</servlet-name>
+		<url-pattern>/query4</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>Query5Servlet</servlet-name>
 		<servlet-class>servlet.Query5Servlet</servlet-class>
