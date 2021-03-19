@@ -84,5 +84,28 @@ public class Queries extends SqlConnectionService {
 		timeStamps.add(end);
 		return timeStamps;
 	}
+	
+	private static final String TOP_MACHINES_SQL = "SELECT machine_id, SUM((-1) * difference * unit_price) AS total_income FROM product_movement NATURAL JOIN product WHERE difference < 0 AND time_stamp >= ? AND time_stamp <= ? group by machine_id order by total_income DESC limit 10;";
+	
+	public List<List<String>> findTopMachines(LocalDate startDate, LocalDate endDate) {
+		List<List<String>> topMachines = new ArrayList<List<String>>();
+		try (Connection con = getConnection();
+				PreparedStatement pstmts1 = con.prepareStatement(TOP_MACHINES_SQL)) {
+			pstmts1.setString(1, Timestamp.valueOf(startDate.atStartOfDay()).toString());
+			pstmts1.setString(2, Timestamp.valueOf(endDate.atTime(23, 59, 59)).toString());
+			ResultSet rs = pstmts1.executeQuery();
+			int count = 1;
+			while (rs.next()) {
+				topMachines.add(List.of(//
+						String.valueOf(count++), //
+						String.valueOf(rs.getString("machine_id")), //
+						String.valueOf(rs.getInt("total_income"))));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return topMachines;
+	}
 
 }
