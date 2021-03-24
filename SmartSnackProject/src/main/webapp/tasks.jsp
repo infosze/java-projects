@@ -18,13 +18,13 @@
 	<br>
 	<a href="query2"> 2. Meghibásodott automaták</a>
 	<br>
-	<a href="query3.jsp"> 3. Az adott év vagy hónap slágertermékei automatánként</a>
+	<a href="popularProducts.jsp"> 3. Az adott év vagy hónap slágertermékei automatánként</a>
 	<br>
-	<a href="query4.jsp"> 4. A legnagyobb forgalmat bonyolító, top 10 automata listája</a>
+	<a href="top10Machines.jsp"> 4. A legnagyobb forgalmat bonyolító, top 10 automata listája</a>
 	<br>
-	<a href="query5.jsp"> 5. Mely automaták nem tudtak visszaadni</a>
+	<a href="runOutOfCoins.jsp"> 5. Mely automaták nem tudtak visszaadni</a>
 	<br>
-	<a href="query6.jsp"> 6. Automatánként történt feltöltések</a>
+	<a href="refills.jsp"> 6. Automatánként történt feltöltések</a>
 </body>
 
 </html>

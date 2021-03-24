@@ -19,7 +19,7 @@ public class BackGroundJobManager implements ServletContextListener{
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {
-        scheduler.shutdownNow();
+        scheduler.shutdownNow(); 
         if (!scheduler.isTerminated())
 			try {
 				scheduler.awaitTermination(10, TimeUnit.SECONDS);

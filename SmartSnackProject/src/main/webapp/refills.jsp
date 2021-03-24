@@ -15,7 +15,7 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Idősáv megadásával megmutatja, mely gépek voltak feltöltve, sorrendben legelől a legtöbb termékkel feltöltött gép</h2>
 	<div class="container">
-	<form action="query6">
+	<form action="refills">
 		<label>Kezdő dátum megadása</label><br>
 		<input type="date" name="startDate"><br>
 		

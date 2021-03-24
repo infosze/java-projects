@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Queries;
+import dao.Query;
+import dao.impl.Top10MachinesQueryImpl;
 
-public class Query4Servlet extends HttpServlet{
+public class Top10MachinesQueryServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -20,11 +21,11 @@ public class Query4Servlet extends HttpServlet{
 		LocalDate startDate = LocalDate.parse(req.getParameter("startDate"));
 		LocalDate endDate = LocalDate.parse(req.getParameter("endDate"));
 		
-		Queries query = new Queries();
-		List<List<String>> machines = query.findTopMachines(startDate, endDate);
+		Query query = new Top10MachinesQueryImpl(startDate, endDate);
+		List<List<String>> machines = query.findDataForQuery();
 		
 		req.setAttribute("machineList", machines);
-		req.getRequestDispatcher("query4.jsp").forward(req, resp);
+		req.getRequestDispatcher("top10Machines.jsp").forward(req, resp);
 	}
 
 }

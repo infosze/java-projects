@@ -16,7 +16,7 @@
 	<h2>Adott időszakban a legnagyobb forgalmat bonyolító automaták listája (Top 10)</h2>
 
 	<div class="container">
-		<form action="query4" method="get">
+		<form action="top10Machines" method="get">
 			<label for="startDate">Kezdő dátum megadása: </label> <input type="date"
 				name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br> <br> <label

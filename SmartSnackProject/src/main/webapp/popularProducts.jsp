@@ -16,7 +16,7 @@
 	<h2>Adott év vagy hónap slágertermékei automatánként</h2>
 
 	<div class="container">
-		<form action="query3" method="get">
+		<form action="popularProducts" method="get">
 			<label for="year">Év megadása: </label> <input type="text"
 				name="year" placeholder="2021" required pattern="[0-9]{4}"
 				title="négy számjegy (pl. 2021)"><br> <br> <label

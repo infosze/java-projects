@@ -15,7 +15,7 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Év, hónap, nap pontosan beállított dátumon megadja, hogy mely automaták nem tudtak visszaadni</h2>
 	<div class="container">
-	<form action="query5">
+	<form action="runOutOfCoins">
 		<label>Dátum megadása</label><br>
 		<input type="date" name="date"><br>
 		<input type="submit" value="Mehet"> 

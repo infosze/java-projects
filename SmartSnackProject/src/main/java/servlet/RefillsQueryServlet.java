@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Queries;
+import dao.Query;
+import dao.impl.RefillsQueryImpl;
 
-public class Query6Servlet extends HttpServlet {
+public class RefillsQueryServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LocalDate startLocalDate = LocalDate.parse(request.getParameter("startDate"));
 		LocalDate endLocalDate = LocalDate.parse(request.getParameter("endDate"));
-		Queries q = new Queries();
-		List<List<String>> list = q.findUploads(startLocalDate, endLocalDate);
+		Query query = new RefillsQueryImpl(startLocalDate, endLocalDate);
+		List<List<String>> list = query.findDataForQuery();
 		for(List<String> l : list) {
 			System.out.println(l.toString());
 		}
 		request.setAttribute("product_machineList", list);
-		request.getRequestDispatcher("query6.jsp").forward(request, response);
+		request.getRequestDispatcher("refills.jsp").forward(request, response);
 	}
 
 }

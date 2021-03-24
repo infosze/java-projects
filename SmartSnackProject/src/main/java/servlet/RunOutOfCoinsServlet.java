@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Queries;
+import dao.Query;
+import dao.impl.RunOutOfCoinsQueryImpl;
 
-public class Query5Servlet extends HttpServlet {
+public class RunOutOfCoinsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LocalDate localDate = LocalDate.parse(request.getParameter("date"));
-		Queries q = new Queries();
-		List<List<String>> list = q.findSoldOutCoinMachine(localDate);
+		Query query = new RunOutOfCoinsQueryImpl(localDate);
+		List<List<String>> list = query.findDataForQuery();
 		request.setAttribute("machineList", list);
-		request.getRequestDispatcher("query5.jsp").forward(request, response);
+		request.getRequestDispatcher("runOutOfCoins.jsp").forward(request, response);
 	}
 
 }
