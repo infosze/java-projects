@@ -15,8 +15,8 @@
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
 
-		<div>
 			<h1>Bejelentkezés</h1>
+		<div class="container">
 			<form action="login">
 				<label>Név</label><br> <input type="text" name="name"
 					required="required"><br> <label>Jelszó</label><br>

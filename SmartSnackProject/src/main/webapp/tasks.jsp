@@ -10,21 +10,21 @@
 <title>Smart Snack - Lekérdezések</title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
-
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h1>LEKÉRDEZÉSEK</h1>
-	<a href="query1"> 1. Három kifogyott termék</a>
-	<br>
-	<a href="query2"> 2. Meghibásodott automaták</a>
-	<br>
-	<a href="query3.jsp"> 3. Az adott év vagy hónap slágertermékei automatánként</a>
-	<br>
-	<a href="query4.jsp"> 4. A legnagyobb forgalmat bonyolító, top 10 automata listája</a>
-	<br>
-	<a href="query5.jsp"> 5. Mely automaták nem tudtak visszaadni</a>
-	<br>
-	<a href="query6.jsp"> 6. Automatánként történt feltöltések</a>
+	<div class="container">
+	<a href="query1">1. Három kifogyott termék.</a>
+	<br><br>
+	<a href="query2">2. Meghibásodott automaták.</a>
+	<br><br>
+	<a href="query3.jsp">3. Az adott év vagy hónap slágertermékei automatánként.</a>
+	<br><br>
+	<a href="query4.jsp">4. A legnagyobb forgalmat bonyolító, top 10 automata listája.</a>
+	<br><br>
+	<a href="query5.jsp">5. Mely automaták nem tudtak visszaadni.</a>
+	<br><br>
+	<a href="query6.jsp">6. Automatánként történt feltöltések.</a>
+	</div>
 </body>
-
 </html>

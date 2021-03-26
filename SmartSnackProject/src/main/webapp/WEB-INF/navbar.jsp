@@ -3,11 +3,11 @@
 
 <div class="navbar">
 
-	<a href="index.jsp"><i class="fas fa-home"></i> Kezdőlap</a>
+<!-- 	<a href="index.jsp"><i class="fas fa-home"></i> Kezdőlap</a> -->
 
 	<c:choose>
 		<c:when test="${loggedInUser == null}">
-			<a  href="login.jsp" style="float:right"><i class="fas fa-sign-in-alt"></i> Bejelentkezés</a>
+			<a  href="login.jsp"><i class="fas fa-sign-in-alt"></i> Bejelentkezés</a>
 		</c:when>
 		<c:otherwise>
 			<a href="tasks.jsp"><i class="fas fa-tasks"></i> Lekérdezések</a>

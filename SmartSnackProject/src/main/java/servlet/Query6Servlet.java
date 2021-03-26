@@ -20,9 +20,6 @@ public class Query6Servlet extends HttpServlet {
 		LocalDate endLocalDate = LocalDate.parse(request.getParameter("endDate"));
 		Queries q = new Queries();
 		List<List<String>> list = q.findUploads(startLocalDate, endLocalDate);
-		for(List<String> l : list) {
-			System.out.println(l.toString());
-		}
 		request.setAttribute("product_machineList", list);
 		request.getRequestDispatcher("query6.jsp").forward(request, response);
 	}

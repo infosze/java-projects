@@ -14,20 +14,21 @@
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Idősáv megadásával megmutatja, mely gépek voltak feltöltve, sorrendben legelől a legtöbb termékkel feltöltött gép</h2>
-	<div class="container">
+	<div class="task">
 	<form action="query6">
-		<label>Kezdő dátum megadása</label><br>
-		<input type="date" name="startDate"><br>
-		
-		<label>Záró dátum megadása</label><br>
-		<input type="date" name="endDate"><br>
+		<label>Kezdő dátum:</label>
+		<input type="date" name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+				title="Év, hónap, nap ebben a formátumban: 2021-01-01">
+		<label>Záró dátum:</label>
+		<input type="date" name="endDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
 		<input type="submit" value="Mehet">  
 	</form>
 	</div>
-	<div>
+	<div class="spreadsheet">
 		<table border="1">
 			<tr>
-				<th>Azonosító</th>
+				<th>Automata azonosító</th>
 				<th>Ország</th>
 				<th>Irányítószám</th>
 				<th>Település</th>
