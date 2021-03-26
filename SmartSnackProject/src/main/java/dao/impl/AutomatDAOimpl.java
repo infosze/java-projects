@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.SqlConnectionService;
+import dao.AbstractQuery;
 import dao.AutomatDAO;
 import entity.Automat;
 
-public class AutomatDAOimpl extends SqlConnectionService implements AutomatDAO {
+public class AutomatDAOimpl extends AbstractQuery implements AutomatDAO {
 
 	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
 	private static final String SOLD_OUT_COIN = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
@@ -47,6 +47,12 @@ public class AutomatDAOimpl extends SqlConnectionService implements AutomatDAO {
 			System.out.println(e);
 		}
 		return result;
+	}
+
+	@Override
+	public List<List<String>> findDataForQuery() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

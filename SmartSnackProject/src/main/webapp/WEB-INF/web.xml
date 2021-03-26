@@ -49,38 +49,38 @@
 		<url-pattern>/query2</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>Query3Servlet</servlet-name>
-		<servlet-class>servlet.Query3Servlet</servlet-class>
+		<servlet-name>PopularProductsServlet</servlet-name>
+		<servlet-class>servlet.PopularProductsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Query3Servlet</servlet-name>
-		<url-pattern>/query3</url-pattern>
+		<servlet-name>PopularProductsServlet</servlet-name>
+		<url-pattern>/popularProducts</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>Query4Servlet</servlet-name>
-		<servlet-class>servlet.Query4Servlet</servlet-class>
+		<servlet-name>Top10MachinesQueryServlet</servlet-name>
+		<servlet-class>servlet.Top10MachinesQueryServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Query4Servlet</servlet-name>
-		<url-pattern>/query4</url-pattern>
+		<servlet-name>Top10MachinesQueryServlet</servlet-name>
+		<url-pattern>/top10Machines</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>Query5Servlet</servlet-name>
-		<servlet-class>servlet.Query5Servlet</servlet-class>
+		<servlet-name>RunOutOfCoinsServlet</servlet-name>
+		<servlet-class>servlet.RunOutOfCoinsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Query5Servlet</servlet-name>
-		<url-pattern>/query5</url-pattern>
+		<servlet-name>RunOutOfCoinsServlet</servlet-name>
+		<url-pattern>/runOutOfCoins</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>Query6Servlet</servlet-name>
-		<servlet-class>servlet.Query6Servlet</servlet-class>
+		<servlet-name>RefillsQueryServlet</servlet-name>
+		<servlet-class>servlet.RefillsQueryServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Query6Servlet</servlet-name>
-		<url-pattern>/query6</url-pattern>
+		<servlet-name>RefillsQueryServlet</servlet-name>
+		<url-pattern>/refills</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
