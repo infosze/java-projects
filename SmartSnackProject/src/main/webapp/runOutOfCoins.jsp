@@ -14,16 +14,15 @@
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Év, hónap, nap pontosan beállított dátumon megadja, hogy mely automaták nem tudtak visszaadni</h2>
-	<div class="task">
+	<div class="choice">
 	<form action="runOutOfCoins">
-		<label>Dátum:</label><br>
+		<label>Dátum:</label>
 		<input type="date" name="date" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
 		<input type="submit" value="Mehet"> 
 	</form>
 	</div>
-	<div class="spreadsheet">
-		<table border="1">
+		<table>
 			<tr>
 				<th>Automata azonosító</th>
 				<th>Ország</th>
@@ -42,7 +41,6 @@
 			</c:forEach>
 		</table>
 	
-	</div>
 	
 </body>
 </html>

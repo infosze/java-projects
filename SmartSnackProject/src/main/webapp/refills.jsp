@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Idősáv megadásával megmutatja, mely gépek voltak feltöltve, sorrendben legelől a legtöbb termékkel feltöltött gép</h2>
-	<div class="task">
+	<div class="choice">
 	<form action="refills">
 		<label>Kezdő dátum:</label>
 		<input type="date" name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
@@ -25,8 +25,7 @@
 		<input type="submit" value="Mehet">  
 	</form>
 	</div>
-	<div class="spreadsheet">
-		<table border="1">
+		<table>
 			<tr>
 				<th>Automata azonosító</th>
 				<th>Ország</th>
@@ -44,8 +43,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-	
-	</div>
 	
 </body>
 </html>

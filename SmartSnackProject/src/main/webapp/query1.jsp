@@ -19,7 +19,7 @@
 	response.setIntHeader("Refresh", 10);
 	%>
 	<div>
-		<table border="1">
+		<table>
 			<tr>
 				<th>Azonosító</th>
 				<th>Irányítószám</th>

@@ -10,8 +10,8 @@ import java.util.List;
 
 import dao.AbstractQuery;
 
-public class RefillsQueryImpl extends AbstractQuery{
-	
+public class RefillsQueryImpl extends AbstractQuery {
+
 	private static final String UPLOADS_SQL = //
 			"SELECT machine.machine_id, machine.country, machine.zipcode, machine.city, machine.address "
 					+ "FROM ssp.machine JOIN ssp.product_movement ON ssp.product_movement.machine_id = ssp.machine.machine_id "
@@ -19,7 +19,7 @@ public class RefillsQueryImpl extends AbstractQuery{
 					+ "AND product_movement.difference > 0 GROUP BY product_movement.machine_id ORDER BY sum(product_movement.difference) DESC;";
 	private LocalDate startDate;
 	private LocalDate endDate;
-	
+
 	public RefillsQueryImpl(LocalDate startDate, LocalDate endDate) {
 		super();
 		this.startDate = startDate;

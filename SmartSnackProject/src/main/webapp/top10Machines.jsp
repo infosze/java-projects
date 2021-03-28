@@ -15,27 +15,27 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Adott időszakban a legnagyobb forgalmat bonyolító automaták listája (Top 10)</h2>
 
-	<div class="container">
+	<div class="choice">
 		<form action="top10Machines" method="get">
-			<label for="startDate">Kezdő dátum megadása: </label> <input type="date"
+			<label for="startDate">Kezdő dátum: </label> <input type="date"
 				name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br> <br> <label
-				for="endDate">Záró dátum megadása: </label> <input type="date"
+				title="Év, hónap, nap ebben a formátumban: 2021-01-01"> 
+				<label for="endDate">Záró dátum: </label> <input type="date"
 				name="endDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br> <br> 
-				<input type="submit" value="Mehet"><br>
-			<br>
+				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
+				<input type="submit" value="Mehet">
+			
 		</form>
 	</div>
 
 
 
-	<div class="container">
-		<table border="1">
+<!-- 	<div class="container"> -->
+		<table>
 			<tr>
 				<th>Sorszám</th>
-				<th>Az automata azonosítója</th>
-				<th>Az automata forgalma (Ft)</th>
+				<th>Automata azonosító</th>
+				<th>Forgalom (Ft)</th>
 				
 			</tr>
 				<c:forEach var="machine" items="${machineList}">
@@ -47,7 +47,7 @@
 					</tr>
 				</c:forEach>
 		</table>
-	</div>
+<!-- 	</div> -->
 
 
 </body>

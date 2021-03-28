@@ -12,7 +12,7 @@
 </head>
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h1>LEKÉRDEZÉSEK</h1>
+	<h1>JELENTÉSEK</h1>
 
 <div class="container">
 	<a href="query1"> 1. Három kifogyott termék</a>

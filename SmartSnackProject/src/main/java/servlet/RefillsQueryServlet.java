@@ -21,9 +21,6 @@ public class RefillsQueryServlet extends HttpServlet {
 		LocalDate endLocalDate = LocalDate.parse(request.getParameter("endDate"));
 		Query query = new RefillsQueryImpl(startLocalDate, endLocalDate);
 		List<List<String>> list = query.findDataForQuery();
-		for(List<String> l : list) {
-			System.out.println(l.toString());
-		}
 		request.setAttribute("product_machineList", list);
 		request.getRequestDispatcher("refills.jsp").forward(request, response);
 	}

@@ -6,7 +6,7 @@
 }
 
 body {
-	margin: 0;
+	margin: 0px;
 	background-color: #e7ebf3;
 }
 
@@ -26,7 +26,7 @@ body {
 
 .navbar a:hover {
 	background-color: #ddd;
-	color: #000000;
+	color: #004080;
 }
 
 .container {
@@ -48,7 +48,6 @@ body {
 }
 
 input[type=text], input[type=password], input[type=datetime-local] {
-/* 	width: 100%; */
 	margin: 20px 0px;
 	display: inline-block;
 	text-align: left;
@@ -65,39 +64,17 @@ input[type=submit], input[type=date]{
 	background-color: #004080;
 }
 
+
 label {
 	text-align: left;
-	margin-right: 10px;
 }
 
-h1{
+h1, h2{
 	margin: 30px;
 	color: #004080;
 }
 
-h2{
-	margin: 30px;
-	color: #004080;
-}
-
-/* table{ */
-/* 	margin: 30px; */
-/* } */
-
-.spreadsheet{
-	margin: 30px;
-	font-size: 20px;
-	color: #004080;
-}
-
-.spreadsheet td{
-	background-color: #ffff80;
-	padding-right: 75px;
-	padding-left: 75px;
-	text-align: center;
-}
-
-.task{
+.choice{
 	margin: 30px;
 	font-size: 22px;
 	color: #004080;
@@ -108,3 +85,28 @@ h2{
 	margin: 30px;
 	color: #004080;
 }
+
+table{
+	border: 1px solid black;
+	margin: 30px;
+	font-size: 20px;
+	color: #004080;
+	visibility: visible;
+}
+
+.table, th{
+	border: 1px solid black;
+	padding-right: 50px;
+	padding-left: 50px;
+	text-align: center;
+}
+
+.table, td{
+	border: 1px solid black;
+	background-color: #ffff80;
+	padding-right: 50px;
+	padding-left: 50px;
+	text-align: center;
+}
+
+

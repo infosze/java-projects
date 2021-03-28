@@ -14,7 +14,6 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-
 			<h1>Bejelentkezés</h1>
 		<div class="container">
 			<form action="login">

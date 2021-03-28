@@ -15,25 +15,25 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Adott év vagy hónap slágertermékei automatánként</h2>
 
-	<div class="container">
+	<div class="choice">
 		<form action="popularProducts" method="get">
-			<label for="year">Év megadása: </label> <input type="text"
-				name="year" placeholder="2021" required pattern="[0-9]{4}"
-				title="négy számjegy (pl. 2021)"><br> <br> <label
-				for="month">Hónap megadása (opcionális): </label> <input type="text"
-				name="month" placeholder="03" pattern="[0-9]{2}"
-				title="két számjegy (pl. 01 vagy 12)"><br> <br> <input
-				type="submit" value="Mehet"><br>
+			<label for="year">Év:</label> 
+			<input type="text" name="year" placeholder="2021" required pattern="[0-9]{4}"
+				title="négy számjegy (pl. 2021)"> 
+			<label for="month">Hónap (opcionális):</label> 
+			<input type="text" name="month" placeholder="03" pattern="[0-9]{2}"
+				title="két számjegy (pl. 01 vagy 12)"><br>
+			<input type="submit" value="Mehet">
 			<br>
 		</form>
 	</div>
 
 
 
-	<div class="container">
-		<table border="1">
+<!-- 	<div class="container"> -->
+		<table>
 			<tr>
-				<th>Az automata azonosítója</th>
+				<th>Automata azonosító</th>
 				<th>Irányítószám</th>
 				<th>Település</th>
 				<th>Cím</th>
@@ -53,7 +53,7 @@
 					</tr>
 				</c:forEach>
 		</table>
-	</div>
+<!-- 	</div> -->
 
 
 </body>
