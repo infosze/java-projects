@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,11 +21,13 @@ public class Top10MachinesQueryServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		LocalDate startDate = LocalDate.parse(req.getParameter("startDate"));
 		LocalDate endDate = LocalDate.parse(req.getParameter("endDate"));
-		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.");
 		Query query = new Top10MachinesQueryImpl(startDate, endDate);
 		List<List<String>> machines = query.findDataForQuery();
-		
 		req.setAttribute("machineList", machines);
+		req.setAttribute("startDate", formatter.format(startDate));
+		req.setAttribute("endDate", formatter.format(endDate));
+		
 		req.getRequestDispatcher("top10Machines.jsp").forward(req, resp);
 	}
 

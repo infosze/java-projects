@@ -28,9 +28,10 @@
 		</form>
 	</div>
 
-
-
-<!-- 	<div class="container"> -->
+<c:choose>
+	<c:when test="${year != null}">
+		<h2>${ year} ${ month}</h2>
+		
 		<table>
 			<tr>
 				<th>Automata azonosító</th>
@@ -53,7 +54,9 @@
 					</tr>
 				</c:forEach>
 		</table>
-<!-- 	</div> -->
+		
+	</c:when>
+	</c:choose>	
 
 
 </body>

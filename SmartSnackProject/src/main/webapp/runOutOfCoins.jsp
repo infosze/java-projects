@@ -22,10 +22,17 @@
 		<input type="submit" value="Mehet"> 
 	</form>
 	</div>
+	<c:choose>
+	<c:when test="${date != null}">
+		<h2>${ date}</h2>
+		<c:choose>
+	<c:when test="${islistEmpty == true}">
+		<h2>A megadott dátumon, minden automata vissza tudott adni.</h2>
+		</c:when>
+			<c:otherwise>
 		<table>
 			<tr>
 				<th>Automata azonosító</th>
-				<th>Ország</th>
 				<th>Irányítószám</th>
 				<th>Település</th>
 				<th>Cím</th>
@@ -36,10 +43,13 @@
 					<td><c:out value="${ machine.get(1)}" /></td>
 					<td><c:out value="${ machine.get(2)}" /></td>
 					<td><c:out value="${ machine.get(3)}" /></td>
-					<td><c:out value="${ machine.get(4)}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
+		</c:otherwise>
+	</c:choose>	
+		</c:when>
+	</c:choose>	
 	
 	
 </body>

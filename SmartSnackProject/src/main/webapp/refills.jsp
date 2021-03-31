@@ -22,13 +22,20 @@
 		<label>Záró dátum:</label>
 		<input type="date" name="endDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
-		<input type="submit" value="Mehet">  
+		<input type="submit" value="Mehet"> 
 	</form>
 	</div>
+	<c:choose>
+	<c:when test="${startDate != null}">
+		<h2>${ startDate} - ${ endDate}</h2>
+		<c:choose>
+	<c:when test="${islistEmpty == true}">
+		<h2>A megadott időintervallumban nem volt feltöltés.</h2>
+		</c:when>
+		<c:otherwise>
 		<table>
 			<tr>
 				<th>Automata azonosító</th>
-				<th>Ország</th>
 				<th>Irányítószám</th>
 				<th>Település</th>
 				<th>Cím</th>
@@ -39,10 +46,14 @@
 					<td><c:out value="${ product_machineList.get(1)}" /></td>
 					<td><c:out value="${ product_machineList.get(2)}" /></td>
 					<td><c:out value="${ product_machineList.get(3)}" /></td>
-					<td><c:out value="${ product_machineList.get(4)}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
+		</c:otherwise>
+	</c:choose>	
+		
+		</c:when>
+	</c:choose>	
 	
 </body>
 </html>

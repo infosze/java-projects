@@ -17,26 +17,26 @@
 
 	<div class="choice">
 		<form action="top10Machines" method="get">
-			<label for="startDate">Kezdő dátum: </label> <input type="date"
-				name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+			<label for="startDate">Kezdő dátum: </label> 
+			<input type="date" name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"> 
-				<label for="endDate">Záró dátum: </label> <input type="date"
-				name="endDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+				<label for="endDate">Záró dátum: </label> 
+				<input type="date" name="endDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
 				<input type="submit" value="Mehet">
 			
 		</form>
 	</div>
-
-
-
-<!-- 	<div class="container"> -->
+	
+<c:choose>
+	<c:when test="${startDate != null}">
+		<h2>${ startDate} - ${ endDate}</h2>
+		
 		<table>
 			<tr>
 				<th>Sorszám</th>
 				<th>Automata azonosító</th>
 				<th>Forgalom (Ft)</th>
-				
 			</tr>
 				<c:forEach var="machine" items="${machineList}">
 					<tr>
@@ -47,8 +47,9 @@
 					</tr>
 				</c:forEach>
 		</table>
-<!-- 	</div> -->
-
+	
+		</c:when>
+	</c:choose>	
 
 </body>
 </html>

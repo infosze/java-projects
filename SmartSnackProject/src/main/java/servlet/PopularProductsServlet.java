@@ -23,6 +23,9 @@ public class PopularProductsServlet extends HttpServlet{
 		Query query = new PopularProductsQueryImpl(year, month);
 		List<List<String>> products = query.findDataForQuery();
 		
+		req.setAttribute("year", String.format("%d.", year));
+		req.setAttribute("month", month > 0 ? String.format("%d.", month) : "");
+		
 		req.setAttribute("productList", products);
 		req.getRequestDispatcher("popularProducts.jsp").forward(req, resp);
 		

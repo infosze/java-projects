@@ -13,7 +13,7 @@ import dao.AbstractQuery;
 public class RunOutOfCoinsQueryImpl extends AbstractQuery{
 	
 	private static final String SOLD_OUT_COIN_MACHINE_SQL = //
-			"SELECT machine.machine_id, machine.country, machine.zipcode, machine.city, machine.address FROM ssp.machine JOIN ssp.coin_movement "
+			"SELECT machine.machine_id, machine.zipcode, machine.city, machine.address FROM ssp.machine JOIN ssp.coin_movement "
 					+ "ON ssp.coin_movement.machine_id = ssp.machine.machine_id WHERE coin_movement.time_stamp >= ? "
 					+ "AND coin_movement.time_stamp < ? AND coin_quantity = 0 GROUP BY ssp.machine.machine_id;";
 	private LocalDate localDate;
@@ -36,7 +36,6 @@ public class RunOutOfCoinsQueryImpl extends AbstractQuery{
 			while (rs.next()) {
 				List<String> machine = new ArrayList<>();
 				machine.add(rs.getString("machine.machine_id"));
-				machine.add(rs.getString("machine.country"));
 				machine.add(rs.getString("machine.zipcode"));
 				machine.add(rs.getString("machine.city"));
 				machine.add(rs.getString("machine.address"));

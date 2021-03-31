@@ -35,7 +35,7 @@ public class Top10MachinesQueryImpl extends AbstractQuery{
 				topMachines.add(List.of(//
 						String.valueOf(count++), //
 						rs.getString("machine_id"), //
-						String.valueOf(rs.getInt("total_income"))));
+						String.format("%,d", rs.getInt("total_income"))));
 			}
 			rs.close();
 		} catch (SQLException e) {
