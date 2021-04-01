@@ -19,8 +19,6 @@ public class PopularProductsQueryImpl extends AbstractQuery{
 	
 	private int year;
 	private int month;
-	
-	
 
 	public PopularProductsQueryImpl(int year, int month) {
 		super();

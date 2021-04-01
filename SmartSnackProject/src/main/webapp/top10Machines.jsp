@@ -35,7 +35,10 @@
 		<table>
 			<tr>
 				<th>Sorszám</th>
-				<th>Automata azonosító</th>
+				<th>Automata azonosítója</th>
+				<th>Irányítószám</th>
+				<th>Település</th>
+				<th>Cím</th>
 				<th>Forgalom (Ft)</th>
 			</tr>
 				<c:forEach var="machine" items="${machineList}">
@@ -43,6 +46,9 @@
 						<td><c:out value="${machine.get(0)}" /></td>
 						<td><c:out value="${machine.get(1)}" /></td>
 						<td><c:out value="${machine.get(2)}" /></td>
+						<td><c:out value="${machine.get(3)}" /></td>
+						<td><c:out value="${machine.get(4)}" /></td>
+						<td><c:out value="${machine.get(5)}" /></td>
 						
 					</tr>
 				</c:forEach>

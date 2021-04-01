@@ -13,7 +13,7 @@ import dao.AbstractQuery;
 
 public class Top10MachinesQueryImpl extends AbstractQuery{
 	
-	private static final String TOP_MACHINES_STATEMENT = "SELECT machine_id, SUM((-1) * difference * unit_price) AS total_income FROM product_movement NATURAL JOIN product WHERE difference < 0 AND time_stamp >= ? AND time_stamp <= ? group by machine_id order by total_income DESC limit 10;";
+	private static final String TOP_MACHINES_STATEMENT = "SELECT machine_id, zipcode, city, address, SUM((-1) * difference * unit_price) AS total_income FROM product_movement NATURAL JOIN product NATURAL JOIN machine WHERE difference < 0 AND time_stamp >= ? AND time_stamp <= ? group by machine_id order by total_income DESC limit 10;";
 	private LocalDate startDate;
 	private LocalDate endDate;
 	
@@ -33,8 +33,11 @@ public class Top10MachinesQueryImpl extends AbstractQuery{
 			int count = 1;
 			while (rs.next()) {
 				topMachines.add(List.of(//
-						String.valueOf(count++), //
+						String.valueOf(count++) + ".", //
 						rs.getString("machine_id"), //
+						String.valueOf(rs.getInt("zipcode")),//
+						rs.getString("city"),
+						rs.getString("address"),//				
 						String.format("%,d", rs.getInt("total_income"))));
 			}
 			rs.close();
