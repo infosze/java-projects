@@ -13,7 +13,7 @@
 </head>
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Idősáv megadásával megmutatja, mely gépek voltak feltöltve, sorrendben legelől a legtöbb termékkel feltöltött gép</h2>
+	<h2>Az adott időszakban a feltöltött automaták listája, sorrendben legelől a legtöbb termékkel feltöltött gép</h2>
 	<div class="choice">
 	<form action="refills">
 		<label>Kezdő dátum:</label>

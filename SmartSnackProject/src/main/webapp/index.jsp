@@ -14,7 +14,7 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h1>Smart Snack project</h1>
-	<h2></h2>
+	<h1>Smart Snack</h1>
+	<h2>Jelentések ital és snack kiadó automatákról</h2>
 </body>
 </html>

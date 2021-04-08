@@ -15,7 +15,7 @@
 	<h1>JELENTÉSEK</h1>
 
 <div class="container">
-	<a href="query1"> 1. Három kifogyott termék</a>
+	<a href="query1"> 1. Három termékből kifogyott automaták</a>
 	<br><br>
 	<a href="query2"> 2. Meghibásodott automaták</a>
 	<br><br>
@@ -23,9 +23,9 @@
 	<br><br>
 	<a href="top10Machines.jsp"> 4. A legnagyobb forgalmat bonyolító, top 10 automata listája</a>
 	<br><br>
-	<a href="runOutOfCoins.jsp"> 5. Mely automaták nem tudtak visszaadni</a>
+	<a href="runOutOfCoins.jsp"> 5. Visszaadni nem tudó automaták</a>
 	<br><br>
-	<a href="refills.jsp"> 6. Automatánként történt feltöltések</a>
+	<a href="refills.jsp"> 6. Feltöltött automaták</a>
 	</div>
 
 </body>

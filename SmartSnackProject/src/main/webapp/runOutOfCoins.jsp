@@ -13,7 +13,7 @@
 </head>
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Év, hónap, nap pontosan beállított dátumon megadja, hogy mely automaták nem tudtak visszaadni</h2>
+	<h2>Az adott dátumon a visszaadni nem tudó automaták listája</h2>
 	<div class="choice">
 	<form action="runOutOfCoins">
 		<label>Dátum:</label>
