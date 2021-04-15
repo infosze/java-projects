@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 		if (user.getName() == name && user.getPassword() == password) {
 			request.getSession().setAttribute("name", name);
 			request.getSession().setAttribute("loggedInUser", user.getName());
-			request.getRequestDispatcher("tasks.jsp").forward(request, response);
+			request.getRequestDispatcher("tasks").forward(request, response);
 		} else {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}

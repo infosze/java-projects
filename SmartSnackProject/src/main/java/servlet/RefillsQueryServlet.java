@@ -26,7 +26,7 @@ public class RefillsQueryServlet extends HttpServlet {
 		request.setAttribute("product_machineList", list);
 		request.setAttribute("startDate", formatter.format(startLocalDate));
 		request.setAttribute("endDate", formatter.format(endLocalDate));
-		boolean islistEmpty = list.isEmpty() ? true : false;
+		boolean islistEmpty = list.isEmpty();
 		request.setAttribute("islistEmpty", islistEmpty);
 		request.getRequestDispatcher("refills.jsp").forward(request, response);
 	}

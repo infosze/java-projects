@@ -19,6 +19,11 @@
 	response.setIntHeader("Refresh", 10);
 	%>
 	<div>
+		<c:choose>
+	<c:when test="${islistEmpty == true}">
+		<h2>Minden automata működik.</h2>
+		</c:when>
+			<c:otherwise>
 		<table>
 			<tr>
 				<th>Azonosító</th>
@@ -35,7 +40,13 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</c:otherwise>
+	</c:choose>	
 	</div>
 </body>
+
+<div class="container">
+	<a href="tasks.jsp">Vissza</a>
+	</div>
 
 </html>

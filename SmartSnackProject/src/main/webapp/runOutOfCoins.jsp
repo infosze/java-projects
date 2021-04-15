@@ -51,6 +51,9 @@
 		</c:when>
 	</c:choose>	
 	
+	<div class="container">
+	<a href="tasks.jsp">Vissza</a>
+	</div>
 	
 </body>
 </html>

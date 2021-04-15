@@ -19,7 +19,8 @@ public class Query2Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AutomatDAO automatDAO = new AutomatDAOimpl();
 		List<Automat> list = automatDAO.getOfflineMachines();
-
+		boolean islistEmpty = list.isEmpty();
+		request.setAttribute("islistEmpty", islistEmpty);
 		request.setAttribute("automatList", list);
 		request.getRequestDispatcher("query2.jsp").forward(request, response);
 	}

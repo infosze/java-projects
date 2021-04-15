@@ -13,12 +13,17 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Kifogyott min. 3 termékkategória:</h2>
+	<h2>Kifogyott minimum 3 termékkategória:</h2>
 	<%
 	// Set refresh, autoload time as 10 seconds
 	response.setIntHeader("Refresh", 10);
 	%>
 	<div>
+		<c:choose>
+	<c:when test="${islistEmpty == true}">
+		<h2>Minden automata feltöltött.</h2>
+		</c:when>
+			<c:otherwise>
 		<table>
 			<tr>
 				<th>Azonosító</th>
@@ -35,7 +40,13 @@
 				</tr>
 			</c:forEach>
 		</table>
+		</c:otherwise>
+	</c:choose>	
 	</div>
 </body>
+
+<div class="container">
+	<a href="tasks.jsp">Vissza</a>
+	</div>
 
 </html>
