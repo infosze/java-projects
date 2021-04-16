@@ -32,18 +32,20 @@ public class LoginServlet extends HttpServlet {
 			userDatas.add(1, " ");
 			userDatas.add(2, " ");
 		}
-		
-		String userName = userDatas.get(0);
-		String userPassword = userDatas.get(1);
-		String userSalt = userDatas.get(2);
+//		String userName = userDatas.get(0);
+//		String userPassword = userDatas.get(1);
+//		String userSalt = userDatas.get(2);
 
 		User user = new User();
-		user.setName(userName);
-		user.setPassword(userPassword);
+//		user.setName(userName);
+//		user.setPassword(userPassword);
+		user.setName(name);
+		user.setPassword(password);
 		
-		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, userPassword, userSalt);
+//		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, userPassword, userSalt);
 
-		if (user.getName().equals(name) & passwordMatch == true) {
+		if (user.getName().equals(name) && user.getPassword().equals(password)) {
+//		if (user.getName().equals(name) && passwordMatch == true) {
 			request.getSession().setAttribute("name", name);
 			request.getSession().setAttribute("loggedInUser", user.getName());
 			request.getRequestDispatcher("tasks").forward(request, response);
