@@ -13,44 +13,44 @@
 </head>
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h1>JELENTÉSEK</h1>
+	<h1 style="text-transform:uppercase">${resource.getString("reports")}</h1>
 	<%
 	// Set refresh, autoload time as 10 seconds
 	response.setIntHeader("Refresh", 10);
 	%> 
 
 <div class="container">
-	<a href="query1"> 1. Három termékből kifogyott automaták</a>&nbsp;&nbsp;
+	<a href="query1"> 1. ${resource.getString("query1_title")}</a>&nbsp;&nbsp;
 	
 	<c:choose>
 	<c:when test="${isEmptyQ1 == true}">
-		<span style="color:blue; font-size:24px">[ Minden automata rendben. ]</span>
+		<span style="color:blue; font-size:24px">[ ${resource.getString("query1_okmessage")} ]</span>
 		</c:when>
 		<c:otherwise>
-		<span style="color:red; font-size:24px">[ ${listSizeQ1} db! ]</span>
+		<span style="color:red; font-size:24px">[ ${listSizeQ1} ${resource.getString("db")}! ]</span>
 		</c:otherwise>
 		</c:choose>
 	
 	<br><br>
-	<a href="query2"> 2. Meghibásodott automaták</a>&nbsp;&nbsp;
+	<a href="query2"> 2. ${resource.getString("query2_title")}</a>&nbsp;&nbsp;
 	
 	<c:choose>
 	<c:when test="${isEmptyQ2 == true}">
-		<span style="color:blue; font-size:24px">[ Minden automata rendben. ]</span>
+		<span style="color:blue; font-size:24px">[ ${resource.getString("query1_okmessage")} ]</span>
 		</c:when>
 		<c:otherwise>
-		<span style="color:red; font-size:24px">[ ${listSizeQ2} db! ]</span>
+		<span style="color:red; font-size:24px">[ ${listSizeQ2} ${resource.getString("db")}! ]</span>
 		</c:otherwise>
 		</c:choose>
 	
 	<br><br>
-	<a href="popularProducts.jsp"> 3. Az adott év vagy hónap slágertermékei automatánként</a>
+	<a href="popularProducts.jsp"> 3. ${resource.getString("query3_title")}</a>
 	<br><br>
-	<a href="top10Machines.jsp"> 4. A legnagyobb forgalmat bonyolító, top 10 automata listája</a>
+	<a href="top10Machines.jsp"> 4. ${resource.getString("query4_title")}</a>
 	<br><br>
-	<a href="runOutOfCoins.jsp"> 5. Visszaadni nem tudó automaták</a>
+	<a href="runOutOfCoins.jsp"> 5. ${resource.getString("query5_title")}</a>
 	<br><br>
-	<a href="refills.jsp"> 6. Feltöltött automaták</a>
+	<a href="refills.jsp"> 6. ${resource.getString("query6_title")}</a>
 	</div>
 	
 </body>

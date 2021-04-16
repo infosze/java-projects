@@ -12,7 +12,7 @@
 			</c:when>
 			<c:otherwise>
 			<a href="index.jsp"><i class="fas fa-home"></i> ${resource.getString("kezdőlap")}</a>
-			<a href="login.jsp"><i class="fas fa-sign-in-alt"></i> ${resource.getString("bejelentkezés")}</a>
+			<a href="login.jsp"><i class="fas fa-sign-in-alt"></i> ${resource.getString("login")}</a>
 		</c:otherwise>
 		</c:choose>
 		</c:when>
@@ -24,7 +24,7 @@
 			<a style="float:right"><i class="far fa-user"></i> ${name }  </a>
 			</c:when>
 			<c:otherwise>
-			<a href="tasks.jsp"><i class="fas fa-tasks"></i> ${resource.getString("jelentések")}</a>
+			<a href="tasks.jsp"><i class="fas fa-tasks"></i> ${resource.getString("reports")}</a>
 			<a href="logout" style="float:right"><i class="fas fa-sign-out-alt"></i> ${resource.getString("kijelentkezés")}</a>
 			<a style="float:right"><i class="far fa-user"></i> ${name }  </a>
 			</c:otherwise>

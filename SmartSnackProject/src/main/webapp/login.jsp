@@ -14,14 +14,14 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-			<h1>Bejelentkezés</h1>
+			<h1>${resource.getString("login")}</h1>
 		<div class="container">
 			<form action="login">
-				<label>Név</label><br> 
+				<label>${resource.getString("name")}</label><br> 
 				<input type="text" name="name" required="required"><br> 
-				<label>Jelszó</label><br>
+				<label>${resource.getString("pw")}</label><br>
 				<input type="password" name="password" required="required"><br>
-				<input type="submit" value="Bejelentkezés">
+				<input type="submit" value=${resource.getString("login")}>
 			</form>
 		</div>
 
