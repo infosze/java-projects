@@ -18,11 +18,9 @@
 	<div class="choice">
 		<form action="popularProducts" method="get">
 			<label for="year">Év:</label> 
-			<input type="text" name="year" placeholder="2021" required pattern="[0-9]{4}"
-				title="négy számjegy (pl. 2021)"> 
+			<input type="text" name="year" placeholder="2021" required pattern="[0-9]{4}" title="négy számjegy (pl. 2021)"> 
 			<label for="month">Hónap (opcionális):</label> 
-			<input type="text" name="month" placeholder="03" pattern="[0-9]{2}"
-				title="két számjegy (pl. 01 vagy 12)"><br>
+			<input type="text" name="month" placeholder="03" pattern="[0-9]{2}" title="két számjegy (pl. 01 vagy 12)"><br>
 			<input type="submit" value="Mehet">
 			<br>
 		</form>
