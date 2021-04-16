@@ -13,17 +13,17 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Adott év vagy hónap slágertermékei automatánként</h2>
+	<h2>${resource.getString("query3_title")}</h2>
 
 	<div class="choice">
 		<form action="popularProducts" method="get">
-			<label for="year">Év:</label> 
+			<label for="year">${resource.getString("year")}:</label> 
 			<input type="text" name="year" placeholder="2021" required pattern="[0-9]{4}"
-				title="négy számjegy (pl. 2021)"> 
-			<label for="month">Hónap (opcionális):</label> 
+				title=${resource.getString("explanation1")}> 
+			<label for="month">${resource.getString("optional_month")}:</label> 
 			<input type="text" name="month" placeholder="03" pattern="[0-9]{2}"
-				title="két számjegy (pl. 01 vagy 12)"><br>
-			<input type="submit" value="Mehet">
+				title=${resource.getString("explanation2")}><br>
+			<input type="submit" value=${resource.getString("submit")}>
 			<br>
 		</form>
 	</div>
@@ -34,13 +34,13 @@
 		
 		<table>
 			<tr>
-				<th>Automata azonosító</th>
-				<th>Irányítószám</th>
-				<th>Település</th>
-				<th>Cím</th>
-				<th>A termék azonosítója</th>
-				<th>A termék neve</th>
-				<th>A fogyott mennyiség</th>
+				<th>${resource.getString("machineId")}</th>
+				<th>${resource.getString("zipcode")}</th>
+				<th>${resource.getString("city")}</th>
+				<th>${resource.getString("address")}</th>
+				<th>${resource.getString("productId")}</th>
+				<th>${resource.getString("productname")}</th>
+				<th>${resource.getString("quantity")}</th>
 			</tr>
 				<c:forEach var="product" items="${productList}">
 					<tr>
@@ -59,7 +59,7 @@
 	</c:choose>	
 	
 <div class="container">
-	<a href="tasks.jsp">Vissza</a>
+	<a href="tasks.jsp">${resource.getString("back")}</a>
 	</div>
 
 </body>

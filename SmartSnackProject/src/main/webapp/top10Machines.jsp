@@ -13,17 +13,17 @@
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Adott időszakban a legnagyobb forgalmat bonyolító automaták listája (Top 10)</h2>
+	<h2>${resource.getString("query4_title")}</h2>
 
 	<div class="choice">
 		<form action="top10Machines" method="get">
-			<label for="startDate">Kezdő dátum: </label> 
+			<label for="startDate">${resource.getString("startdate")}: </label> 
 			<input type="date" name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"> 
-				<label for="endDate">Záró dátum: </label> 
+				<label for="endDate">${resource.getString("enddate")}: </label> 
 				<input type="date" name="endDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
-				<input type="submit" value="Mehet">
+				<input type="submit" value=${resource.getString("submit")}>
 			
 		</form>
 	</div>
@@ -34,12 +34,12 @@
 		
 		<table>
 			<tr>
-				<th>Sorszám</th>
-				<th>Automata azonosítója</th>
-				<th>Irányítószám</th>
-				<th>Település</th>
-				<th>Cím</th>
-				<th>Forgalom (Ft)</th>
+				<th>${resource.getString("num")}</th>
+				<th>${resource.getString("machineId")}</th>
+				<th>${resource.getString("zipcode")}</th>
+				<th>${resource.getString("city")}</th>
+				<th>${resource.getString("address")}</th>
+				<th>${resource.getString("turnover")}</th>
 			</tr>
 				<c:forEach var="machine" items="${machineList}">
 					<tr>
@@ -58,7 +58,7 @@
 	</c:choose>	
 	
 	<div class="container">
-	<a href="tasks.jsp">Vissza</a>
+	<a href="tasks.jsp">${resource.getString("back")}</a>
 	</div>
 
 </body>

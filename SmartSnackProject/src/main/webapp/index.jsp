@@ -15,11 +15,6 @@
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
 
-	<form action="language" method="get">
-		<input type="submit" name="language" value="Magyar" />
-		<input type="submit" name="language" value="English" />
-	</form>
-
 	<h1>Smart Snack</h1>
 	<c:choose>
 		<c:when test="${resource == null}">
@@ -29,6 +24,12 @@
 			<h2>${resource.getString("index_text") }</h2>
 		</c:otherwise>
 	</c:choose>
-
+	<h2>
+		Kérjük, válasszon nyelvet! / Please, choose language
+		<form action="language" method="get">
+			<input type="submit" name="language" value="Magyar" /> <input
+				type="submit" name="language" value="English" />
+		</form>
+	</h2>
 </body>
 </html>
