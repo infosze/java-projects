@@ -17,6 +17,7 @@
 
 	<div class="choice">
 		<form action="popularProducts" method="get">
+
 			<label for="year">${resource.getString("year")}:</label> 
 			<input type="text" name="year" placeholder="2021" required pattern="[0-9]{4}"
 				title=${resource.getString("explanation1")}> 

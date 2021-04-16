@@ -25,7 +25,7 @@
 		</c:otherwise>
 	</c:choose>
 	<h2>
-		Kérjük, válasszon nyelvet! / Please, choose language
+		Kérjük, válasszon nyelvet! / Please, choose a language
 		<form action="language" method="get">
 			<input type="submit" name="language" value="Magyar" /> <input
 				type="submit" name="language" value="English" />
