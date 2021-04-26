@@ -88,7 +88,7 @@ public class Automat {
 
 	@Override
 	public String toString() {
-		return "Automat [machineId=" + machineId + "; " + zipCode + ". " + county + ", " + address + "]";
+		return "Automata [iD=" + machineId + "; " + zipCode + ". " + county + ", " + address + "]";
 	}
 
 	

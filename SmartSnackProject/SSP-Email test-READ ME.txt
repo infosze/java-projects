@@ -1,0 +1,29 @@
+------------------------------------------------------------
+Email teszthez:
+
+Tehát elugrasz a
+https://mailtrap.io/
+oldalra és belépsz a következő adatokkal.
+
+Bejelentkezés:
+Email: tadasob164@quossum.com
+Password: L&dr8RgZ4-59PPR
+
+
+
+-----------------------------------------------------------
+Beállítások:
+
+Test Email address: 800c67efdc-30f21b@inbox.mailtrap.io
+
+
+  host = "smtp.mailtrap.io"
+  port = 2525
+  ssl = no
+  tls = yes
+  user = "8879f84a687e7f"
+  password = "02aade719583e3"
+
+-----------------------------------------------------------
+
+

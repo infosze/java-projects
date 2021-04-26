@@ -1,4 +1,4 @@
-package servlet.listener;
+package util;
 
 import java.util.List;
 
@@ -14,10 +14,14 @@ public class HourlyJob implements Runnable {
 
 	@Override
 	public void run() {
+//		System.out.println("HourlyJob run...");
 		AutomatDAO automatDao = new AutomatDAOimpl();
 		soldOutProductMachines = automatDao.getSoldOutProductMachines();
 		soldOutCoinMachines = automatDao.getSoldOutCoinMachines();
 		offlineMachines = automatDao.getOfflineMachines();
+		if (!offlineMachines.isEmpty()) {
+			new EmailSender().sendEmail(offlineMachines);
+		}
 	}
 
 	public List<Automat> getSoldOutProductMachines() {
