@@ -11,7 +11,7 @@ import dao.AbstractQuery;
 public class LogInQueryImpl extends AbstractQuery {
 
 	private static final String USER_PASSWORD_SQL = //
-			"SELECT user_name, password, salt FROM ssp.users WHERE users.user_name = ?;";
+			"SELECT user_name, password, salt FROM freedbtech_ssp.users WHERE users.user_name = ?;";
 
 	private String userName;
 

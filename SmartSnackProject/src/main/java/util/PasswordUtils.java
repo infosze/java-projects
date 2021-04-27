@@ -1,4 +1,4 @@
-package entity;
+package util;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

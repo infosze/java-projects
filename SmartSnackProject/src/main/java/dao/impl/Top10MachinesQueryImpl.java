@@ -13,7 +13,7 @@ import dao.AbstractQuery;
 
 public class Top10MachinesQueryImpl extends AbstractQuery{
 	
-	private static final String TOP_MACHINES_STATEMENT = "SELECT machine_id, zipcode, city, address, SUM((-1) * difference * unit_price) AS total_income FROM product_movement NATURAL JOIN product NATURAL JOIN machine WHERE difference < 0 AND time_stamp >= ? AND time_stamp <= ? group by machine_id order by total_income DESC limit 10;";
+	private static final String TOP_MACHINES_STATEMENT = "SELECT machine.machine_id, zipcode, city, address, SUM((-1) * product_movement.difference * unit_price) AS total_income FROM product_movement NATURAL JOIN product NATURAL JOIN machine WHERE product_movement.difference < 0 AND product_movement.time_stamp >= ? AND product_movement.time_stamp <= ? GROUP BY machine.machine_id, zipcode, city, address  ORDER BY total_income DESC limit 10;";
 	private LocalDate startDate;
 	private LocalDate endDate;
 	

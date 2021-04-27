@@ -13,9 +13,9 @@ import entity.Automat;
 
 public class AutomatDAOimpl extends AbstractQuery implements AutomatDAO {
 
-	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
-	private static final String SOLD_OUT_COIN = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
-	private static final String OFFLINE = "SELECT * FROM ssp.machine;"; // TODO fix it SQL query
+	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
+	private static final String SOLD_OUT_COIN = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
+	private static final String OFFLINE = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
 
 	public List<Automat> getSoldOutProductMachines() {
 //		return findMachines(SOLD_OUT_PRODUCT);

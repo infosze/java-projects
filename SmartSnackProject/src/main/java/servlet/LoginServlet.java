@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Query;
 import dao.impl.LogInQueryImpl;
-import entity.PasswordUtils;
 import entity.User;
 
 public class LoginServlet extends HttpServlet {

@@ -11,12 +11,12 @@ import java.util.List;
 
 import dao.AbstractQuery;
 
-public class PopularProductsQueryImpl extends AbstractQuery{
-	
+public class PopularProductsQueryImpl extends AbstractQuery {
+
 	private static final String CREATE_VIEW_STATEMENT = "CREATE VIEW my_view AS SELECT machine_id, product_id, SUM(difference) as total_diff FROM product_movement WHERE difference < 0 AND time_stamp >= ? AND time_stamp < ? group by machine_id, product_id;";
 	private static final String FIND_POPULAR_PRODUCTS_STATEMENT = "SELECT machine_id, city, zipcode, address, product_id, name, total_diff FROM my_view NATURAL JOIN machine NATURAL JOIN product WHERE (machine_id,  total_diff) IN (SELECT machine_id, MIN(total_diff) FROM my_view group by machine_id);";
 	private static final String DROP_VIEW_STATEMENT = "DROP VIEW my_view";
-	
+
 	private int year;
 	private int month;
 
@@ -57,7 +57,7 @@ public class PopularProductsQueryImpl extends AbstractQuery{
 		}
 		return popularProducts;
 	}
-	
+
 	private List<Timestamp> createTimeStamps() {
 		List<Timestamp> timeStamps = new ArrayList<>();
 		Timestamp start = month == 0 ? Timestamp.valueOf(LocalDate.of(year, 1, 1).atStartOfDay())

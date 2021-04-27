@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
- import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.AbstractQuery;
@@ -14,9 +14,9 @@ public class RefillsQueryImpl extends AbstractQuery {
 
 	private static final String UPLOADS_SQL = //
 			"SELECT machine.machine_id, machine.zipcode, machine.city, machine.address "
-					+ "FROM ssp.machine JOIN ssp.product_movement ON ssp.product_movement.machine_id = ssp.machine.machine_id "
+					+ "FROM machine JOIN product_movement ON product_movement.machine_id = machine.machine_id "
 					+ "WHERE product_movement.time_stamp >= ? AND product_movement.time_stamp < ? "
-					+ "AND product_movement.difference > 0 GROUP BY product_movement.machine_id ORDER BY sum(product_movement.difference) DESC;";
+					+ "AND product_movement.difference > 0 GROUP BY product_movement.machine_id, machine.zipcode, machine.city, machine.address ORDER BY sum(product_movement.difference) DESC;";
 
 	private LocalDate startDate;
 	private LocalDate endDate;

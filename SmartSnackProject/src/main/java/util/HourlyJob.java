@@ -14,7 +14,6 @@ public class HourlyJob implements Runnable {
 
 	@Override
 	public void run() {
-//		System.out.println("HourlyJob run...");
 		AutomatDAO automatDao = new AutomatDAOimpl();
 		soldOutProductMachines = automatDao.getSoldOutProductMachines();
 		soldOutCoinMachines = automatDao.getSoldOutCoinMachines();

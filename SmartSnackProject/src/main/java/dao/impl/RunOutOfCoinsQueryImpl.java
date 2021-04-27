@@ -10,14 +10,13 @@ import java.util.List;
 
 import dao.AbstractQuery;
 
-public class RunOutOfCoinsQueryImpl extends AbstractQuery{
-	
+public class RunOutOfCoinsQueryImpl extends AbstractQuery {
+
 	private static final String SOLD_OUT_COIN_MACHINE_SQL = //
-			"SELECT machine.machine_id, machine.zipcode, machine.city, machine.address FROM ssp.machine JOIN ssp.coin_movement "
-					+ "ON ssp.coin_movement.machine_id = ssp.machine.machine_id WHERE coin_movement.time_stamp >= ? "
-					+ "AND coin_movement.time_stamp < ? AND coin_quantity = 0 GROUP BY ssp.machine.machine_id;";
+			"SELECT machine.machine_id, machine.zipcode, machine.city, machine.address FROM machine JOIN coin_movement "
+					+ "ON coin_movement.machine_id = machine.machine_id WHERE coin_movement.time_stamp >= ? "
+					+ "AND coin_movement.time_stamp < ? AND coin_quantity = 0 GROUP BY machine.machine_id, machine.zipcode, machine.city, machine.address;";
 	private LocalDate localDate;
-	
 
 	public RunOutOfCoinsQueryImpl(LocalDate date) {
 		super();
@@ -47,7 +46,5 @@ public class RunOutOfCoinsQueryImpl extends AbstractQuery{
 		}
 		return soldOutCoinMachines;
 	}
-
-	
 
 }
