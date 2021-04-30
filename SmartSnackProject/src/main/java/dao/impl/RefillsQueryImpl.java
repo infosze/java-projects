@@ -16,7 +16,7 @@ public class RefillsQueryImpl extends AbstractQuery {
 			"SELECT machine.machine_id, machine.zipcode, machine.city, machine.address "
 					+ "FROM machine JOIN product_movement ON product_movement.machine_id = machine.machine_id "
 					+ "WHERE product_movement.time_stamp >= ? AND product_movement.time_stamp < ? "
-					+ "AND product_movement.difference > 0 GROUP BY product_movement.machine_id, machine.zipcode, machine.city, machine.address ORDER BY sum(product_movement.difference) DESC;";
+					+ "AND product_movement.difference > 0 GROUP BY product_movement.machine_id, machine.zipcode, machine.city, machine.address ORDER BY SUM(product_movement.difference) DESC;";
 
 	private LocalDate startDate;
 	private LocalDate endDate;

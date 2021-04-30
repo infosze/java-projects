@@ -13,6 +13,14 @@ import entity.Automat;
 
 public class AutomatDAOimpl extends AbstractQuery implements AutomatDAO {
 
+	/*
+	 * 1.típusú jelentés: tartalmazza azoknak az automatáknak az adatait amelyekben min. 3 termékkategória elfogyott.
+	 * Megjelenik az automata azonosítója, címe, a kifogyott termékek azonosítója.
+	 * 
+	 * 
+	 * 2.típusú jelentés: meghibásodott automaták listázása. Megjeleníti az automata azonosítóját és címét.
+	 */
+	
 	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
 	private static final String SOLD_OUT_COIN = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
 	private static final String OFFLINE = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query

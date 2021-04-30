@@ -19,29 +19,30 @@
 	response.setIntHeader("Refresh", 10);
 	%>
 	<div>
-		<c:choose>
+	<c:choose>
 	<c:when test="${islistEmpty == true}">
 		<h2>Minden automata működik.</h2>
 		</c:when>
-			<c:otherwise>
+		<c:otherwise>
 		<table>
 			<tr>
-				<th>Azonosító</th>
+				<th>Automata azonosító</th>
 				<th>Irányítószám</th>
 				<th>Település</th>
 				<th>Cím</th>
 			</tr>
-			<c:forEach var="automat" items="${ automatList}">
+			<c:forEach var="product_machineList" items="${ product_machineList}">
 				<tr>
-					<td><c:out value="${ automat.machineId}" /></td>
-					<td><c:out value="${ automat.zipCode}" /></td>
-					<td><c:out value="${ automat.county}" /></td>
-					<td><c:out value="${ automat.address}" /></td>
+					<td><c:out value="${ product_machineList.get(0)}" /></td>
+					<td><c:out value="${ product_machineList.get(1)}" /></td>
+					<td><c:out value="${ product_machineList.get(2)}" /></td>
+					<td><c:out value="${ product_machineList.get(3)}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
 		</c:otherwise>
 	</c:choose>	
+	
 	</div>
 </body>
 

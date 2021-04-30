@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.AutomatDAO;
-import dao.impl.AutomatDAOimpl;
-import entity.Automat;
+import dao.Query;
+import dao.impl.FaultyMachinesQuepyImpl;
 
 public class Query2Servlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AutomatDAO automatDAO = new AutomatDAOimpl();
-		List<Automat> list = automatDAO.getOfflineMachines();
+		Query query = new FaultyMachinesQuepyImpl();
+		List<List<String>> list = query.findDataForQuery();
+		request.setAttribute("product_machineList", list);
 		boolean islistEmpty = list.isEmpty();
 		request.setAttribute("islistEmpty", islistEmpty);
-		request.setAttribute("automatList", list);
 		request.getRequestDispatcher("query2.jsp").forward(request, response);
 	}
 

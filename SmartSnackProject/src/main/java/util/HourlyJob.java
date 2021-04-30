@@ -19,7 +19,7 @@ public class HourlyJob implements Runnable {
 		soldOutCoinMachines = automatDao.getSoldOutCoinMachines();
 		offlineMachines = automatDao.getOfflineMachines();
 		if (!offlineMachines.isEmpty()) {
-			new EmailSender().sendEmail(offlineMachines);
+//			new EmailSender().sendEmail(offlineMachines);
 		}
 	}
 

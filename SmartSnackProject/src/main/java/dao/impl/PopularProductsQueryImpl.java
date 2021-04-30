@@ -13,8 +13,15 @@ import dao.AbstractQuery;
 
 public class PopularProductsQueryImpl extends AbstractQuery {
 
-	private static final String CREATE_VIEW_STATEMENT = "CREATE VIEW my_view AS SELECT machine_id, product_id, SUM(difference) as total_diff FROM product_movement WHERE difference < 0 AND time_stamp >= ? AND time_stamp < ? group by machine_id, product_id;";
-	private static final String FIND_POPULAR_PRODUCTS_STATEMENT = "SELECT machine_id, city, zipcode, address, product_id, name, total_diff FROM my_view NATURAL JOIN machine NATURAL JOIN product WHERE (machine_id,  total_diff) IN (SELECT machine_id, MIN(total_diff) FROM my_view group by machine_id);";
+	private static final String CREATE_VIEW_STATEMENT = //
+			"CREATE VIEW my_view AS SELECT machine_id, product_id, SUM(difference) as total_diff FROM product_movement "//
+					+ "WHERE difference < 0 AND time_stamp >= ? AND time_stamp < ? "//
+					+ "GROUP BY machine_id, product_id;";
+	private static final String FIND_POPULAR_PRODUCTS_STATEMENT = //
+			"SELECT machine_id, city, zipcode, address, product_id, name, total_diff "//
+					+ "FROM my_view NATURAL JOIN machine NATURAL JOIN product "//
+					+ "WHERE (machine_id,  total_diff) IN (SELECT machine_id, MIN(total_diff) "//
+					+ "FROM my_view GROUP BY machine_id);";
 	private static final String DROP_VIEW_STATEMENT = "DROP VIEW my_view";
 
 	private int year;
