@@ -17,4 +17,14 @@
 		</c:otherwise>
 	</c:choose>
 
+		
+		<form action="language" method="get">
+			<input type="submit" style="float: right" name="language" value="Magyar" /> 
+			<input type="submit" style="float: right" name="language" value="English" />
+		</form>
+		
+<%-- 		<a href="language" style="float: right"><i class="fas fa-home"></i>${resource.getString("hungary")}</a> --%>
+<%-- 		<a href="language" style="float: right"><i class="fas fa-sign-in-alt"></i>${resource.getString("english")}</a> --%>
+		
+
 </div>

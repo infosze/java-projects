@@ -23,6 +23,7 @@ public class LanguageSelectorServlet extends HttpServlet {
 				: ResourceBundle.getBundle("Resources", new Locale("en"));
 		req.getSession().setAttribute("resource", rb);
 		req.getRequestDispatcher("index.jsp").forward(req, resp);
+		
 	}
 
 }
