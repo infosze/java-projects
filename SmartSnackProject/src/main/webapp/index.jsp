@@ -16,14 +16,9 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 
 	<h1>Smart Snack</h1>
-	<c:choose>
-		<c:when test="${resource == null}">
-			<h2>Jelentések ital és snack kiadó automatákról</h2>
-		</c:when>
-		<c:otherwise>
-			<h2>${resource.getString("index_text") }</h2>
-		</c:otherwise>
-	</c:choose>
+	
+	<h2>${resource.getString("index_text") }</h2>
+	
 	<h2>
 		Kérjük, válasszon nyelvet! / Please, choose a language
 		<form action="language" method="get">

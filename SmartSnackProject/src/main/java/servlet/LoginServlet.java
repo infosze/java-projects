@@ -20,11 +20,11 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
-				
+
 		Query query = new LogInQueryImpl(name);
 		List<List<String>> list = query.findDataForQuery();
 		List<String> userDatas = new ArrayList<>();
-		if(!list.isEmpty()) {
+		if (!list.isEmpty()) {
 			userDatas = list.get(0);
 		} else {
 			userDatas.add(0, " ");
@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 //		user.setPassword(userPassword);
 		user.setName(name);
 		user.setPassword(password);
-		
+
 //		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, userPassword, userSalt);
 
 		if (user.getName().equals(name) && user.getPassword().equals(password)) {

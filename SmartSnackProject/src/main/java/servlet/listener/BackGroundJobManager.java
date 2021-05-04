@@ -1,9 +1,12 @@
 package servlet.listener;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -15,6 +18,9 @@ public class BackGroundJobManager implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
+		ResourceBundle rb = ResourceBundle.getBundle("Resources", new Locale("hu"));
+		ServletContext sc = event.getServletContext();
+		sc.setAttribute("resource", rb);
 		scheduler = Executors.newSingleThreadScheduledExecutor();
 		scheduler.scheduleAtFixedRate(new HourlyJob(), 0, 60, TimeUnit.MINUTES); // TODO test setup . fix it later.
 	}
