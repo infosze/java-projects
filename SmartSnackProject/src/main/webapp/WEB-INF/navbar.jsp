@@ -4,6 +4,9 @@
 
 <div class="navbar">
 
+<!-- 		path változó létrehozása az aktuális oldal elérési útjával.  -->
+	<c:set var="path" scope="session" value="${pageContext.request.requestURI}" />
+
 	<c:choose>
 		<c:when test="${loggedInUser == null}">
 
@@ -12,19 +15,16 @@
 		</c:when>
 		<c:otherwise>
 			<a href="tasks.jsp"><i class="fas fa-tasks"></i>${resource.getString("reports")}</a>
-			<a href="logout" style="float: right"><i class="fas fa-sign-out-alt"></i>${resource.getString("kijelentkezés")}</a>
+			<a href="logout" style="float: right"><i
+				class="fas fa-sign-out-alt"></i>${resource.getString("kijelentkezés")}</a>
 			<a style="float: right"><i class="far fa-user"></i> ${name } </a>
 		</c:otherwise>
 	</c:choose>
 
-		
-		<form action="language" method="get">
-			<input type="submit" style="float: right" name="language" value="Magyar" /> 
-			<input type="submit" style="float: right" name="language" value="English" />
-		</form>
-		
-<%-- 		<a href="language" style="float: right"><i class="fas fa-home"></i>${resource.getString("hungary")}</a> --%>
-<%-- 		<a href="language" style="float: right"><i class="fas fa-sign-in-alt"></i>${resource.getString("english")}</a> --%>
-		
+	<form action="language" method="get">
+		<input type="submit" style="float: right" name="language"
+			value="Magyar" /> <input type="submit" style="float: right"
+			name="language" value="English" />
+	</form>
 
 </div>

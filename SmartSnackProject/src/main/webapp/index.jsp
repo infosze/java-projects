@@ -16,15 +16,8 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 
 	<h1>Smart Snack</h1>
-	
+
 	<h2>${resource.getString("index_text") }</h2>
-	
-	<h2>
-		Kérjük, válasszon nyelvet! / Please, choose a language
-		<form action="language" method="get">
-			<input type="submit" name="language" value="Magyar" /> <input
-				type="submit" name="language" value="English" />
-		</form>
-	</h2>
+
 </body>
 </html>
