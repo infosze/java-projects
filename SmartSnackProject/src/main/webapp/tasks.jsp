@@ -32,7 +32,7 @@
 		</c:choose>
 	
 	<br><br>
-	<a href="query2"> 2. ${resource.getString("query2_title")}</a>&nbsp;&nbsp;
+	<a href="faultyMachines"> 2. ${resource.getString("query2_title")}</a>&nbsp;&nbsp;
 	
 	<c:choose>
 	<c:when test="${isEmptyQ2 == true}">

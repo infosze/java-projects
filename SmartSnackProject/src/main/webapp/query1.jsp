@@ -15,8 +15,8 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h2>Kifogyott minimum 3 termékkategória:</h2>
 	<%
-	// Set refresh, autoload time as 10 seconds
-	response.setIntHeader("Refresh", 10);
+	// Set refresh, autoload time as 60 seconds
+	response.setIntHeader("Refresh", 60);
 	%>
 	<div>
 		<c:choose>

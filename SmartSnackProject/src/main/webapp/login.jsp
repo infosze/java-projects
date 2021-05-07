@@ -16,7 +16,7 @@
 	<%@ include file="WEB-INF/navbar.jsp"%>
 			<h1>${resource.getString("login")}</h1>
 		<div class="container">
-			<form action="login">
+			<form action="login" method="post"> 
 				<label>${resource.getString("name")}</label><br> 
 				<input type="text" name="name" required="required"><br> 
 				<label>${resource.getString("pw")}</label><br>
@@ -24,6 +24,5 @@
 				<input type="submit" value=${resource.getString("login")}>
 			</form>
 		</div>
-
 </body>
 </html>

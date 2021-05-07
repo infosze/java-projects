@@ -41,12 +41,12 @@
 		<url-pattern>/query1</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>Query2Servlet</servlet-name>
-		<servlet-class>servlet.Query2Servlet</servlet-class>
+		<servlet-name>FaultyMachinesServlet</servlet-name>
+		<servlet-class>servlet.FaultyMachinesServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Query2Servlet</servlet-name>
-		<url-pattern>/query2</url-pattern>
+		<servlet-name>FaultyMachinesServlet</servlet-name>
+		<url-pattern>/faultyMachines</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>PopularProductsServlet</servlet-name>

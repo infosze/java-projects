@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Query;
 import dao.impl.LogInQueryImpl;
@@ -17,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 
@@ -45,9 +46,10 @@ public class LoginServlet extends HttpServlet {
 
 		if (user.getName().equals(name) && user.getPassword().equals(password)) {
 //		if (user.getName().equals(name) && passwordMatch == true) {
+
 			request.getSession().setAttribute("name", name);
 			request.getSession().setAttribute("loggedInUser", user.getName());
-			request.getRequestDispatcher("tasks").forward(request, response);
+			response.sendRedirect("tasks");
 		} else {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
