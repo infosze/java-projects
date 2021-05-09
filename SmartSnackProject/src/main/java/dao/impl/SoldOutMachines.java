@@ -12,12 +12,14 @@ import util.DatabaseConnect;
 
 public class SoldOutMachines implements Query {
 
-	private static final String CREATE_VIEW_STATEMENT = "CREATE VIEW view_1query AS SELECT machine_id, country, zipcode, city, address, max_sortiment, min_sortiment //"
-			+ "FROM machine NATURAL JOIN machine_type;";
-	private static final String CREATE_VIEW2_STATEMENT = "CREATE VIEW view_2query AS SELECT machine_id, country, zipcode, city, address, product_id, ABS(max_sortiment - min_sortiment) //"
-			+ "AS difference FROM product_movement NATURAL JOIN view_1query WHERE active_report=true AND product_quantity = 0 HAVING count(product_id) >= difference;";
-	private static final String FIND_SOLDOUT_MACHINES_STATEMENT = "SELECT machine_id, country, zipcode, city, address, product_id FROM product_movement //"
-			+ "NATURAL JOIN machine WHERE active_report = true AND machine_id IN (SELECT machine_id FROM view_2query) AND product_quantity = 0 GROUP BY product_id;";
+	private static final String CREATE_VIEW_STATEMENT = "CREATE VIEW view_1query AS SELECT machine_id, country, zipcode, city, address, "
+			+ "(max_sortiment - min_sortiment) AS difference FROM machine NATURAL JOIN machine_type;";
+	private static final String CREATE_VIEW2_STATEMENT = "CREATE VIEW view_2query AS SELECT machine_id, COUNT(product_id) AS missing_products "
+			+ "FROM product_movement WHERE product_quantity = 0 AND active_report = 1 GROUP BY machine_id;";
+	private static final String FIND_SOLDOUT_MACHINES_STATEMENT = "SELECT product_movement.machine_id, country, zipcode, city, address, product_id "
+			+ "FROM product_movement INNER JOIN view_1query ON product_movement.machine_id = view_1query.machine_id "
+			+ "WHERE product_quantity = 0 AND active_report = true AND product_movement.machine_id "
+			+ "IN (SELECT view_1query.machine_id FROM view_1query NATURAL JOIN view_2query WHERE missing_products >= difference);";
 	private static final String DROP_VIEW_STATEMENT = "DROP VIEW view_1query, view_2query";
 
 	@Override
@@ -42,7 +44,6 @@ public class SoldOutMachines implements Query {
 			}
 			pstmt4.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return soldOutMachines;

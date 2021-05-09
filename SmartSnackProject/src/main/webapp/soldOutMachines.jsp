@@ -21,24 +21,28 @@
 	<div>
 		<c:choose>
 	<c:when test="${islistEmpty == true}">
-		<h2>Minden automata feltöltött.</h2>
+		<h2>Minden automata fel van töltve.</h2>
 		</c:when>
 			<c:otherwise>
 		<table>
 			<tr>
-				<th>Azonosító</th>
-				<th>Irányítószám</th>
-				<th>Település</th>
-				<th>Cím</th>
+				<th>${resource.getString("machineId")}</th>
+				<th>${resource.getString("country")}</th>
+				<th>${resource.getString("zipcode")}</th>
+				<th>${resource.getString("city")}</th>
+				<th>${resource.getString("address")}</th>
+				<th>${resource.getString("productId")}</th>
 			</tr>
-			<c:forEach var="automat" items="${ automatList}">
-				<tr>
-					<td><c:out value="${ automat.machineId}" /></td>
-					<td><c:out value="${ automat.zipCode}" /></td>
-					<td><c:out value="${ automat.county}" /></td>
-					<td><c:out value="${ automat.address}" /></td>
-				</tr>
-			</c:forEach>
+				<c:forEach var="machine" items="${machineList}">
+					<tr>
+						<td><c:out value="${machine.get(0)}" /></td>
+						<td><c:out value="${machine.get(1)}" /></td>
+						<td><c:out value="${machine.get(2)}" /></td>
+						<td><c:out value="${machine.get(3)}" /></td>
+						<td><c:out value="${machine.get(4)}" /></td>
+						<td><c:out value="${machine.get(5)}" /></td>
+					</tr>
+				</c:forEach>
 		</table>
 		</c:otherwise>
 	</c:choose>	

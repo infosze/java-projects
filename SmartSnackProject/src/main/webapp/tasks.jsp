@@ -20,7 +20,7 @@
 	%> 
 
 <div class="container">
-	<a href="query1"> 1. ${resource.getString("query1_title")}</a>&nbsp;&nbsp;
+	<a href="soldOutMachines"> 1. ${resource.getString("query1_title")}</a>&nbsp;&nbsp;
 	
 	<c:choose>
 	<c:when test="${isEmptyQ1 == true}">

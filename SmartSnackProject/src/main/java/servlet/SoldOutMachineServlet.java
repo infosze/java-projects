@@ -8,21 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.AutomatDAO;
-import dao.impl.AutomatDAOimpl;
-import entity.Automat;
+import dao.Query;
+import dao.impl.SoldOutMachines;
 
-public class Query1Servlet extends HttpServlet {
+public class SoldOutMachineServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AutomatDAO automatDAO = new AutomatDAOimpl();
-		List<Automat> list = automatDAO.getSoldOutProductMachines();
-		boolean islistEmpty = list.isEmpty();
+		Query query = new SoldOutMachines();
+		List<List<String>> machines = query.findDataForQuery();
+		boolean islistEmpty = machines.isEmpty();
 		request.setAttribute("islistEmpty", islistEmpty);
-		request.setAttribute("automatList", list);
-		request.getRequestDispatcher("query1.jsp").forward(request, response);
+		request.setAttribute("machineList", machines);
+		request.getRequestDispatcher("soldOutMachines.jsp").forward(request, response);
 	}
 
 }
