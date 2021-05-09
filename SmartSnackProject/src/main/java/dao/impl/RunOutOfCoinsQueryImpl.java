@@ -8,9 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbstractQuery;
+import dao.Query;
+import util.DatabaseConnect;
 
-public class RunOutOfCoinsQueryImpl extends AbstractQuery {
+public class RunOutOfCoinsQueryImpl implements Query {
 
 	private static final String SOLD_OUT_COIN_MACHINE_SQL = //
 			"SELECT machine.machine_id, machine.zipcode, machine.city, machine.address FROM machine JOIN coin_movement "
@@ -28,7 +29,7 @@ public class RunOutOfCoinsQueryImpl extends AbstractQuery {
 		Timestamp timestamp = Timestamp.valueOf(localDate.atStartOfDay());
 		Timestamp timestamp2 = Timestamp.valueOf(localDate.plusDays(1).atStartOfDay());
 		List<List<String>> soldOutCoinMachines = new ArrayList<>();
-		try (PreparedStatement pstmt = getConnection().prepareStatement(SOLD_OUT_COIN_MACHINE_SQL)) {
+		try (PreparedStatement pstmt = DatabaseConnect.getConnection().prepareStatement(SOLD_OUT_COIN_MACHINE_SQL)) {
 			pstmt.setString(1, timestamp.toString());
 			pstmt.setString(2, timestamp2.toString());
 			ResultSet rs = pstmt.executeQuery();

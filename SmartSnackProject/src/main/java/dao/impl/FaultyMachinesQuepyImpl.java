@@ -8,9 +8,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbstractQuery;
+import dao.Query;
+import util.DatabaseConnect;
 
-public class FaultyMachinesQuepyImpl extends AbstractQuery {
+public class FaultyMachinesQuepyImpl implements Query {
 
 	private static final String FAULTY_MACHINES_SQL = //
 			"SELECT * FROM machine WHERE machine.machine_id NOT IN (SELECT machine.machine_id "
@@ -21,7 +22,7 @@ public class FaultyMachinesQuepyImpl extends AbstractQuery {
 
 	private LocalDateTime reportStartTime() {
 		LocalDateTime minus = null;
-		LocalDateTime startDate = LocalDateTime.of(2020,11,20,22,15); //LocalDateTime.now(); TODO fix it!
+		LocalDateTime startDate = LocalDateTime.of(2020, 11, 20, 22, 15); // LocalDateTime.now(); TODO fix it!
 		if (startDate.getMinute() < 10) {
 			minus = startDate.minusHours(1);
 		} else {
@@ -33,11 +34,10 @@ public class FaultyMachinesQuepyImpl extends AbstractQuery {
 
 	@Override
 	public List<List<String>> findDataForQuery() {
-		
 		Timestamp timestamp = Timestamp.valueOf(reportStartTime().minusHours(2).minusMinutes(10));
 		Timestamp timestamp2 = Timestamp.valueOf(reportStartTime());
 		List<List<String>> list = new ArrayList<>();
-		try (PreparedStatement pstmt = getConnection().prepareStatement(FAULTY_MACHINES_SQL)) {
+		try (PreparedStatement pstmt = DatabaseConnect.getConnection().prepareStatement(FAULTY_MACHINES_SQL)) {
 			pstmt.setString(1, timestamp.toString());
 			pstmt.setString(2, timestamp2.toString());
 			ResultSet rs = pstmt.executeQuery();

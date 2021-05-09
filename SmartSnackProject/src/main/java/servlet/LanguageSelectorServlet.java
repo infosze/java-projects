@@ -19,9 +19,8 @@ public class LanguageSelectorServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();   // a path változó a jsp-ben a session-ben van beállítva ezért kell egy session.
-		String uri = session.getAttribute("path").toString(); // lekérjük a path -ot.
-		String jspName = uri.substring(uri.lastIndexOf("/") + 1); // kiszedjük a teljes elérési útból az AKTUÁLISOLDAL.jsp -t
+		String uri = req.getSession().getAttribute("path").toString();
+		String jspName = uri.substring(uri.lastIndexOf("/") + 1); 
 		String language = req.getParameter("language");
 		ResourceBundle rb = Objects.equals(language, "Magyar") ? ResourceBundle.getBundle("Resources", new Locale("hu"))
 				: ResourceBundle.getBundle("Resources", new Locale("en"));

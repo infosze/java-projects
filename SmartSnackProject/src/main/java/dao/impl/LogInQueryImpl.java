@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbstractQuery;
+import dao.Query;
+import util.DatabaseConnect;
 
-public class LogInQueryImpl extends AbstractQuery {
+public class LogInQueryImpl implements Query {
 
 	private static final String USER_PASSWORD_SQL = //
 			"SELECT user_name, password, salt FROM freedbtech_ssp.users WHERE users.user_name = ?;";
@@ -22,7 +23,7 @@ public class LogInQueryImpl extends AbstractQuery {
 	@Override
 	public List<List<String>> findDataForQuery() {
 		List<List<String>> findUserAndPassword = new ArrayList<>();
-		try (PreparedStatement pstmt = getConnection().prepareStatement(USER_PASSWORD_SQL)) {
+		try (PreparedStatement pstmt = DatabaseConnect.getConnection().prepareStatement(USER_PASSWORD_SQL)) {
 			pstmt.setString(1, userName);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {

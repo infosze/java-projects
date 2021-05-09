@@ -8,9 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbstractQuery;
+import dao.Query;
+import util.DatabaseConnect;
 
-public class RefillsQueryImpl extends AbstractQuery {
+public class RefillsQueryImpl implements Query {
 
 	private static final String UPLOADS_SQL = //
 			"SELECT machine.machine_id, machine.zipcode, machine.city, machine.address "
@@ -31,7 +32,7 @@ public class RefillsQueryImpl extends AbstractQuery {
 		Timestamp timestamp = Timestamp.valueOf(startDate.atStartOfDay());
 		Timestamp timestamp2 = Timestamp.valueOf(endDate.plusDays(1).atStartOfDay());
 		List<List<String>> findUploadsMachines = new ArrayList<>();
-		try (PreparedStatement pstmt = getConnection().prepareStatement(UPLOADS_SQL)) {
+		try (PreparedStatement pstmt = DatabaseConnect.getConnection().prepareStatement(UPLOADS_SQL)) {
 			pstmt.setString(1, timestamp.toString());
 			pstmt.setString(2, timestamp2.toString());
 			ResultSet rs = pstmt.executeQuery();

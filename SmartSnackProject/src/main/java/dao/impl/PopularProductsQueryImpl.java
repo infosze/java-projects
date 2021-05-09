@@ -9,9 +9,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.AbstractQuery;
+import dao.Query;
+import util.DatabaseConnect;
 
-public class PopularProductsQueryImpl extends AbstractQuery {
+public class PopularProductsQueryImpl implements Query {
 
 	private static final String CREATE_VIEW_STATEMENT = //
 			"CREATE VIEW my_view AS SELECT machine_id, product_id, SUM(difference) as total_diff FROM product_movement "//
@@ -37,7 +38,7 @@ public class PopularProductsQueryImpl extends AbstractQuery {
 	public List<List<String>> findDataForQuery() {
 		List<Timestamp> timeStamps = createTimeStamps();
 		List<List<String>> popularProducts = new ArrayList<List<String>>();
-		try (Connection con = getConnection();
+		try (Connection con = DatabaseConnect.getConnection();
 				PreparedStatement pstmts1 = con.prepareStatement(CREATE_VIEW_STATEMENT);
 				PreparedStatement pstmts2 = con.prepareStatement(FIND_POPULAR_PRODUCTS_STATEMENT);
 				PreparedStatement pstmts3 = con.prepareStatement(DROP_VIEW_STATEMENT)) {
