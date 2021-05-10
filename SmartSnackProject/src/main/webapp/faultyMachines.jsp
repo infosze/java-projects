@@ -19,7 +19,7 @@
 	%>
 	<div>
 		<c:choose>
-			<c:when test="${islistEmpty == true}">
+			<c:when test="${isEmptyQ2 == true}">
 				<h2>Minden automata működik.</h2>
 			</c:when>
 			<c:otherwise>
@@ -30,7 +30,7 @@
 						<th>Település</th>
 						<th>Cím</th>
 					</tr>
-					<c:forEach var="faultyMachine" items="${ faultyMachineList}">
+					<c:forEach var="faultyMachine" items="${faultyMachinesList}">
 						<tr>
 							<td><c:out value="${ faultyMachine.get(0)}" /></td>
 							<td><c:out value="${ faultyMachine.get(1)}" /></td>

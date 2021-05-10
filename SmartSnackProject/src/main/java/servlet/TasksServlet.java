@@ -8,25 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.AutomatDAO;
 import dao.Query;
-import dao.impl.AutomatDAOimpl;
 import dao.impl.FaultyMachinesQuepyImpl;
-import entity.Automat;
+import dao.impl.SoldOutMachines;
 
 public class TasksServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AutomatDAO automatDAO = new AutomatDAOimpl();
-		List<Automat> soldOutProductMachinesList = automatDAO.getSoldOutProductMachines();
+		Query soldOutQuery = new SoldOutMachines();
+		List<List<String>> machines = soldOutQuery.findDataForQuery();
 		Query query = new FaultyMachinesQuepyImpl();
-		List<List<String>> list = query.findDataForQuery();
-		request.getSession().setAttribute("isEmptyQ1", soldOutProductMachinesList.isEmpty());
-		request.getSession().setAttribute("listSizeQ1", soldOutProductMachinesList.size());
-		request.getSession().setAttribute("isEmptyQ2", list.isEmpty());
-		request.getSession().setAttribute("listSizeQ2", list.size());
+		List<List<String>> machines2 = query.findDataForQuery();
+		request.getSession().setAttribute("soldOutMachinesList", machines);
+		request.getSession().setAttribute("isEmptyQ1", machines.isEmpty());
+		request.getSession().setAttribute("listSizeQ1", machines.size());
+		request.getSession().setAttribute("faultyMachinesList", machines2);
+		request.getSession().setAttribute("isEmptyQ2", machines2.isEmpty());
+		request.getSession().setAttribute("listSizeQ2", machines2.size());
 		request.getRequestDispatcher("tasks.jsp").forward(request, response);
 	}
 

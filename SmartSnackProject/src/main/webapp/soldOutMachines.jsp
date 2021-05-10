@@ -20,7 +20,7 @@
 	%>
 	<div>
 		<c:choose>
-	<c:when test="${islistEmpty == true}">
+	<c:when test="${isEmptyQ1 == true}">
 		<h2>Minden automata fel van töltve.</h2>
 		</c:when>
 			<c:otherwise>
@@ -33,7 +33,7 @@
 				<th>${resource.getString("address")}</th>
 				<th>${resource.getString("productId")}</th>
 			</tr>
-				<c:forEach var="machine" items="${machineList}">
+				<c:forEach var="machine" items="${soldOutMachinesList}">
 					<tr>
 						<td><c:out value="${machine.get(0)}" /></td>
 						<td><c:out value="${machine.get(1)}" /></td>

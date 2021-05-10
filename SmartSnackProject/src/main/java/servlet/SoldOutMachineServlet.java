@@ -16,11 +16,11 @@ public class SoldOutMachineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Query query = new SoldOutMachines();
-		List<List<String>> machines = query.findDataForQuery();
-		boolean islistEmpty = machines.isEmpty();
-		request.setAttribute("islistEmpty", islistEmpty);
-		request.setAttribute("machineList", machines);
+		//Query query = new SoldOutMachines();
+		//List<List<String>> machines = query.findDataForQuery();
+		//boolean islistEmpty = machines.isEmpty();
+		//request.setAttribute("islistEmpty", islistEmpty);
+		//request.setAttribute("machineList", machines);
 		request.getRequestDispatcher("soldOutMachines.jsp").forward(request, response);
 	}
 
