@@ -33,22 +33,6 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>SoldOutMachineServlet</servlet-name>
-		<servlet-class>servlet.SoldOutMachineServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SoldOutMachineServlet</servlet-name>
-		<url-pattern>/soldOutMachines</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>FaultyMachinesServlet</servlet-name>
-		<servlet-class>servlet.FaultyMachinesServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FaultyMachinesServlet</servlet-name>
-		<url-pattern>/faultyMachines</url-pattern>
-	</servlet-mapping>
-	<servlet>
 		<servlet-name>PopularProductsServlet</servlet-name>
 		<servlet-class>servlet.PopularProductsServlet</servlet-class>
 	</servlet>

@@ -7,21 +7,21 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - Termék kifogyott</title>
+<title>Smart Snack - ${resource.getString("query1_title")}</title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Kifogyott minimum 3 termékkategória:</h2>
+	<h2>${resource.getString("query1_title")}:</h2>
 	<%
 	// Set refresh, autoload time as 60 seconds
 	response.setIntHeader("Refresh", 60);
 	%>
 	<div>
 		<c:choose>
-	<c:when test="${isEmptyQ1 == true}">
-		<h2>Minden automata fel van töltve.</h2>
+	<c:when test="${soldOutMachinesList.isEmpty()}">
+		<h2>${resource.getString("query1_okmessage")}</h2>
 		</c:when>
 			<c:otherwise>
 		<table>
@@ -50,7 +50,7 @@
 </body>
 
 <div class="container">
-	<a href="tasks.jsp">Vissza</a>
+	<a href="tasks">${resource.getString("back")}</a>
 	</div>
 
 </html>

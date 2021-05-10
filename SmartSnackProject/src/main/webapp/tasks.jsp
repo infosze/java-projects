@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <%@ page session="true" %> --%>
 
@@ -8,38 +7,38 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - Lekérdezések</title>
+<title>Smart Snack - ${resource.getString("reports")}</title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
 	<h1 style="text-transform:uppercase">${resource.getString("reports")}</h1>
 	<%
-	// Set refresh, autoload time as 10 seconds
-	response.setIntHeader("Refresh", 10);
+	// Set refresh, autoload time as 60 seconds
+	response.setIntHeader("Refresh", 60);
 	%> 
 
 <div class="container">
-	<a href="soldOutMachines"> 1. ${resource.getString("query1_title")}</a>&nbsp;&nbsp;
+	<a href="soldOutMachines.jsp"> 1. ${resource.getString("query1_title")}</a>&nbsp;&nbsp;
 	
 	<c:choose>
-	<c:when test="${isEmptyQ1 == true}">
+	<c:when test="${soldOutMachinesList.isEmpty()}">
 		<span style="color:blue; font-size:24px">[ ${resource.getString("query1_okmessage")} ]</span>
 		</c:when>
 		<c:otherwise>
-		<span style="color:red; font-size:24px">[ ${listSizeQ1} ${resource.getString("db")}! ]</span>
+		<span style="color:red; font-size:24px">[ ${soldOutMachinesList.size()} ${resource.getString("db")}! ]</span>
 		</c:otherwise>
 		</c:choose>
 	
 	<br><br>
-	<a href="faultyMachines"> 2. ${resource.getString("query2_title")}</a>&nbsp;&nbsp;
+	<a href="faultyMachines.jsp"> 2. ${resource.getString("query2_title")}</a>&nbsp;&nbsp;
 	
 	<c:choose>
-	<c:when test="${isEmptyQ2 == true}">
+	<c:when test="${faultyMachinesList.isEmpty()}">
 		<span style="color:blue; font-size:24px">[ ${resource.getString("query1_okmessage")} ]</span>
 		</c:when>
 		<c:otherwise>
-		<span style="color:red; font-size:24px">[ ${listSizeQ2} ${resource.getString("db")}! ]</span>
+		<span style="color:red; font-size:24px">[ ${faultyMachinesList.size()} ${resource.getString("db")}! ]</span>
 		</c:otherwise>
 		</c:choose>
 	

@@ -18,12 +18,13 @@ public class AutomatDAOimpl implements AutomatDAO {
 	private static final String OFFLINE = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
 
 	public List<Automat> getSoldOutProductMachines() {
-//		return findMachines(SOLD_OUT_PRODUCT);
-		return new ArrayList<>();
+		return findMachines(SOLD_OUT_PRODUCT);
+//		return new ArrayList<>();
 	}
 
 	public List<Automat> getSoldOutCoinMachines() {
 		return findMachines(SOLD_OUT_COIN);
+//		return new ArrayList<>();
 	}
 
 	public List<Automat> getOfflineMachines() {

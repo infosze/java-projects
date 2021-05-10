@@ -6,8 +6,11 @@
 }
 
 body {
-	margin: 0px;
-	background-color: #e7ebf3;
+	margin: 0px; /* így teljesen hozzásímul az ablakhoz az oldal tartalma */
+	background-image: url("blue_background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+/* 	background-color: #e7ebf3; */
 }
 
 .navbar {

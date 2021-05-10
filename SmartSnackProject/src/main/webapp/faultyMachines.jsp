@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -6,29 +7,29 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - Meghibásodott automaták</title>
+<title>Smart Snack - ${resource.getString("query2_title")}</title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Meghibásodott automaták:</h2>
+	<h2>${resource.getString("query2_title")}:</h2>
 	<%
 	// Set refresh, autoload time as 60 seconds
 	response.setIntHeader("Refresh", 60);
 	%>
 	<div>
 		<c:choose>
-			<c:when test="${isEmptyQ2 == true}">
-				<h2>Minden automata működik.</h2>
+			<c:when test="${faultyMachinesList.isEmpty()}">
+				<h2>${resource.getString("query1_okmessage")}</h2>
 			</c:when>
 			<c:otherwise>
 				<table>
 					<tr>
-						<th>Automata azonosító</th>
-						<th>Irányítószám</th>
-						<th>Település</th>
-						<th>Cím</th>
+						<th>${resource.getString("machineId")}</th>
+						<th>${resource.getString("zipcode")}</th>
+						<th>${resource.getString("city")}</th>
+						<th>${resource.getString("address")}</th>
 					</tr>
 					<c:forEach var="faultyMachine" items="${faultyMachinesList}">
 						<tr>
@@ -46,7 +47,7 @@
 </body>
 
 <div class="container">
-	<a href="tasks.jsp">Vissza</a>
+	<a href="tasks">${resource.getString("back")}</a>
 </div>
 
 </html>

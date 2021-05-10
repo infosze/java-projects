@@ -4,8 +4,7 @@
 
 <div class="navbar">
 
-<!-- 		path változó létrehozása az aktuális oldal elérési útjával.  -->
-	<c:set var="path" scope="session" value="${pageContext.request.requestURI}" />
+	<c:set var="pagePath" scope="session" value="${pageContext.request.requestURI}" />
 
 	<c:choose>
 		<c:when test="${loggedInUser == null}">

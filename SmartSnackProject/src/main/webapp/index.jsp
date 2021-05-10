@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - Kezdőlap</title>
+<title>Smart Snack - ${resource.getString("index_text") }  </title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 

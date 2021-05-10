@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/language")
 public class LanguageSelectorServlet extends HttpServlet {
@@ -19,10 +18,11 @@ public class LanguageSelectorServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uri = req.getSession().getAttribute("path").toString();
-		String jspName = uri.substring(uri.lastIndexOf("/") + 1); 
+		String uri = req.getSession().getAttribute("pagePath").toString();
+		String jspName = uri.substring(uri.lastIndexOf("/") + 1);
 		String language = req.getParameter("language");
-		ResourceBundle rb = Objects.equals(language, "Magyar") ? ResourceBundle.getBundle("Resources", new Locale("hu"))
+		ResourceBundle rb = Objects.equals(language, "Magyar")//
+				? ResourceBundle.getBundle("Resources", new Locale("hu"))
 				: ResourceBundle.getBundle("Resources", new Locale("en"));
 		req.getSession().setAttribute("resource", rb);
 		req.getRequestDispatcher(jspName).forward(req, resp);

@@ -19,14 +19,12 @@ public class TasksServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Query soldOutQuery = new SoldOutMachines();
 		List<List<String>> machines = soldOutQuery.findDataForQuery();
-		Query query = new FaultyMachinesQuepyImpl();
-		List<List<String>> machines2 = query.findDataForQuery();
+
+		Query faultyQuery = new FaultyMachinesQuepyImpl();
+		List<List<String>> machines2 = faultyQuery.findDataForQuery();
+
 		request.getSession().setAttribute("soldOutMachinesList", machines);
-		request.getSession().setAttribute("isEmptyQ1", machines.isEmpty());
-		request.getSession().setAttribute("listSizeQ1", machines.size());
 		request.getSession().setAttribute("faultyMachinesList", machines2);
-		request.getSession().setAttribute("isEmptyQ2", machines2.isEmpty());
-		request.getSession().setAttribute("listSizeQ2", machines2.size());
 		request.getRequestDispatcher("tasks.jsp").forward(request, response);
 	}
 
