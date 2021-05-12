@@ -6,7 +6,7 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
-import entity.Automat;
+import entity.Machine;
 
 public class EmailSender {
 
@@ -18,7 +18,7 @@ public class EmailSender {
 	private static final String EMAIL_FROM = "800c67efdc-30f21b@inbox.mailtrap.io";
 	private static final String EMAIL_TO = "800c67efdc-30f21b@inbox.mailtrap.io";
 
-	public void sendEmail(List<Automat> faultyMachinesList) {
+	public void sendEmail(List<Machine> faultyMachinesList) {
 		HtmlEmail email = new HtmlEmail();
 		email.setHostName(SMTP_SERVER);
 		email.setSmtpPort(PORT);

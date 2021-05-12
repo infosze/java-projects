@@ -29,7 +29,7 @@ public class SoldOutMachines implements Query {
 				PreparedStatement pstmt1 = con.prepareStatement(CREATE_VIEW_STATEMENT);
 				PreparedStatement pstmt2 = con.prepareStatement(CREATE_VIEW2_STATEMENT);
 				PreparedStatement pstmt3 = con.prepareStatement(FIND_SOLDOUT_MACHINES_STATEMENT);
-				PreparedStatement pstmt4 = con.prepareStatement(DROP_VIEW_STATEMENT)) {
+				) {
 			pstmt1.execute();
 			pstmt2.execute();
 			ResultSet rs = pstmt3.executeQuery();
@@ -42,9 +42,16 @@ public class SoldOutMachines implements Query {
 						rs.getString("address"), //
 						String.valueOf(rs.getInt("product_id"))));
 			}
-			pstmt4.execute();
 		} catch (SQLException e) {
+			System.err.print("Hiba az adatbáziműveletben.");
 			e.printStackTrace();
+		} finally {
+			try (Connection con = DatabaseConnect.getConnection();
+					PreparedStatement pstmt4 = con.prepareStatement(DROP_VIEW_STATEMENT)) {
+				pstmt4.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return soldOutMachines;
 	}

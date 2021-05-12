@@ -2,15 +2,15 @@ package dao;
 
 import java.util.List;
 
-import entity.Automat;
+import entity.Machine;
 
 public interface AutomatDAO {
 	
-	public List<Automat> getSoldOutProductMachines();
+	public List<Machine> getSoldOutProductMachines();
 
-	public List<Automat> getSoldOutCoinMachines();
+	public List<Machine> getSoldOutCoinMachines();
 
-	public List<Automat> getOfflineMachines();
+	public List<Machine> getOfflineMachines();
 
 
 }

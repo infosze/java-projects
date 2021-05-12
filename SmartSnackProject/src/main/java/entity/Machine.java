@@ -2,7 +2,7 @@ package entity;
 
 import java.util.Objects;
 
-public class Automat {
+public class Machine {
 
 	private String machineId;
 	private int machineTypeId;
@@ -11,10 +11,10 @@ public class Automat {
 	private String county;
 	private String address;
 
-	public Automat() {
+	public Machine() {
 	}
 
-	public Automat(String machineId, int machineTypeId, String coutry, int zipCode, String county, String address) {
+	public Machine(String machineId, int machineTypeId, String coutry, int zipCode, String county, String address) {
 		this.machineId = machineId;
 		this.machineTypeId = machineTypeId;
 		this.coutry = coutry;
@@ -80,9 +80,9 @@ public class Automat {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!(obj instanceof Automat))
+		if (!(obj instanceof Machine))
 			return false;
-		Automat other = (Automat) obj;
+		Machine other = (Machine) obj;
 		return Objects.equals(machineId, other.machineId);
 	}
 

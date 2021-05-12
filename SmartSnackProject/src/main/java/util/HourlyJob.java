@@ -4,13 +4,13 @@ import java.util.List;
 
 import dao.AutomatDAO;
 import dao.impl.AutomatDAOimpl;
-import entity.Automat;
+import entity.Machine;
 
 public class HourlyJob implements Runnable {
 
-	private static List<Automat> soldOutProductMachines;
-	private static List<Automat> soldOutCoinMachines;
-	private static List<Automat> offlineMachines;
+	private static List<Machine> soldOutProductMachines;
+	private static List<Machine> soldOutCoinMachines;
+	private static List<Machine> offlineMachines;
 
 	@Override
 	public void run() {
@@ -23,15 +23,15 @@ public class HourlyJob implements Runnable {
 		}
 	}
 
-	public List<Automat> getSoldOutProductMachines() {
+	public List<Machine> getSoldOutProductMachines() {
 		return soldOutProductMachines;
 	}
 
-	public List<Automat> getSoldOutCoinMachines() {
+	public List<Machine> getSoldOutCoinMachines() {
 		return soldOutCoinMachines;
 	}
 
-	public List<Automat> getOfflineMachines() {
+	public List<Machine> getOfflineMachines() {
 		return offlineMachines;
 	}
 
