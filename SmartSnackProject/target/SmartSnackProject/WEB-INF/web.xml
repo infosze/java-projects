@@ -33,22 +33,6 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>Query1Servlet</servlet-name>
-		<servlet-class>servlet.Query1Servlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Query1Servlet</servlet-name>
-		<url-pattern>/query1</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>Query2Servlet</servlet-name>
-		<servlet-class>servlet.Query2Servlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Query2Servlet</servlet-name>
-		<url-pattern>/query2</url-pattern>
-	</servlet-mapping>
-	<servlet>
 		<servlet-name>PopularProductsServlet</servlet-name>
 		<servlet-class>servlet.PopularProductsServlet</servlet-class>
 	</servlet>
