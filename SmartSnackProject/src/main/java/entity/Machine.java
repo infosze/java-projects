@@ -8,7 +8,7 @@ public class Machine {
 	private int machineTypeId;
 	private String coutry;
 	private int zipCode;
-	private String county;
+	private String city;
 	private String address;
 
 	public Machine() {
@@ -19,7 +19,7 @@ public class Machine {
 		this.machineTypeId = machineTypeId;
 		this.coutry = coutry;
 		this.zipCode = zipCode;
-		this.county = county;
+		this.city = county;
 		this.address = address;
 	}
 
@@ -55,12 +55,12 @@ public class Machine {
 		this.zipCode = zipCode;
 	}
 
-	public String getCounty() {
-		return county;
+	public String getCity() {
+		return city;
 	}
 
-	public void setCounty(String county) {
-		this.county = county;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getAddress() {
@@ -88,7 +88,7 @@ public class Machine {
 
 	@Override
 	public String toString() {
-		return "Automata [iD=" + machineId + "; " + zipCode + ". " + county + ", " + address + "]";
+		return "Automata [iD=" + machineId + "; " + zipCode + ". " + city + ", " + address + "]";
 	}
 
 	

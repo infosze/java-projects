@@ -66,6 +66,14 @@
 		<servlet-name>RefillsQueryServlet</servlet-name>
 		<url-pattern>/refills</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>MachineGeneratorServlet</servlet-name>
+		<servlet-class>servlet.MachineGeneratorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MachineGeneratorServlet</servlet-name>
+		<url-pattern>/machineGenerator</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>

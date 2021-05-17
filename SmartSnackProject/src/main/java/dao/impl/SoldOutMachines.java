@@ -43,7 +43,7 @@ public class SoldOutMachines implements Query {
 						String.valueOf(rs.getInt("product_id"))));
 			}
 		} catch (SQLException e) {
-			System.err.print("Hiba az adatbáziműveletben.");
+			System.err.print("Hiba az adatbázisműveletben.");
 			e.printStackTrace();
 		} finally {
 			try (Connection con = DatabaseConnect.getConnection();
