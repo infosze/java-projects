@@ -16,6 +16,8 @@
 	<div class="container">
 		<a href="machineGenerator"> 1.
 			${resource.getString("setting1_title")}</a> <br> <br>
+		<a href="firstReportGenerator"> 2 .
+			${resource.getString("setting2_title")}</a> <br> <br>
 	</div>
 </body>
 </html>

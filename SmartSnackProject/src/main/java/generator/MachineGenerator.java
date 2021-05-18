@@ -13,7 +13,7 @@ import util.DatabaseConnect;
 public class MachineGenerator {
 
 	private static final String MACHINE_TYPES_ST = "SELECT machine_type_id FROM machine_type;";
-	private static final String MACHINE_INSERTER_ST = "INSERT INTO machine_test (machine_type_id, country, zipcode, city, address) VALUES (?, ?, ?, ?, ?)";
+	private static final String MACHINE_INSERTER_ST = "INSERT INTO machine (machine_type_id, country, zipcode, city, address) VALUES (?, ?, ?, ?, ?)";
 	
 	public void run(int number) {
 		try (Connection con = DatabaseConnect.getConnection()) {

@@ -74,6 +74,14 @@
 		<servlet-name>MachineGeneratorServlet</servlet-name>
 		<url-pattern>/machineGenerator</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>FirstReportGeneratorServlet</servlet-name>
+		<servlet-class>servlet.FirstReportGeneratorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FirstReportGeneratorServlet</servlet-name>
+		<url-pattern>/firstReportGenerator</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
