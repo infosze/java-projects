@@ -8,21 +8,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - Feltöltések</title>
+<title>Smart Snack – ${resource.getString("refills")}</title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Az adott időszakban a feltöltött automaták listája, sorrendben legelől a legtöbb termékkel feltöltött gép</h2>
+	<h2>${resource.getString("query6_title")}</h2>
 	<div class="choice">
 	<form action="refills">
-		<label>Kezdő dátum:</label>
+		<label>${resource.getString("startdate")}:</label>
 		<input type="date" name="startDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01">
-		<label>Záró dátum:</label>
+		<label>${resource.getString("enddate")}:</label>
 		<input type="date" name="endDate" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
-		<input type="submit" value="Mehet"> 
+		<input type="submit" value=${resource.getString("submit")}> 
 	</form>
 	</div>
 	<c:choose>
@@ -30,15 +30,15 @@
 		<h2>${ startDate} - ${ endDate}</h2>
 		<c:choose>
 	<c:when test="${islistEmpty == true}">
-		<h2>A megadott időintervallumban nem volt feltöltés.</h2>
+		<h2>${resource.getString("query6_OK_message")}</h2>
 		</c:when>
 		<c:otherwise>
 		<table>
 			<tr>
-				<th>Automata azonosító</th>
-				<th>Irányítószám</th>
-				<th>Település</th>
-				<th>Cím</th>
+				<th>${resource.getString("machineId")}</th>
+				<th>${resource.getString("zipcode")}</th>
+				<th>${resource.getString("city")}</th>
+				<th>${resource.getString("address")}</th>
 			</tr>
 			<c:forEach var="product_machineList" items="${ product_machineList}">
 				<tr>
@@ -55,7 +55,7 @@
 		</c:when>
 	</c:choose>	
 	<div class="container">
-	<a href="tasks.jsp">Vissza</a>
+	<a href="tasks.jsp">${resource.getString("back")}</a>
 	</div>
 </body>
 </html>

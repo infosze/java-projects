@@ -8,18 +8,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - Kifogyott érme</title>
+<title>Smart Snack - ${resource.getString("query5_heading")}</title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 <body>
 	<%@ include file="WEB-INF/navbar.jsp"%>
-	<h2>Az adott dátumon a visszaadni nem tudó automaták listája</h2>
+	<h2>${resource.getString("query5_title")}</h2>
 	<div class="choice">
 	<form action="runOutOfCoins">
 		<label>Dátum:</label>
 		<input type="date" name="date" placeholder="2021-01-01" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
 				title="Év, hónap, nap ebben a formátumban: 2021-01-01"><br>
-		<input type="submit" value="Mehet"> 
+		<input type="submit" value=${resource.getString("submit")}> 
 	</form>
 	</div>
 	<c:choose>
@@ -27,15 +27,15 @@
 		<h2>${ date}</h2>
 		<c:choose>
 	<c:when test="${islistEmpty == true}">
-		<h2>A megadott dátumon, minden automata vissza tudott adni.</h2>
+		<h2>${resource.getString("query5_OK_message")}</h2>
 		</c:when>
 			<c:otherwise>
 		<table>
 			<tr>
-				<th>Automata azonosító</th>
-				<th>Irányítószám</th>
-				<th>Település</th>
-				<th>Cím</th>
+				<th>${resource.getString("machineId")}</th>
+				<th>${resource.getString("zipcode")}</th>
+				<th>${resource.getString("city")}</th>
+				<th>${resource.getString("address")}Cím</th>
 			</tr>
 			<c:forEach var="machine" items="${ machineList}">
 				<tr>
@@ -52,7 +52,7 @@
 	</c:choose>	
 	
 	<div class="container">
-	<a href="tasks.jsp">Vissza</a>
+	<a href="tasks.jsp">${resource.getString("back")}</a>
 	</div>
 	
 </body>
