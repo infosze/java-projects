@@ -35,7 +35,7 @@
 				<th>${resource.getString("machineId")}</th>
 				<th>${resource.getString("zipcode")}</th>
 				<th>${resource.getString("city")}</th>
-				<th>${resource.getString("address")}Cím</th>
+				<th>${resource.getString("address")}</th>
 			</tr>
 			<c:forEach var="machine" items="${ machineList}">
 				<tr>
