@@ -14,19 +14,20 @@ public class MachineGenerator {
 
 	private static final String MACHINE_TYPES_ST = "SELECT machine_type_id FROM machine_type;";
 	private static final String MACHINE_INSERTER_ST = "INSERT INTO machine (machine_type_id, country, zipcode, city, address) VALUES (?, ?, ?, ?, ?)";
-	
+
 	public void run(int number) {
-		try (Connection con = DatabaseConnect.getConnection()) {
-			List<Machine> machines = generateMachines(con, number);
-			insertMachines(con, machines);
+		try {
+			List<Machine> machines = generateMachines(number);
+			insertMachines(machines);
 		} catch (SQLException e) {
 			System.out.println("Hiba az adatbázisműveletben.");
 			e.printStackTrace();
 		}
 	}
-	
-	public void insertMachines(Connection con, List<Machine> machines) throws SQLException {
- 		try (PreparedStatement pstmt = con.prepareStatement(MACHINE_INSERTER_ST)) {
+
+	private void insertMachines(List<Machine> machines) throws SQLException {
+		try (Connection con = DatabaseConnect.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(MACHINE_INSERTER_ST)) {
 			con.setAutoCommit(false);
 			for (Machine machine : machines) {
 				pstmt.setInt(1, machine.getMachineTypeId());
@@ -42,11 +43,11 @@ public class MachineGenerator {
 		}
 	}
 
-	public List<Machine> generateMachines(Connection con, int number) throws SQLException {
+	private List<Machine> generateMachines(int number) throws SQLException {
 		List<Machine> machines = new ArrayList<>(number);
 		while (machines.size() < number) {
 			Machine machine = new Machine();
-			machine.setMachineTypeId(selectRandomMachineType(con));
+			machine.setMachineTypeId(selectRandomMachineType());
 			machine.setCoutry("Magyarország");
 			machine.setZipCode(1111);
 			machine.setCity("Tesztváros");
@@ -55,21 +56,22 @@ public class MachineGenerator {
 		}
 		return machines;
 	}
-	
-	int selectRandomMachineType(Connection con) throws SQLException {
-		List<Integer> machineTypes = getMachineTypes(con);
+
+	private int selectRandomMachineType() throws SQLException {
+		List<Integer> machineTypes = getMachineTypes();
 		int randomNum = (int) Math.round(Math.random() * (machineTypes.size() - 1));
 		return machineTypes.get(randomNum);
 	}
 
-	List<Integer> getMachineTypes(Connection con) throws SQLException {
+	private List<Integer> getMachineTypes() throws SQLException {
 		List<Integer> machineTypes = new ArrayList<>();
-		try (PreparedStatement pstmt = con.prepareStatement(MACHINE_TYPES_ST)) {
+		try (Connection con = DatabaseConnect.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(MACHINE_TYPES_ST)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				machineTypes.add(rs.getInt(1));
 			}
-		} 
+		}
 		return machineTypes;
 	}
 

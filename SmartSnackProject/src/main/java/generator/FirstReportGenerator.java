@@ -24,11 +24,11 @@ public class FirstReportGenerator {
 			+ "VALUES (?, ?, 20, 0);";
 
 	public void run() {
-		try (Connection con = DatabaseConnect.getConnection()) {
-			Map<Integer, Integer> machineTypes = getMachineTypesWithSortiment(con);
+		try {
+			Map<Integer, Integer> machineTypes = getMachineTypesWithSortiment();
 			Set<Integer> types = machineTypes.keySet();
 			for (int type : types) {
-				insertDataIntoReports(con, type, machineTypes.get(type));
+				insertDataIntoReports(type, machineTypes.get(type));
 			}
 		} catch (SQLException e) {
 			System.err.println("Hiba az adatbázisműveletben");
@@ -36,10 +36,10 @@ public class FirstReportGenerator {
 		}
 	}
 
-	private void insertDataIntoReports(Connection con, int machineType, int sortiment) throws SQLException {
-		List<String> machines = getMachineIds(con, machineType);
-		List<Integer> products = getProductsForMachineType(con, machineType);
-		try (PreparedStatement pstmt = con.prepareStatement(INSERT_FIRST_REPORT)) {
+	private void insertDataIntoReports(int machineType, int sortiment) throws SQLException {
+		List<String> machines = getMachineIds(machineType);
+		List<Integer> products = getProductsForMachineType(machineType);
+		try (Connection con = DatabaseConnect.getConnection(); PreparedStatement pstmt = con.prepareStatement(INSERT_FIRST_REPORT)) {
 			con.setAutoCommit(false);
 			for (String machineId : machines) {
 				List<Integer> productPool = new LinkedList<>(products);
@@ -56,9 +56,9 @@ public class FirstReportGenerator {
 		}
 	}
 
-	List<String> getMachineIds(Connection con, int machineType) throws SQLException {
+	List<String> getMachineIds(int machineType) throws SQLException {
 		List<String> machines = new ArrayList<>();
-		try (PreparedStatement pstmt = con.prepareStatement(MACHINES_WITH_MACHINE_TYPE)) {
+		try (Connection con = DatabaseConnect.getConnection(); PreparedStatement pstmt = con.prepareStatement(MACHINES_WITH_MACHINE_TYPE)) {
 			pstmt.setInt(1, machineType);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -68,9 +68,9 @@ public class FirstReportGenerator {
 		return machines;
 	}
 
-	private List<Integer> getProductsForMachineType(Connection con, int machineType) throws SQLException {
+	private List<Integer> getProductsForMachineType(int machineType) throws SQLException {
 		List<Integer> products = new LinkedList<>();
-		try (PreparedStatement pstmt = con.prepareStatement(PRODUCTS_FOR_MACHINES)) {
+		try (Connection con = DatabaseConnect.getConnection(); PreparedStatement pstmt = con.prepareStatement(PRODUCTS_FOR_MACHINES)) {
 			pstmt.setInt(1, machineType);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -80,9 +80,9 @@ public class FirstReportGenerator {
 		return products;
 	}
 
-	private Map<Integer, Integer> getMachineTypesWithSortiment(Connection con) throws SQLException {
+	private Map<Integer, Integer> getMachineTypesWithSortiment() throws SQLException {
 		Map<Integer, Integer> machineTypes = new HashMap<>();
-		try (PreparedStatement pstmt = con.prepareStatement(MACHINE_TYPES)) {
+		try (Connection con = DatabaseConnect.getConnection(); PreparedStatement pstmt = con.prepareStatement(MACHINE_TYPES)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				machineTypes.put(rs.getInt(1), rs.getInt(2));

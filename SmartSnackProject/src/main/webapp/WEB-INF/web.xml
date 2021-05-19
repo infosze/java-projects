@@ -82,6 +82,14 @@
 		<servlet-name>FirstReportGeneratorServlet</servlet-name>
 		<url-pattern>/firstReportGenerator</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegularReportGeneratorServlet</servlet-name>
+		<servlet-class>servlet.RegularReportGeneratorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegularReportGeneratorServlet</servlet-name>
+		<url-pattern>/reguralReportGenerator</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
