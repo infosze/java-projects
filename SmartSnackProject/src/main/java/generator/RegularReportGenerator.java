@@ -48,10 +48,7 @@ public class RegularReportGenerator {
 	}
 
 	private int calculateDiff(int productQuant) {
-		if (productQuant >= 3)
-			return (int) (Math.random() * 4);
-		else
-			return (int) (Math.random() * 2);
+		return productQuant >= 3 ? (int) (Math.random() * 4) : (int) (Math.random() * 2);
 	}
 
 }
