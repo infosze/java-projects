@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Query;
 import dao.impl.LogInQueryImpl;
 import entity.User;
+import util.PasswordUtils;
 
 public class LoginServlet extends HttpServlet {
 
@@ -31,21 +32,22 @@ public class LoginServlet extends HttpServlet {
 			userDatas.add(1, " ");
 			userDatas.add(2, " ");
 		}
-//		String userName = userDatas.get(0);
-//		String userPassword = userDatas.get(1);
-//		String userSalt = userDatas.get(2);
+		String userName = userDatas.get(0);
+		String userPassword = userDatas.get(1);
+		String userSalt = userDatas.get(2);
+		System.out.println(userName + " " + userPassword + " " +userSalt);
 
 		User user = new User();
-//		user.setName(userName);
+		user.setName(userName);
 //		user.setPassword(userPassword);
-		user.setName(name);
-		user.setPassword(password);
+//		user.setName(name);
+//		user.setPassword(password);
 
-//		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, userPassword, userSalt);
+		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, userPassword, userSalt);
+		System.out.println(passwordMatch);
 
-		if (user.getName().equals(name) && user.getPassword().equals(password)) {
-//		if (user.getName().equals(name) && passwordMatch == true) {
-
+//		if (user.getName().equals(name) && user.getPassword().equals(password)) {
+		if (user.getName().equals(name) && passwordMatch == true) {
 			request.getSession().setAttribute("name", name);
 			request.getSession().setAttribute("loggedInUser", user.getName());
 			response.sendRedirect("tasks");

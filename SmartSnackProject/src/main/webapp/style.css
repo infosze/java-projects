@@ -79,6 +79,11 @@ h1, h2{
 	color: #004080;
 }
 
+h3{
+	font-size: 30px;
+	color: #004080;
+}
+
 .choice{
 	margin: 30px;
 	font-size: 22px;

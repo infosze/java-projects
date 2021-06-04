@@ -16,7 +16,7 @@
 			<a href="tasks.jsp"><i class="fas fa-tasks">&nbsp;</i>${resource.getString("reports")}</a>
 			<a href="logout" style="float: right"><i
 				class="fas fa-sign-out-alt">&nbsp;</i>${resource.getString("kijelentkezés")}</a>
-			<a style="float: right"><i class="far fa-user">&nbsp;</i> ${name } </a>
+			<a href="passwordChange.jsp" style="float: right"><i class="far fa-user">&nbsp;</i> ${loggedInUser } </a>
 			<a href="settings.jsp" style="float: right"><i class="fas fa-cog">&nbsp;</i>${resource.getString("settings")}</a>
 		</c:otherwise>
 	</c:choose>
