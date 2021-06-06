@@ -22,8 +22,8 @@ public class ChangePasswordImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean updateUserPassword() {
-		int updatedNumber = 0;
+	public int updateUserPassword() {
+		int updatedNumber = -1;
 		try (PreparedStatement pstmt = DatabaseConnect.getConnection().prepareStatement(CHANGE_USER_PASSWORD_SQL)) {
 			pstmt.setString(3, userName);
 			pstmt.setString(1, password);
@@ -32,7 +32,7 @@ public class ChangePasswordImpl implements UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return updatedNumber > 0;
+		return updatedNumber;
 	}
 
 }

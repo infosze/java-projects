@@ -3,6 +3,6 @@ package dao;
 
 public interface UserDAO {
 	
-	public boolean updateUserPassword();
+	public int updateUserPassword();
 
 }

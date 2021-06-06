@@ -25,12 +25,16 @@
 				<input type="submit" value=${resource.getString("modify")}>
 			</form>
 			<c:choose>
-				<c:when test="${successed}">
-					<a>${resource.getString("success")}</a>
+				<c:when test="${successed > -1}">
+			<c:choose>
+				<c:when test="${successed > 0}">
+					<h3>${resource.getString("success")}</h3>
 				</c:when>
 				<c:otherwise>
-					<a>${resource.getString("unsuccess")}</a>
+					<h3>${resource.getString("unsuccess")}</h3>
 				</c:otherwise>
+			</c:choose>
+				</c:when>
 			</c:choose>
 		</div>
 </body>
