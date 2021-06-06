@@ -17,10 +17,6 @@ public class TasksServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = (String) request.getSession().getAttribute("loggedInUser");
-		System.out.println(name);
-		
-		
 		Query soldOutQuery = new SoldOutMachines();
 		List<List<String>> machines = soldOutQuery.findDataForQuery();
 
@@ -30,7 +26,6 @@ public class TasksServlet extends HttpServlet {
 		request.getSession().setAttribute("soldOutMachinesList", machines);
 		request.getSession().setAttribute("faultyMachinesList", machines2);
 		request.getRequestDispatcher("tasks.jsp").forward(request, response);
-		
 	}
 
 }

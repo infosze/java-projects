@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 		String userName = userDatas.get(0);
 		String userPassword = userDatas.get(1);
 		String userSalt = userDatas.get(2);
-		System.out.println(userName + " " + userPassword + " " +userSalt);
 
 		User user = new User();
 		user.setName(userName);
@@ -44,7 +43,6 @@ public class LoginServlet extends HttpServlet {
 //		user.setPassword(password);
 
 		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, userPassword, userSalt);
-		System.out.println(passwordMatch);
 
 //		if (user.getName().equals(name) && user.getPassword().equals(password)) {
 		if (user.getName().equals(name) && passwordMatch == true) {

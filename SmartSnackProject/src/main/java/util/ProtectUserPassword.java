@@ -3,7 +3,7 @@ package util;
 public class ProtectUserPassword {
 
 	public static void main(String[] args) {
-		String myPassword = "1122";
+		String myPassword = "0000";
 
 		// Generate Salt. The generated value can be stored in DB.
 		String salt = PasswordUtils.getSalt(30);
