@@ -2,8 +2,8 @@ package util;
 
 import java.util.List;
 
-import dao.AutomatDAO;
-import dao.impl.AutomatDAOimpl;
+import dao.MachineDAO;
+import dao.impl.MachineDAOimpl;
 import entity.Machine;
 
 public class HourlyJob implements Runnable {
@@ -14,12 +14,12 @@ public class HourlyJob implements Runnable {
 
 	@Override
 	public void run() {
-		AutomatDAO automatDao = new AutomatDAOimpl();
+		MachineDAO automatDao = new MachineDAOimpl();
 		soldOutProductMachines = automatDao.getSoldOutProductMachines();
 		soldOutCoinMachines = automatDao.getSoldOutCoinMachines();
 		offlineMachines = automatDao.getOfflineMachines();
 		if (!offlineMachines.isEmpty()) {
-//			new EmailSender().sendEmail(offlineMachines);
+			new EmailSender().sendEmail(offlineMachines);
 		}
 	}
 

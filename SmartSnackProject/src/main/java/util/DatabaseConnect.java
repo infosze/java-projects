@@ -42,4 +42,8 @@ public class DatabaseConnect {
 		return cpds.getConnection();
 	}
 
+	public static void close() {
+		cpds.close();
+	}
+
 }

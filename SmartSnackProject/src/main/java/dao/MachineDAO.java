@@ -4,7 +4,7 @@ import java.util.List;
 
 import entity.Machine;
 
-public interface AutomatDAO {
+public interface MachineDAO {
 	
 	public List<Machine> getSoldOutProductMachines();
 

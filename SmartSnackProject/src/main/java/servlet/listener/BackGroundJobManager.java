@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import util.DatabaseConnect;
 import util.HourlyJob;
 
 public class BackGroundJobManager implements ServletContextListener {
@@ -27,6 +28,7 @@ public class BackGroundJobManager implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
+		DatabaseConnect.close();
 		scheduler.shutdownNow();
 		if (!scheduler.isTerminated())
 			try {
