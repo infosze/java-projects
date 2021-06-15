@@ -22,8 +22,89 @@ public class MachineDAOimpl implements MachineDAO {
 					+ "AND machine.machine_type_id > 3 GROUP BY machine.machine_id ) AND machine.machine_type_id > 3; ";
 // '2020-11-20 20:05:00'     '2020-11-20 22:05:00'
 
+	private static final String ALL_MACHINE = "SELECT * FROM freedbtech_ssp.machine;";
+	private static final String ADD_MACHINE = "INSERT INTO machine (machine_type_id, country, zipcode, city, address) VALUES (?, ?, ?, ?, ?)";
+
 	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
 	private static final String SOLD_OUT_COIN = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
+	private static final String FIND_MACHINE_BY_ID = "SELECT * FROM freedbtech_ssp.machine WHERE machine_id = ? ";
+
+	@Override
+	public List<Machine> getAllMachines() {
+		return findMachines(ALL_MACHINE);
+	}
+
+	@Override
+	public Machine getMachineById(String id) {
+
+		Machine machine = new Machine();
+
+		try (Connection con = DatabaseConnect.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(FIND_MACHINE_BY_ID)) {
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				machine.setMachineId(rs.getString("machine_id"));
+				machine.setMachineTypeId(rs.getInt("machine_type_id"));
+				machine.setCoutry(rs.getString("country"));
+				machine.setZipCode(rs.getInt("zipcode"));
+				machine.setCity(rs.getString("city"));
+				machine.setAddress(rs.getString("address"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return machine;
+	}
+
+	@Override
+	public boolean addMachine(Machine machine) {
+		int status = 0;
+		try (Connection con = DatabaseConnect.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(ADD_MACHINE)) {
+			pstmt.setInt(1, machine.getMachineTypeId());
+			pstmt.setString(2, machine.getCoutry());
+			pstmt.setInt(3, machine.getZipCode());
+			pstmt.setString(4, machine.getCity());
+			pstmt.setString(5, machine.getAddress());
+
+			status = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Hiba az adatbázisműveletben.");
+			e.printStackTrace();
+		}
+		return status > 0;
+
+	}
+	private static final String EDIT_MACHINE = "UPDATE machine SET machine_type_id=?, country=?, zipcode=?, city=?, address=? WHERE machine_id=?";
+
+	@Override
+	public boolean modifyMachine(Machine machine) {
+		int status = 0;
+		try (Connection con = DatabaseConnect.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(EDIT_MACHINE)) {
+			pstmt.setInt(1, machine.getMachineTypeId());
+			pstmt.setString(2, machine.getCoutry());
+			pstmt.setInt(3, machine.getZipCode());
+			pstmt.setString(4, machine.getCity());
+			pstmt.setString(5, machine.getAddress());
+			pstmt.setString(6, machine.getMachineId());
+
+			status = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Hiba az adatbázisműveletben.");
+			e.printStackTrace();
+		}
+		return status > 0;
+	}
+
+	@Override
+	public boolean deleteMachine(Machine machine) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public List<Machine> getOfflineMachines() {

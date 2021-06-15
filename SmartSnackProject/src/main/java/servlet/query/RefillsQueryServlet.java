@@ -1,4 +1,4 @@
-package servlet;
+package servlet.query;
 
 import java.io.IOException;
 import java.time.LocalDate;

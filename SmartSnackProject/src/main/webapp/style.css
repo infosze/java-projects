@@ -7,7 +7,7 @@
 
 body {
 	margin: 0px; /* így teljesen hozzásímul az ablakhoz az oldal tartalma */
-	background-image: url("blue_background.jpg");
+	background-image: url("images/blue_background.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 /* 	background-color: #e7ebf3; */

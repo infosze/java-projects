@@ -14,12 +14,12 @@ public class Machine {
 	public Machine() {
 	}
 
-	public Machine(String machineId, int machineTypeId, String coutry, int zipCode, String county, String address) {
+	public Machine(String machineId, int machineTypeId, String coutry, int zipCode, String city, String address) {
 		this.machineId = machineId;
 		this.machineTypeId = machineTypeId;
 		this.coutry = coutry;
 		this.zipCode = zipCode;
-		this.city = county;
+		this.city = city;
 		this.address = address;
 	}
 

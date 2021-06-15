@@ -31,10 +31,26 @@
 		<servlet-name>TasksServlet</servlet-name>
 		<url-pattern>/tasks</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>MachineEditServlet</servlet-name>
+		<servlet-class>servlet.MachineEditServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MachineEditServlet</servlet-name>
+		<url-pattern>/editmachine</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>MachineEditServlet2</servlet-name>
+		<servlet-class>servlet.MachineEditServlet2</servlet-class>
+	</servlet>
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>MachineEditServlet2</servlet-name> -->
+<!-- 		<url-pattern>/editmachine</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
 	<servlet>
 		<servlet-name>PopularProductsServlet</servlet-name>
-		<servlet-class>servlet.PopularProductsServlet</servlet-class>
+		<servlet-class>servlet.query.PopularProductsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PopularProductsServlet</servlet-name>
@@ -43,7 +59,7 @@
 
 	<servlet>
 		<servlet-name>Top10MachinesQueryServlet</servlet-name>
-		<servlet-class>servlet.Top10MachinesQueryServlet</servlet-class>
+		<servlet-class>servlet.query.Top10MachinesQueryServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Top10MachinesQueryServlet</servlet-name>
@@ -52,7 +68,7 @@
 
 	<servlet>
 		<servlet-name>RunOutOfCoinsServlet</servlet-name>
-		<servlet-class>servlet.RunOutOfCoinsServlet</servlet-class>
+		<servlet-class>servlet.query.RunOutOfCoinsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RunOutOfCoinsServlet</servlet-name>
@@ -60,7 +76,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RefillsQueryServlet</servlet-name>
-		<servlet-class>servlet.RefillsQueryServlet</servlet-class>
+		<servlet-class>servlet.query.RefillsQueryServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RefillsQueryServlet</servlet-name>
@@ -84,7 +100,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RegularReportGeneratorServlet</servlet-name>
-		<servlet-class>servlet.RegularReportGeneratorServlet</servlet-class>
+		<servlet-class>servlet.query.RegularReportGeneratorServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegularReportGeneratorServlet</servlet-name>
