@@ -18,7 +18,7 @@
 		<div class="container">
 			<form action="passwordChange" method="post"> 
 				<label>${resource.getString("name")}</label>
-				<h3>${loggedInUser }</h3>
+				<h3>${loggedInUser.getName() }</h3>
 <!-- 				<input type="text" name="name" required="required"><br>  -->
 				<label>${resource.getString("newPw")}</label><br>
 				<input type="password" name="newPassword" required="required"><br>

@@ -18,7 +18,7 @@
 			
 			<a href="logout" style="float: right"><i
 				class="fas fa-sign-out-alt">&nbsp;</i>${resource.getString("logout")}</a>
-			<a href="passwordChange.jsp" style="float: right"><i class="far fa-user">&nbsp;</i> ${loggedInUser } </a>
+			<a href="passwordChange.jsp" style="float: right"><i class="far fa-user">&nbsp;</i> ${loggedInUser.getName() } </a>
 			<a href="settings.jsp" style="float: right"><i class="fas fa-cog">&nbsp;</i>${resource.getString("settings")}</a>
 		</c:otherwise>
 	</c:choose>
