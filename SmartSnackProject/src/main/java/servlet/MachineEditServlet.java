@@ -16,10 +16,13 @@ public class MachineEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String id = request.getParameter("machineId");
-		Machine machine = new  MachineDAOimpl().getMachineById(id);
+		Machine machine = new MachineDAOimpl().getMachineById(id);
 		request.setAttribute("machine", machine);
-		
+
 		request.getRequestDispatcher("editmachine.jsp").forward(request, response);
 	}
 

@@ -1,20 +1,16 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MachineDAO;
 import dao.impl.MachineDAOimpl;
-import entity.Machine;
 
-@WebServlet("/MachineViewServlet")
-public class MachineViewServlet extends HttpServlet {
+@WebServlet("/MachineDeleteServlet")
+public class MachineDeleteServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,10 +19,18 @@ public class MachineViewServlet extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		MachineDAO machineDAO = new MachineDAOimpl();
-		List<Machine> machines = machineDAO.getAllMachines();
-		request.getSession().setAttribute("machines", machines);
-		request.getRequestDispatcher("machines.jsp").forward(request, response);
+		String machineId = request.getParameter("machineId");
+		int status = new MachineDAOimpl().deleteMachine(machineId);
+
+//		request.setAttribute("status", status);
+
+		if (status > 0) {
+			response.sendRedirect("MachineViewServlet");
+		} else {
+			System.out.println("Nem sikerült az adatok törlése !");
+//			request.getRequestDispatcher("machines.jsp").forward(request, response);
+		}
+
 	}
 
 }

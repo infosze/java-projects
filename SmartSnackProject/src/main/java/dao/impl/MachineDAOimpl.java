@@ -15,6 +15,12 @@ import util.DatabaseConnect;
 
 public class MachineDAOimpl implements MachineDAO {
 
+	private static final String ALL_MACHINE = "SELECT * FROM freedbtech_ssp.machine;";
+	private static final String FIND_MACHINE_BY_ID = "SELECT * FROM freedbtech_ssp.machine WHERE machine_id = ? ";
+	private static final String ADD_MACHINE = "INSERT INTO machine (machine_type_id, country, zipcode, city, address) VALUES (?, ?, ?, ?, ?)";
+	private static final String EDIT_MACHINE = "UPDATE machine SET machine_type_id=?, country=?, zipcode=?, city=?, address=? WHERE machine_id=?";
+	private static final String DELETE_MACHINE = "DELETE FROM machine WHERE machine_id = ?";
+
 	private static final String OFFLINE = //
 			"SELECT * FROM machine WHERE machine.machine_id NOT IN (SELECT machine.machine_id "
 					+ "FROM machine JOIN product_movement ON product_movement.machine_id = machine.machine_id "
@@ -22,12 +28,8 @@ public class MachineDAOimpl implements MachineDAO {
 					+ "AND machine.machine_type_id > 3 GROUP BY machine.machine_id ) AND machine.machine_type_id > 3; ";
 // '2020-11-20 20:05:00'     '2020-11-20 22:05:00'
 
-	private static final String ALL_MACHINE = "SELECT * FROM freedbtech_ssp.machine;";
-	private static final String ADD_MACHINE = "INSERT INTO machine (machine_type_id, country, zipcode, city, address) VALUES (?, ?, ?, ?, ?)";
-
 	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
 	private static final String SOLD_OUT_COIN = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
-	private static final String FIND_MACHINE_BY_ID = "SELECT * FROM freedbtech_ssp.machine WHERE machine_id = ? ";
 
 	@Override
 	public List<Machine> getAllMachines() {
@@ -58,7 +60,7 @@ public class MachineDAOimpl implements MachineDAO {
 	}
 
 	@Override
-	public boolean addMachine(Machine machine) {
+	public int addMachine(Machine machine) {
 		int status = 0;
 		try (Connection con = DatabaseConnect.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(ADD_MACHINE)) {
@@ -74,13 +76,12 @@ public class MachineDAOimpl implements MachineDAO {
 			System.out.println("Hiba az adatbázisműveletben.");
 			e.printStackTrace();
 		}
-		return status > 0;
+		return status;
 
 	}
-	private static final String EDIT_MACHINE = "UPDATE machine SET machine_type_id=?, country=?, zipcode=?, city=?, address=? WHERE machine_id=?";
 
 	@Override
-	public boolean modifyMachine(Machine machine) {
+	public int editMachine(Machine machine) {
 		int status = 0;
 		try (Connection con = DatabaseConnect.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(EDIT_MACHINE)) {
@@ -97,13 +98,24 @@ public class MachineDAOimpl implements MachineDAO {
 			System.out.println("Hiba az adatbázisműveletben.");
 			e.printStackTrace();
 		}
-		return status > 0;
+		return status;
 	}
 
 	@Override
-	public boolean deleteMachine(Machine machine) {
-		// TODO Auto-generated method stub
-		return false;
+	public int deleteMachine(String machineId) {
+		int status = 0;
+		try (Connection con = DatabaseConnect.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(DELETE_MACHINE)) {
+			pstmt.setString(1, machineId);
+
+			status = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Hiba az adatbázisműveletben.");
+			e.printStackTrace();
+		}
+		return status;
+
 	}
 
 	@Override

@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Smart Snack - editmachine  </title>
+<title>Smart Snack - ${resource.getString("machines")} ${resource.getString("edit")}  </title>
 <%@ include file="WEB-INF/meta.jsp"%>
 </head>
 
@@ -17,17 +17,17 @@
 	
 
 	<form action='MachineEditServlet2' method='post'> 
-        <input type='hidden' name='machineId' value="${ machine.getMachineId()}"/>
+      <input type='hidden' name='machineId' value="${ machine.getMachineId()}"/>
         <table>  
-        <tr><td>MachineType:</td><td><input type='text' name='machineTypeId' value="${ machine.getMachineTypeId()}"/></td></tr>
-        <tr><td>Country:</td><td><input type='text' name='country' value="${ machine.getCoutry()}" /> </td></tr>
-        <tr><td>ZipCode:</td><td><input type='text' name='zipCode' value="${ machine.getZipCode()}" /> </td></tr>
-        <tr><td>City:</td><td><input type='text' name='city' value="${ machine.getCity()}" /> </td></tr>
-        <tr><td>Address:</td><td><input type='text' name='address' value="${ machine.getAddress()}" /> </td></tr>
+        	<tr><td>${resource.getString("machineTypeId")}</td><td><input type='text' name='machineTypeId' value="${ machine.getMachineTypeId()}"/></td></tr>
+       	    <tr><td>${resource.getString("country")}</td><td><input type='text' name='country' value="${ machine.getCoutry()}" /> </td></tr>
+      	    <tr><td>${resource.getString("zipcode")}</td><td><input type='text' name='zipCode' value="${ machine.getZipCode()}" /> </td></tr>
+            <tr><td>${resource.getString("city")}</td><td><input type='text' name='city' value="${ machine.getCity()}" /> </td></tr>
+            <tr><td>${resource.getString("address")}</td><td><input type='text' name='address' value="${ machine.getAddress()}" /> </td></tr>
         
-       <tr><td colspan='2'><input type='submit' value='Edit & Save '/></td></tr>
-      </table>
-        </form>
+            <tr><td colspan='2'><input type='submit' value=${resource.getString("edit")} ${resource.getString("save")} ></td></tr>
+        </table>
+    </form>
 
 </body>
 </html>
