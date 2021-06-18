@@ -15,9 +15,7 @@ public class MachineSaveServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		String machineTypeId = request.getParameter("machineTypeId");
@@ -42,7 +40,6 @@ public class MachineSaveServlet extends HttpServlet {
 			System.out.println("Nem sikerült az adatok hozzáadása !");
 //			request.getRequestDispatcher("machines.jsp").forward(request, response);
 		}
-
 	}
 
 }
