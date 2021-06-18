@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                    
+                                        
+    
     
     
     
@@ -12,8 +13,8 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp/WEB-INF/lib"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <wb-resource deploy-path="/" source-path="/src/main/java"/>
-                                                                        
+                                                                                
+        
         
         
         
@@ -22,7 +23,8 @@
         
         
         <property name="context-root" value="SmartSnackProject"/>
-                                                                        
+                                                                                
+        
         
         
         
@@ -31,7 +33,8 @@
         
         
         <property name="java-output-path" value="/SmartSnackProject/target/classes"/>
-                                                                    
+                                                                            
+    
     
     
     
@@ -40,7 +43,8 @@
     
     
     </wb-module>
-                                
+                                    
+
 
 
 

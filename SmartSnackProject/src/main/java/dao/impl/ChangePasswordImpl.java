@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import dao.UserDAO;
+import entity.User;
 import util.DatabaseConnect;
 
 public class ChangePasswordImpl implements UserDAO {
@@ -33,6 +34,30 @@ public class ChangePasswordImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		return updatedNumber;
+	}
+
+	@Override
+	public User findUserByName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int addUser(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int editUser(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteUser(int id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
