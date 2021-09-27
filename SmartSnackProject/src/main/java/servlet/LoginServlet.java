@@ -28,11 +28,11 @@ public class LoginServlet extends HttpServlet {
 
 		UserDAO userDao= new UserDAOimpl();
 		User user = userDao.findUserByName(name);
+		 
+//		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, user.getPassword(), user.getSalt());   //TODO   INACTIVATED
 		
-		boolean passwordMatch = PasswordUtils.verifyUserPassword(password, user.getPassword(), user.getSalt());
-		
-//		if (user.getName().equals(name) && user.getPassword().equals(password)) {
-		if (user.getName().equals(name) && passwordMatch == true) {
+//		if (user.getName().equals(name)&& passwordMatch == true) {  //TODO   INACTIVATED
+		if (name.equals(user.getName())) {                                     
 			request.getSession().setAttribute("name", name);
 			request.getSession().setAttribute("loggedInUser", user);
 			response.sendRedirect("tasks");
@@ -41,26 +41,5 @@ public class LoginServlet extends HttpServlet {
 		}
 	}
 		
-		
-//		Query query = new LogInQueryImpl(name);
-//		List<List<String>> list = query.findDataForQuery();
-//		List<String> userDatas = new ArrayList<>();
-//		if (!list.isEmpty()) {
-//			userDatas = list.get(0);
-//		} else {
-//			userDatas.add(0, " ");
-//			userDatas.add(1, " ");
-//			userDatas.add(2, " ");
-//		}
-//		String userName = userDatas.get(0);
-//		String userPassword = userDatas.get(1);
-//		String userSalt = userDatas.get(2);
-
-//		User user = new User();
-//		user.setName(userName);
-//		user.setPassword(userPassword);
-//		user.setName(name);
-//		user.setPassword(password);
-
 
 }

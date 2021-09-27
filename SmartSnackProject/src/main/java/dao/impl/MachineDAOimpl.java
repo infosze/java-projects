@@ -15,8 +15,8 @@ import util.DatabaseConnect;
 
 public class MachineDAOimpl implements MachineDAO {
 
-	private static final String ALL_MACHINE = "SELECT * FROM freedbtech_ssp.machine;";
-	private static final String FIND_MACHINE_BY_ID = "SELECT * FROM freedbtech_ssp.machine WHERE machine_id = ? ";
+	private static final String ALL_MACHINE = "SELECT * FROM machine;";
+	private static final String FIND_MACHINE_BY_ID = "SELECT * FROM machine WHERE machine_id = ? ";
 	private static final String ADD_MACHINE = "INSERT INTO machine (machine_type_id, country, zipcode, city, address) VALUES (?, ?, ?, ?, ?)";
 	private static final String EDIT_MACHINE = "UPDATE machine SET machine_type_id=?, country=?, zipcode=?, city=?, address=? WHERE machine_id=?";
 	private static final String DELETE_MACHINE = "DELETE FROM machine WHERE machine_id = ?";
@@ -28,8 +28,8 @@ public class MachineDAOimpl implements MachineDAO {
 					+ "AND machine.machine_type_id > 3 GROUP BY machine.machine_id ) AND machine.machine_type_id > 3; ";
 // '2020-11-20 20:05:00'     '2020-11-20 22:05:00'
 
-	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
-	private static final String SOLD_OUT_COIN = "SELECT * FROM freedbtech_ssp.machine;"; // TODO fix it SQL query
+	private static final String SOLD_OUT_PRODUCT = "SELECT * FROM machine;"; // TODO fix it SQL query
+	private static final String SOLD_OUT_COIN = "SELECT * FROM machine;"; // TODO fix it SQL query
 
 	@Override
 	public List<Machine> getAllMachines() {

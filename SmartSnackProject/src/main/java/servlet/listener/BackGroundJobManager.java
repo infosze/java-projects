@@ -1,4 +1,4 @@
- package servlet.listener;
+package servlet.listener;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -28,14 +28,14 @@ public class BackGroundJobManager implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
-		DatabaseConnect.close();
 		scheduler.shutdownNow();
 		if (!scheduler.isTerminated())
 			try {
-				scheduler.awaitTermination(20, TimeUnit.MINUTES);
+				scheduler.awaitTermination(3, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+//		DatabaseConnect.close();
 	}
 
 }

@@ -29,10 +29,10 @@ public class DatabaseConnect {
 			cpds.setPassword(properties.getProperty("DB_PWD"));
 			// the settings below are optional
 			// c3p0 can work with defaults
-			cpds.setInitialPoolSize(5);
-			cpds.setMinPoolSize(5);
-			cpds.setAcquireIncrement(5);
-			cpds.setMaxPoolSize(20);
+//			cpds.setInitialPoolSize(5);
+//			cpds.setMinPoolSize(5);
+//			cpds.setAcquireIncrement(5);
+//			cpds.setMaxPoolSize(20);
 		} catch (PropertyVetoException | IOException e) {
 			e.printStackTrace();
 		}

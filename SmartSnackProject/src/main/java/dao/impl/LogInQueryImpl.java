@@ -12,7 +12,7 @@ import util.DatabaseConnect;
 public class LogInQueryImpl implements Query {
 
 	private static final String USER_PASSWORD_SQL = //
-			"SELECT user_name, password, salt FROM freedbtech_ssp.users WHERE users.user_name = ?;";
+			"SELECT user_name, password, salt FROM users WHERE users.user_name = ?;";
 
 	private String userName;
 

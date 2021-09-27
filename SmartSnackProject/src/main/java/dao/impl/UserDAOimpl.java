@@ -11,7 +11,7 @@ import util.DatabaseConnect;
 public class UserDAOimpl implements UserDAO {
 
 	private static final String CHANGE_USER_PASSWORD_SQL = //
-			"UPDATE freedbtech_ssp.users SET password = ?, salt = ? WHERE users.user_name = ?;";
+			"UPDATE users SET password = ?, salt = ? WHERE users.user_name = ?;";
 
 	private String userName;
 	private String password;
@@ -41,7 +41,7 @@ public class UserDAOimpl implements UserDAO {
 	}
 
 	private static final String FIND_USER_BY_NAME = //
-			"SELECT * FROM freedbtech_ssp.users WHERE users.user_name = ?;";
+			"SELECT * FROM users WHERE users.user_name = ?;";
 
 	@Override
 	public User findUserByName(String name) {
