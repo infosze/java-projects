@@ -36,6 +36,7 @@ public class BackGroundJobManager implements ServletContextListener {
 				e.printStackTrace();
 			}
 //		DatabaseConnect.close();
+//		DatabaseConnect.close(true);
 	}
 
 }

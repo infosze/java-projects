@@ -71,7 +71,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.23</version>
-			<!-- <scope>provided</scope> -->
+			<scope>provided</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
 		<dependency>
@@ -84,6 +84,12 @@
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>fontawesome</artifactId>
 			<version>4.7.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<dependency>
+  		    <groupId>org.primefaces</groupId>
+  			<artifactId>primefaces</artifactId>
+ 		    <version>11.0.0-RC1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
 		<dependency>

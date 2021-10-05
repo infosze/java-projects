@@ -46,4 +46,9 @@ public class DatabaseConnect {
 		cpds.close();
 	}
 
+	@SuppressWarnings("deprecation")
+	public static void close(boolean force_close) {
+		cpds.close(force_close); // forcre_close (deprecated) argument ONLY under develop
+	}
+
 }

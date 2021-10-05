@@ -1,9 +1,12 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Machine {
+public class Machine implements Serializable {
 
+	
+	private static final long serialVersionUID = 1L;
 	private String machineId;
 	private int machineTypeId;
 	private String coutry;

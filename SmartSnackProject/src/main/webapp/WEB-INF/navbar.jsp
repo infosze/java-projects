@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="navbar">
@@ -13,6 +12,7 @@
 			<a href="login.jsp"><i class="fas fa-sign-in-alt">&nbsp;</i>${resource.getString("login")}</a>
 		</c:when>
 		<c:otherwise>
+			<a href="index.jsp"><i class="fas fa-home">&nbsp;</i>${resource.getString("homepage")}</a>
 			<a href="tasks.jsp"><i class="fas fa-tasks">&nbsp;</i>${resource.getString("reports")}</a>
 			<a href="MachineViewServlet"><i class="far fa-list-alt">&nbsp;</i>${resource.getString("machines")}</a>
 			
